@@ -13,119 +13,65 @@ $isHomePage = $this->context->id == 'site' && $this->context->action->id == 'ind
 $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' => false]);
 
 ?>
+<div class="menu-wrapper">
+    <div class="container">
+        <div class="menu">
+            <a href="./index.html">
+                <img
+                        class="menu__logo"
+                        src="./img/logo_meetfaces_trading.png"
+                        alt=""
+                />
+            </a>
 
-<div class="Menu-top-wrapper">
-    <style>
-        .Menu-top__search-btn{
-            width: var(--size);
-            height: var(--size);
-            line-height: var(--size);
-        }
-    </style>
-    <div id="nav-container" class="Menu-top">
-        <div class="container">
-            <div class="Menu-top__inner">
-                <div>
-                    <a href="/">
-                        <img src="/svg/logo_piesto.svg" alt="" />
-                    </a>
-                </div>
-                <div class="Menu-top__elements">
-                    <ul class="Menu-top__list">
-                        <? foreach ($menu->getItems() as $item): ?>
-                            <li class="<? if (isset($item['active']) && $item['active']): ?>menu__item--current<? endif ?>">
-                                <? if (isset($item['url'])): ?>
-                                    <a href="<?= \yii\helpers\Url::to($item['url']) ?>"
-                                       class="
-                                   Menu-top__link
-                                   <? if (!$isHomePage || !preg_match('/.*#.*/', $item['url'])): ?>external<? endif ?>
-                                   <? if (isset($item['active']) && $item['active']): ?>Menu-top__link--active<? endif ?>
-                                "><?= $item['label'] ?></a>
-                                <? endif ?>
-                            </li>
-                        <? endforeach ?>
-
-                    </ul>
-
-                    <? if (Yii::$app->user->isGuest): ?>
-                        <a href="<?= yii\helpers\Url::to(['/site/login']) ?>" class="btn btn-default"> <?= Yii::t('db', 'Login'); ?> </a>
-                    <? else: ?>
-                        <a href="<?= yii\helpers\Url::to(['/site/account']) ?>" class="btn btn-default"> <?= Yii::t('db', 'My account'); ?> </a>
-                        <a href="javascript:submitLogoutForm()" class="btn btn-default"> <?= Yii::t('db', 'Log out'); ?> </a>
-                    <? endif; ?>
-
-                    <a href="#" class="Menu-top__search-btn d-noned">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </a>
-                    <div class="Social-icons">
-                        <? if (MgHelpers::getSetting('facebook url')): ?>
-                            <a  href="<?= MgHelpers::getSetting('facebook url') ?>" target="_blank" class="Social-icons__icon">
-                                <i class="Menu-top__icon fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                        <? endif ?>
-                        <? if (MgHelpers::getSetting('youtube url')): ?>
-                            <a  href="<?= MgHelpers::getSetting('youtube url') ?>" target="_blank" class="Social-icons__icon">
-                                <i class="Menu-top__icon fa fa-youtube" aria-hidden="true"></i>
-                            </a>
-                        <? endif ?>
-                        <? if (MgHelpers::getSetting('twitter url')): ?>
-                            <a href="<?= MgHelpers::getSetting('twitter url') ?>" target="_blank" class="Social-icons__icon">
-                                <i class="Menu-top__icon fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                        <? endif ?>
-                        <? if (MgHelpers::getSetting('linkedin url')): ?>
-                            <a href="<?= MgHelpers::getSetting('linkedin url') ?>" target="_blank" class="Social-icons__icon">
-                                <i class="Menu-top__icon fa fa-linkedin" aria-hidden="true"></i>
-                            </a>
-                        <? endif ?>
-                        <? if (MgHelpers::getSetting('instagram url')): ?>
-                            <a href="<?= MgHelpers::getSetting('instagram url') ?>" target="_blank" class="Social-icons__icon">
-                                <img
-                                        class="Social-icons__icon__img"
-                                        src="/svg/instagram.svg"
-                                        alt=""
-                                />
-                            </a>
-                        <? endif ?>
-
+            <div>
+                <div class="arr-down">
+                    <div class="dropdown">
+                        <a href="#">Więcej o MFT</a>
+                        <a href="#">Dla inwestorów</a>
+                        <a href="#">Produkty w promocji</a>
+                        <a href="#">Jak kupić reklamy?</a>
                     </div>
-                    <a href="#" class="Menu-top__toggle-btn">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </a>
                 </div>
             </div>
-        </div>
-        <div class="Search-box">
-            <div class="container">
-                <?= Html::beginForm(['/site/search'], 'get') ?>
-                    <div class="Search-box__form-wrpper">
-                        <input
-                                class="Search-box__input Form__input"
-                                placeholder="&nbsp;"
-                                name="q"
-                        />
-                        <label class="Form__label" for="phone"
-                        ><?= Yii::t('db', 'Enter phrase'); ?></label
-                        >
-                        <button class="Search-box__submit" type="submit">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                        <a href="#" class="Search-box__close"> &#215; </a>
-                    </div>
-                <?= Html::endForm() ?>
+            <div class="search-wrapper">
+                <form action="./wyniki-wyszukiwania.html">
+                    <input
+                            type="text"
+                            placeholder="Filmy, usługi, produkty, NIP, REGON, KRS..."
+                            class="search"
+                    />
+                    <img class="search-wrapper__icon" src="/svg/lupa.svg" alt="" />
+                </form>
+            </div>
+            <div>
+                <a class="btn btn--secondary" href="./register.html"
+                >Zarejestruj się</a
+                >
+            </div>
+            <div>
+                <a class="btn btn--primary" href="./login.html">Zaloguj się</a>
+            </div>
+            <div class="language-select">
+                <img
+                        class="language-select__selected-lang"
+                        src="./img/flaga_pl.png"
+                        alt=""
+                />
+                <div class="dropdown">
+                    <img
+                            class="language-select__selected-lang"
+                            src="./img/flaga_panama.png"
+                            alt=""
+                    />
+                    <img
+                            class="language-select__selected-lang"
+                            src="./img/flaga_kanada.png"
+                            alt=""
+                    />
+                </div>
             </div>
         </div>
     </div>
-    <?= Html::beginForm(['/site/logout'], 'post', ['id' => 'logoutForm']) ?>
-    <?= Html::endForm() ?>
-    <script type="text/javascript">
-      function submitLogoutForm() {
-        $('#logoutForm').submit();
-      }
-    </script>
-
 </div>
-
-
-
 

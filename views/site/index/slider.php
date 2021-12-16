@@ -12,38 +12,159 @@ $index=0;
 
 ?>
 
-
-<section class="Slider">
-    <div class="owl-carousel owl-theme">
-        <? foreach ($project->files as $file): ?>
-            <? if ($file->isImage()): $index++;?>
-                <div class="item" data-dot="<?= $index ?>>">
-                    <div
-                            class="Slider__item"
-                            style="background-image: url('<?= $file->getImageSrc(1360, 768) ?>')"
-                    >
-                        <div class="container">
-                            <div class="Slider__description">
-                                <div class="Slider__description__header">
-                                    <?= Yii::t('db', 'Investition in'); ?>
-                                    <div><?= $project->name ?></div>
-                                </div>
-                                <div class="Slider__description__content">
-                                    <?= $project->lead ?>
-                                </div>
-                                <a class="btn btn-primary btn-small"
-                                   href="<?= \yii\helpers\Url::to(['site/about-project']) ?>"><?= Yii::t('db', 'More about project'); ?>
-                                </a>
-                                <div class="owl-dots">
-                                    <? for ($i = 1; $i <= sizeof($project->files); $i++): ?>
-                                        <div class="owl-dot"><?= $i ?></div>
-                                    <? endfor; ?>
-                                </div>
+<section class="main-slider-wrapper">
+    <div class="container">
+        <div id="MAIN-SLIDER" class="owl-carousel owl-theme">
+            <div class="main-slider item">
+                <div class="main-slider__content">
+                    <h1>
+                        <strong>Agent numer 1 </strong>online<br />
+                        łączący Cię z dostawcami<br />
+                        i klientami <strong>na całym świecie</strong>
+                    </h1>
+                    <div class="block-icons">
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/inwestor.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Informacje dla Inwestorów
                             </div>
-                        </div>
+                        </a>
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/promocje.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Produkty <br />
+                                w promocji
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/benefity.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Benefity <br />
+                                i Korzyści
+                            </div>
+                        </a>
                     </div>
+                    <a href="" class="btn btn--primary">
+                        Sprawdź najnowszą inwestycje
+                    </a>
                 </div>
-            <? endif; ?>
-        <? endforeach; ?>
+                <div class="main-slider__images">
+                    <img src="img/Depositphotos_24647225_xl-2015.jpg" alt="" />
+                    <img src="img/Depositphotos_233884870_xl-2015.jpg" alt="" />
+                </div>
+            </div>
+            <div class="main-slider item">
+                <div class="main-slider__content">
+                    <h1>
+                        <strong>Agent numer 1 </strong>online<br />
+                        łączący Cię z dostawcami<br />
+                        i klientami <strong>na całym świecie</strong>
+                    </h1>
+                    <div class="block-icons">
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/inwestor.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Informacje dla Inwestorów
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/promocje.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Produkty <br />
+                                w promocji
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/benefity.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Benefity <br />
+                                i Korzyści
+                            </div>
+                        </a>
+                    </div>
+                    <a href="" class="btn btn--primary">
+                        Sprawdź najnowszą inwestycje
+                    </a>
+                </div>
+                <div class="main-slider__images">
+                    <img src="img/Depositphotos_24647225_xl-2015.jpg" alt="" />
+                    <img src="img/Depositphotos_233884870_xl-2015.jpg" alt="" />
+                </div>
+            </div>
+            <div class="main-slider item">
+                <div class="main-slider__content">
+                    <h1>
+                        <strong>Agent numer 1 </strong>online<br />
+                        łączący Cię z dostawcami<br />
+                        i klientami <strong>na całym świecie</strong>
+                    </h1>
+                    <div class="block-icons">
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/inwestor.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Informacje dla Inwestorów
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/promocje.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Produkty <br />
+                                w promocji
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/benefity.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Benefity <br />
+                                i Korzyści
+                            </div>
+                        </a>
+                    </div>
+                    <a href="" class="btn btn--primary">
+                        Sprawdź najnowszą inwestycje
+                    </a>
+                </div>
+                <div class="main-slider__images">
+                    <img src="img/Depositphotos_24647225_xl-2015.jpg" alt="" />
+                    <img src="img/Depositphotos_233884870_xl-2015.jpg" alt="" />
+                </div>
+            </div>
+        </div>
     </div>
 </section>

@@ -25,7 +25,7 @@ class FrontAsset extends AssetBundle
         'css/font-awesome.min.css',
         'css/owl.carousel.min.css',
         'css/animations.css',
-        'scss/style.scss',
+        'css/style.css',
         'css/magnific-popup.min.css',
         'less/front.less',
         'fonts/stylesheet.css',
@@ -37,7 +37,7 @@ class FrontAsset extends AssetBundle
         'js/jquery.viewportchecker.min.js',
         'js/jquery.countTo.js',
         'js/css3-animate-it.js',
-        'js/scriprs.js',
+        'js/main.js',
         'js/jquery.magnific-popup.min.js',
     ];
     public $depends = [
