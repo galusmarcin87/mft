@@ -39,7 +39,7 @@ class File extends BaseFile
   {
     return \yii\helpers\Html::a($this->origin_name, $this->getWebPath());
   }
-  
+
   public function getLinkUrl(){
     return $this->getWebPath();
   }
@@ -51,7 +51,7 @@ class File extends BaseFile
     if (!$this->isImage()) {
       return false;
     }
-    ini_set('memory_limit','80M');
+    ini_set('memory_limit','8000M');
     $src = str_replace('\\', '/', (string) $this->image()->thumbnail($width, $height, $mode));
     $img = Html::img($src, \yii\helpers\ArrayHelper::merge($htmlOptions, ['alt' => $this->origin_name]));
     if ($lightBox) {
@@ -66,7 +66,7 @@ class File extends BaseFile
   {
     $iniPrev = ini_get('display_errors');
     ini_set('display_errors', 'Off');
-    
+
     $src = false;
     if ($width && !$height) {
       ini_set('memory_limit','150M');

@@ -30,13 +30,13 @@ $this->registerJs($search);
     <div class="search-form" style="display:none">
         <?=  $this->render('_search', ['model' => $searchModel]); ?>
     </div>
-    <?php 
+    <?php
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
         'name',
         'description:ntext',
-        'is_promoted',
+        'is_promoted:boolean',
         'first_name',
         'surname',
         'status',
@@ -60,7 +60,7 @@ $this->registerJs($search);
                 'attribute' => 'category_id',
                 'label' => Yii::t('app', 'Category'),
                 'value' => function($model){
-                    return $model->category->name;
+                    return $model->category ? $model->category->name : '';
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->asArray()->all(), 'id', 'name'),
@@ -73,7 +73,7 @@ $this->registerJs($search);
                 'attribute' => 'user_id',
                 'label' => Yii::t('app', 'User'),
                 'value' => function($model){
-                    return $model->user->username;
+                    return $model->user ? $model->user->username : '';
                 },
                 'filterType' => GridView::FILTER_SELECT2,
                 'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->asArray()->all(), 'id', 'username'),
@@ -85,32 +85,6 @@ $this->registerJs($search);
         'payment_status',
         'paid_from',
         'paid_to',
-        [
-                'attribute' => 'thumbnail_id',
-                'label' => Yii::t('app', 'Thumbnail'),
-                'value' => function($model){
-                    return $model->thumbnail->name;
-                },
-                'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->asArray()->all(), 'id', 'name'),
-                'filterWidgetOptions' => [
-                    'pluginOptions' => ['allowClear' => true],
-                ],
-                'filterInputOptions' => ['placeholder' => 'File', 'id' => 'grid-company-search-thumbnail_id']
-            ],
-        [
-                'attribute' => 'background_id',
-                'label' => Yii::t('app', 'Background'),
-                'value' => function($model){
-                    return $model->background->name;
-                },
-                'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->asArray()->all(), 'id', 'name'),
-                'filterWidgetOptions' => [
-                    'pluginOptions' => ['allowClear' => true],
-                ],
-                'filterInputOptions' => ['placeholder' => 'File', 'id' => 'grid-company-search-background_id']
-            ],
         'is_for_sale',
         'sale_title',
         'sale_description:ntext',
@@ -126,11 +100,10 @@ $this->registerJs($search);
         'is_institution',
         'institution_agent_prefix',
         'institution_invoice_amount',
-        'companycol1',
         [
             'class' => app\components\mgcms\yii\ActionColumn::className(),
         ],
-    ]; 
+    ];
     ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

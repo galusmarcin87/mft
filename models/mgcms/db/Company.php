@@ -4,6 +4,7 @@ namespace app\models\mgcms\db;
 
 use Yii;
 use app\components\mgcms\MgHelpers;
+use yii\helpers\Html;
 
 /**
  * This is the base model class for table "company".
@@ -54,7 +55,8 @@ use app\components\mgcms\MgHelpers;
  * @property integer $is_institution
  * @property string $institution_agent_prefix
  * @property double $institution_invoice_amount
- * @property string $companycol1
+ * @property string $link
+ * @property string $linkUrl
  *
  * @property \app\models\mgcms\db\Agent[] $agents
  * @property \app\models\mgcms\db\Benefit[] $benefits
@@ -68,6 +70,11 @@ use app\components\mgcms\MgHelpers;
  */
 class Company extends \app\models\mgcms\db\AbstractRecord
 {
+    use LanguageBehaviorTrait;
+
+    public $languageAttributes = ['description'];
+
+    public $downloadFiles;
 
     /**
      * @inheritdoc
@@ -86,7 +93,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             [['phone', 'nip', 'regon', 'krs', 'sale_currency'], 'string', 'max' => 15]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -149,7 +156,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             'companycol1' => Yii::t('app', 'Companycol1'),
         ];
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -157,7 +164,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasMany(\app\models\mgcms\db\Agent::className(), ['company_id' => 'id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -165,7 +172,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasMany(\app\models\mgcms\db\Benefit::className(), ['company_id' => 'id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -173,7 +180,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\Category::className(), ['id' => 'category_id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -181,7 +188,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\File::className(), ['id' => 'thumbnail_id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -189,7 +196,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\File::className(), ['id' => 'background_id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -197,7 +204,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\User::className(), ['id' => 'created_by']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -205,7 +212,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\User::className(), ['id' => 'user_id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -213,7 +220,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasMany(\app\models\mgcms\db\Job::className(), ['company_id' => 'id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -221,7 +228,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasMany(\app\models\mgcms\db\Product::className(), ['company_id' => 'id']);
     }
-    
+
     /**
      * @inheritdoc
      * @return \app\models\mgcms\db\CompanyQuery the active query used by this AR class.
@@ -229,5 +236,15 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     public static function find()
     {
         return new \app\models\mgcms\db\CompanyQuery(get_called_class());
+    }
+
+    public function getLinkUrl()
+    {
+        return \yii\helpers\Url::to(['/company/view', 'name' => $this->name]);
+    }
+
+    public function getLink()
+    {
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/company/view', 'name' => $this->name]));
     }
 }

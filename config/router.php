@@ -38,6 +38,14 @@ return [
         [
             'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
             'patterns' => [
+                'en' => '/company/<name>',
+                'pl' => '/firma/<name>',
+            ],
+            'route' => '/company/view',
+        ],
+        [
+            'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
+            'patterns' => [
                 'en' => '/projects',
                 'pl' => '/projekty',
             ],

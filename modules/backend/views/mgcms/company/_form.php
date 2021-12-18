@@ -1,41 +1,43 @@
 <?php
 
+use app\models\mgcms\db\Category;
 use yii\helpers\Html;
 use app\components\mgcms\yii\ActiveForm;
 use app\components\mgcms\MgHelpers;
+use kartik\icons\Icon;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\mgcms\db\Company */
 /* @var $form app\components\mgcms\yii\ActiveForm */
 
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END, 
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
     'viewParams' => [
-        'class' => 'Agent', 
-        'relID' => 'agent', 
+        'class' => 'Agent',
+        'relID' => 'agent',
         'value' => \yii\helpers\Json::encode($model->agents),
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END, 
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
     'viewParams' => [
-        'class' => 'Benefit', 
-        'relID' => 'benefit', 
+        'class' => 'Benefit',
+        'relID' => 'benefit',
         'value' => \yii\helpers\Json::encode($model->benefits),
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END, 
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
     'viewParams' => [
-        'class' => 'Job', 
-        'relID' => 'job', 
+        'class' => 'Job',
+        'relID' => 'job',
         'value' => \yii\helpers\Json::encode($model->jobs),
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END, 
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
     'viewParams' => [
-        'class' => 'Product', 
-        'relID' => 'product', 
+        'class' => 'Product',
+        'relID' => 'product',
         'value' => \yii\helpers\Json::encode($model->products),
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
@@ -90,12 +92,8 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field($model, 'subscription_fee')->textInput(['placeholder' => 'Subscription Fee']) ?>
 
-    <?= $form->field($model, 'companycol')->textInput(['maxlength' => true, 'placeholder' => 'Companycol']) ?>
-
-    <?= $form->field($model, 'created_on')->textInput(['placeholder' => 'Created On']) ?>
-
     <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
+        'data' => \yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type'=> Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
         'options' => ['placeholder' => Yii::t('app', 'Choose Category')],
         'pluginOptions' => [
             'allowClear' => true
@@ -137,7 +135,7 @@ use app\components\mgcms\MgHelpers;
     ]); ?>
 
     <?= $form->field($model, 'thumbnail_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
         'options' => ['placeholder' => Yii::t('app', 'Choose File')],
         'pluginOptions' => [
             'allowClear' => true
@@ -145,7 +143,7 @@ use app\components\mgcms\MgHelpers;
     ]); ?>
 
     <?= $form->field($model, 'background_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
         'options' => ['placeholder' => Yii::t('app', 'Choose File')],
         'pluginOptions' => [
             'allowClear' => true
@@ -182,7 +180,48 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field($model, 'institution_invoice_amount')->textInput(['placeholder' => 'Institution Invoice Amount']) ?>
 
-    <?= $form->field($model, 'companycol1')->textInput(['maxlength' => true, 'placeholder' => 'Companycol1']) ?>
+    <div class="well">
+        <div class="col-md-12">
+            <?= $form->relatedFileInput($model, true, true) ?>
+        </div>
+
+        <legend><?= Yii::t('app', 'Images'); ?></legend>
+        <?/*---------------specyfic for this project distinguish between files ------------------*/?>
+        <div class="row images itemsFlex">
+            <? foreach ($model->fileRelations as $relation): ?>
+
+                <?if ($relation->json == '1' || !$relation->file) continue?>
+                <div class="col-md-3 center bottom10">
+                    <?= \kartik\helpers\Html::hiddenInput("fileOrder[".$relation->file->id."]") ?>
+                    <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
+                    <?= $relation->file->getThumb(250, 250, true, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET, ['class' => 'img-responsive']) ?>
+                    <? \kartik\helpers\Html::textarea("FileRelation[$relation->file->id][$model->id][" . $model::className() . "][description]", 'aaa', ['class' => 'form-control']) ?>
+                </div>
+            <? endforeach ?>
+        </div>
+
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $('.images').sortable()
+          })
+
+        </script>
+    </div>
+
+
+    <div class="col-md-12">
+        <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true]) ?>
+        <legend><?= Yii::t('app', 'Files to download'); ?></legend>
+        <? foreach ($model->fileRelations as $relation): ?>
+            <?if ($relation->json != '1' || !$relation->file) continue?>
+            <div class="col-md-3 center bottom10">
+                <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
+                <?= Html::a($relation->file->origin_name,$relation->file->linkUrl) ?>
+
+            </div>
+        <? endforeach ?>
+    </div>
+
 
     <?php
     $forms = [
