@@ -164,26 +164,31 @@ $model->language = Yii::$app->language;
                 <div class="single-company__video">
                     <a
                         class="popup-video"
-                        href="http://www.youtube.com/watch?v=0O2aH4XLbto"
+                        href="<?= $model->video?>"
                     >
-                        <img src="./img/Depositphotos_307530416_xl-2015.jpg" />
+                        <img src="<?= $model->video_thumbnail?>" />
                         <img
                             class="single-company__video__play"
-                            src="./svg/play.svg"
+                            src="/svg/play.svg"
                             alt=""
                         />
                     </a>
                 </div>
                 <div class="flex">
+                    <?if(count($model->fileRelations)):?>
                     <div>
-                        <h3>Multimedia</h3>
-                        <a href="" class="btn btn--primary btn--small">
-                            Pobierz logo
-                        </a>
-                        <a href="" class="btn btn--primary btn--small">
-                            Zobacz video
-                        </a>
+                        <h3><?= Yii::t('db', 'Multimedia') ?></h3>
+                        <div class="carousel-wrap">
+                                <? foreach ($model->fileRelations as $relation): ?>
+                                    <?if ($relation->json != '1' || !$relation->file) continue?>
+                                    <a href="<?= $relation->file->getLinkUrl() ?>" class="btn btn--primary btn--small">
+                                        <?= $relation->file->origin_name?>
+                                    </a>
+                                <? endforeach ?>
+
+                        </div>
                     </div>
+                    <?endif?>
                     <div class="hidden">
                         <h3>Udostpnij</h3>
                         <div class="social-icons social-icons--color">

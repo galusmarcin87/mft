@@ -2,6 +2,8 @@
 
 namespace app\modules\backend\controllers\mgcms;
 
+use app\models\mgcms\db\File;
+use app\models\mgcms\db\FileRelation;
 use Yii;
 use app\models\mgcms\db\Company;
 use app\models\mgcms\db\CompanySearch;
@@ -9,6 +11,7 @@ use app\modules\backend\components\mgcms\MgBackendController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\components\mgcms\MgHelpers;
+use yii\web\UploadedFile;
 
 /**
  * CompanyController implements the CRUD actions for Company model.
@@ -81,6 +84,7 @@ class CompanyController extends MgBackendController
         $model = new Company();
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
+            $this->_assignDownloadFiles($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -100,6 +104,7 @@ class CompanyController extends MgBackendController
         $model = $this->findModel($id);
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
+            $this->_assignDownloadFiles($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -108,6 +113,36 @@ class CompanyController extends MgBackendController
         }
     }
 
+    private function _assignDownloadFiles($model)
+    {
+        $upladedFiles = UploadedFile::getInstances($model, 'downloadFiles');
+
+        if ($upladedFiles) {
+            foreach ($upladedFiles as $CUploadedFileModel) {
+                if ($CUploadedFileModel->hasError) {
+                    MgHelpers::setFlash(MgHelpers::FLASH_TYPE_ERROR, Yii::t('app', 'Error with uploading file - probably file is too big'));
+                    continue;
+                }
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($CUploadedFileModel));
+                if ($file) {
+                    if (FileRelation::find()->where(['file_id' => $file->id, 'rel_id' => $this->id, 'model' => $this::className()])->count()) {
+                        continue;
+                    }
+                    $fileRel = new FileRelation;
+                    $fileRel->file_id = $file->id;
+                    $fileRel->rel_id = $model->id;
+                    $fileRel->model = $model::className();
+                    $fileRel->json = 1;
+                    MgHelpers::saveModelAndLog($fileRel);
+                } else {
+                    MgHelpers::setFlashError('Błąd dodawania pliku powiązanego');
+                }
+            }
+            return true;
+        }
+        return false;
+    }
     /**
      * Deletes an existing Company model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -120,9 +155,9 @@ class CompanyController extends MgBackendController
 
         return $this->redirect(['index']);
     }
-    
+
     /**
-     * 
+     *
      * Export Company information into PDF format.
      * @param integer $id
      * @return mixed
@@ -168,7 +203,7 @@ class CompanyController extends MgBackendController
         return $pdf->render();
     }
 
-    
+
     /**
      * Finds the Company model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -184,7 +219,7 @@ class CompanyController extends MgBackendController
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
     }
-    
+
     /**
     * Action to load a tabular form grid
     * for Agent
@@ -204,7 +239,7 @@ class CompanyController extends MgBackendController
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
     }
-    
+
     /**
     * Action to load a tabular form grid
     * for Benefit
@@ -224,7 +259,7 @@ class CompanyController extends MgBackendController
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
     }
-    
+
     /**
     * Action to load a tabular form grid
     * for Job
@@ -244,7 +279,7 @@ class CompanyController extends MgBackendController
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
     }
-    
+
     /**
     * Action to load a tabular form grid
     * for Product

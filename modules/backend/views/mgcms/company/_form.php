@@ -180,6 +180,10 @@ use kartik\icons\Icon;
 
     <?= $form->field($model, 'institution_invoice_amount')->textInput(['placeholder' => 'Institution Invoice Amount']) ?>
 
+    <?= $form->field($model, 'video')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('video')]) ?>
+
+    <?= $form->field($model, 'video_thumbnail')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('video_thumbnail')]) ?>
+
     <div class="well">
         <div class="col-md-12">
             <?= $form->relatedFileInput($model, true, true) ?>

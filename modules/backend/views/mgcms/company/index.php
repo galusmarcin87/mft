@@ -34,6 +34,9 @@ $this->registerJs($search);
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
+        [
+            'class' => app\components\mgcms\yii\ActionColumn::className(),
+        ],
         'name',
         'description:ntext',
         'is_promoted:boolean',
@@ -100,9 +103,7 @@ $this->registerJs($search);
         'is_institution',
         'institution_agent_prefix',
         'institution_invoice_amount',
-        [
-            'class' => app\components\mgcms\yii\ActionColumn::className(),
-        ],
+
     ];
     ?>
     <?= GridView::widget([
