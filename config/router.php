@@ -54,6 +54,22 @@ return [
         [
             'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
             'patterns' => [
+                'en' => '/job/<id>/<name>',
+                'pl' => '/oferta-pracy/<id>/<name>',
+            ],
+            'route' => '/job/view',
+        ],
+        [
+            'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
+            'patterns' => [
+                'en' => '/service/<id>/<name>',
+                'pl' => '/usluga/<id>/<name>',
+            ],
+            'route' => '/service/view',
+        ],
+        [
+            'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
+            'patterns' => [
                 'en' => '/projects',
                 'pl' => '/projekty',
             ],

@@ -9,10 +9,10 @@ use yii\web\View;
         class="company company--service"
         target="_blank"
 >
-    <? if ($model->file && $model->file->isImage()): ?>
+    <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
         <img
                 class="company__logo company__logo--full"
-                src="<?= $model->file->getImageSrc(250, 178) ?>"
+                src="<?= $model->company->thumbnail->getImageSrc(250, 178, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET) ?>"
                 alt=""
         />
     <? endif; ?>

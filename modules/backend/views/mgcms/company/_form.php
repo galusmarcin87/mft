@@ -42,6 +42,14 @@ use kartik\icons\Icon;
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
+    'viewParams' => [
+        'class' => 'Service',
+        'relID' => 'service',
+        'value' => \yii\helpers\Json::encode($model->services),
+        'isNewRecord' => ($model->isNewRecord) ? 1 : 0
+    ]
+]);
 ?>
 
 <div class="company-form">
@@ -230,29 +238,36 @@ use kartik\icons\Icon;
     <?php
     $forms = [
         [
-            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Agent')),
+            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Products')),
+            'content' => $this->render('_formProduct', [
+                'row' => \yii\helpers\ArrayHelper::toArray($model->products),
+            ]),
+        ],
+        [
+            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Services')),
+            'content' => $this->render('_formService', [
+                'row' => \yii\helpers\ArrayHelper::toArray($model->services),
+            ]),
+        ],
+        [
+            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Agents')),
             'content' => $this->render('_formAgent', [
                 'row' => \yii\helpers\ArrayHelper::toArray($model->agents),
             ]),
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Benefit')),
+            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Benefits')),
             'content' => $this->render('_formBenefit', [
                 'row' => \yii\helpers\ArrayHelper::toArray($model->benefits),
             ]),
         ],
         [
-            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Job')),
+            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Jobs')),
             'content' => $this->render('_formJob', [
                 'row' => \yii\helpers\ArrayHelper::toArray($model->jobs),
             ]),
         ],
-        [
-            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Product')),
-            'content' => $this->render('_formProduct', [
-                'row' => \yii\helpers\ArrayHelper::toArray($model->products),
-            ]),
-        ],
+
     ];
     echo kartik\tabs\TabsX::widget([
         'items' => $forms,

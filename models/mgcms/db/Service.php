@@ -1,11 +1,12 @@
 <?php
 
-namespace app\models\mgcms\db\base;
+namespace app\models\mgcms\db;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use mootensai\behaviors\UUIDBehavior;
+use yii\helpers\Html;
 
 /**
  * This is the base model class for table "service".
@@ -34,11 +35,9 @@ class Service extends \app\models\mgcms\db\AbstractRecord
             [['description', 'specification'], 'string'],
             [['company_id'], 'integer'],
             [['name'], 'string', 'max' => 245],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -47,16 +46,6 @@ class Service extends \app\models\mgcms\db\AbstractRecord
         return 'service';
     }
 
-    /**
-     * 
-     * @return string
-     * overwrite function optimisticLock
-     * return string name of field are used to stored optimistic lock 
-     * 
-     */
-    public function optimisticLock() {
-        return 'lock';
-    }
 
     /**
      * @inheritdoc
@@ -72,7 +61,7 @@ class Service extends \app\models\mgcms\db\AbstractRecord
             'company_id' => Yii::t('app', 'Company ID'),
         ];
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -80,31 +69,7 @@ class Service extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\Company::className(), ['id' => 'company_id']);
     }
-    
-/**
-     * @inheritdoc
-     * @return array mixed
-     */ 
-    public function behaviors()
-    {
-        return [
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
-                'value' => new \yii\db\Expression('NOW()'),
-            ],
-            'blameable' => [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'created_by',
-                'updatedByAttribute' => 'updated_by',
-            ],
-            'uuid' => [
-                'class' => UUIDBehavior::className(),
-                'column' => 'id',
-            ],
-        ];
-    }
+
 
     /**
      * @inheritdoc
@@ -113,5 +78,15 @@ class Service extends \app\models\mgcms\db\AbstractRecord
     public static function find()
     {
         return new \app\models\mgcms\db\ServiceQuery(get_called_class());
+    }
+
+    public function getLinkUrl()
+    {
+        return \yii\helpers\Url::to(['/service/view', 'id' => $this->id, 'name' => $this->name]);
+    }
+
+    public function getLink()
+    {
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/service/view', 'id' => $this->id, 'name' => $this->name]));
     }
 }

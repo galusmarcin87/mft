@@ -36,7 +36,6 @@ $model->language = Yii::$app->language;
 <div class="container">
     <div class="search-results">
         <div class="menu-vertical">
-            <div class="label">Filtruj</div>
             <div class="menu-vertical__toggle">
                 <i class="fa fa-times" aria-hidden="true"></i>
                 <i class="fa fa-bars" aria-hidden="true"></i>

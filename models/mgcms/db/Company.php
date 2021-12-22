@@ -67,6 +67,7 @@ use yii\helpers\Html;
  * @property \app\models\mgcms\db\User $user
  * @property \app\models\mgcms\db\Job[] $jobs
  * @property \app\models\mgcms\db\Product[] $products
+ * @property \app\models\mgcms\db\Service[] $services
  */
 class Company extends \app\models\mgcms\db\AbstractRecord
 {
@@ -229,6 +230,14 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     public function getProducts()
     {
         return $this->hasMany(\app\models\mgcms\db\Product::className(), ['company_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getServices()
+    {
+        return $this->hasMany(\app\models\mgcms\db\Service::className(), ['company_id' => 'id']);
     }
 
     /**

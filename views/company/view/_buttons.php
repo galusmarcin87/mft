@@ -22,7 +22,7 @@ use yii\bootstrap\ActiveForm;
         >
     <?endif;?>
 
-    <?if(0):?>
+    <?if(count($model->services) > 0):?>
         <a href="<?=$model->getLinkUrl('services')?>" class="btn <?= $model->viewType == 'services' ? 'btn--primary' : 'btn--secondary' ?> btn--small"
         ><?= Yii::t('db', 'Services') ?></a
         >

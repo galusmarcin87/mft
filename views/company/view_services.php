@@ -36,7 +36,6 @@ $model->language = Yii::$app->language;
 <div class="container">
     <div class="search-results">
         <div class="menu-vertical">
-            <div class="label">Filtruj</div>
             <div class="menu-vertical__toggle">
                 <i class="fa fa-times" aria-hidden="true"></i>
                 <i class="fa fa-bars" aria-hidden="true"></i>
@@ -85,13 +84,13 @@ $model->language = Yii::$app->language;
                 <a href="" class="menu-vertical__item"> Opieka zdrowotna</a>
             </div>
             <a href="./produkty.html" class="menu-vertical__category">
-                <div class="menu-vertical__item menu-vertical__item--active">Produkty</div>
+                <div class="menu-vertical__item ">Produkty</div>
             </a>
             <a href="./firmy-napsprzedaz.html" class="menu-vertical__category">
                 <div class="menu-vertical__item">Firmy na sprzedaż</div>
             </a>
             <a href="./uslugi.html" class="menu-vertical__category">
-                <div class="menu-vertical__item">
+                <div class="menu-vertical__item menu-vertical__item--active">
                     Usługi
                 </div>
             </a>
@@ -117,7 +116,7 @@ $model->language = Yii::$app->language;
             </div>
             <div class="companies companies--wide">
                 <? foreach ($model->services as $service): ?>
-                    <?= $this->render('/product/_index', ['model' => $product]) ?>
+                    <?= $this->render('/service/_index', ['model' => $service]) ?>
                 <? endforeach ?>
             </div>
         </div>
