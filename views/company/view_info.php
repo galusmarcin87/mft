@@ -18,79 +18,14 @@ $model->language = Yii::$app->language;
 
 <section class="service-wrapper company-wrapper">
     <div class="container">
-        <div class="breadcrumb">
-            <a href="/company/index"> <?= Yii::t('db', 'List of companies') ?> </a>
-            <span><?=$model->name?>></span>
-        </div>
+        <?= $this->render('view/_breadcrumbs',['model'=>$model])?>
 
         <div class="service single-company">
-            <div class="badge-corner"><?= Yii::t('db', 'Company') ?></div>
-            <div class="relative">
-                <?if($model->background && $model->background->isImage()):?>
-                    <img
-                        class="single-company__image"
-                        src="<?=$model->background->getImageSrc()?>"
-                        alt=""
-                    />
-                <?endif;?>
-                <?if($model->thumbnail && $model->thumbnail->isImage()):?>
-                    <img src="<?=$model->thumbnail->getImageSrc(0, 45)?>" class="training__logo" />
-                <?endif;?>
-            </div>
+            <?= $this->render('view/_logo',['model'=>$model])?>
             <div class="single-company__content ">
-                <div class="rating hidden">
-                    Oceń:
-                    <i
-                        class="fa fa-star rating__star rating__star--active"
-                        aria-hidden="true"
-                    ></i>
-                    <i
-                        class="fa fa-star rating__star rating__star--active"
-                        aria-hidden="true"
-                    ></i>
-                    <i
-                        class="fa fa-star rating__star rating__star--active"
-                        aria-hidden="true"
-                    ></i>
-                    <i
-                        class="fa fa-star rating__star rating__star--active"
-                        aria-hidden="true"
-                    ></i>
-                    <i
-                        class="fa fa-star rating__star rating__star--active"
-                        aria-hidden="true"
-                    ></i>
-                    <i
-                        class="fa fa-star rating__star rating__star--active"
-                        aria-hidden="true"
-                    ></i>
-                    <i class="fa fa-star rating__star" aria-hidden="true"></i>
-                    <span class="rating__rate">(6,0)</span>
-                </div>
-                <h1 class="text-left"><?=$model->name?></h1>
-                <div class="hr"></div>
-                <div class="label"><?= Yii::t('db', 'Address') ?>:</div>
-                <?= $model->city?>,<?= $model->street?>, <?= $model->country?>
+                <?= $this->render('view/_top',['model'=>$model])?>
+                <?= $this->render('view/_buttons',['model'=>$model])?>
 
-                <div class="buttons-wrapper">
-                    <a href="./tekstowa.html" class="btn btn--primary btn--small"
-                    >Informacje</a
-                    >
-                    <a href="./produkty.html" class="btn btn--secondary btn--small"
-                    >Produkty</a
-                    >
-                    <a href="./uslugi.html" class="btn btn--secondary btn--small"
-                    >Usługi</a
-                    >
-                    <a href="./tekstowa.html" class="btn btn--secondary btn--small"
-                    >Przedstawiciele</a
-                    >
-                    <a
-                        href="./oferty-pracy.html"
-                        class="btn btn--secondary btn--small"
-                    >Oferty pracy</a
-                    >
-                </div>
                 <h3><?= Yii::t('db', 'General information') ?></h3>
                 <p>
                     <?=$model->description?>

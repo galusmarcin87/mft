@@ -76,8 +76,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     public $modelAttributes = ['video','video_thumbnail'];
 
     public $downloadFiles;
-
-
+    public $viewType;
 
     /**
      * @inheritdoc
@@ -241,9 +240,9 @@ class Company extends \app\models\mgcms\db\AbstractRecord
         return new \app\models\mgcms\db\CompanyQuery(get_called_class());
     }
 
-    public function getLinkUrl()
+    public function getLinkUrl($type = 'info')
     {
-        return \yii\helpers\Url::to(['/company/view', 'name' => $this->name]);
+        return \yii\helpers\Url::to(['/company/view', 'name' => $this->name, 'type' => $type]);
     }
 
     public function getLink()

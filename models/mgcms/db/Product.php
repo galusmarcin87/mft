@@ -4,6 +4,7 @@ namespace app\models\mgcms\db;
 
 use Yii;
 use app\components\mgcms\MgHelpers;
+use yii\helpers\Html;
 
 /**
  * This is the base model class for table "product".
@@ -22,6 +23,9 @@ use app\components\mgcms\MgHelpers;
  * @property integer $min_amount_of_purchase
  * @property double $special_offer_price
  * @property integer $company_id
+ * @property string $link
+ * @property string $linkUrl
+ * @property integer $file_id
  *
  * @property \app\models\mgcms\db\Category $category
  * @property \app\models\mgcms\db\Company $company
@@ -37,7 +41,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
         return [
             [['name', 'category_id', 'company_id'], 'required'],
             [['created_on', 'special_offer_from', 'special_offer_to'], 'safe'],
-            [['category_id', 'number', 'min_amount_of_purchase', 'company_id'], 'integer'],
+            [['category_id', 'number', 'min_amount_of_purchase', 'company_id','file_id'], 'integer'],
             [['description', 'specification'], 'string'],
             [['price', 'special_offer_price'], 'number'],
             [['name'], 'string', 'max' => 245],
@@ -46,7 +50,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
             [['number'], 'unique']
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -75,9 +79,10 @@ class Product extends \app\models\mgcms\db\AbstractRecord
             'min_amount_of_purchase' => Yii::t('app', 'Min Amount Of Purchase'),
             'special_offer_price' => Yii::t('app', 'Special Offer Price'),
             'company_id' => Yii::t('app', 'Company ID'),
+            'file_id' => Yii::t('app', 'File'),
         ];
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -85,7 +90,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\Category::className(), ['id' => 'category_id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -93,7 +98,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\Company::className(), ['id' => 'company_id']);
     }
-    
+
     /**
      * @inheritdoc
      * @return \app\models\mgcms\db\ProductQuery the active query used by this AR class.
@@ -101,5 +106,23 @@ class Product extends \app\models\mgcms\db\AbstractRecord
     public static function find()
     {
         return new \app\models\mgcms\db\ProductQuery(get_called_class());
+    }
+
+    public function getLinkUrl()
+    {
+        return \yii\helpers\Url::to(['/product/view', 'id' => $this->id, 'name' => $this->name]);
+    }
+
+    public function getLink()
+    {
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/product/view', 'id' => $this->id, 'name' => $this->name]));
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFile()
+    {
+        return $this->hasOne(\app\models\mgcms\db\File::className(), ['id' => 'file_id']);
     }
 }

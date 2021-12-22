@@ -16,10 +16,10 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
 <div class="menu-wrapper">
     <div class="container">
         <div class="menu">
-            <a href="./index.html">
+            <a href="/">
                 <img
                         class="menu__logo"
-                        src="./img/logo_meetfaces_trading.png"
+                        src="/img/logo_meetfaces_trading.png"
                         alt=""
                 />
             </a>
@@ -55,18 +55,18 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
             <div class="language-select">
                 <img
                         class="language-select__selected-lang"
-                        src="./img/flaga_pl.png"
+                        src="/img/flaga_pl.png"
                         alt=""
                 />
                 <div class="dropdown">
                     <img
                             class="language-select__selected-lang"
-                            src="./img/flaga_panama.png"
+                            src="/img/flaga_panama.png"
                             alt=""
                     />
                     <img
                             class="language-select__selected-lang"
-                            src="./img/flaga_kanada.png"
+                            src="/img/flaga_kanada.png"
                             alt=""
                     />
                 </div>

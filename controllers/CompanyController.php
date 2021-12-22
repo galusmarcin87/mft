@@ -42,15 +42,16 @@ class CompanyController extends \app\components\mgcms\MgCmsController
      *
      * @return string
      */
-    public function actionView($name)
+    public function actionView($name, $type = 'data')
     {
         $model = Company::find()->where(['name' => $name])->one();
         if (!$model) {
             throw new \yii\web\HttpException(404, Yii::t('app', 'Not found'));
         }
 
+        $model->viewType =  $type;
 
-        return $this->render('view', ['model' => $model]);
+        return $this->render('view_'.$type, ['model' => $model]);
     }
 
     public function actionBuy($id)

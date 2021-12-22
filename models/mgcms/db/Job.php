@@ -4,6 +4,7 @@ namespace app\models\mgcms\db;
 
 use Yii;
 use app\components\mgcms\MgHelpers;
+use yii\helpers\Html;
 
 /**
  * This is the base model class for table "job".
@@ -38,7 +39,7 @@ class Job extends \app\models\mgcms\db\AbstractRecord
             [['name', 'position', 'address', 'industry', 'country', 'city'], 'string', 'max' => 245]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -66,7 +67,7 @@ class Job extends \app\models\mgcms\db\AbstractRecord
             'city' => Yii::t('app', 'City'),
         ];
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -74,7 +75,7 @@ class Job extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\Company::className(), ['id' => 'company_id']);
     }
-    
+
     /**
      * @inheritdoc
      * @return \app\models\mgcms\db\JobQuery the active query used by this AR class.
@@ -82,5 +83,15 @@ class Job extends \app\models\mgcms\db\AbstractRecord
     public static function find()
     {
         return new \app\models\mgcms\db\JobQuery(get_called_class());
+    }
+
+    public function getLinkUrl()
+    {
+        return \yii\helpers\Url::to(['/job/view', 'id' => $this->id, 'name' => $this->name]);
+    }
+
+    public function getLink()
+    {
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/job/view', 'id' => $this->id, 'name' => $this->name]));
     }
 }
