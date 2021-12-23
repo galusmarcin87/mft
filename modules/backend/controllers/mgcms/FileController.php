@@ -46,7 +46,7 @@ class FileController extends MgBackendController
             'dataProvider' => $dataProvider,
     ]);
   }
-  
+
   public function actionChooseFile()
   {
     $searchModel = new FileSearch();
@@ -88,6 +88,8 @@ class FileController extends MgBackendController
       foreach ($files as $file) {
         if ($file && !$file->hasError) {
           $model = $model->push(new UploadedResource($file));
+          $model->created_by = $this->getUserModel()->id;
+          $model->save();
         } else {
           MgHelpers::setFlash(MgHelpers::FLASH_TYPE_WARNING, Yii::t('app', 'Problem with uploading file') . ' ' . (string) $file);
         }

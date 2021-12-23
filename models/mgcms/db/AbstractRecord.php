@@ -145,6 +145,8 @@ class AbstractRecord extends \yii\db\ActiveRecord
                 }
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($CUploadedFileModel));
+                $file->created_by = MgHelpers::getUserModel()->id;
+                $file->save();
                 if ($file) {
                     if ($this->onlyOneFile) {
                         foreach ($this->fileRelations as $fileRelation) {

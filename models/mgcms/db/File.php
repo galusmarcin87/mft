@@ -4,6 +4,7 @@ namespace app\models\mgcms\db;
 use \app\models\mgcms\db\base\File as BaseFile;
 
 use \mgcms\lightbox\Lightbox;
+use yii\db\Expression;
 use \yii\helpers\Html;
 
 \rmrevin\yii\module\File\component\Image::$thumbnailBackgroundAlpha = 0;
@@ -29,7 +30,7 @@ class File extends BaseFile
   public function rules()
   {
     return array_replace_recursive(parent::rules(), [
-        [['size', 'image_bad'], 'integer'],
+        [['size', 'image_bad', 'created_by'], 'integer'],
         [['mime', 'name', 'origin_name'], 'string', 'max' => 255],
         [['sha1'], 'string', 'max' => 40]
     ]);
@@ -111,4 +112,7 @@ class File extends BaseFile
   {
     return $this->isImage() ? $this->thumb : $this->link;
   }
+
+
+
 }

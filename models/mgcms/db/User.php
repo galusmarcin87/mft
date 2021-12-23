@@ -390,4 +390,9 @@ class User extends BaseUser implements IdentityInterface
 
         }
     }
+
+    public function isAdmin(){
+
+        return $this->role == self::ROLE_ADMIN;
+    }
 }

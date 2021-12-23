@@ -214,6 +214,9 @@ class CompanyController extends MgBackendController
     protected function findModel($id)
     {
         if (($model = Company::findOne($id)) !== null) {
+            if(!$this->getUserModel()->isAdmin() && $model->user_id != $this->getUserModel()->id) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));

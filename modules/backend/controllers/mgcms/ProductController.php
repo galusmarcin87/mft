@@ -108,9 +108,9 @@ class ProductController extends MgBackendController
 
         return $this->redirect(['index']);
     }
-    
+
     /**
-     * 
+     *
      * Export Product information into PDF format.
      * @param integer $id
      * @return mixed
@@ -154,7 +154,7 @@ class ProductController extends MgBackendController
         if (Yii::$app->request->post('_asnew') != '1') {
             $model = $this->findModel($id);
         }
-    
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -163,7 +163,7 @@ class ProductController extends MgBackendController
             ]);
         }
     }
-    
+
     /**
      * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -174,6 +174,9 @@ class ProductController extends MgBackendController
     protected function findModel($id)
     {
         if (($model = Product::findOne($id)) !== null) {
+            if(!$this->getUserModel()->isAdmin() && $model->company->user_id != $this->getUserModel()->id) {
+                throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+            }
             return $model;
         } else {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
