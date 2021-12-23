@@ -29,7 +29,7 @@ class CompanyController extends \app\components\mgcms\MgCmsController
     {
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Company::find()->where(['status' => [Project::STATUS_ACTIVE, Project::STATUS_PLANNED]]),
+            'query' => Company::find(),
         ]);
 
         return $this->render('index', [

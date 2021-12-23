@@ -337,6 +337,8 @@ or <b>=</b>) na początku każdej wyszukiwanej wartości.',
     'Choose file' => 'Wybierz plik',
     'Edit menu item' => 'Edytuj pozycję menu',
     'Incorrect username or password.' => 'Nieprawidłowy login lub hasło',
+    'Bank Account No' => 'Numer konta bankowego',
+    'Company' => 'Firma',
 ];
 
 return $arr;

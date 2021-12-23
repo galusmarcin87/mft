@@ -27,7 +27,7 @@ $companies = Company::find()->all();
 
         </div>
         <div class="text-center">
-            <a href="#" class="btn btn--primary"> Załaduj więcej </a>
+            <a href="<?= \yii\helpers\Url::to('company/index')?>" class="btn btn--primary"> <?= Yii::t('db', 'Show all') ?> </a>
         </div>
     </div>
 </section>

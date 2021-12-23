@@ -128,7 +128,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             'nip' => Yii::t('app', 'Nip'),
             'regon' => Yii::t('app', 'Regon'),
             'krs' => Yii::t('app', 'Krs'),
-            'banc_account_no' => Yii::t('app', 'Banc Account No'),
+            'banc_account_no' => Yii::t('app', 'Bank Account No'),
             'gps_lat' => Yii::t('app', 'Gps Lat'),
             'gps_long' => Yii::t('app', 'Gps Long'),
             'subscription_fee' => Yii::t('app', 'Subscription Fee'),
