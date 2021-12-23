@@ -20,8 +20,10 @@ use yii\helpers\Html;
  * @property string $requirements
  * @property string $country
  * @property string $city
+ * @property integer $file_id
  *
  * @property \app\models\mgcms\db\Company $company
+ * @property \app\models\mgcms\db\File $file
  */
 class Job extends \app\models\mgcms\db\AbstractRecord
 {
@@ -33,7 +35,7 @@ class Job extends \app\models\mgcms\db\AbstractRecord
     {
         return [
             [['name', 'company_id', 'salary', 'position', 'address', 'industry', 'info', 'requirements', 'country', 'city'], 'required'],
-            [['company_id'], 'integer'],
+            [['company_id', 'file_id'], 'integer'],
             [['salary'], 'number'],
             [['info', 'requirements'], 'string'],
             [['name', 'position', 'address', 'industry', 'country', 'city'], 'string', 'max' => 245]
@@ -65,6 +67,7 @@ class Job extends \app\models\mgcms\db\AbstractRecord
             'requirements' => Yii::t('app', 'Requirements'),
             'country' => Yii::t('app', 'Country'),
             'city' => Yii::t('app', 'City'),
+            'file_id' => Yii::t('app', 'File'),
         ];
     }
 
@@ -93,5 +96,13 @@ class Job extends \app\models\mgcms\db\AbstractRecord
     public function getLink()
     {
         return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/job/view', 'id' => $this->id, 'name' => $this->name]));
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFile()
+    {
+        return $this->hasOne(\app\models\mgcms\db\File::className(), ['id' => 'file_id']);
     }
 }

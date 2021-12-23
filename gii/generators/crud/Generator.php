@@ -373,19 +373,19 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
                     'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
                 ]));
             }
-            
+
             if ($this->pdf) {
                 $files[] = new CodeFile("$viewPath/_pdf.php", $this->render("views/_pdf.php", [
                     'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
                 ]));
             }
-            
+
             if($this->saveAsNew){
                 $files[] = new CodeFile("$viewPath/saveAsNew.php", $this->render("views/saveAsNew.php", [
                     'relations' => isset($relations[$tableName]) ? $relations[$tableName] : [],
                 ]));
             }
-            
+
             if (isset($relations[$tableName]) && !$isTree) {
                 if ($this->expandable) {
                     $files[] = new CodeFile("$viewPath/_detail.php", $this->render("views/_detail.php", [
@@ -679,7 +679,7 @@ class Generator extends \mootensai\enhancedgii\BaseGenerator
         }
         $column = $tableSchema->columns[$attribute];
         if ($column->autoIncrement) {
-            return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false]";
+            return "'$attribute' => ['type' => TabularForm::INPUT_HIDDEN_STATIC, 'columnOptions' => ['hidden' => true]]";
         } elseif ($column->phpType === 'boolean' || $column->dbType === 'tinyint(1)') {
             return "'$attribute' => ['type' => TabularForm::INPUT_CHECKBOX,
             'options' => [

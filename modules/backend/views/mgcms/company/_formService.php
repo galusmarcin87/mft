@@ -33,6 +33,14 @@ echo TabularForm::widget([
                 return Html::a('<i class="glyphicon glyphicon-trash"></i>', '#', ['title' =>  Yii::t('app', 'Delete'), 'onClick' => 'delRowService(' . $key . '); return false;', 'id' => 'service-del-btn']);
             },
         ],
+        'edit' => [
+            'type' => 'raw',
+            'label' => '',
+            'value' => function($model, $key) {
+                return isset($model) && isset($model['id']) ? Html::a('<i class="glyphicon glyphicon-edit"></i>',
+                    ['mgcms/service/update', 'id' => $model['id']]) : false;
+            },
+        ],
     ],
     'gridSettings' => [
         'panel' => [

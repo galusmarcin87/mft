@@ -29,6 +29,7 @@ use yii\helpers\Html;
  *
  * @property \app\models\mgcms\db\Category $category
  * @property \app\models\mgcms\db\Company $company
+ * @property \app\models\mgcms\db\File $file
  */
 class Product extends \app\models\mgcms\db\AbstractRecord
 {

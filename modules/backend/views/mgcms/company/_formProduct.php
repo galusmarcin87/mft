@@ -21,7 +21,7 @@ echo TabularForm::widget([
         'type' => TabularForm::INPUT_TEXT,
     ],
     'attributes' => [
-        "id" => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false],
+        "id" => ['type' => TabularForm::INPUT_HIDDEN_STATIC, 'columnOptions' => ['hidden' => true]],
         'name' => ['type' => TabularForm::INPUT_TEXT],
         'category_id' => [
             'label' => 'Category',
@@ -43,8 +43,8 @@ echo TabularForm::widget([
             ],
             'columnOptions' => ['width' => '200px']
         ],
-        'description' => ['type' => TabularForm::INPUT_TEXTAREA],
-        'specification' => ['type' => TabularForm::INPUT_TEXTAREA],
+        //'description' => ['type' => TabularForm::INPUT_TEXTAREA],
+        //'specification' => ['type' => TabularForm::INPUT_TEXTAREA],
         'price' => ['type' => TabularForm::INPUT_TEXT],
         'number' => ['type' => TabularForm::INPUT_TEXT],
         'is_special_offer' => ['type' => TabularForm::INPUT_CHECKBOX,
@@ -87,6 +87,14 @@ echo TabularForm::widget([
             'label' => '',
             'value' => function($model, $key) {
                 return Html::a('<i class="glyphicon glyphicon-trash"></i>', '#', ['title' =>  Yii::t('app', 'Delete'), 'onClick' => 'delRowProduct(' . $key . '); return false;', 'id' => 'product-del-btn']);
+            },
+        ],
+        'edit' => [
+            'type' => 'raw',
+            'label' => '',
+            'value' => function($model, $key) {
+                return isset($model) && isset($model['id']) ? Html::a('<i class="glyphicon glyphicon-edit"></i>',
+                    ['mgcms/product/update', 'id' => $model['id']]) : false;
             },
         ],
     ],

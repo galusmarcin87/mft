@@ -21,7 +21,7 @@ echo TabularForm::widget([
         'type' => TabularForm::INPUT_TEXT,
     ],
     'attributes' => [
-        "id" => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false],
+        "id" => ['type' => TabularForm::INPUT_HIDDEN_STATIC, 'columnOptions' => ['hidden' => true]],
         'name' => ['type' => TabularForm::INPUT_TEXT],
         'salary' => ['type' => TabularForm::INPUT_TEXT],
         'position' => ['type' => TabularForm::INPUT_TEXT],
@@ -31,6 +31,16 @@ echo TabularForm::widget([
         'requirements' => ['type' => TabularForm::INPUT_TEXTAREA],
         'country' => ['type' => TabularForm::INPUT_TEXT],
         'city' => ['type' => TabularForm::INPUT_TEXT],
+        'file_id' => [
+            'label' => 'File',
+            'type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \kartik\widgets\Select2::className(),
+            'options' => [
+                'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('origin_name')->asArray()->all(), 'id', 'origin_name'),
+                'options' => ['placeholder' => Yii::t('app', 'Choose File')],
+            ],
+            'columnOptions' => ['width' => '200px']
+        ],
         'del' => [
             'type' => 'raw',
             'label' => '',
