@@ -22,7 +22,8 @@ use yii\helpers\Html;
  */
 class Service extends \app\models\mgcms\db\AbstractRecord
 {
-    use \mootensai\relation\RelationTrait;
+
+    public $downloadFiles;
 
     /**
      * @inheritdoc

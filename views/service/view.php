@@ -1,5 +1,5 @@
 <?
-/* @var $model app\models\mgcms\db\Product */
+/* @var $model app\models\mgcms\db\Service */
 
 use yii\web\View;
 
@@ -7,7 +7,7 @@ use yii\web\View;
 <section class="service-wrapper">
     <div class="container">
         <div class="breadcrumb">
-            <a href=""> <?= $model->category ?> </a>
+            <a href=""> <?= $model->company->category ?> </a>
             <span><?= $model->name ?></span>
         </div>
         <div class="service">
@@ -28,7 +28,7 @@ use yii\web\View;
                     </div>
                 </div>
                 <div>
-                    <div class="training__badge"><?= Yii::t('db', 'PRODUCT') ?></div>
+                    <div class="training__badge"><?= Yii::t('db', 'SERVICE') ?></div>
                     <div class="rating hidden">
                         Oceń:
                         <i
@@ -63,8 +63,8 @@ use yii\web\View;
                     <div class="label"><?= Yii::t('db', 'Category') ?>:</div>
 
 
-                    <? foreach (array_reverse($model->category->getCategoryTree()) as $category): ?>
-                        <a href="<?= \yii\helpers\Url::to(['product/index', 'category' => $category->id]) ?>"> <?= Yii::t('db', (string)$category) ?></a>
+                    <? foreach (array_reverse($model->company->category->getCategoryTree()) as $category): ?>
+                        <a href="<?= \yii\helpers\Url::to(['service/index', 'category' => $category->id]) ?>"> <?= Yii::t('db', (string)$category) ?></a>
                     <? endforeach ?>
 
                     <div class="hr"></div>
@@ -117,7 +117,7 @@ use yii\web\View;
                     <? endforeach ?>
                 <? endif ?>
 
-                <h3><?= Yii::t('db', 'Product description') ?></h3>
+                <h3><?= Yii::t('db', 'Service description') ?></h3>
                 <?=$model->description?>
                 <h3><?= Yii::t('db', 'Specification') ?></h3>
                 <?=$model->specification?>
