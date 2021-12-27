@@ -38,10 +38,7 @@ $this->registerJs($search);
             'class' => app\components\mgcms\yii\ActionColumn::className(),
         ],
         'name',
-        'description:ntext',
         'is_promoted:boolean',
-        'first_name',
-        'surname',
         'status',
         'country',
         'city',
@@ -53,11 +50,6 @@ $this->registerJs($search);
         'nip',
         'regon',
         'krs',
-        'banc_account_no',
-        'gps_lat',
-        'gps_long',
-        'subscription_fee',
-        'companycol',
         'created_on',
         [
                 'attribute' => 'category_id',
@@ -66,43 +58,13 @@ $this->registerJs($search);
                     return $model->category ? $model->category->name : '';
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->asArray()->all(), 'id', 'name'),
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->where(['type'=>\app\models\mgcms\db\Category::TYPE_COMPANY_TYPE])->asArray()->all(), 'id', 'name'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
                 'filterInputOptions' => ['placeholder' => 'Category', 'id' => 'grid-company-search-category_id']
             ],
-        [
-                'attribute' => 'user_id',
-                'label' => Yii::t('app', 'User'),
-                'value' => function($model){
-                    return $model->user ? $model->user->username : '';
-                },
-                'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->asArray()->all(), 'id', 'username'),
-                'filterWidgetOptions' => [
-                    'pluginOptions' => ['allowClear' => true],
-                ],
-                'filterInputOptions' => ['placeholder' => 'User', 'id' => 'grid-company-search-user_id']
-            ],
-        'payment_status',
-        'paid_from',
-        'paid_to',
-        'is_for_sale',
-        'sale_title',
-        'sale_description:ntext',
-        'sale_price',
-        'sale_currency',
-        'sale_price_includes:ntext',
-        'sale_reason:ntext',
-        'sale_business_range',
-        'sale_workers_number',
-        'sale_sale_range',
-        'sale_last_year_income',
-        'sale_company_profile',
-        'is_institution',
-        'institution_agent_prefix',
-        'institution_invoice_amount',
+
 
     ];
     ?>

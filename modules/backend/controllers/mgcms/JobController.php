@@ -88,7 +88,7 @@ class JobController extends MgBackendController
         }
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

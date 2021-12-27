@@ -20,13 +20,6 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Name']) ?>
 
-    <?= $form->field($model, 'company_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Company::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose Company')],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]); ?>
 
     <?= $form->field($model, 'salary')->textInput(['placeholder' => 'Salary']) ?>
 
@@ -36,9 +29,9 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field($model, 'industry')->textInput(['maxlength' => true, 'placeholder' => 'Industry']) ?>
 
-    <?= $form->field($model, 'info')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'info')->tinyMce() ?>
 
-    <?= $form->field($model, 'requirements')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'requirements')->tinyMce() ?>
 
     <?= $form->field($model, 'country')->textInput(['maxlength' => true, 'placeholder' => 'Country']) ?>
 
