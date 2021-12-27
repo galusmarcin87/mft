@@ -2,8 +2,12 @@
 namespace app\modules\backend\components\mgcms;
 
 use app\components\mgcms\MgCmsController;
+use app\components\mgcms\MgHelpers;
+use app\models\mgcms\db\File;
+use app\models\mgcms\db\FileRelation;
 use yii\filters\AccessControl;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * Default controller for the `backend` module
@@ -92,6 +96,37 @@ class MgBackendController extends MgCmsController
         $model->file_id = null;
         $model->save();
         $this->back();
+    }
+
+    public function _assignDownloadFiles($model)
+    {
+        $upladedFiles = UploadedFile::getInstances($model, 'downloadFiles');
+
+        if ($upladedFiles) {
+            foreach ($upladedFiles as $CUploadedFileModel) {
+                if ($CUploadedFileModel->hasError) {
+                    MgHelpers::setFlash(MgHelpers::FLASH_TYPE_ERROR, Yii::t('app', 'Error with uploading file - probably file is too big'));
+                    continue;
+                }
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($CUploadedFileModel));
+                if ($file) {
+                    if (FileRelation::find()->where(['file_id' => $file->id, 'rel_id' => $this->id, 'model' => $this::className()])->count()) {
+                        continue;
+                    }
+                    $fileRel = new FileRelation;
+                    $fileRel->file_id = $file->id;
+                    $fileRel->rel_id = $model->id;
+                    $fileRel->model = $model::className();
+                    $fileRel->json = 1;
+                    MgHelpers::saveModelAndLog($fileRel);
+                } else {
+                    MgHelpers::setFlashError('Błąd dodawania pliku powiązanego');
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
 }

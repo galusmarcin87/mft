@@ -34,6 +34,7 @@ use yii\helpers\Html;
 class Product extends \app\models\mgcms\db\AbstractRecord
 {
 
+    public $downloadFiles;
     /**
      * @inheritdoc
      */
@@ -126,4 +127,5 @@ class Product extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\File::className(), ['id' => 'file_id']);
     }
+
 }

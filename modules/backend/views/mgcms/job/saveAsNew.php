@@ -11,7 +11,7 @@ $this->title = Yii::t('app', 'Save As New {modelClass}: ', [
 ]). ' ' . $model->name;
 
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Job'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Job'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Save As New');
 ?>

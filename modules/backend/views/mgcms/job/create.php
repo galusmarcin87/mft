@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\mgcms\db\Job */
 
 $this->title = Yii::t('app', 'Create Job');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Job'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Job'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="job-create">

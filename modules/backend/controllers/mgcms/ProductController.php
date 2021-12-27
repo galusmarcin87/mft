@@ -65,6 +65,7 @@ class ProductController extends MgBackendController
         $model = new Product();
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
+            $this->_assignDownloadFiles($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -88,7 +89,8 @@ class ProductController extends MgBackendController
         }
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $this->_assignDownloadFiles($model);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

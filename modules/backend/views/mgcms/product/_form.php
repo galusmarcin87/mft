@@ -104,6 +104,19 @@ use kartik\icons\Icon;
         </script>
     </div>
 
+    <div class="col-md-12">
+        <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true]) ?>
+        <legend><?= Yii::t('app', 'Files to download'); ?></legend>
+        <? foreach ($model->fileRelations as $relation): ?>
+            <?if ($relation->json != '1' || !$relation->file) continue?>
+            <div class="col-md-3 center bottom10">
+                <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
+                <?= Html::a($relation->file->origin_name,$relation->file->linkUrl) ?>
+
+            </div>
+        <? endforeach ?>
+    </div>
+
     <div class="form-group">
     <?php if(Yii::$app->controller->action->id != 'save-as-new'): ?>
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

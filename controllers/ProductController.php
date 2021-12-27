@@ -25,7 +25,7 @@ use yii\validators\EmailValidator;
 class ProductController extends \app\components\mgcms\MgCmsController
 {
 
-    public function actionIndex()
+    public function actionIndex($category = null)
     {
 
         $dataProvider = new ActiveDataProvider([

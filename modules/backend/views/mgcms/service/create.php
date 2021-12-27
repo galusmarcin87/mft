@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\mgcms\db\Service */
 
 $this->title = Yii::t('app', 'Create Service');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Service'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Service'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="service-create">

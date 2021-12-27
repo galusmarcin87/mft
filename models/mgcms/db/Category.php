@@ -115,4 +115,18 @@ class Category extends BaseCategory
             return $categories[0];
         }
     }
+
+
+    public function getCategoryTree(){
+        $parent = $this->parent;
+        $categories = [$this];
+
+        while($parent){
+            $categories[] = $parent;
+            $parent = $parent->parent;
+        }
+
+        return $categories;
+
+    }
 }

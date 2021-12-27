@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\mgcms\db\Product */
 
 $this->title = Yii::t('app', 'Create Product');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Product'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-create">
