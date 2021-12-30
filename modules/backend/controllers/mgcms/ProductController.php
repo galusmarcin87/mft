@@ -90,6 +90,7 @@ class ProductController extends MgBackendController
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             $this->_assignDownloadFiles($model);
+            MgHelpers::setFlash('success',Yii::t('db','Saved'));
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [

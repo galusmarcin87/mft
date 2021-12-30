@@ -108,13 +108,16 @@ use kartik\icons\Icon;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'user_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->orderBy('id')->asArray()->all(), 'id', 'username'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose User')],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]); ?>
+    <?if(MgHelpers::getUserModel()->isAdmin()): ?>
+        <?= $form->field($model, 'user_id')->widget(\kartik\widgets\Select2::classname(), [
+            'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->orderBy('id')->asArray()->all(), 'id', 'username'),
+            'options' => ['placeholder' => Yii::t('app', 'Choose User')],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
+
+    <?endif; ?>
 
     <?= $form->field($model, 'payment_status')->textInput(['maxlength' => true, 'placeholder' => 'Payment Status']) ?>
 
