@@ -50,7 +50,7 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
                 >
             </div>
             <div>
-                <a class="btn btn--primary" href="./login.html">Zaloguj się</a>
+                <a class="btn btn--primary" href="/admin">Zaloguj się</a>
             </div>
             <div class="language-select">
                 <img

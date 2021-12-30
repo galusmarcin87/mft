@@ -5,12 +5,12 @@ use app\components\mgcms\MgHelpers;
 use yii\web\View;
 use app\models\mgcms\db\Company;
 
-$companies = Company::find()->all();
+$companies = Company::find()->limit(20)->all();
 
 ?>
 <section class="companies-wrapper">
     <div class="container">
-        <h1>Firmy</h1>
+        <h1><?= Yii::t('db', 'Companies') ?></h1>
         <div class="companies">
             <?foreach($companies as $company):?>
                 <a href="<?=$company->linkUrl?>" class="company">
