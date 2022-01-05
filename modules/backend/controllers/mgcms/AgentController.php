@@ -79,16 +79,16 @@ class AgentController extends MgBackendController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $lang = false)
     {
         if (Yii::$app->request->post('_asnew') == '1') {
             $model = new Agent();
         }else{
             $model = $this->findModel($id);
         }
-
+        $model->language = $lang;
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

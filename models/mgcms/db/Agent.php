@@ -24,6 +24,10 @@ use app\components\mgcms\MgHelpers;
 class Agent extends \app\models\mgcms\db\AbstractRecord
 {
 
+    use LanguageBehaviorTrait;
+
+    public $languageAttributes = ['description'];
+
     /**
      * @inheritdoc
      */
@@ -37,7 +41,7 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
             [['phone', 'agentcol'], 'string', 'max' => 45]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -63,7 +67,7 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
             'company_id' => Yii::t('app', 'Company ID'),
         ];
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -71,7 +75,7 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\Company::className(), ['id' => 'company_id']);
     }
-        
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -79,7 +83,7 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\File::className(), ['id' => 'file_id']);
     }
-    
+
     /**
      * @inheritdoc
      * @return \app\models\mgcms\db\AgentQuery the active query used by this AR class.

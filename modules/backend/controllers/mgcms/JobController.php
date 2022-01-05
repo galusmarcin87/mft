@@ -79,14 +79,14 @@ class JobController extends MgBackendController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $lang = false)
     {
         if (Yii::$app->request->post('_asnew') == '1') {
             $model = new Job();
         }else{
             $model = $this->findModel($id);
         }
-
+        $model->language = $lang;
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             MgHelpers::setFlash('success',Yii::t('db','Saved'));
             return $this->redirect(['update', 'id' => $model->id]);

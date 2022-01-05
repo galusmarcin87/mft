@@ -45,6 +45,14 @@ echo TabularForm::widget([
                 return Html::a('<i class="glyphicon glyphicon-trash"></i>', '#', ['title' =>  Yii::t('app', 'Delete'), 'onClick' => 'delRowAgent(' . $key . '); return false;', 'id' => 'agent-del-btn']);
             },
         ],
+        'edit' => [
+            'type' => 'raw',
+            'label' => '',
+            'value' => function($model, $key) {
+                return isset($model) && isset($model['id']) ? Html::a('<i class="glyphicon glyphicon-edit"></i>',
+                    ['mgcms/agent/update', 'id' => $model['id']]) : false;
+            },
+        ],
     ],
     'gridSettings' => [
         'panel' => [

@@ -22,6 +22,9 @@ use yii\helpers\Html;
  */
 class Service extends \app\models\mgcms\db\AbstractRecord
 {
+    use LanguageBehaviorTrait;
+
+    public $languageAttributes = ['description','specification'];
 
     public $downloadFiles;
 

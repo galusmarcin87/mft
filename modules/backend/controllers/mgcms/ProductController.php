@@ -80,7 +80,7 @@ class ProductController extends MgBackendController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $lang = false)
     {
         if (Yii::$app->request->post('_asnew') == '1') {
             $model = new Product();
@@ -88,6 +88,7 @@ class ProductController extends MgBackendController
             $model = $this->findModel($id);
         }
 
+        $model->language = $lang;
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             $this->_assignDownloadFiles($model);
             MgHelpers::setFlash('success',Yii::t('db','Saved'));

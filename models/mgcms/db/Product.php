@@ -34,6 +34,10 @@ use yii\helpers\Html;
 class Product extends \app\models\mgcms\db\AbstractRecord
 {
 
+    use LanguageBehaviorTrait;
+
+    public $languageAttributes = ['description', 'specification'];
+
     public $downloadFiles;
     /**
      * @inheritdoc

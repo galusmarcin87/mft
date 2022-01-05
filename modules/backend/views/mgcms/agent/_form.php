@@ -16,6 +16,8 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->errorSummary($model); ?>
 
+    <?= $this->render('/common/languageBehaviorSwicher', ['model' => $model, 'form' => $form]) ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'full_name')->textInput(['maxlength' => true, 'placeholder' => 'Full Name']) ?>

@@ -25,7 +25,6 @@ $this->registerJs($search);
             if(\app\components\mgcms\MgHelpers::getUserModel()->checkAccess($controller, 'create')):?>
         <?= Html::a(Yii::t('app', 'Create Company'), ['create'], ['class' => 'btn btn-success']) ?>
         <? endif?>
-        <?= Html::a(Yii::t('app', 'Advance Search'), '#', ['class' => 'btn btn-info search-button']) ?>
     </p>
     <div class="search-form" style="display:none">
         <?=  $this->render('_search', ['model' => $searchModel]); ?>

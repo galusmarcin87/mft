@@ -28,6 +28,10 @@ use yii\helpers\Html;
 class Job extends \app\models\mgcms\db\AbstractRecord
 {
 
+    use LanguageBehaviorTrait;
+
+    public $languageAttributes = ['requirements','info'];
+
     /**
      * @inheritdoc
      */
