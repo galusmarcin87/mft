@@ -2,7 +2,7 @@
 return [
     'adminEmail' => 'admin@email.com',
     'roles' => ['admin', 'front', 'agent'],
-    'languages' => ['pl', 'en', 'de', 'fr'],
+    'languages' => ['pl', 'en', 'de', 'fr','zh','it','hi','es'],
     'languagesDisplay' => ['pl', 'en', 'de', 'fr'],
     'icon-framework' => 'bsg',
     'containerComponents' => require __DIR__ . '/containerComponents.php',

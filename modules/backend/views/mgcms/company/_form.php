@@ -5,6 +5,8 @@ use yii\helpers\Html;
 use app\components\mgcms\yii\ActiveForm;
 use app\components\mgcms\MgHelpers;
 use kartik\icons\Icon;
+use \app\models\mgcms\db\Company;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\mgcms\db\Company */
@@ -58,184 +60,230 @@ use kartik\icons\Icon;
 
     <?= $form->errorSummary($model); ?>
 
+    <?= $this->render('/common/languageBehaviorSwicher', ['model' => $model, 'form' => $form]) ?>
+
+    <div class="col-md-12"><legend><?= Yii::t('db', 'General information') ?></legend></div>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Name']) ?>
+    <?= $form->field12md($model, 'name')->textInput(['maxlength' => true, 'placeholder2' => 'Name']) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= MgHelpers::isAdmin() ? $form->field6md($model, 'status')->dropDownList(Company::STATUSES) : '' ?>
 
-    <?= $form->field($model, 'is_promoted')->checkbox() ?>
+    <?= $form->field6md($model, 'is_promoted')->switchInput() ?>
 
-    <?= $form->field($model, 'first_name')->textInput(['maxlength' => true, 'placeholder' => 'First Name']) ?>
+    <?= $form->field12md($model, 'description')->tinyMce(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'surname')->textInput(['maxlength' => true, 'placeholder' => 'Surname']) ?>
-
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true, 'placeholder' => 'Status']) ?>
-
-    <?= $form->field($model, 'country')->textInput(['maxlength' => true, 'placeholder' => 'Country']) ?>
-
-    <?= $form->field($model, 'city')->textInput(['maxlength' => true, 'placeholder' => 'City']) ?>
-
-    <?= $form->field($model, 'postcode')->textInput(['maxlength' => true, 'placeholder' => 'Postcode']) ?>
-
-    <?= $form->field($model, 'street')->textInput(['maxlength' => true, 'placeholder' => 'Street']) ?>
-
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true, 'placeholder' => 'Phone']) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'Email']) ?>
-
-    <?= $form->field($model, 'www')->textInput(['maxlength' => true, 'placeholder' => 'Www']) ?>
-
-    <?= $form->field($model, 'nip')->textInput(['maxlength' => true, 'placeholder' => 'Nip']) ?>
-
-    <?= $form->field($model, 'regon')->textInput(['maxlength' => true, 'placeholder' => 'Regon']) ?>
-
-    <?= $form->field($model, 'krs')->textInput(['maxlength' => true, 'placeholder' => 'Krs']) ?>
-
-    <?= $form->field($model, 'banc_account_no')->textInput(['maxlength' => true, 'placeholder' => 'Banc Account No']) ?>
-
-    <?= $form->field($model, 'gps_lat')->textInput(['maxlength' => true, 'placeholder' => 'Gps Lat']) ?>
-
-    <?= $form->field($model, 'gps_long')->textInput(['maxlength' => true, 'placeholder' => 'Gps Long']) ?>
-
-    <?= $form->field($model, 'subscription_fee')->textInput(['placeholder' => 'Subscription Fee']) ?>
-
-    <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
+    <?= $form->field6md($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type'=> Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose Category')],
+        'options' => ['placeholder2' => Yii::t('app', 'Choose Category')],
         'pluginOptions' => [
             'allowClear' => true
         ],
     ]); ?>
 
     <?if(MgHelpers::getUserModel()->isAdmin()): ?>
-        <?= $form->field($model, 'user_id')->widget(\kartik\widgets\Select2::classname(), [
-            'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->orderBy('id')->asArray()->all(), 'id', 'username'),
-            'options' => ['placeholder' => Yii::t('app', 'Choose User')],
-            'pluginOptions' => [
-                'allowClear' => true
-            ],
-        ]); ?>
-
+    <?= $form->field6md($model, 'user_id')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->orderBy('id')->asArray()->all(), 'id', 'username'),
+        'options' => ['placeholder2' => Yii::t('app', 'Choose User')],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
     <?endif; ?>
 
-    <?= $form->field($model, 'payment_status')->textInput(['maxlength' => true, 'placeholder' => 'Payment Status']) ?>
+    <?= $form->field6md($model, 'subscription_fee')->textInput(['placeholder2' => 'Subscription Fee']) ?>
 
-    <?= $form->field($model, 'paid_from')->widget(\kartik\datecontrol\DateControl::classname(), [
+
+
+    <?= $form->field6md($model, 'payment_status')->textInput(['maxlength' => true, 'placeholder2' => 'Payment Status']) ?>
+
+    <?= $form->field6md($model, 'paid_from')->widget(\kartik\datecontrol\DateControl::classname(), [
         'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
         'saveFormat' => 'php:Y-m-d',
         'ajaxConversion' => true,
         'options' => [
             'pluginOptions' => [
-                'placeholder' => Yii::t('app', 'Choose Paid From'),
+                'placeholder2' => Yii::t('app', 'Choose Paid From'),
                 'autoclose' => true
             ]
         ],
     ]); ?>
 
-    <?= $form->field($model, 'paid_to')->widget(\kartik\datecontrol\DateControl::classname(), [
+    <?= $form->field6md($model, 'paid_to')->widget(\kartik\datecontrol\DateControl::classname(), [
         'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
         'saveFormat' => 'php:Y-m-d',
         'ajaxConversion' => true,
         'options' => [
             'pluginOptions' => [
-                'placeholder' => Yii::t('app', 'Choose Paid To'),
+                'placeholder2' => Yii::t('app', 'Choose Paid To'),
                 'autoclose' => true
             ]
         ],
     ]); ?>
 
-    <?= $form->field($model, 'thumbnail_id')->widget(\kartik\widgets\Select2::classname(), [
+
+
+    <div class="col-md-12"><legend><?= Yii::t('db', 'Contact data') ?></legend></div>
+
+
+    <?= $form->field6md($model, 'first_name')->textInput(['maxlength' => true, 'placeholder2' => 'First Name']) ?>
+
+    <?= $form->field6md($model, 'surname')->textInput(['maxlength' => true, 'placeholder2' => 'Surname']) ?>
+
+
+    <?= $form->field6md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArray('countries array')) ?>
+
+    <?= $form->field6md($model, 'city')->textInput(['maxlength' => true, 'placeholder2' => 'City']) ?>
+
+    <?= $form->field6md($model, 'postcode')->textInput(['maxlength' => true, 'placeholder2' => 'Postcode']) ?>
+
+    <?= $form->field6md($model, 'street')->textInput(['maxlength' => true, 'placeholder2' => 'Street']) ?>
+
+    <?= $form->field6md($model, 'phone')->textInput(['maxlength' => true, 'placeholder2' => 'Phone']) ?>
+
+    <?= $form->field6md($model, 'email')->textInput(['maxlength' => true, 'placeholder2' => 'Email','type'=>'email']) ?>
+
+    <?= $form->field6md($model, 'www')->textInput(['maxlength' => true, 'placeholder2' => 'Www']) ?>
+
+    <?= $form->field6md($model, 'nip')->textInput(['maxlength' => true, 'placeholder2' => 'Nip']) ?>
+
+    <?= $form->field6md($model, 'regon')->textInput(['maxlength' => true, 'placeholder2' => 'Regon']) ?>
+
+    <?= $form->field6md($model, 'krs')->textInput(['maxlength' => true, 'placeholder2' => 'Krs']) ?>
+
+    <?= $form->field6md($model, 'banc_account_no')->textInput(['maxlength' => true, 'placeholder2' => 'Banc Account No']) ?>
+
+    <?= $form->field6md($model, 'gps_lat')->textInput(['maxlength' => true, 'placeholder2' => 'Gps Lat']) ?>
+
+    <?= $form->field6md($model, 'gps_long')->textInput(['maxlength' => true, 'placeholder2' => 'Gps Long']) ?>
+
+
+
+    <?= $form->field6md($model, 'thumbnail_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose File')],
+        'options' => ['placeholder2' => Yii::t('app', 'Choose File')],
         'pluginOptions' => [
             'allowClear' => true
         ],
     ]); ?>
 
-    <?= $form->field($model, 'background_id')->widget(\kartik\widgets\Select2::classname(), [
+    <?= $form->field6md($model, 'background_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose File')],
+        'options' => ['placeholder2' => Yii::t('app', 'Choose File')],
         'pluginOptions' => [
             'allowClear' => true
         ],
     ]); ?>
-
-    <?= $form->field($model, 'is_for_sale')->checkbox() ?>
-
-    <?= $form->field($model, 'sale_title')->textInput(['maxlength' => true, 'placeholder' => 'Sale Title']) ?>
-
-    <?= $form->field($model, 'sale_description')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'sale_price')->textInput(['placeholder' => 'Sale Price']) ?>
-
-    <?= $form->field($model, 'sale_currency')->textInput(['maxlength' => true, 'placeholder' => 'Sale Currency']) ?>
-
-    <?= $form->field($model, 'sale_price_includes')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'sale_reason')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'sale_business_range')->textInput(['maxlength' => true, 'placeholder' => 'Sale Business Range']) ?>
-
-    <?= $form->field($model, 'sale_workers_number')->textInput(['placeholder' => 'Sale Workers Number']) ?>
-
-    <?= $form->field($model, 'sale_sale_range')->textInput(['maxlength' => true, 'placeholder' => 'Sale Sale Range']) ?>
-
-    <?= $form->field($model, 'sale_last_year_income')->textInput(['placeholder' => 'Sale Last Year Income']) ?>
-
-    <?= $form->field($model, 'sale_company_profile')->textInput(['maxlength' => true, 'placeholder' => 'Sale Company Profile']) ?>
-
-    <?= $form->field($model, 'is_institution')->checkbox() ?>
-
-    <?= $form->field($model, 'institution_agent_prefix')->textInput(['maxlength' => true, 'placeholder' => 'Institution Agent Prefix']) ?>
-
-    <?= $form->field($model, 'institution_invoice_amount')->textInput(['placeholder' => 'Institution Invoice Amount']) ?>
-
-    <?= $form->field($model, 'video')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('video')]) ?>
-
-    <?= $form->field($model, 'video_thumbnail')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('video_thumbnail')]) ?>
-
-    <div class="well">
-        <div class="col-md-12">
-            <?= $form->relatedFileInput($model, true, true) ?>
-        </div>
-
-        <legend><?= Yii::t('app', 'Images'); ?></legend>
-        <?/*---------------specyfic for this project distinguish between files ------------------*/?>
-        <div class="row images itemsFlex">
-            <? foreach ($model->fileRelations as $relation): ?>
-
-                <?if ($relation->json == '1' || !$relation->file) continue?>
-                <div class="col-md-3 center bottom10">
-                    <?= \kartik\helpers\Html::hiddenInput("fileOrder[".$relation->file->id."]") ?>
-                    <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
-                    <?= $relation->file->getThumb(250, 250, true, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET, ['class' => 'img-responsive']) ?>
-                    <? \kartik\helpers\Html::textarea("FileRelation[$relation->file->id][$model->id][" . $model::className() . "][description]", 'aaa', ['class' => 'form-control']) ?>
-                </div>
-            <? endforeach ?>
-        </div>
-
-        <script type="text/javascript">
-          $(document).ready(function () {
-            $('.images').sortable()
-          })
-
-        </script>
-    </div>
-
 
     <div class="col-md-12">
-        <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true]) ?>
-        <legend><?= Yii::t('app', 'Files to download'); ?></legend>
-        <? foreach ($model->fileRelations as $relation): ?>
-            <?if ($relation->json != '1' || !$relation->file) continue?>
-            <div class="col-md-3 center bottom10">
-                <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
-                <?= Html::a($relation->file->origin_name,$relation->file->linkUrl) ?>
-
+        <div class="well">
+            <div class="col-md-12">
+                <?= $form->relatedFileInput($model, true, true) ?>
             </div>
-        <? endforeach ?>
+
+            <legend><?= Yii::t('app', 'Images'); ?></legend>
+            <?/*---------------specyfic for this project distinguish between files ------------------*/?>
+            <div class="row images itemsFlex">
+                <? foreach ($model->fileRelations as $relation): ?>
+
+                    <?if ($relation->json == '1' || !$relation->file) continue?>
+                    <div class="col-md-3 center bottom10">
+                        <?= \kartik\helpers\Html::hiddenInput("fileOrder[".$relation->file->id."]") ?>
+                        <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
+                        <?= $relation->file->getThumb(250, 250, true, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET, ['class' => 'img-responsive']) ?>
+                        <? \kartik\helpers\Html::textarea("FileRelation[$relation->file->id][$model->id][" . $model::className() . "][description]", 'aaa', ['class' => 'form-control']) ?>
+                    </div>
+                <? endforeach ?>
+            </div>
+
+            <script type="text/javascript">
+              $(document).ready(function () {
+                $('.images').sortable()
+              })
+
+            </script>
+        </div>
     </div>
+
+    <?= $form->field6md($model, 'video')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('video')]) ?>
+
+    <?= $form->field6md($model, 'video_thumbnail')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('video_thumbnail')]) ?>
+
+
+
+    <div class="col-md-12 ">
+        <div class="well row ">
+            <div class="col-md-12">
+                <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true]) ?>
+                <legend><?= Yii::t('app', 'Files to download'); ?></legend>
+                <? foreach ($model->fileRelations as $relation): ?>
+                    <?if ($relation->json != '1' || !$relation->file) continue?>
+                    <div class="col-md-3 center bottom10">
+                        <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
+                        <?= Html::a($relation->file->origin_name,$relation->file->linkUrl) ?>
+
+                    </div>
+                <? endforeach ?>
+            </div>
+        </div>
+    </div>
+
+
+
+    <?= $form->field12md($model, 'is_for_sale')->checkbox() ?>
+
+    <div id="saleWrapper" class="<?= $model->is_for_sale ? '' : 'hidden'?>">
+        <div class="col-md-12"><legend><?= Yii::t('db', 'Data for sale') ?></legend></div>
+
+
+        <?= $form->field12md($model, 'sale_title')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Title']) ?>
+
+        <?= $form->field12md($model, 'sale_description')->textarea(['rows' => 6]) ?>
+
+        <?= $form->field6md($model, 'sale_price')->textInput(['placeholder2' => 'Sale Price']) ?>
+
+        <?= $form->field6md($model, 'sale_currency')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Currency']) ?>
+
+        <?= $form->field12md($model, 'sale_price_includes')->textarea(['rows' => 6]) ?>
+
+        <?= $form->field12md($model, 'sale_reason')->textarea(['rows' => 6]) ?>
+
+        <?= $form->field6md($model, 'sale_business_range')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Business Range']) ?>
+
+        <?= $form->field6md($model, 'sale_workers_number')->textInput(['placeholder2' => 'Sale Workers Number']) ?>
+
+        <?= $form->field6md($model, 'sale_sale_range')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Sale Range']) ?>
+
+        <?= $form->field6md($model, 'sale_last_year_income')->textInput(['placeholder2' => 'Sale Last Year Income']) ?>
+
+        <?= $form->field6md($model, 'sale_company_profile')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Company Profile']) ?>
+    </div>
+
+    <script>
+        var saleSwitch = $('#company-is_for_sale');
+        saleSwitch.change(function(){
+            $('#saleWrapper').toggleClass('hidden')
+        })
+    </script>
+
+
+
+    <?= $form->field12md($model, 'is_institution')->checkbox() ?>
+    <div id="institutionWrapper" class="<?= $model->is_institution? '' : 'hidden'?>">
+
+        <?= $form->field6md($model, 'institution_agent_prefix')->textInput(['maxlength' => true, 'placeholder2' => 'Institution Agent Prefix']) ?>
+
+        <?= $form->field6md($model, 'institution_invoice_amount')->textInput(['placeholder2' => 'Institution Invoice Amount']) ?>
+
+    </div>
+    <script>
+      var saleSwitch = $('#company-is_institution');
+      saleSwitch.change(function(){
+        $('#institutionWrapper').toggleClass('hidden')
+      })
+    </script>
+
 
 
     <?php

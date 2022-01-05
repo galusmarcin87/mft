@@ -940,5 +940,9 @@ class MgHelpers extends \yii\base\Component
         return number_format($n);
     }
 
+    static function isAdmin(){
+        return MgHelpers::getUserModel()->isAdmin();
+    }
+
 
 }
