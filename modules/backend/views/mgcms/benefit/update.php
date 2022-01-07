@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\mgcms\db\Benefit */
 
 $this->title = Yii::t('app', 'Update Benefit') . ' ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Benefit'), 'url' => ['index']];
+//$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Benefit'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>

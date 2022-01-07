@@ -176,58 +176,16 @@ use \app\models\mgcms\db\Company;
         ],
     ]); ?>
 
-    <div class="col-md-12">
-        <div class="well">
-            <div class="col-md-12">
-                <?= $form->relatedFileInput($model, true, true) ?>
-            </div>
+    <?= $this->render('../common/_imagesForm', ['model' => $model, 'form' => $form]) ?>
 
-            <legend><?= Yii::t('app', 'Images'); ?></legend>
-            <?/*---------------specyfic for this project distinguish between files ------------------*/?>
-            <div class="row images itemsFlex">
-                <? foreach ($model->fileRelations as $relation): ?>
+    <?= $this->render('../common/_downloadFilesForm', ['model' => $model, 'form' => $form]) ?>
 
-                    <?if ($relation->json == '1' || !$relation->file) continue?>
-                    <div class="col-md-3 center bottom10">
-                        <?= \kartik\helpers\Html::hiddenInput("fileOrder[".$relation->file->id."]") ?>
-                        <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
-                        <?= $relation->file->getThumb(250, 250, true, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET, ['class' => 'img-responsive']) ?>
-                        <? \kartik\helpers\Html::textarea("FileRelation[$relation->file->id][$model->id][" . $model::className() . "][description]", 'aaa', ['class' => 'form-control']) ?>
-                    </div>
-                <? endforeach ?>
-            </div>
-
-            <script type="text/javascript">
-              $(document).ready(function () {
-                $('.images').sortable()
-              })
-
-            </script>
-        </div>
-    </div>
 
     <?= $form->field6md($model, 'video')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('video')]) ?>
 
     <?= $form->field6md($model, 'video_thumbnail')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('video_thumbnail')]) ?>
 
 
-
-    <div class="col-md-12 ">
-        <div class="well row ">
-            <div class="col-md-12">
-                <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true]) ?>
-                <legend><?= Yii::t('app', 'Files to download'); ?></legend>
-                <? foreach ($model->fileRelations as $relation): ?>
-                    <?if ($relation->json != '1' || !$relation->file) continue?>
-                    <div class="col-md-3 center bottom10">
-                        <? echo \yii\helpers\Html::a(Icon::show('trash', ['class' => 'gi-2x']), MgHelpers::createUrl(['backend/mgcms/file/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
-                        <?= Html::a($relation->file->origin_name,$relation->file->linkUrl) ?>
-
-                    </div>
-                <? endforeach ?>
-            </div>
-        </div>
-    </div>
 
 
 

@@ -74,7 +74,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'created_on' => Yii::t('app', 'Created On'),
-            'category_id' => Yii::t('app', 'Category ID'),
+            'category_id' => Yii::t('app', 'Category'),
             'description' => Yii::t('app', 'Description'),
             'specification' => Yii::t('app', 'Specification'),
             'price' => Yii::t('app', 'Price'),
@@ -84,7 +84,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
             'special_offer_to' => Yii::t('app', 'Special Offer To'),
             'min_amount_of_purchase' => Yii::t('app', 'Min Amount Of Purchase'),
             'special_offer_price' => Yii::t('app', 'Special Offer Price'),
-            'company_id' => Yii::t('app', 'Company ID'),
+            'company_id' => Yii::t('app', 'Company'),
             'file_id' => Yii::t('app', 'File'),
         ];
     }

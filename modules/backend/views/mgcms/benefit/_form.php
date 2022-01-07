@@ -20,21 +20,15 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Name']) ?>
+    <?= $form->field6md($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Name']) ?>
+    <?= $form->field6md($model, 'price')->textInput(['placeholder' => 'Price']) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field12md($model, 'description')->tinyMce(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'price')->textInput(['placeholder' => 'Price']) ?>
 
-    <?= $form->field($model, 'company_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Company::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose Company')],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]); ?>
 
-    <div class="form-group">
+
+    <div class="form-group col-md-12">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Cancel'), Yii::$app->request->referrer , ['class'=> 'btn btn-danger']) ?>
     </div>
