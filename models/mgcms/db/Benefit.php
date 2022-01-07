@@ -18,6 +18,9 @@ use app\components\mgcms\MgHelpers;
  */
 class Benefit extends \app\models\mgcms\db\AbstractRecord
 {
+    use LanguageBehaviorTrait;
+
+    public $languageAttributes = ['description'];
 
     /**
      * @inheritdoc
@@ -32,7 +35,7 @@ class Benefit extends \app\models\mgcms\db\AbstractRecord
             [['name'], 'string', 'max' => 45]
         ];
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -54,7 +57,7 @@ class Benefit extends \app\models\mgcms\db\AbstractRecord
             'company_id' => Yii::t('app', 'Company ID'),
         ];
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -62,7 +65,7 @@ class Benefit extends \app\models\mgcms\db\AbstractRecord
     {
         return $this->hasOne(\app\models\mgcms\db\Company::className(), ['id' => 'company_id']);
     }
-    
+
     /**
      * @inheritdoc
      * @return \app\models\mgcms\db\BenefitQuery the active query used by this AR class.

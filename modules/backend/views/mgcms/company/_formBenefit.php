@@ -32,6 +32,14 @@ echo TabularForm::widget([
                 return Html::a('<i class="glyphicon glyphicon-trash"></i>', '#', ['title' =>  Yii::t('app', 'Delete'), 'onClick' => 'delRowBenefit(' . $key . '); return false;', 'id' => 'benefit-del-btn']);
             },
         ],
+        'edit' => [
+            'type' => 'raw',
+            'label' => '',
+            'value' => function($model, $key) {
+                return isset($model) && isset($model['id']) ? Html::a('<i class="glyphicon glyphicon-edit"></i>',
+                    ['mgcms/benefit/update', 'id' => $model['id']]) : false;
+            },
+        ],
     ],
     'gridSettings' => [
         'panel' => [
