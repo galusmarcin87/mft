@@ -843,6 +843,18 @@ class MgHelpers extends \yii\base\Component
         return MgHelpers::translatedSBValueFromArray($settingArr);
     }
 
+    public static function getSettingOptionArrayTranslated($name)
+    {
+        $settingArr = MgHelpers::getSettingsArray($name);
+
+        $ret = [];
+        foreach($settingArr as $item){
+            $ret[$item] = Yii::t('db', $item);
+        }
+
+        return $ret;
+    }
+
     public static function createUrl($params)
     {
         return Yii::$app->urlManager->createUrl($params);

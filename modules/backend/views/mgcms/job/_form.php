@@ -29,15 +29,17 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field6md($model, 'address')->textInput(['maxlength' => true, 'placeholder' => 'Address']) ?>
 
-    <?= $form->field6md($model, 'industry')->textInput(['maxlength' => true, 'placeholder' => 'Industry']) ?>
+    <?= $form->field4md($model, 'industry')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('industries array')) ?>
+
+    <?= $form->field4md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array')) ?>
+
+    <?= $form->field4md($model, 'city')->textInput(['maxlength' => true, 'placeholder' => 'City']) ?>
 
     <?= $form->field12md($model, 'info')->tinyMce() ?>
 
     <?= $form->field12md($model, 'requirements')->tinyMce() ?>
 
-    <?= $form->field6md($model, 'country')->textInput(['maxlength' => true, 'placeholder' => 'Country']) ?>
 
-    <?= $form->field6md($model, 'city')->textInput(['maxlength' => true, 'placeholder' => 'City']) ?>
 
     <div class="form-group col-md-12">
     <?php if(Yii::$app->controller->action->id != 'save-as-new'): ?>

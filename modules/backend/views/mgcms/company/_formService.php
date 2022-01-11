@@ -23,8 +23,6 @@ echo TabularForm::widget([
     'attributes' => [
         "id" => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false],
         'name' => ['type' => TabularForm::INPUT_TEXT],
-        'description' => ['type' => TabularForm::INPUT_TEXTAREA],
-        'specification' => ['type' => TabularForm::INPUT_TEXTAREA],
         'price' => ['type' => TabularForm::INPUT_TEXT],
         'del' => [
             'type' => 'raw',

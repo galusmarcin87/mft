@@ -5,6 +5,7 @@ use kartik\builder\TabularForm;
 use yii\data\ArrayDataProvider;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
+use app\components\mgcms\MgHelpers;
 
 $dataProvider = new ArrayDataProvider([
     'allModels' => $row,
@@ -26,10 +27,8 @@ echo TabularForm::widget([
         'salary' => ['type' => TabularForm::INPUT_TEXT],
         'position' => ['type' => TabularForm::INPUT_TEXT],
         'address' => ['type' => TabularForm::INPUT_TEXT],
-        'industry' => ['type' => TabularForm::INPUT_TEXT],
-        'info' => ['type' => TabularForm::INPUT_TEXTAREA],
-        'requirements' => ['type' => TabularForm::INPUT_TEXTAREA],
-        'country' => ['type' => TabularForm::INPUT_TEXT],
+        'industry' => ['type' => TabularForm::INPUT_DROPDOWN_LIST, 'items' => MgHelpers::getSettingOptionArrayTranslated('industries array')],
+        'country' => ['type' => TabularForm::INPUT_DROPDOWN_LIST, 'items' => MgHelpers::getSettingOptionArrayTranslated('countries array')],
         'city' => ['type' => TabularForm::INPUT_TEXT],
         'file_id' => [
             'label' => 'File',

@@ -24,7 +24,6 @@ echo TabularForm::widget([
         "id" => ['type' => TabularForm::INPUT_HIDDEN_STATIC, 'columnOptions' => ['hidden' => true]],
         'full_name' => ['type' => TabularForm::INPUT_TEXT],
         'position' => ['type' => TabularForm::INPUT_TEXT],
-        'description' => ['type' => TabularForm::INPUT_TEXTAREA],
         'phone' => ['type' => TabularForm::INPUT_TEXT],
         'file_id' => [
             'label' => 'File',
@@ -37,7 +36,6 @@ echo TabularForm::widget([
             'columnOptions' => ['width' => '200px']
         ],
         'email' => ['type' => TabularForm::INPUT_TEXT],
-        'agentcol' => ['type' => TabularForm::INPUT_TEXT],
         'del' => [
             'type' => 'raw',
             'label' => '',

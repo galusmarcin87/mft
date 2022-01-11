@@ -132,7 +132,7 @@ use \app\models\mgcms\db\Company;
     <?= $form->field6md($model, 'surname')->textInput(['maxlength' => true, 'placeholder2' => 'Surname']) ?>
 
 
-    <?= $form->field6md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArray('countries array')) ?>
+    <?= $form->field6md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array')) ?>
 
     <?= $form->field6md($model, 'city')->textInput(['maxlength' => true, 'placeholder2' => 'City']) ?>
 
@@ -201,21 +201,23 @@ use \app\models\mgcms\db\Company;
 
         <?= $form->field6md($model, 'sale_price')->textInput(['placeholder2' => 'Sale Price']) ?>
 
-        <?= $form->field6md($model, 'sale_currency')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Currency']) ?>
+        <?= $form->field6md($model, 'sale_currency')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('currency array')) ?>
 
         <?= $form->field12md($model, 'sale_price_includes')->textarea(['rows' => 6]) ?>
 
         <?= $form->field12md($model, 'sale_reason')->textarea(['rows' => 6]) ?>
 
-        <?= $form->field6md($model, 'sale_business_range')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Business Range']) ?>
+        <?= $form->field6md($model, 'sale_business_range')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('business range array')) ?>
 
         <?= $form->field6md($model, 'sale_workers_number')->textInput(['placeholder2' => 'Sale Workers Number']) ?>
 
-        <?= $form->field6md($model, 'sale_sale_range')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Sale Range']) ?>
+        <?= $form->field6md($model, 'sale_sale_range')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('sales range array')) ?>
 
         <?= $form->field6md($model, 'sale_last_year_income')->textInput(['placeholder2' => 'Sale Last Year Income']) ?>
 
-        <?= $form->field6md($model, 'sale_company_profile')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Company Profile']) ?>
+        <?= $form->field6md($model, 'sale_company_profile')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('company profile array')) ?>
+
+        <?= $form->field6md($model, 'sale_form_of_business')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('form of business array')) ?>
     </div>
 
     <script>

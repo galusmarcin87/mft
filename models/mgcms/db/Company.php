@@ -52,6 +52,7 @@ use yii\helpers\Html;
  * @property string $sale_sale_range
  * @property double $sale_last_year_income
  * @property string $sale_company_profile
+ * @property string $sale_form_of_business
  * @property integer $is_institution
  * @property string $institution_agent_prefix
  * @property double $institution_invoice_amount
@@ -91,7 +92,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return [
             [['name', 'description', 'first_name', 'surname', 'country', 'city', 'postcode', 'street', 'phone', 'email', 'nip', 'regon', 'category_id', 'user_id', 'background_id'], 'required'],
-            [['description', 'sale_description', 'sale_price_includes', 'sale_reason'], 'string'],
+            [['description', 'sale_description', 'sale_price_includes', 'sale_reason','sale_form_of_business'], 'string'],
             [['gps_lat', 'gps_long', 'subscription_fee', 'sale_price', 'sale_last_year_income', 'institution_invoice_amount'], 'number'],
             [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number'], 'integer'],
             [['created_on', 'paid_from', 'paid_to','video','video_thumbnail'], 'safe'],
@@ -158,6 +159,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             'sale_sale_range' => Yii::t('app', 'Sale Sale Range'),
             'sale_last_year_income' => Yii::t('app', 'Sale Last Year Income'),
             'sale_company_profile' => Yii::t('app', 'Sale Company Profile'),
+            'sale_form_of_business' => Yii::t('app', 'Sale Form Of Business'),
             'is_institution' => Yii::t('app', 'Is Institution'),
             'institution_agent_prefix' => Yii::t('app', 'Institution Agent Prefix'),
             'institution_invoice_amount' => Yii::t('app', 'Institution Invoice Amount'),
