@@ -15,7 +15,7 @@ use yii\widgets\ListView;
             <?= $this->render('/common/leftMenu') ?>
             <div>
                 <div class="companies__labels">
-                    <div class="label"><?= Yii::t('db', 'Companies') ?></div>
+                    <div class="label"><?= Yii::t('db', 'Services') ?></div>
                     <div class="labell text-right hidden" style="margin-top: -12px">
                         Sortuj wg
                         <div class="select-wrqpper">

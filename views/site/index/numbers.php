@@ -3,6 +3,11 @@
 
 use app\components\mgcms\MgHelpers;
 use yii\web\View;
+use \app\models\mgcms\db\Company;
+use app\models\mgcms\db\Product;
+use app\models\mgcms\db\Service;
+use app\models\mgcms\db\Job;
+use yii\helpers\Url;
 
 
 ?>
@@ -10,25 +15,25 @@ use yii\web\View;
 <section class="numbers-wrapper">
     <div class="container">
         <div class="numbers">
-            <a href="./wyniki-wyszukiwania.html" class="numbers__item">
-                641059
-                <small>Liczba firm</small>
+            <a href="<?= Url::to('company/index')?>" class="numbers__item">
+                <?= Company::find()->andWhere(['status' => Company::STATUS_CONFIRMED])->count()?>
+                <small><?= Yii::t('db', 'Companies number') ?></small>
             </a>
-            <a href="./firmy-napsprzedaz.html" class="numbers__item">
-                0
-                <small>Liczba firm na sprzedaz</small>
+            <a href="<?= Url::to(['company/index', 'is_for_sale' => 1])?>" class="numbers__item">
+                <?= Company::find()->andWhere(['status' => Company::STATUS_CONFIRMED,'is_for_sale' => 1])->count()?>
+                <small><?= Yii::t('db', 'Companies for sale number') ?></small>
             </a>
-            <a href="./produkty.html" class="numbers__item">
-                256
-                <small>Liczba produktów</small>
+            <a href="<?= Url::to('project/index')?>" class="numbers__item">
+                <?= Product::find()->count()?>
+                <small><?= Yii::t('db', 'Products number') ?></small>
             </a>
-            <a href="./uslugi.html" class="numbers__item">
-                73
-                <small>Liczba usług</small>
+            <a href="<?= Url::to('service/index')?>" class="numbers__item">
+                <?= Service::find()->count()?>
+                <small><?= Yii::t('db', 'Services number') ?></small>
             </a>
-            <a href="./oferty-pracy.html" class="numbers__item">
-                7
-                <small>Liczba ofert pracy</small>
+            <a href="<?= Url::to('job/index')?>" class="numbers__item">
+                <?= Job::find()->count()?>
+                <small><?= Yii::t('db', 'Job offers number') ?></small>
             </a>
         </div>
         <div class="text-center">
