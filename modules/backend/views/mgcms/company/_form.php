@@ -70,7 +70,7 @@ use \app\models\mgcms\db\Company;
 
     <?= MgHelpers::isAdmin() ? $form->field6md($model, 'status')->dropDownList(Company::STATUSES) : '' ?>
 
-    <?= $form->field6md($model, 'is_promoted')->switchInput() ?>
+    <?=MgHelpers::isAdmin() ?  $form->field6md($model, 'is_promoted')->switchInput() : ''?>
 
     <?= $form->field12md($model, 'description')->tinyMce(['rows' => 6]) ?>
 

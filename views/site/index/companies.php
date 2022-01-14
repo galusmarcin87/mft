@@ -5,7 +5,7 @@ use app\components\mgcms\MgHelpers;
 use yii\web\View;
 use app\models\mgcms\db\Company;
 
-$companies = Company::find()->limit(20)->all();
+$companies = Company::find()->limit(19)->orderBy(['is_promoted' => SORT_DESC])->all();
 
 ?>
 <section class="companies-wrapper">
@@ -13,7 +13,7 @@ $companies = Company::find()->limit(20)->all();
         <h1><?= Yii::t('db', 'Companies') ?></h1>
         <div class="companies">
             <?foreach($companies as $company):?>
-                <a href="<?=$company->linkUrl?>" class="company">
+                <a href="<?=$company->linkUrl?>" class="company <?= $company->is_promoted ? 'company--highlighted': ''?>">
                     <?if($company->thumbnail && $company->thumbnail->isImage()):?>
                         <img class="company__logo" src="<?=$company->thumbnail->getImageSrc(0, 70)?>" alt="" />
                     <?endif;?>
