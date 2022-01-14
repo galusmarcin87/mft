@@ -25,11 +25,15 @@ use yii\validators\EmailValidator;
 class CompanyController extends \app\components\mgcms\MgCmsController
 {
 
-    public function actionIndex()
+    public function actionIndex($is_for_sale = null)
     {
+        $query = Company::find();
+        if($is_for_sale){
+            $query->where(['is_for_sale' => 1]);
+        }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Company::find(),
+            'query' => $query,
         ]);
 
         return $this->render('index', [
