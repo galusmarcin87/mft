@@ -35,11 +35,14 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
                 </div>
             </div>
             <div class="search-wrapper">
-                <form action="./wyniki-wyszukiwania.html">
+
+                <form action="<?=Url::to('/search/index')?>">
                     <input
                             type="text"
                             placeholder="Filmy, usługi, produkty, NIP, REGON, KRS..."
                             class="search"
+                            name="q"
+                            value="<?=$this->context->request->getQueryParam('q')?>"
                     />
                     <img class="search-wrapper__icon" src="/svg/lupa.svg" alt="" />
                 </form>
