@@ -36,7 +36,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
 
     use LanguageBehaviorTrait;
 
-    public $languageAttributes = ['description', 'specification'];
+    public $languageAttributes = ['description', 'specification','name'];
 
     public $downloadFiles;
     /**

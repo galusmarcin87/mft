@@ -26,7 +26,7 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
 
     use LanguageBehaviorTrait;
 
-    public $languageAttributes = ['description'];
+    public $languageAttributes = ['description','position'];
 
     /**
      * @inheritdoc

@@ -30,7 +30,7 @@ class Job extends \app\models\mgcms\db\AbstractRecord
 
     use LanguageBehaviorTrait;
 
-    public $languageAttributes = ['requirements','info'];
+    public $languageAttributes = ['requirements','info','position','address', 'city'];
 
     /**
      * @inheritdoc

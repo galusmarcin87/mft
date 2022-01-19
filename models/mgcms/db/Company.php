@@ -74,7 +74,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
 {
     use LanguageBehaviorTrait;
 
-    public $languageAttributes = ['description'];
+    public $languageAttributes = ['description', 'sale_description', 'sale_title', 'sale_price_includes', 'sale_reason','city'];
     public $modelAttributes = ['video','video_thumbnail'];
 
     public $downloadFiles;

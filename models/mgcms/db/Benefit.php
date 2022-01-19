@@ -20,7 +20,7 @@ class Benefit extends \app\models\mgcms\db\AbstractRecord
 {
     use LanguageBehaviorTrait;
 
-    public $languageAttributes = ['description'];
+    public $languageAttributes = ['description','name'];
 
     /**
      * @inheritdoc

@@ -28,7 +28,7 @@ use yii\bootstrap\ActiveForm;
         >
     <?endif;?>
 
-    <?if(count($model->agents) > 0 && 0):?>
+    <?if(count($model->agents) > 0):?>
         <a href="<?=$model->getLinkUrl('agents')?>" class="btn <?= $model->viewType == 'agents' ? 'btn--primary' : 'btn--secondary' ?> btn--small"
         ><?= Yii::t('db', 'Agents') ?></a
         >
