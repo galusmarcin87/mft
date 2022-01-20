@@ -4,12 +4,13 @@ namespace app\models\mgcms\db;
 
 use Yii;
 use app\components\mgcms\MgHelpers;
+use yii\helpers\Html;
 
 /**
  * This is the base model class for table "agent".
  *
  * @property integer $id
- * @property string $full_name
+     * @property string $full_name
  * @property string $position
  * @property string $description
  * @property string $phone
@@ -91,5 +92,15 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
     public static function find()
     {
         return new \app\models\mgcms\db\AgentQuery(get_called_class());
+    }
+
+    public function getLinkUrl($type = 'info')
+    {
+        return \yii\helpers\Url::to(['/agent/view', 'name' => $this->full_name, 'type' => $type]);
+    }
+
+    public function getLink()
+    {
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/agent/view', 'name' => $this->full_name]));
     }
 }

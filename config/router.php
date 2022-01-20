@@ -70,6 +70,14 @@ return [
         [
             'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
             'patterns' => [
+                'en' => '/agent/<id>/<name>',
+                'pl' => '/agent/<id>/<name>',
+            ],
+            'route' => '/agent/view',
+        ],
+        [
+            'class' => 'geertw\Yii2\TranslatableUrlRule\TranslatableUrlRule',
+            'patterns' => [
                 'en' => '/projects',
                 'pl' => '/projekty',
             ],
