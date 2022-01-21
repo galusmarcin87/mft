@@ -2,7 +2,7 @@
 /* @var $model app\models\mgcms\db\Service */
 
 use yii\web\View;
-
+$model->language = Yii::$app->language;
 ?>
 <section class="service-wrapper">
     <div class="container">

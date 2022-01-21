@@ -2,7 +2,7 @@
 /* @var $model app\models\mgcms\db\Product */
 
 use yii\web\View;
-
+$model->language = Yii::$app->language;
 ?>
 <a
         href="<?=$model->getLinkUrl()?>"

@@ -1,165 +1,71 @@
 <?
-/* @var $model app\models\mgcms\db\Job */
+/* @var $model app\models\mgcms\db\Agent */
 
 use yii\web\View;
-
+$model->language = Yii::$app->language;
 ?>
 
-<section class="service-wrapper company-wrapper">
+<section class="service-wrapper">
     <div class="container">
-        <div class="breadcrumb">
-            <a href="<?= \yii\helpers\Url::to('job/index') ?>"> <?= Yii::t('db', 'Job offers') ?> </a>
-            <span><?= $model->name ?></span>
-        </div>
+        <div class="service">
+            <div class="training">
+                <div>
 
-        <div class="service single-company">
-            <div class="badge-corner"><?= Yii::t('db', 'Job offer') ?></div>
-            <div class="relative">
-                <? if ($model->file && $model->file->isImage()): ?>
-                    <img
-                            class="single-company__image"
-                            src="<?= $model->file->getImageSrc(1530) ?>"
-                            alt=""
-                    />
-                <? endif ?>
-                <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
-                    <img src="<?= $model->company->thumbnail->getImageSrc(0, 45) ?>" class="training__logo"/>
-                <? endif ?>
+                    <div id="SERVICE_SLIDER" class="owl-carousel owl-theme">
+                            <div class="item">
+                                <img src="<?= $model->file->getImageSrc(765)?>" alt=""/>
+                            </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="training__badge"><?= Yii::t('db', 'Agent') ?></div>
+                    <div class="rating hidden">
+                        Oceń:
+                        <i
+                                class="fa fa-star rating__star rating__star--active"
+                                aria-hidden="true"
+                        ></i>
+                        <i
+                                class="fa fa-star rating__star rating__star--active"
+                                aria-hidden="true"
+                        ></i>
+                        <i
+                                class="fa fa-star rating__star rating__star--active"
+                                aria-hidden="true"
+                        ></i>
+                        <i
+                                class="fa fa-star rating__star rating__star--active"
+                                aria-hidden="true"
+                        ></i>
+                        <i
+                                class="fa fa-star rating__star rating__star--active"
+                                aria-hidden="true"
+                        ></i>
+                        <i
+                                class="fa fa-star rating__star rating__star--active"
+                                aria-hidden="true"
+                        ></i>
+                        <i class="fa fa-star rating__star" aria-hidden="true"></i>
+                        <span class="rating__rate">(6,0)</span>
+                    </div>
+                    <h1><?= $model->full_name ?></h1>
+                    <div class="hr"></div>
+                    <div class="label"><?= Yii::t('db', 'Position') ?>:</div>
+                    <?= $model->position ?>
+                    <div class="hr"></div>
+                    <div class="label"><?= Yii::t('db', 'Phone') ?>:</div>
+                    <?= $model->phone ?>
+                    <div class="hr"></div>
+                    <div class="label"><?= Yii::t('db', 'Email') ?>:</div>
+                    <?= $model->email ?>
+                    <div class="hr"></div>
 
-
+                </div>
             </div>
-            <div class="single-company__content">
-                <h1 class="text-left"><?= $model->position ?></h1>
+            <div class="service__content">
 
-                <div class="flex">
-                    <div>
-                        <div class="label"><?= Yii::t('db', 'Address') ?>:</div>
-                        <strong> <?= $model->country ?>, <?= $model->city ?>, <?= $model->address ?></strong>
-                    </div>
-                    <div>
-                        <div class="label"><?= Yii::t('db', 'Industry') ?>:</div>
-                        <div class="highlighted"><?= Yii::t('db', $model->industry) ?></div>
-                    </div>
-                    <div>
-                        <div class="label"><?= Yii::t('db', 'Salary') ?>:</div>
-                        <div class="highlighted"><?= $model->salary ?></div>
-                    </div>
-                </div>
-                <div class="hr"></div>
-                <h3><?= Yii::t('db', 'General information') ?></h3>
-                <?= $model->info?>
-                <h3><?= Yii::t('db', 'Requirements') ?></h3>
-                <?= $model->requirements?>
-
-                <h3 class=""hidden><?= Yii::t('db', 'Vacancy') ?></h3>
-                <table class="table hidden">
-                    <thead>
-                    <tr>
-                        <th>Kraj</th>
-                        <th>Miasto</th>
-                        <th>Wakat</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="highlighted">Polska</div>
-                        </td>
-                        <td>
-                            <div class="highlighted">Nazwa miasta</div>
-                        </td>
-                        <td>
-                            <div class="highlighted">1</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="highlighted">Polska</div>
-                        </td>
-                        <td>
-                            <div class="highlighted">Nazwa miasta</div>
-                        </td>
-                        <td>
-                            <div class="highlighted">1</div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="text-center hidden">
-                    <form class="contact-form" method="POST">
-                        <div class="contact-form__header">Formularz kontaktowy</div>
-                        <div class="flex">
-                            <input
-                                    type="text"
-                                    class="input"
-                                    placeholder="Imie"
-                                    name="imie"
-                            />
-                            <input
-                                    type="text"
-                                    class="input"
-                                    placeholder="Nazwisko"
-                                    name="nazwisko"
-                            />
-                        </div>
-                        <div class="flex">
-                            <input
-                                    type="email"
-                                    class="input"
-                                    placeholder="Email"
-                                    name="email"
-                            />
-                            <input
-                                    type="text"
-                                    class="input"
-                                    placeholder="Telefon"
-                                    name="telefon"
-                            />
-                        </div>
-                        <textarea
-                                class="input input-textarea"
-                                placeholder="Adres"
-                                name="adres"
-                        ></textarea>
-                        <textarea
-                                class="input input-textarea"
-                                placeholder="Wiadomość"
-                                name="wiadomosc"
-                        ></textarea>
-                        <input
-                                type="file"
-                                name="file"
-                                id="file"
-                                class="inputfile"
-                                data-multiple-caption="{count} pliki"
-                                multiple
-                        />
-                        <label for="file">wgraj plik</label>
-                        <button class="btn btn--primary btn--block" type="submit">
-                            Wyślij wiadomość
-                        </button>
-                    </form>
-                </div>
-                <div class="hidden">
-                    <h3>Udostpnij</h3>
-                    <div class="social-icons social-icons--color">
-                        <a class="social-icons__icon social-icons__icon--fb">
-                            <img src="./svg/facebook.svg" alt=""/>
-                        </a>
-                        <a class="social-icons__icon social-icons__icon--tw">
-                            <img src="./svg/twitter.svg" alt=""/>
-                        </a>
-                        <a class="social-icons__icon social-icons__icon--in">
-                            <img src="./svg/instagram.svg" alt=""/>
-                        </a>
-                        <a class="social-icons__icon social-icons__icon--tik-tok">
-                            <img src="./svg/tik-tok.svg" alt=""/>
-                        </a>
-                        <a class="social-icons__icon social-icons__icon--ln">
-                            <img src="./svg/linkedin.svg" alt=""/>
-                        </a>
-                    </div>
-                </div>
+                <h3><?= Yii::t('db', 'Description') ?></h3>
+                <?=$model->description?>
             </div>
         </div>
     </div>

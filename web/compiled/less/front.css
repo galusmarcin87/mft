@@ -19,6 +19,9 @@
 .top10 {
   margin-top: 10px;
 }
+.agentList {
+  text-align: center;
+}
 .agentList .agentName {
   font-size: 1.8rem;
   font-weight: 600;
