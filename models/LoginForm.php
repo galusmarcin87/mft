@@ -59,9 +59,9 @@ class LoginForm extends Model
      */
     public function login()
     {
-//        Yii::$app->user->on(\yii\web\User::EVENT_AFTER_LOGIN, function ($event) {
-//            $event->identity->updateLastLogin();
-//        });
+        Yii::$app->user->on(\yii\web\User::EVENT_AFTER_LOGIN, function ($event) {
+            $event->identity->updateLastLogin();
+        });
         if ($this->validate()) {
             if ($this->getUser()->status == mgcms\db\User::STATUS_INACTIVE) {
                 MgHelpers::setFlashError(Yii::t('db', 'Your account is not activated. Check Your email for activation link'));
