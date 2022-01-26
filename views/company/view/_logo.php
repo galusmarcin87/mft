@@ -25,6 +25,6 @@ use yii\bootstrap\ActiveForm;
         />
     <? endif; ?>
     <? if ($model->thumbnail && $model->thumbnail->isImage()): ?>
-        <img src="<?= $model->thumbnail->getImageSrc(0, 45) ?>" class="training__logo"/>
+        <img src="<?= $model->thumbnail->getImageSrc(240, 0) ?>" class="training__logo"/>
     <? endif; ?>
 </div>
