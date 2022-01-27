@@ -2,11 +2,13 @@
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\mgcms\db\CompanySearch */
+
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
 use kartik\export\ExportMenu;
-use kartik\grid\GridView;use app\components\mgcms\MgHelpers;
+use kartik\grid\GridView;
+use app\components\mgcms\MgHelpers;
 
 
 $this->title = Yii::t('app', 'Company');
@@ -21,13 +23,13 @@ $this->registerJs($search);
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-      <? $controller = Yii::$app->controller->id;
-            if(\app\components\mgcms\MgHelpers::getUserModel()->checkAccess($controller, 'create')):?>
-        <?= Html::a(Yii::t('app', 'Create Company'), ['create'], ['class' => 'btn btn-success']) ?>
-        <? endif?>
+        <? $controller = Yii::$app->controller->id;
+        if (\app\components\mgcms\MgHelpers::getUserModel()->checkAccess($controller, 'create')):?>
+            <?= Html::a(Yii::t('app', 'Create Company'), ['create'], ['class' => 'btn btn-success']) ?>
+        <? endif ?>
     </p>
     <div class="search-form" style="display:none">
-        <?=  $this->render('_search', ['model' => $searchModel]); ?>
+        <?= $this->render('_search', ['model' => $searchModel]); ?>
     </div>
     <?php
     $gridColumn = [
@@ -38,31 +40,49 @@ $this->registerJs($search);
         ],
         'name',
         'is_promoted:boolean',
-        'status',
-        'country',
+        [
+            'attribute' => 'status',
+            'value' => function ($model) {
+                return \app\models\mgcms\db\Company::STATUSES[$model->status];
+            },
+            'format' => 'translate',
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => \app\models\mgcms\db\Company::STATUSES,
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true],
+            ],
+            'filterInputOptions' => ['placeholder' => Yii::t('app', 'Status')]
+        ],
+        [
+            'attribute' => 'country',
+            'value' => function ($model) {
+                return Yii::t('db', $model->country);
+            },
+            'format' => 'translate',
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => MgHelpers::getSettingOptionArrayTranslated('countries array'),
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true],
+            ],
+            'filterInputOptions' => ['placeholder' => Yii::t('app', 'Status')]
+        ],
         'city',
-        'postcode',
-        'street',
         'phone',
         'email:email',
-        'www',
-        'nip',
-        'regon',
-        'krs',
         'created_on',
         [
-                'attribute' => 'category_id',
-                'label' => Yii::t('app', 'Category'),
-                'value' => function($model){
-                    return $model->category ? $model->category->name : '';
-                },
-                'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->where(['type'=>\app\models\mgcms\db\Category::TYPE_COMPANY_TYPE])->asArray()->all(), 'id', 'name'),
-                'filterWidgetOptions' => [
-                    'pluginOptions' => ['allowClear' => true],
-                ],
-                'filterInputOptions' => ['placeholder' => 'Category', 'id' => 'grid-company-search-category_id']
+            'attribute' => 'category_id',
+            'label' => Yii::t('app', 'Category'),
+            'value' => function ($model) {
+                return $model->category ? $model->category->name : '';
+            },
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->where(['type' => \app\models\mgcms\db\Category::TYPE_COMPANY_TYPE])->asArray()->all(), 'id', 'name'),
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true],
             ],
+            'filterInputOptions' => ['placeholder' => 'Category', 'id' => 'grid-company-search-category_id']
+        ],
 
 
     ];
@@ -92,7 +112,7 @@ $this->registerJs($search);
                         '<li class="dropdown-header">Export All Data</li>',
                     ],
                 ],
-            ]) ,
+            ]),
         ],
     ]); ?>
 
