@@ -4,7 +4,7 @@
  * @author Revin Roman http://phptime.ru
  */
 
-namespace rmrevin\yii\module\File;
+    namespace rmrevin\yii\module\File;
 
 use Imagine\Image\ImageInterface;
 use Imagine\Image\ManipulatorInterface;
@@ -18,7 +18,7 @@ use yii\helpers\StringHelper;
  * Class ImageWrapper
  * @package rmrevin\yii\module\File
  */
-class ImageWrapper extends \yii\base\Object
+class ImageWrapper extends \yii\base\BaseObject
 {
 
     /** @var \rmrevin\yii\module\File\models\File */

@@ -5,7 +5,7 @@
   "type": "project",
   "minimum-stability": "stable",
   "require": {
-    "php": ">=7.0.0",
+    "php": "~7.3",
     "yiisoft/yii2": "~2.0.5",
     "yiisoft/yii2-imagine": "2.1.0",
     "yiisoft/yii2-bootstrap": "~2.0.0",
@@ -17,7 +17,7 @@
     "kartik-v/yii2-datecontrol": "dev-master",
     "2amigos/yii2-ckeditor-widget": "~2.1",
     "tinymce/tinymce": "4.7.3",
-    "rmrevin/yii2-file": "~1.1",
+    "rmrevin/yii2-file": "~1.2.5",
     "kartik-v/yii2-widget-fileinput": "@dev",
     "kartik-v/yii2-editable": "*",
     "kartik-v/yii2-icons": "@dev",
