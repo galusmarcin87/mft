@@ -22,8 +22,6 @@ echo TabularForm::widget([
     ],
     'attributes' => [
         "id" => ['type' => TabularForm::INPUT_HIDDEN, 'visible' => false],
-        'name' => ['type' => TabularForm::INPUT_TEXT],
-        'price' => ['type' => TabularForm::INPUT_TEXT],
         'del' => [
             'type' => 'raw',
             'label' => '',
@@ -39,6 +37,9 @@ echo TabularForm::widget([
                     ['mgcms/service/update', 'id' => $model['id']]) : false;
             },
         ],
+        'name' => ['type' => TabularForm::INPUT_TEXT],
+        'price' => ['type' => TabularForm::INPUT_TEXT],
+
     ],
     'gridSettings' => [
         'panel' => [

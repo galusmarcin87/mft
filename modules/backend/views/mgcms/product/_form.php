@@ -25,7 +25,7 @@ use kartik\icons\Icon;
 
     <?= $form->field6md($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->andWhere(['type' => \app\models\mgcms\db\Category::TYPE_PRODUCT_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose Category')],
+        'options' => ['placeholder' => Yii::t('app', 'Choose Category'), 'prompt' => '',],
         'pluginOptions' => [
             'allowClear' => true
         ],
@@ -72,7 +72,7 @@ use kartik\icons\Icon;
 
     <?= $form->field4md($model, 'file_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->where(['created_by' => MgHelpers::getUserModel()->id])->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose File')],
+        'options' => ['placeholder' => Yii::t('app', 'Choose File'), 'prompt' => '',],
         'pluginOptions' => [
             'allowClear' => true
         ],

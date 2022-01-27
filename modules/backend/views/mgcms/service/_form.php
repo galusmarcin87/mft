@@ -24,9 +24,9 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field6md($model, 'price')->textInput(['placeholder' => 'Price']) ?>
 
-    <?= $form->field12md($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field12md($model, 'description')->tinyMce(['rows' => 6]) ?>
 
-    <?= $form->field12md($model, 'specification')->textarea(['rows' => 6]) ?>
+    <?= $form->field12md($model, 'specification')->tinyMce(['rows' => 6]) ?>
 
     <?= $this->render('../common/_imagesForm', ['model' => $model, 'form' => $form]) ?>
 

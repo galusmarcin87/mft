@@ -29,8 +29,8 @@ use app\components\mgcms\MgHelpers;
     <?= $form->field4md($model, 'phone')->textInput(['maxlength' => true, 'placeholder2' => 'Phone']) ?>
 
     <?= $form->field4md($model, 'file_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder2' => Yii::t('app', 'Choose File')],
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
+        'options' => ['placeholder2' => Yii::t('app', 'Choose File'), ['prompt' => '']],
         'pluginOptions' => [
             'allowClear' => true
         ],

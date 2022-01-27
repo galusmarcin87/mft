@@ -22,10 +22,6 @@ echo TabularForm::widget([
     ],
     'attributes' => [
         "id" => ['type' => TabularForm::INPUT_HIDDEN_STATIC, 'columnOptions' => ['hidden' => true]],
-        'full_name' => ['type' => TabularForm::INPUT_TEXT],
-        'position' => ['type' => TabularForm::INPUT_TEXT],
-        'phone' => ['type' => TabularForm::INPUT_TEXT],
-        'email' => ['type' => TabularForm::INPUT_TEXT],
         'del' => [
             'type' => 'raw',
             'label' => '',
@@ -41,6 +37,11 @@ echo TabularForm::widget([
                     ['mgcms/agent/update', 'id' => $model['id']]) : false;
             },
         ],
+        'full_name' => ['type' => TabularForm::INPUT_TEXT],
+        'position' => ['type' => TabularForm::INPUT_TEXT],
+        'phone' => ['type' => TabularForm::INPUT_TEXT],
+        'email' => ['type' => TabularForm::INPUT_TEXT],
+
     ],
     'gridSettings' => [
         'panel' => [

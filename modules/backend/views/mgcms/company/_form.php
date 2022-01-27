@@ -12,7 +12,7 @@ use \app\models\mgcms\db\Company;
 /* @var $model app\models\mgcms\db\Company */
 /* @var $form app\components\mgcms\yii\ActiveForm */
 
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos' => \yii\web\View::POS_END,
     'viewParams' => [
         'class' => 'Agent',
         'relID' => 'agent',
@@ -20,7 +20,7 @@ use \app\models\mgcms\db\Company;
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos' => \yii\web\View::POS_END,
     'viewParams' => [
         'class' => 'Benefit',
         'relID' => 'benefit',
@@ -28,7 +28,7 @@ use \app\models\mgcms\db\Company;
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos' => \yii\web\View::POS_END,
     'viewParams' => [
         'class' => 'Job',
         'relID' => 'job',
@@ -36,7 +36,7 @@ use \app\models\mgcms\db\Company;
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos' => \yii\web\View::POS_END,
     'viewParams' => [
         'class' => 'Product',
         'relID' => 'product',
@@ -44,7 +44,7 @@ use \app\models\mgcms\db\Company;
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END,
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos' => \yii\web\View::POS_END,
     'viewParams' => [
         'class' => 'Service',
         'relID' => 'service',
@@ -62,7 +62,9 @@ use \app\models\mgcms\db\Company;
 
     <?= $this->render('/common/languageBehaviorSwicher', ['model' => $model, 'form' => $form]) ?>
 
-    <div class="col-md-12"><legend><?= Yii::t('db', 'General information') ?></legend></div>
+    <div class="col-md-12">
+        <legend><?= Yii::t('db', 'General information') ?></legend>
+    </div>
 
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
@@ -70,27 +72,27 @@ use \app\models\mgcms\db\Company;
 
     <?= MgHelpers::isAdmin() ? $form->field6md($model, 'status')->dropDownList(Company::STATUSES) : '' ?>
 
-    <?=MgHelpers::isAdmin() ?  $form->field6md($model, 'is_promoted')->switchInput() : ''?>
+    <?= MgHelpers::isAdmin() ? $form->field6md($model, 'is_promoted')->switchInput() : '' ?>
 
     <?= $form->field12md($model, 'description')->tinyMce(['rows' => 6]) ?>
 
     <?= $form->field6md($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type'=> Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder2' => Yii::t('app', 'Choose Category')],
+        'options' => ['placeholder2' => Yii::t('app', 'Choose Category'), 'prompt' => '',],
         'pluginOptions' => [
             'allowClear' => true
         ],
     ]); ?>
 
-    <?if(MgHelpers::getUserModel()->isAdmin()): ?>
-    <?= $form->field6md($model, 'user_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->orderBy('id')->asArray()->all(), 'id', 'username'),
-        'options' => ['placeholder2' => Yii::t('app', 'Choose User')],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]); ?>
-    <?endif; ?>
+    <? if (MgHelpers::getUserModel()->isAdmin()): ?>
+        <?= $form->field6md($model, 'user_id')->widget(\kartik\widgets\Select2::classname(), [
+            'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->orderBy('id')->asArray()->all(), 'id', 'username'),
+            'options' => ['placeholder2' => Yii::t('app', 'Choose User')],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]); ?>
+    <? endif; ?>
 
     <?= $form->field6md($model, 'subscription_fee')->textInput(['placeholder2' => 'Subscription Fee']) ?>
 
@@ -123,8 +125,9 @@ use \app\models\mgcms\db\Company;
     ]); ?>
 
 
-
-    <div class="col-md-12"><legend><?= Yii::t('db', 'Contact data') ?></legend></div>
+    <div class="col-md-12">
+        <legend><?= Yii::t('db', 'Contact data') ?></legend>
+    </div>
 
 
     <?= $form->field6md($model, 'first_name')->textInput(['maxlength' => true, 'placeholder2' => 'First Name']) ?>
@@ -132,7 +135,7 @@ use \app\models\mgcms\db\Company;
     <?= $form->field6md($model, 'surname')->textInput(['maxlength' => true, 'placeholder2' => 'Surname']) ?>
 
 
-    <?= $form->field6md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array')) ?>
+    <?= $form->field6md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array'), ['prompt' => '']) ?>
 
     <?= $form->field6md($model, 'city')->textInput(['maxlength' => true, 'placeholder2' => 'City']) ?>
 
@@ -142,7 +145,7 @@ use \app\models\mgcms\db\Company;
 
     <?= $form->field6md($model, 'phone')->textInput(['maxlength' => true, 'placeholder2' => 'Phone']) ?>
 
-    <?= $form->field6md($model, 'email')->textInput(['maxlength' => true, 'placeholder2' => 'Email','type'=>'email']) ?>
+    <?= $form->field6md($model, 'email')->textInput(['maxlength' => true, 'placeholder2' => 'Email', 'type' => 'email']) ?>
 
     <?= $form->field6md($model, 'www')->textInput(['maxlength' => true, 'placeholder2' => 'Www']) ?>
 
@@ -162,7 +165,7 @@ use \app\models\mgcms\db\Company;
 
     <?= $form->field6md($model, 'thumbnail_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
-        'options' => ['placeholder2' => Yii::t('app', 'Choose File')],
+        'options' => ['placeholder2' => Yii::t('app', 'Choose File'), 'prompt' => '',],
         'pluginOptions' => [
             'allowClear' => true
         ],
@@ -170,7 +173,7 @@ use \app\models\mgcms\db\Company;
 
     <?= $form->field6md($model, 'background_id')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
-        'options' => ['placeholder2' => Yii::t('app', 'Choose File')],
+        'options' => ['placeholder2' => Yii::t('app', 'Choose File'), 'prompt' => '',],
         'pluginOptions' => [
             'allowClear' => true
         ],
@@ -191,8 +194,10 @@ use \app\models\mgcms\db\Company;
 
     <?= $form->field12md($model, 'is_for_sale')->checkbox() ?>
 
-    <div id="saleWrapper" class="<?= $model->is_for_sale ? '' : 'hidden'?>">
-        <div class="col-md-12"><legend><?= Yii::t('db', 'Data for sale') ?></legend></div>
+    <div id="saleWrapper" class="<?= $model->is_for_sale ? '' : 'hidden' ?>">
+        <div class="col-md-12">
+            <legend><?= Yii::t('db', 'Data for sale') ?></legend>
+        </div>
 
 
         <?= $form->field12md($model, 'sale_title')->textInput(['maxlength' => true, 'placeholder2' => 'Sale Title']) ?>
@@ -201,36 +206,35 @@ use \app\models\mgcms\db\Company;
 
         <?= $form->field6md($model, 'sale_price')->textInput(['placeholder2' => 'Sale Price']) ?>
 
-        <?= $form->field6md($model, 'sale_currency')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('currency array')) ?>
+        <?= $form->field6md($model, 'sale_currency')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('currency array'), ['prompt' => '']) ?>
 
         <?= $form->field12md($model, 'sale_price_includes')->textarea(['rows' => 6]) ?>
 
         <?= $form->field12md($model, 'sale_reason')->textarea(['rows' => 6]) ?>
 
-        <?= $form->field6md($model, 'sale_business_range')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('business range array')) ?>
+        <?= $form->field6md($model, 'sale_business_range')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('business range array'), ['prompt' => '']) ?>
 
         <?= $form->field6md($model, 'sale_workers_number')->textInput(['placeholder2' => 'Sale Workers Number']) ?>
 
-        <?= $form->field6md($model, 'sale_sale_range')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('sales range array')) ?>
+        <?= $form->field6md($model, 'sale_sale_range')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('sales range array'), ['prompt' => '']) ?>
 
         <?= $form->field6md($model, 'sale_last_year_income')->textInput(['placeholder2' => 'Sale Last Year Income']) ?>
 
-        <?= $form->field6md($model, 'sale_company_profile')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('company profile array')) ?>
+        <?= $form->field6md($model, 'sale_company_profile')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('company profile array'), ['prompt' => '']) ?>
 
-        <?= $form->field6md($model, 'sale_form_of_business')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('form of business array')) ?>
+        <?= $form->field6md($model, 'sale_form_of_business')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('form of business array'), ['prompt' => '']) ?>
     </div>
 
     <script>
-        var saleSwitch = $('#company-is_for_sale');
-        saleSwitch.change(function(){
-            $('#saleWrapper').toggleClass('hidden')
-        })
+      var saleSwitch = $('#company-is_for_sale');
+      saleSwitch.change(function () {
+        $('#saleWrapper').toggleClass('hidden');
+      });
     </script>
 
 
-
     <?= $form->field12md($model, 'is_institution')->checkbox() ?>
-    <div id="institutionWrapper" class="<?= $model->is_institution? '' : 'hidden'?>">
+    <div id="institutionWrapper" class="<?= $model->is_institution ? '' : 'hidden' ?>">
 
         <?= $form->field6md($model, 'institution_agent_prefix')->textInput(['maxlength' => true, 'placeholder2' => 'Institution Agent Prefix']) ?>
 
@@ -239,11 +243,10 @@ use \app\models\mgcms\db\Company;
     </div>
     <script>
       var saleSwitch = $('#company-is_institution');
-      saleSwitch.change(function(){
-        $('#institutionWrapper').toggleClass('hidden')
-      })
+      saleSwitch.change(function () {
+        $('#institutionWrapper').toggleClass('hidden');
+      });
     </script>
-
 
 
     <?php
@@ -293,7 +296,7 @@ use \app\models\mgcms\db\Company;
     ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Cancel'), Yii::$app->request->referrer , ['class'=> 'btn btn-danger']) ?>
+        <?= Html::a(Yii::t('app', 'Cancel'), Yii::$app->request->referrer, ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

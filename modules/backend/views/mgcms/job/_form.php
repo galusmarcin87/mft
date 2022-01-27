@@ -29,9 +29,9 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field6md($model, 'address')->textInput(['maxlength' => true, 'placeholder' => 'Address']) ?>
 
-    <?= $form->field4md($model, 'industry')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('industries array')) ?>
+    <?= $form->field4md($model, 'industry')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('industries array'), ['prompt' => '']) ?>
 
-    <?= $form->field4md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array')) ?>
+    <?= $form->field4md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array'), ['prompt' => '']) ?>
 
     <?= $form->field4md($model, 'city')->textInput(['maxlength' => true, 'placeholder' => 'City']) ?>
 

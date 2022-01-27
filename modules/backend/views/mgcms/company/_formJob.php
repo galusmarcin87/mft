@@ -23,23 +23,6 @@ echo TabularForm::widget([
     ],
     'attributes' => [
         "id" => ['type' => TabularForm::INPUT_HIDDEN_STATIC, 'columnOptions' => ['hidden' => true]],
-        'name' => ['type' => TabularForm::INPUT_TEXT],
-        'salary' => ['type' => TabularForm::INPUT_TEXT],
-        'position' => ['type' => TabularForm::INPUT_TEXT],
-        'address' => ['type' => TabularForm::INPUT_TEXT],
-        'industry' => ['type' => TabularForm::INPUT_DROPDOWN_LIST, 'items' => MgHelpers::getSettingOptionArrayTranslated('industries array')],
-        'country' => ['type' => TabularForm::INPUT_DROPDOWN_LIST, 'items' => MgHelpers::getSettingOptionArrayTranslated('countries array')],
-        'city' => ['type' => TabularForm::INPUT_TEXT],
-        'file_id' => [
-            'label' => 'File',
-            'type' => TabularForm::INPUT_WIDGET,
-            'widgetClass' => \kartik\widgets\Select2::className(),
-            'options' => [
-                'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('origin_name')->asArray()->all(), 'id', 'origin_name'),
-                'options' => ['placeholder' => Yii::t('app', 'Choose File')],
-            ],
-            'columnOptions' => ['width' => '200px']
-        ],
         'del' => [
             'type' => 'raw',
             'label' => '',
@@ -55,6 +38,24 @@ echo TabularForm::widget([
                     ['mgcms/job/update', 'id' => $model['id']]) : false;
             },
         ],
+        'name' => ['type' => TabularForm::INPUT_TEXT],
+        'salary' => ['type' => TabularForm::INPUT_TEXT],
+        'position' => ['type' => TabularForm::INPUT_TEXT],
+        'address' => ['type' => TabularForm::INPUT_TEXT],
+        'industry' => ['type' => TabularForm::INPUT_DROPDOWN_LIST, 'items' => MgHelpers::getSettingOptionArrayTranslated('industries array'), 'options'=>['prompt' => '']],
+        'country' => ['type' => TabularForm::INPUT_DROPDOWN_LIST, 'items' => MgHelpers::getSettingOptionArrayTranslated('countries array'), 'options'=>['prompt' => '']],
+        'city' => ['type' => TabularForm::INPUT_TEXT],
+        'file_id' => [
+            'label' => 'File',
+            'type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \kartik\widgets\Select2::className(),
+            'options' => [
+                'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('origin_name')->asArray()->all(), 'id', 'origin_name'),
+                'options' => ['placeholder' => Yii::t('app', 'Choose File')],
+            ],
+            'columnOptions' => ['width' => '200px']
+        ],
+
     ],
     'gridSettings' => [
         'panel' => [

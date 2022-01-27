@@ -22,6 +22,21 @@ echo TabularForm::widget([
     ],
     'attributes' => [
         "id" => ['type' => TabularForm::INPUT_HIDDEN_STATIC, 'columnOptions' => ['hidden' => true]],
+        'del' => [
+            'type' => 'raw',
+            'label' => '',
+            'value' => function($model, $key) {
+                return Html::a('<i class="glyphicon glyphicon-trash"></i>', '#', ['title' =>  Yii::t('app', 'Delete'), 'onClick' => 'delRowProduct(' . $key . '); return false;', 'id' => 'product-del-btn']);
+            },
+        ],
+        'edit' => [
+            'type' => 'raw',
+            'label' => '',
+            'value' => function($model, $key) {
+                return isset($model) && isset($model['id']) ? Html::a('<i class="glyphicon glyphicon-edit"></i>',
+                    ['mgcms/product/update', 'id' => $model['id']]) : false;
+            },
+        ],
         'name' => ['type' => TabularForm::INPUT_TEXT],
         'category_id' => [
             'label' => 'Category',
@@ -82,21 +97,7 @@ echo TabularForm::widget([
         ],
         'min_amount_of_purchase' => ['type' => TabularForm::INPUT_TEXT],
         'special_offer_price' => ['type' => TabularForm::INPUT_TEXT],
-        'del' => [
-            'type' => 'raw',
-            'label' => '',
-            'value' => function($model, $key) {
-                return Html::a('<i class="glyphicon glyphicon-trash"></i>', '#', ['title' =>  Yii::t('app', 'Delete'), 'onClick' => 'delRowProduct(' . $key . '); return false;', 'id' => 'product-del-btn']);
-            },
-        ],
-        'edit' => [
-            'type' => 'raw',
-            'label' => '',
-            'value' => function($model, $key) {
-                return isset($model) && isset($model['id']) ? Html::a('<i class="glyphicon glyphicon-edit"></i>',
-                    ['mgcms/product/update', 'id' => $model['id']]) : false;
-            },
-        ],
+
     ],
     'gridSettings' => [
         'panel' => [
