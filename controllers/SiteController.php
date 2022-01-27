@@ -2,12 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\LoginCodeForm;
 use FiberPay\FiberIdClient;
 use app\models\mgcms\db\File;
 use app\models\ReportRealEstateForm;
 use FiberPay\FiberPayClient;
 use Yii;
-use yii\base\BaseObject;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -265,21 +265,65 @@ class SiteController extends \app\components\mgcms\MgCmsController
             return $this->goHome();
         }
 
-
         $model = new LoginForm();
-        $modelRegister = new RegisterForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        if ($modelRegister->load(Yii::$app->request->post()) && $modelRegister->register()) {
-            MgHelpers::setFlashSuccess(MgHelpers::getSettingTranslated('register_after_message', 'Thank you for registration, email with activation of account has been sent.'));
+        $loginCodeForm = new LoginCodeForm();
 
-            return $this->refresh();
+
+        if ($model->load(Yii::$app->request->post()) && $model->login2step()) {
+            $loginCodeForm->userId = $model->getUser()->id;
+            if ($this->_sendLoginConfirmationCodeEmail($model, $loginCodeForm)) {
+                $loginCodeForm->userId = $model->getUser()->id;
+                $loginCodeForm->rememberMe = $model->rememberMe;
+                return $this->render('loginCode', [
+                    'model' => $model,
+                    'loginCodeForm' => $loginCodeForm
+                ]);
+            } else {
+                MgHelpers::setFlashError(MgHelpers::getSettingTranslated('login_error_email', 'Problem with sending email'));
+                return $this->goHome();
+            }
         }
+
+        if ($loginCodeForm->load(Yii::$app->request->post())) {
+            if ($loginCodeForm->verifyCode() && $loginCodeForm->login()) {
+                return $this->goHome();
+            } else {
+                return $this->render('loginCode', [
+                    'model' => $model,
+                    'loginCodeForm' => $loginCodeForm
+                ]);
+            }
+        }
+
+
         return $this->render('login', [
             'model' => $model,
-            'modelRegister' => $modelRegister
         ]);
+    }
+
+    /**
+     * @param $loginForm LoginForm
+     * @param $loginForm LoginCodeForm
+     */
+    private function _sendLoginConfirmationCodeEmail($loginForm, $loginCodeForm)
+    {
+        /**
+         * @var $model User
+         */
+        $user = $loginForm->getUser();
+
+        if (!$user) {
+            return false;
+        }
+
+        $code = $loginCodeForm->generateCode();
+
+        $mailer = Yii::$app->mailer->compose('loginCode', ['user' => $user, 'code' => $code])
+            ->setTo($user->email ? $user->email : $user->username)
+            ->setFrom([MgHelpers::getSetting('email') => MgHelpers::getSetting('email nazwa')])
+            ->setSubject(Yii::t('db', 'Login code'));
+
+        return $mailer->send();
     }
 
     /**
@@ -480,19 +524,19 @@ class SiteController extends \app\components\mgcms\MgCmsController
         $userId = $data['userId'];
         $user = User::findOne($userId);
 
-        if(!$user){
+        if (!$user) {
             $this->throw404();
         }
 
         \Yii::info("actionVerifyFiberIdCallback", 'own');
 
         //$body = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjoiSXNPTU15YlNBOTZTbjA0TGxWckJEenhSWHdoU05ZbTUxUlh6Z0l2VU44WGtNZ3JKbGYzNHdSTmJiaHV4UTdHSGQwbE56ZHNIUW9cL3FPTUFsMHhBVzhOWlJUR3QydldzTWQ1S0IxRVA3VnNuYVE5YWdJdk9FNjNzXC82eUh1T0JWVWhwOGhuaEZ3YlVta1hWV3Zka0xyekVabGpCWTVjVTRHUVZmQ0s0b0JxK0JkUlwvSENyeWExVXpcL3ZIRDRaa2RxbGJDMXpcL3A1YVRSTDFhNWxsRnB3dFdNdUJFaU4zbVJpcTUrQUQwckFYQWw0a3Y1YnlpeU1wRFpIS1wvMUphSGJ6bTA0RDNcL2R1b2xNYXkyVTJjc284OFNZRnlGTjFDQWhVN1JKY216VzRXSmVRRDRuMktrSVcyK3pnMUNNTkZySjZhcndudXRFcklVK2gzUnRpWmYwWm9ZTkVoVnZUcTh2b0ZzRFNZeEJna1M1M1wvRlwvSmJpdEhXS0J5cHJqQllCWlpVeHpVbm9QYVdGTFlZNTlFSUhrRE9NQStIMTJBdlA2dnUzakR3N1BKNGxJZU1cL1pucDVOdHRsY3FhRVwvRUlPRlVTSEtHbVA2cnNcL1UrM1hRT2l5ZFM5RFNQaFYwdXg0c0UwVit4R3pmUTdsOE1YS1REbXFJQTFRalwvUERHdWRXUDZHN0kyaFhVUzgwcXlXXC9FSXFSaHh1SUJOUHY1NW0wR1ZXdGVUQVFaWThmQzA2aHZnRDVpdHFkZ1AraUNucjFteUdWUGlFQ1lcLzA1REdlaStJaWYrTm9XZjNxTXNnenVraFRWUG5QSG0zZVFpM2Nadk9md2doVE5sRDcyV0lMdHE4cnliXC83a2VvcHR2ZFhPcmpQQWdPXC8yeWZIRnlKVUJmb0N5NDlkZlB5WThpK2FCZHREaUdaMTZGTUVrRDZ0N05OdGE0SE9EQ1JJK1JCTFRRRTJ6eUdXRVJXZCtycWM5ckYyb21TK0s5ZGtTa3FwMWhMMkVPMjFTbTBhUzh0WDI0Zyt1eEtSb0FOVDNYU2ZMU0Q1XC9pcHpGT0JmZG5FM0xWVU9TQ0x4YXhwOXZzY1I5Tjl4RE9KbE1FeTVXRlh3MG9DbiIsImlzcyI6IlZlcmlmaWNhdGlvbiIsImlhdCI6MTYyOTgyODIyMSwiaXYiOiIzN2ZmNDBkMjIzMzQ2ZWQzZDVlZWUyZjA0ZjAxNTgwNSJ9.7B7NvqYb9hfWKXCZLZXDK63sn8CRNVxAGJ-FwoRN4gU';
-        $body =  $this->request->rawBody;
+        $body = $this->request->rawBody;
         $headers = $this->request->headers;
         $fiberPayConfig = MgHelpers::getConfigParam('fiberPay');
         $apiKey = $headers['api-key'];
         \Yii::info($apiKey, 'own');
-        if($apiKey != $fiberPayConfig['fiberIdApiKey']){
+        if ($apiKey != $fiberPayConfig['fiberIdApiKey']) {
             $this->throw404();
         }
         \Yii::info('fiber decrypt', 'own');
@@ -521,7 +565,7 @@ class SiteController extends \app\components\mgcms\MgCmsController
                 Yii::$app->mailer->compose('accountVerifiedFiber', ['model' => $user])
                     ->setTo($user->email)
                     ->setFrom([MgHelpers::getSetting('email from') => MgHelpers::getSetting('email from name')])
-                    ->setSubject(Yii::t('db','Verification successful'))
+                    ->setSubject(Yii::t('db', 'Verification successful'))
                     ->send();
                 \Yii::info('mail accepted', 'own');
                 break;
@@ -530,7 +574,7 @@ class SiteController extends \app\components\mgcms\MgCmsController
                 Yii::$app->mailer->compose('accountRejectedFiber', ['model' => $user])
                     ->setTo($user->email)
                     ->setFrom([MgHelpers::getSetting('email from') => MgHelpers::getSetting('email from name')])
-                    ->setSubject(Yii::t('db','Verification rejected'))
+                    ->setSubject(Yii::t('db', 'Verification rejected'))
                     ->send();
                 \Yii::info('mail rejected', 'own');
                 break;

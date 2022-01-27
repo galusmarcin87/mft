@@ -82,6 +82,32 @@ class LoginForm extends Model
         return false;
     }
 
+
+    public function login2step()
+    {
+        Yii::$app->user->on(\yii\web\User::EVENT_AFTER_LOGIN, function ($event) {
+            $event->identity->updateLastLogin();
+        });
+        if ($this->validate()) {
+            if ($this->getUser()->status == mgcms\db\User::STATUS_INACTIVE) {
+                MgHelpers::setFlashError(Yii::t('db', 'Your account is not activated. Check Your email for activation link'));
+                $this->addError('username', Yii::t('db', 'Your account is not activated. Check Your email for activation link'));
+                return false;
+            }
+            if ($this->getUser()->status == mgcms\db\User::STATUS_SUSPENDED) {
+                MgHelpers::setFlashError(Yii::t('db', 'Your account is suspended. Contact with us'));
+                $this->addError('username', Yii::t('db', 'Your account is suspended. Contact with us'));
+                return false;
+            }
+
+            return true;
+        } else {
+            MgHelpers::setFlashError(Yii::t('db', 'Invalid username or password'));
+            //Yii::$app->response->redirect(Yii::$app->request->url);
+        }
+        return false;
+    }
+
     /**
      * Finds user by [[username]]
      *

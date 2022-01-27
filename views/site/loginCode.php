@@ -31,7 +31,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
         <div class="service single-company">
             <div class="flex">
                 <div>
-                    <h1 class="text-left">Logowanie</h1>
+                    <h1 class="text-left"><?= Yii::t('db', 'Log in') ?></h1>
                     <div class="hr"></div>
                     <h3 class="highlighted">
                         <img src="/svg/atuty.svg" alt=""/>
@@ -63,29 +63,14 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
                         'fieldConfig' => $fieldConfig
                     ]);
 
-                    echo $form->errorSummary($model);
+                    //echo $form->errorSummary($loginCodeForm);
                     ?>
                     <div class="contact-form__header">
                         <?= Yii::t('db', 'Log in into your account') ?>
                     </div>
-                    <?= $form->field($model, 'username')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $model->getAttributeLabel('username')]) ?>
-                    <?= $form->field($model, 'password')->passwordInput(['required' => true, 'placeholder' => $model->getAttributeLabel('password')]) ?>
-                    <div class="flex">
-                        <div>
-                            <input type="hidden" name="LoginForm[rememberMe]" value="0">
-                            <input
-                                    type="checkbox"
-                                    class="checkbox"
-                                    name="LoginForm[rememberMe]"
-                                    id="check-1"
-                                    value="1"
-                            />
-                            <label for="check-1"> <?= Yii::t('db', 'Remember me') ?> </label>
-                        </div>
-                        <div class="text-right">
-                            <?= Html::a(Yii::t('db', 'Forgotten password?'), ['site/forgot-password'], ['class' => 'underline']) ?>
-                        </div>
-                    </div>
+                    <?= $form->field($loginCodeForm, 'code')->textInput(['type' => 'text', 'required' => true, 'placeholder' => $loginCodeForm->getAttributeLabel('code')]) ?>
+                    <?= $form->field($loginCodeForm, 'userId')->hiddenInput() ?>
+                    <?= $form->field($loginCodeForm, 'rememberMe')->hiddenInput() ?>
 
                     <button class="btn btn--primary btn--block" type="submit">
                         <?= Yii::t('db', 'Log in') ?>
