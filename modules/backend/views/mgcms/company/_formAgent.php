@@ -25,16 +25,6 @@ echo TabularForm::widget([
         'full_name' => ['type' => TabularForm::INPUT_TEXT],
         'position' => ['type' => TabularForm::INPUT_TEXT],
         'phone' => ['type' => TabularForm::INPUT_TEXT],
-        'file_id' => [
-            'label' => 'File',
-            'type' => TabularForm::INPUT_WIDGET,
-            'widgetClass' => \kartik\widgets\Select2::className(),
-            'options' => [
-                'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('origin_name')->asArray()->all(), 'id', 'origin_name'),
-                'options' => ['placeholder' => Yii::t('app', 'Choose File')],
-            ],
-            'columnOptions' => ['width' => '200px']
-        ],
         'email' => ['type' => TabularForm::INPUT_TEXT],
         'del' => [
             'type' => 'raw',

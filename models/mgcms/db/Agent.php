@@ -35,7 +35,7 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
     public function rules()
     {
         return [
-            [['full_name', 'position', 'description', 'company_id'], 'required'],
+            [['full_name', 'position', 'company_id'], 'required'],
             [['description'], 'string'],
             [['file_id', 'company_id'], 'integer'],
             [['full_name', 'position', 'email'], 'string', 'max' => 245],
