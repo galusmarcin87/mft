@@ -36,30 +36,36 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
             </div>
             <div class="search-wrapper">
 
-                <form action="<?=Url::to('/search/index')?>">
+                <form action="<?= Url::to('/search/index') ?>">
                     <input
                             type="text"
                             placeholder="Filmy, usługi, produkty, NIP, REGON, KRS..."
                             class="search"
                             name="q"
-                            value="<?=$this->context->request->getQueryParam('q')?>"
+                            value="<?= $this->context->request->getQueryParam('q') ?>"
                     />
-                    <img class="search-wrapper__icon" src="/svg/lupa.svg" alt="" />
+                    <img class="search-wrapper__icon" src="/svg/lupa.svg" alt=""/>
                 </form>
             </div>
             <? if (Yii::$app->user->isGuest): ?>
                 <div>
-                    <a class="btn btn--secondary" href="<?= Url::to('site/register')?>"
+                    <a class="btn btn--secondary" href="<?= Url::to('site/register') ?>"
                     ><?= Yii::t('db', 'Register') ?></a
                     >
                 </div>
                 <div>
-                    <a class="btn btn--primary" href="<?= Url::to('site/login')?>"><?= Yii::t('db', 'Log in') ?></a>
+                    <a class="btn btn--primary" href="<?= Url::to('site/login') ?>"><?= Yii::t('db', 'Log in') ?></a>
                 </div>
             <? else: ?>
                 <div>
-                    <a href="javascript:submitLogoutForm()" class="btn btn--primary"> <?= Yii::t('db', 'Log out'); ?> </a>
+                    <a class="btn btn--secondary"
+                       href="<?= Url::to('account/index') ?>"><?= Yii::t('db', 'My account') ?></a>
                 </div>
+                <div>
+                    <a href="javascript:submitLogoutForm()"
+                       class="btn btn--primary"> <?= Yii::t('db', 'Log out'); ?> </a>
+                </div>
+
             <? endif; ?>
             <div class="language-select hidden">
                 <img
@@ -87,7 +93,7 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
 <?= Html::beginForm(['/site/logout'], 'post', ['id' => 'logoutForm']) ?>
 <?= Html::endForm() ?>
 <script type="text/javascript">
-  function submitLogoutForm() {
+  function submitLogoutForm () {
     $('#logoutForm').submit();
   }
 </script>

@@ -956,5 +956,56 @@ class MgHelpers extends \yii\base\Component
         return MgHelpers::getUserModel()->isAdmin();
     }
 
+    static function getTinyMceOptions($options = []){
+
+        return [
+            'options' => ['rows' => 6],
+            'language' => substr(Yii::$app->language, 0, 2),
+            'clientOptions' => \yii\helpers\ArrayHelper::merge($options, [
+                'plugins' => [
+                    "advlist autolink lists link charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table contextmenu paste",
+                    "image imagetools visualchars textcolor",
+                    "autosave colorpicker hr nonbreaking template"
+                ],
+                'toolbar1' => "undo redo | styleselect fontselect fontsizeselect forecolor backcolor | bold italic",
+                'toolbar2' => "fullscreen | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                'image_advtab' => true,
+                'visualblocks_default_state' => false,
+                'relative_urls' => false,
+                'remove_script_host' => false,
+                'convert_urls' => true,
+                'images_upload_url' => MgHelpers::createUrl(['backend/mgcms/file/uploadinstorage']),
+                // here we add custom filepicker only to Image dialog
+                'file_picker_types' => 'image',
+                // and here's our custom image picker
+                'file_picker_callback' => new \yii\web\JsExpression("function(callback, value, meta) {
+                  var input = document.createElement('input');
+                  input.setAttribute('type', 'file');
+                  input.setAttribute('accept', 'image/*');
+
+                  input.onchange = function() {
+                      var file = this.files[0];
+
+                      var reader = new FileReader();
+                      reader.readAsDataURL(file);
+                      reader.onload = function () {
+                          var id = 'blobid' + (new Date()).getTime();
+                          var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                          var blobInfo = blobCache.create(id, file, reader.result);
+                          blobCache.add(blobInfo);
+
+                          // call the callback and populate the Title field with the file name
+                          callback(blobInfo.blobUri(), { title: file.name });
+                      };
+                  };
+                  input.click();
+              }")
+            ]),
+        ];
+
+    }
+
 
 }

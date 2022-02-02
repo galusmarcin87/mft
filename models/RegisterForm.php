@@ -23,6 +23,8 @@ class RegisterForm extends Model
     public $firstName;
     public $surname;
     public $phone;
+    public $agentCode;
+    public $isForSale;
 
 
     /**
@@ -41,9 +43,9 @@ class RegisterForm extends Model
                 'special' => 0,
                 'userAttribute' => 'username'],
             ['passwordRepeat', 'compare', 'compareAttribute' => 'password', 'message' => Yii::t('db', "Passwords don't match")],
-            [['acceptTerms', 'acceptTerms2', 'acceptTerms3', 'acceptTerms4'], 'required', 'requiredValue' => 1, 'message' => Yii::t('db', 'This field is required')],
+            [['acceptTerms'], 'required', 'requiredValue' => 1, 'message' => Yii::t('db', 'This field is required')],
             ['username', 'email'],
-            [['phone', 'acceptTerms5', 'acceptTerms6'], 'safe'],
+            [['phone', 'acceptTerms5', 'acceptTerms6', 'agentCode','isForSale'], 'safe'],
 //        [['password'], StrengthValidator::className(), 'min' => 8, 'digit' => 1, 'special' => 1, 'upper' => 1, 'lower' => 1, 'userAttribute' => 'username'],
         ];
     }
@@ -57,6 +59,8 @@ class RegisterForm extends Model
             'surname' => Yii::t('db', 'Surname'),
             'phone' => Yii::t('db', 'Phone'),
             'passwordRepeat' => Yii::t('db', 'Repeat password'),
+            'agentCode' => Yii::t('db','Agent code (if you have)'),
+            'isForSale' => Yii::t('db','Is for sale'),
             'acceptTerms' => MgHelpers::getSettingTranslated('register_terms_label1', 'Akceptuje <a href="#">regulamin</a> serwisu i wyrażamzgode...'),
             'acceptTerms2' => MgHelpers::getSettingTranslated('register_terms_label2', 'Akceptuje <a href="#">regulamin</a> serwisu i wyrażamzgode...'),
             'acceptTerms3' => MgHelpers::getSettingTranslated('register_terms_label3', 'Akceptuje <a href="#">regulamin</a> serwisu i wyrażamzgode...'),
@@ -81,6 +85,8 @@ class RegisterForm extends Model
             $user->phone = $this->phone;
             $user->acceptTerms5 = (int)$this->acceptTerms5;
             $user->acceptTerms6 = (int)$this->acceptTerms6;
+            $user->setModelAttribute('companyForSale', $this->isForSale);
+            $user->setModelAttribute('agentCode', $this->agentCode);
             $saved = $user->save();
             if (!$saved) {
                 MgHelpers::setFlashError(Yii::t('db', 'Error during registration:') . MgHelpers::getErrorsString($user->getErrors()));
