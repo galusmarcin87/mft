@@ -70,8 +70,29 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
         $model->language = $lang;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            MgHelpers::setFlash('success',Yii::t('db','Saved'));
+        if ($model->load(Yii::$app->request->post())) {
+            $thumbnail = UploadedFile::getInstance($model, 'thumbnailFile');
+            if($thumbnail){
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($thumbnail));
+                $model->thumbnail_id = $file->id;
+            }
+
+            $background = UploadedFile::getInstance($model, 'backgroundFile');
+            if($background){
+                $fileModel2 = new File;
+                $file2 = $fileModel2->push(new \rmrevin\yii\module\File\resources\UploadedResource($background));
+                $model->background_id = $file2->id;
+            }
+
+
+
+            if($model->save()){
+                MgHelpers::setFlash('success',Yii::t('db','Saved'));
+            }else{
+                MgHelpers::setFlash('error',Yii::t('db','Saving failed'));
+            }
+
         }
 
         return $this->render('editCompany', [

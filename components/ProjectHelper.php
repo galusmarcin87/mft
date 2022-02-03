@@ -48,4 +48,22 @@ class ProjectHelper extends \yii\base\Component
             ];
         }
     }
+
+    static function getFormFieldConfigMyAccount()
+    {
+
+            return [
+                'options' => [
+                    'class' => "Contact-form__label",
+                ],
+                'template' => "{input}\n{error}",
+                'inputOptions' => ['class' => 'input full-width'],
+                'labelOptions' => [
+                    'class' => "Form__label",
+                ],
+                'wrapperOptions' => [
+                    'class' => "Form__group  form-group",
+                ]
+            ];
+    }
 }

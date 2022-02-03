@@ -79,6 +79,9 @@ class Company extends \app\models\mgcms\db\AbstractRecord
 
     public $downloadFiles;
     public $viewType;
+    public $backgroundFile;
+    public $thumbnailFile;
+
 
     const STATUS_NEW = 1;
     const STATUS_CONFIRMED = 2;
@@ -95,9 +98,9 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             [['description', 'sale_description', 'sale_price_includes', 'sale_reason','sale_form_of_business'], 'string'],
             [['gps_lat', 'gps_long', 'subscription_fee', 'sale_price', 'sale_last_year_income', 'institution_invoice_amount'], 'number'],
             [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number'], 'integer'],
-            [['created_on', 'paid_from', 'paid_to','video','video_thumbnail'], 'safe'],
+            [['created_on', 'paid_from', 'paid_to','video','video_thumbnail','backgroundFile', 'thumbnailFile'], 'safe'],
             [['name', 'first_name', 'surname', 'email', 'www', 'sale_title', 'sale_business_range', 'sale_sale_range'], 'string', 'max' => 245],
-            [['is_promoted', 'is_for_sale', 'is_institution'], 'string', 'max' => 1],
+            [['is_promoted', 'is_for_sale', 'is_institution'], 'integer', 'max' => 1],
             [['status', 'country', 'city', 'postcode', 'street', 'banc_account_no', 'companycol', 'payment_status', 'sale_company_profile', 'institution_agent_prefix', 'companycol1'], 'string', 'max' => 45],
             [['phone', 'nip', 'regon', 'krs', 'sale_currency'], 'string', 'max' => 15]
         ];

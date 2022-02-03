@@ -49,17 +49,17 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
             </div>
             <? if (Yii::$app->user->isGuest): ?>
                 <div>
-                    <a class="btn btn--secondary" href="<?= Url::to('site/register') ?>"
+                    <a class="btn btn--secondary" href="<?= Url::to('/site/register') ?>"
                     ><?= Yii::t('db', 'Register') ?></a
                     >
                 </div>
                 <div>
-                    <a class="btn btn--primary" href="<?= Url::to('site/login') ?>"><?= Yii::t('db', 'Log in') ?></a>
+                    <a class="btn btn--primary" href="<?= Url::to('/site/login') ?>"><?= Yii::t('db', 'Log in') ?></a>
                 </div>
             <? else: ?>
                 <div>
                     <a class="btn btn--secondary"
-                       href="<?= Url::to('account/index') ?>"><?= Yii::t('db', 'My account') ?></a>
+                       href="<?= Url::to('/account/index') ?>"><?= Yii::t('db', 'My account') ?></a>
                 </div>
                 <div>
                     <a href="javascript:submitLogoutForm()"

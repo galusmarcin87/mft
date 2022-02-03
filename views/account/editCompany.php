@@ -10,7 +10,7 @@ use \yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use \app\models\mgcms\db\Category;
 
-$fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true);
+$fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 ?>
 <section class="companies-wrapper companies-wrapper--dashboard">
     <div class="container">
@@ -40,18 +40,19 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true);
 
                     </div>
                     <div class="form-wrapper">
-                        <h2>Informacje ogólne</h2>
+                        <h2><?= Yii::t('db', 'Main information') ?></h2>
                         <?php $form = ActiveForm::begin([
                             'id' => 'category-edit-form',
                             'options' => ['class' => 'contact-form'],
                             'fieldConfig' => $fieldConfig
                         ]); ?>
-                        <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name'), 'class' => 'input full-width']) ?>
+                        <?= $form->errorSummary($model); ?>
+                        <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
 
-                        <div class="mb-4">
-                            <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description'), 'class' => 'input full-width'])) ?>
+                        <div class="mb-4 bottom25">
+                            <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-4 bottom25">
                             <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
                                 'data' => \yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type' => Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
                                 'options' => ['placeholder2' => Yii::t('db', 'Choose Category'), 'prompt' => ''],
@@ -66,240 +67,175 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true);
                                 <?= Yii::t('db', 'Save') ?>
                             </button>
                         </div>
-                        </form>
+                        <?php ActiveForm::end(); ?>
                     </div>
                     <div class="form-wrapper">
                         <h2><?= Yii::t('db', 'Contact data') ?></h2>
-                        <form action="" class="contact-form" method="POST">
-                            <div class="flex">
-                                <?= $form->field($model, 'first_name')->textInput(['placeholder' => $model->getAttributeLabel('first_name'), 'class' => 'input full-width']) ?>
-                                <?= $form->field($model, 'surname')->textInput(['placeholder' => $model->getAttributeLabel('surname'), 'class' => 'input full-width']) ?>
-                            </div>
-                            <div class="flex">
-                                <div>
-                                    <div class="select-wrqpper full-width">
-                                        <?= $form->field($model, 'country')->
-                                        dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array'),
-                                            ['prompt' => '','class' => 'select full-width']) ?>
+                        <?php $form = ActiveForm::begin([
+                            'id' => 'category-edit-form',
+                            'options' => ['class' => 'contact-form'],
+                            'fieldConfig' => $fieldConfig
+                        ]); ?>
 
-                                        <i
-                                                class="select__icon fa fa-chevron-down"
-                                                aria-hidden="true"
-                                        ></i>
-                                    </div>
+                        <div class="flex">
+                            <?= $form->field($model, 'first_name')->textInput(['placeholder' => $model->getAttributeLabel('first_name')]) ?>
+                            <?= $form->field($model, 'surname')->textInput(['placeholder' => $model->getAttributeLabel('surname')]) ?>
+                        </div>
+                        <div class="flex">
+                            <div>
+                                <div class="select-wrqpper full-width">
+                                    <?= $form->field($model, 'country')->
+                                    dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array'),
+                                        ['prompt' => '', 'class' => 'select full-width']) ?>
+
+                                    <i
+                                            class="select__icon fa fa-chevron-down"
+                                            aria-hidden="true"
+                                    ></i>
                                 </div>
+                            </div>
 
-                                <?= $form->field($model, 'city')->textInput(['placeholder' => $model->getAttributeLabel('city'), 'class' => 'input full-width']) ?>
-                            </div>
-                            <div class="flex">
-                                <div>
-                                    <div class="select-wrqpper full-width">
-                                        <select class="select full-width" name="wojewodztwo">
-                                            <option readonly>Województwo</option>
-                                        </select>
-                                        <i
-                                                class="select__icon fa fa-chevron-down"
-                                                aria-hidden="true"
-                                        ></i>
-                                    </div>
-                                </div>
+                            <?= $form->field($model, 'city')->textInput(['placeholder' => $model->getAttributeLabel('city')]) ?>
+                        </div>
+                        <div class="flex">
 
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="Kod pocztowy"
-                                        name="kod-pocztowy"
-                                />
-                            </div>
-                            <div class="flex">
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="Adres"
-                                        name="adres"
-                                />
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="Numer telefonu"
-                                        name="nr-tel"
-                                />
-                            </div>
-                            <div class="flex">
-                                <input
-                                        type="email"
-                                        class="input full-width"
-                                        placeholder="Adres e-mail"
-                                        name="e-mail"
-                                />
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="Adres strony www"
-                                        name="strona"
-                                />
-                            </div>
-                            <div class="switch-wrapper">
-                                Konto standardowe
-                                <label class="switch">
-                                    <input type="checkbox"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                Firma na sprzedaz
-                            </div>
-                            <div class="flex">
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="NIP"
-                                        name="nip"
-                                />
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="REGON"
-                                        name="regon"
-                                />
-                            </div>
-                            <div class="flex">
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="KRS"
-                                        name="krs"
-                                />
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="Numer konta"
-                                        name="numer-konta"
-                                />
-                            </div>
-                            <h2>Mapa</h2>
-                            <div class="flex">
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="Latitude"
-                                        name="latitude"
-                                />
-                                <input
-                                        type="text"
-                                        class="input full-width"
-                                        placeholder="Longitude"
-                                        name="longityde"
-                                />
-                            </div>
-                            <div class="text-right">
-                                <button class="btn btn--primary btn--medium" type="submit">
-                                    Zapisz
-                                </button>
-                            </div>
-                        </form>
+                            <?= $form->field($model, 'postcode')->textInput(['placeholder' => $model->getAttributeLabel('postcode')]) ?>
+                        </div>
+                        <div class="flex">
+                            <?= $form->field($model, 'street')->textInput(['placeholder' => $model->getAttributeLabel('street')]) ?>
+                            <?= $form->field($model, 'phone')->textInput(['placeholder' => $model->getAttributeLabel('address')]) ?>
+                        </div>
+                        <div class="flex">
+                            <?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email'), 'type' => 'email']) ?>
+                            <?= $form->field($model, 'www')->textInput(['placeholder' => $model->getAttributeLabel('www')]) ?>
+
+                        </div>
+                        <div class="switch-wrapper">
+                            <?= Yii::t('db', 'Standard account') ?>
+                            <label class="switch">
+                                <input type="checkbox"
+                                       name="Company[is_for_sale]" <?= $model->is_for_sale ? 'checked' : '' ?>/>
+                                <span class="slider round"></span>
+                            </label>
+                            <?= Yii::t('db', 'Company for sale') ?>
+                        </div>
+                        <div class="flex">
+                            <?= $form->field($model, 'nip')->textInput(['placeholder' => $model->getAttributeLabel('nip')]) ?>
+                            <?= $form->field($model, 'regon')->textInput(['placeholder' => $model->getAttributeLabel('regon')]) ?>
+
+                        </div>
+                        <div class="flex">
+                            <?= $form->field($model, 'krs')->textInput(['placeholder' => $model->getAttributeLabel('krs')]) ?>
+                            <?= $form->field($model, 'banc_account_no')->textInput(['placeholder' => $model->getAttributeLabel('banc_account_no')]) ?>
+                        </div>
+                        <h2><?= Yii::t('db', 'Map') ?></h2>
+                        <div class="flex">
+                            <?= $form->field($model, 'gps_lat')->textInput(['placeholder' => $model->getAttributeLabel('gps_lat')]) ?>
+                            <?= $form->field($model, 'gps_long')->textInput(['placeholder' => $model->getAttributeLabel('gps_long')]) ?>
+                        </div>
+
+                        <h2><?= Yii::t('db', 'Video') ?></h2>
+                        <div class="flex">
+                            <?= $form->field($model, 'video')->textInput(['placeholder' => $model->getAttributeLabel('video')]) ?>
+                            <?= $form->field($model, 'video_thumbnail')->textInput(['placeholder' => $model->getAttributeLabel('video_thumbnail')]) ?>
+                        </div>
+                        <div class="text-right">
+                            <button class="btn btn--primary btn--medium" type="submit">
+                                <?= Yii::t('db', 'Save') ?>
+                            </button>
+                        </div>
+                        <?php ActiveForm::end(); ?>
                     </div>
                     <div class="form-wrapper">
-                        <form action="" class="contact-form" method="POST">
-                            <h2 class="with-label">Miniatura</h2>
-                            <label>Wybierz plik graficzny</label>
+                        <?php $form = ActiveForm::begin([
+                            'id' => 'category-edit-form',
+                            'options' => ['class' => 'contact-form'],
+                            'fieldConfig' => $fieldConfig
+                        ]); ?>
+                        <h2 class="with-label"><?= Yii::t('db', 'Thumbnail') ?></h2>
+                        <label><?= Yii::t('db', 'Choose graphics file') ?></label>
 
+
+                        <? if ($model->thumbnail && $model->thumbnail->isImage()): ?>
                             <div
                                     id="MINIATURE-PREVIEW"
                                     class="file-uplad"
-                                    style="display: none"
-                            ></div>
-
-                            <label class="file-uplad">
-                                + Dodaj
-                                <input
-                                        type="file"
-                                        name="file"
-                                        id="MINIATURE"
-                                        accept="image/*"
-                                        class="inputfile"
-                                />
-                            </label>
-
-                            <h2 class="with-label">Zdjcie tła</h2>
-                            <label>Wybierz plik graficzny</label>
-
-                            <div
-                                    id="BG-IMAGE-PREVIEW"
-                                    class="file-uplad"
-                                    style="display: none"
-                            ></div>
-
-                            <label class="file-uplad">
-                                + Dodaj
-                                <input
-                                        type="file"
-                                        name="file"
-                                        id="BG-IMAGE"
-                                        accept="image/*"
-                                        class="inputfile"
-                                />
-                            </label>
-
-                            <h2 class="with-label">Galeria</h2>
-                            <label>Zdjcia w rozmiarze co najmniej 1000 x 1000 px</label>
-
-                            <div
-                                    id="GALLERY-IMAGE-PREVIEW"
-                                    class="file-uplad"
-                                    style="display: none"
-                            ></div>
-
-                            <label class="file-uplad">
-                                + Dodaj
-                                <input
-                                        type="file"
-                                        name="file"
-                                        id="GALLERY-IMAGE"
-                                        accept="image/*"
-                                        class="inputfile"
-                                />
-                            </label>
-
-                            <h2 class="with-label">Filmy</h2>
-                            <label>Filmy w formacie *.mp4</label>
-                            <div
-                                    id="VIDEO-PREVIEW"
-                                    class="file-uplad"
-                                    style="display: none"
-                            ></div>
-
-                            <label class="file-uplad">
-                                + Dodaj
-                                <input
-                                        type="file"
-                                        name="file"
-                                        id="VIDEO"
-                                        accept="video/mp4,video/*"
-                                        class="inputfile"
-                                />
-                            </label>
-
-                            <h2 class="with-label">Pliki</h2>
-                            <label>Pliki z rozszerzeniami *.pdf</label>
-                            <div class="file-uplad file-upload--light">
-                                <img src="./svg/file.svg" alt=""/>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            >
+                                <img src="<?= $model->thumbnail->getImageSrc(240, 0) ?>" class=""/>
                             </div>
-                            <label class="file-uplad">
-                                + Dodaj
-                                <input
-                                        type="file"
-                                        name="file"
-                                        id="file"
-                                        class="inputfile"
-                                />
-                            </label>
+                        <? endif; ?>
 
-                            <div class="text-right">
-                                <button class="btn btn--primary btn--medium" type="submit">
-                                    Zapisz
-                                </button>
-                            </div>
-                            <?php ActiveForm::end(); ?>
+
+                        <label class="file-uplad">
+                            + <?= Yii::t('db', 'Add') ?>
+
+                            <?= $form->field($model, 'thumbnailFile')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
+
+                        </label>
+
+                        <h2 class="with-label"><?= Yii::t('db', 'Background photo') ?></h2>
+                        <label><?= Yii::t('db', 'Choose graphics file') ?></label>
+
+                        <? if ($model->background && $model->background->isImage()): ?>
+                        <div
+                                id="BG-IMAGE-PREVIEW"
+                                class="file-uplad"
+                        >
+                            <img
+                                    src="<?= $model->background->getImageSrc(240,0) ?>"
+                                    alt=""
+                            />
+                        </div>
+                        <? endif; ?>
+
+                        <label class="file-uplad">
+                            + <?= Yii::t('db', 'Add') ?>
+                            <?= $form->field($model, 'backgroundFile')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
+                        </label>
+
+                        <h2 class="with-label">Galeria</h2>
+                        <label>Zdjcia w rozmiarze co najmniej 1000 x 1000 px</label>
+
+                        <div
+                                id="GALLERY-IMAGE-PREVIEW"
+                                class="file-uplad"
+                                style="display: none"
+                        ></div>
+
+                        <label class="file-uplad">
+                            + Dodaj
+                            <input
+                                    type="file"
+                                    name="file"
+                                    id="GALLERY-IMAGE"
+                                    accept="image/*"
+                                    class="inputfile"
+                            />
+                        </label>
+
+
+                        <h2 class="with-label">Pliki</h2>
+                        <label>Pliki z rozszerzeniami *.pdf</label>
+                        <div class="file-uplad file-upload--light">
+                            <img src="./svg/file.svg" alt=""/>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                        <label class="file-uplad">
+                            + Dodaj
+                            <input
+                                    type="file"
+                                    name="file"
+                                    id="file"
+                                    class="inputfile"
+                            />
+                        </label>
+
+                        <div class="text-right">
+                            <button class="btn btn--primary btn--medium" type="submit">
+                                Zapisz
+                            </button>
+                        </div>
+                        <?php ActiveForm::end(); ?>
                     </div>
                 </div>
             </div>

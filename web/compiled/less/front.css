@@ -19,6 +19,12 @@
 .top10 {
   margin-top: 10px;
 }
+.bottom25 {
+  margin-bottom: 25px;
+}
+.top25 {
+  margin-top: 25px;
+}
 .agentList {
   text-align: center;
 }
