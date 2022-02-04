@@ -68,6 +68,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
     public function actionEditCompany($lang = false)
     {
         $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        if(!$model){
+            $model = new Company();
+            $model->user_id = $this->getUserModel()->id;
+        }
         $model->language = $lang;
 
         if ($model->load(Yii::$app->request->post())) {
