@@ -85,6 +85,13 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->background_id = $file2->id;
             }
 
+            $videoThumbnail = UploadedFile::getInstance($model, 'video_thumbnail');
+            if($videoThumbnail){
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($videoThumbnail));
+                $model->video_thumbnail = $file->getImageSrc(240,0);
+            }
+
 
 
             if($model->save()){
@@ -98,6 +105,17 @@ class AccountController extends \app\components\mgcms\MgCmsController
         return $this->render('editCompany', [
             'model' => $model
         ]);
+    }
+
+    public function actionDeleteRelation($relId, $fileId, $model)
+    {
+        $file = File::find()->andWhere(['id' => $fileId, 'created_by' => $this->getUserModel()->id])->one();
+        $fileRel = \app\models\mgcms\db\FileRelation::find()->where(['rel_id' => $relId, 'file_id' => $fileId, 'model' => $model])->one();
+        if ($fileRel) {
+            $fileRel->delete();
+            MgHelpers::setFlash('success',Yii::t('db','Deleted'));
+        }
+        $this->back();
     }
 
 

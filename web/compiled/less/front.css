@@ -43,3 +43,6 @@
   overflow: hidden;
   -webkit-box-orient: vertical;
 }
+.file-uplad img {
+  max-height: 140px;
+}

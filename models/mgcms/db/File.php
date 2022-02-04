@@ -1,6 +1,7 @@
 <?php
 namespace app\models\mgcms\db;
 
+use app\components\mgcms\MgHelpers;
 use \app\models\mgcms\db\base\File as BaseFile;
 
 use \mgcms\lightbox\Lightbox;
@@ -111,6 +112,15 @@ class File extends BaseFile
   public function __toString()
   {
     return $this->isImage() ? $this->thumb : $this->link;
+  }
+
+  public static function push(\rmrevin\yii\module\File\resources\ResourceInterface $Resource){
+
+      $file = parent::push($Resource);
+      $file->created_by = MgHelpers::getUserModel()->id;
+      $file->save();
+
+      return $file;
   }
 
 

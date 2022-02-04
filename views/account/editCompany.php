@@ -9,6 +9,9 @@ use app\components\mgcms\MgHelpers;
 use \yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use \app\models\mgcms\db\Category;
+use kartik\icons\Icon;
+Icon::map($this, Icon::FA);
+
 
 $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 ?>
@@ -137,8 +140,26 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         <h2><?= Yii::t('db', 'Video') ?></h2>
                         <div class="flex">
                             <?= $form->field($model, 'video')->textInput(['placeholder' => $model->getAttributeLabel('video')]) ?>
-                            <?= $form->field($model, 'video_thumbnail')->textInput(['placeholder' => $model->getAttributeLabel('video_thumbnail')]) ?>
+
                         </div>
+                        <h2 class="with-label"></h2>
+                        <label><?= Yii::t('db', 'Choose graphics file for video thumbnail') ?></label>
+
+
+                        <? if ($model->thumbnail && $model->thumbnail->isImage()): ?>
+                            <div
+                                    id="MINIATURE-PREVIEW"
+                                    class="file-uplad"
+                            >
+                                <img src="<?= $model->video_thumbnail ?>" class=""/>
+                            </div>
+                        <? endif; ?>
+
+
+                        <label class="file-uplad">
+                            + <?= Yii::t('db', 'Add') ?>
+                            <?= $form->field($model, 'video_thumbnail')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
+                        </label>
                         <div class="text-right">
                             <button class="btn btn--primary btn--medium" type="submit">
                                 <?= Yii::t('db', 'Save') ?>
@@ -177,15 +198,15 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         <label><?= Yii::t('db', 'Choose graphics file') ?></label>
 
                         <? if ($model->background && $model->background->isImage()): ?>
-                        <div
-                                id="BG-IMAGE-PREVIEW"
-                                class="file-uplad"
-                        >
-                            <img
-                                    src="<?= $model->background->getImageSrc(240,0) ?>"
-                                    alt=""
-                            />
-                        </div>
+                            <div
+                                    id="BG-IMAGE-PREVIEW"
+                                    class="file-uplad"
+                            >
+                                <img
+                                        src="<?= $model->background->getImageSrc(240, 0) ?>"
+                                        alt=""
+                                />
+                            </div>
                         <? endif; ?>
 
                         <label class="file-uplad">
@@ -193,24 +214,27 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <?= $form->field($model, 'backgroundFile')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
                         </label>
 
-                        <h2 class="with-label">Galeria</h2>
-                        <label>Zdjcia w rozmiarze co najmniej 1000 x 1000 px</label>
+                        <h2 class="with-label"><?= Yii::t('db', 'Gallery') ?></h2>
+                        <label><?= Yii::t('db', 'Photos with at least 1000 x 1000 pixels resolution') ?></label>
 
-                        <div
-                                id="GALLERY-IMAGE-PREVIEW"
-                                class="file-uplad"
-                                style="display: none"
-                        ></div>
+
+                        <? foreach ($model->fileRelations as $relation): ?>
+                            <? if ($relation->json == '1' || !$relation->file) continue ?>
+                            <div
+                                    id="GALLERY-IMAGE-PREVIEW"
+                                    class="file-uplad"
+                            >
+                                    <?= \kartik\helpers\Html::hiddenInput("fileOrder[" . $relation->file->id . "]") ?>
+                                    <? echo \yii\helpers\Html::a(Icon::show('trash', ['framework' => Icon::FA]), MgHelpers::createUrl(['/account/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
+                                    <?= $relation->file->getThumb(250, 130  , true, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET, ['class' => 'img-responsive']) ?>
+                                    <? \kartik\helpers\Html::textarea("FileRelation[$relation->file->id][$model->id][" . $model::className() . "][description]", 'aaa', ['class' => 'form-control']) ?>
+                            </div>
+                        <? endforeach ?>
+
 
                         <label class="file-uplad">
-                            + Dodaj
-                            <input
-                                    type="file"
-                                    name="file"
-                                    id="GALLERY-IMAGE"
-                                    accept="image/*"
-                                    class="inputfile"
-                            />
+                            + <?= Yii::t('db', 'Add') ?>
+                            <?= $form->field($model, 'uploadedFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
                         </label>
 
 
