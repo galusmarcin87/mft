@@ -94,7 +94,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'first_name', 'surname', 'country', 'city', 'postcode', 'street', 'phone', 'email', 'nip', 'regon', 'category_id', 'user_id', 'background_id'], 'required'],
+            [['name', 'description', 'first_name', 'surname', 'country', 'city', 'postcode', 'street', 'phone', 'email', 'nip', 'regon', 'category_id', 'user_id'], 'required'],
             [['description', 'sale_description', 'sale_price_includes', 'sale_reason','sale_form_of_business'], 'string'],
             [['gps_lat', 'gps_long', 'subscription_fee', 'sale_price', 'sale_last_year_income', 'institution_invoice_amount'], 'number'],
             [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number'], 'integer'],
