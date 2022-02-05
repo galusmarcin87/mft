@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\LoginCodeForm;
 use app\models\mgcms\db\Company;
+use app\models\mgcms\db\Product;
 use FiberPay\FiberIdClient;
 use app\models\mgcms\db\File;
 use app\models\ReportRealEstateForm;
@@ -120,6 +121,21 @@ class AccountController extends \app\components\mgcms\MgCmsController
             MgHelpers::setFlash('success',Yii::t('db','Deleted'));
         }
         $this->back();
+    }
+
+    public function actionProducts(){
+        $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        if(!$model) {
+            $models = [];
+        }else{
+            $models = Product::find()->where(['company_id' => $model->id])->all();
+        }
+
+        return $this->render('products', [
+            '$model' => $models
+        ]);
+
+
     }
 
 
