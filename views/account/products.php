@@ -10,7 +10,6 @@ use \yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
 
-
 ?>
 <section class="companies-wrapper companies-wrapper--dashboard">
     <div class="container">
@@ -18,12 +17,12 @@ use yii\bootstrap\ActiveForm;
             <?= $this->render('_leftMenu') ?>
             <div>
                 <div class="dashboard-wrapper">
-                    <h1 class="text-left">Lista przedstawicieli</h1>
+                    <h1 class="text-left"><?= Yii::t('db', 'Products') ?></h1>
                     <div class="flex">
                         <div>
-                            <div class="search-wrapper search-wrapper--small">
+                            <div class="search-wrapper search-wrapper--small hidden">
                                 <form action="./wyniki-wyszukiwania.html">
-                                    <input type="text" placeholder="Szukaj" class="search" />
+                                    <input type="text" placeholder="Szukaj" class="search"/>
                                     <img
                                             class="search-wrapper__icon"
                                             src="/svg/lupa.svg"
@@ -33,173 +32,33 @@ use yii\bootstrap\ActiveForm;
                             </div>
                         </div>
                         <div class="text-right">
-                            <a class="btn btn--secondary">+ Dodaj</a>
+                            <a class="btn btn--secondary"
+                               href="<?= Url::to('/account/product-add') ?>">+ <?= Yii::t('db', 'Add') ?></a>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <div class="person-list person-list-header">
-                            <div class="text-left">Zdjecie</div>
+                            <div class="text-left"><?= Yii::t('db', 'Photo') ?></div>
                             <div class="text-left sort">
-                                Nazwa
-                                <i class="fa fa-sort" aria-hidden="true"></i>
+                                <?= Yii::t('db', 'Name') ?>
+
                             </div>
-                            <div>Widoczność</div>
-                            <div>Edytuj</div>
-                            <div>Usuń</div>
-                            <div>Zobacz</div>
+                            <div><?= Yii::t('db', 'Edit') ?></div>
+                            <div><?= Yii::t('db', 'Delete') ?></div>
+                            <div><?= Yii::t('db', 'See') ?></div>
                         </div>
-                        <div class="contact-box contact-box--light">
-                            <div class="person person--big person-list">
-                                <div class="text-left">
-                                    <img
-                                            class="person__avatar person__avatar--small"
-                                            src="./img/person.png"
-                                            alt=""
-                                    />
-                                </div>
-                                <div class="text-left">Jan nowak</div>
-                                <div>
-                                    <div>
-                                        <input
-                                                type="checkbox"
-                                                class="checkbox"
-                                                name="zapamietaj"
-                                                id="check-1"
-                                        />
-                                        <label for="check-1"></label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-box contact-box--light">
-                            <div class="person person--big person-list">
-                                <div class="text-left">
-                                    <img
-                                            class="person__avatar person__avatar--small"
-                                            src="./img/person.png"
-                                            alt=""
-                                    />
-                                </div>
-                                <div class="text-left">Jan nowak</div>
-                                <div>
-                                    <div>
-                                        <input
-                                                type="checkbox"
-                                                class="checkbox"
-                                                name="zapamietaj"
-                                                id="check-1"
-                                        />
-                                        <label for="check-1"></label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-box contact-box--light">
-                            <div class="person person--big person-list">
-                                <div class="text-left">
-                                    <img
-                                            class="person__avatar person__avatar--small"
-                                            src="./img/person.png"
-                                            alt=""
-                                    />
-                                </div>
-                                <div class="text-left">Jan nowak</div>
-                                <div>
-                                    <div>
-                                        <input
-                                                type="checkbox"
-                                                class="checkbox"
-                                                name="zapamietaj"
-                                                id="check-1"
-                                        />
-                                        <label for="check-1"></label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="contact-box contact-box--light">
-                            <div class="person person--big person-list">
-                                <div class="text-left">
-                                    <img
-                                            class="person__avatar person__avatar--small"
-                                            src="./img/person.png"
-                                            alt=""
-                                    />
-                                </div>
-                                <div class="text-left">Jan nowak</div>
-                                <div>
-                                    <div>
-                                        <input
-                                                type="checkbox"
-                                                class="checkbox"
-                                                name="zapamietaj"
-                                                id="check-1"
-                                        />
-                                        <label for="check-1"></label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+
+                        <? foreach ($models as $model): ?>
+                            <?= $this->render('_listItem', [
+                                'imageSrc' => $model->file && $model->file->isImage() ? $model->file->getImageSrc(70, 0) : false,
+                                'name' => $model->name,
+                                'id' => $model->id,
+                                'type' => 'product',
+                                'linkUrl' => $model->linkUrl
+
+
+                            ]) ?>
+                        <? endforeach ?>
                     </div>
                 </div>
             </div>

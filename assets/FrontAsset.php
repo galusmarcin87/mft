@@ -22,7 +22,7 @@ class FrontAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/bootstrap.min.css',
-        //'css/font-awesome.min.css',
+        'css/font-awesome.min.css',
         'css/owl.carousel.min.css',
         'css/animations.css',
         'css/style.css',

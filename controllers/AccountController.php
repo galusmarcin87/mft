@@ -69,7 +69,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
     public function actionEditCompany($lang = false)
     {
         $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
-        if(!$model){
+        if (!$model) {
             $model = new Company();
             $model->user_id = $this->getUserModel()->id;
         }
@@ -77,32 +77,31 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         if ($model->load(Yii::$app->request->post())) {
             $thumbnail = UploadedFile::getInstance($model, 'thumbnailFile');
-            if($thumbnail){
+            if ($thumbnail) {
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($thumbnail));
                 $model->thumbnail_id = $file->id;
             }
 
             $background = UploadedFile::getInstance($model, 'backgroundFile');
-            if($background){
+            if ($background) {
                 $fileModel2 = new File;
                 $file2 = $fileModel2->push(new \rmrevin\yii\module\File\resources\UploadedResource($background));
                 $model->background_id = $file2->id;
             }
 
             $videoThumbnail = UploadedFile::getInstance($model, 'video_thumbnail');
-            if($videoThumbnail){
+            if ($videoThumbnail) {
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($videoThumbnail));
-                $model->video_thumbnail = $file->getImageSrc(240,0);
+                $model->video_thumbnail = $file->getImageSrc(240, 0);
             }
 
 
-
-            if($model->save()){
-                MgHelpers::setFlash('success',Yii::t('db','Saved'));
-            }else{
-                MgHelpers::setFlash('error',Yii::t('db','Saving failed'));
+            if ($model->save()) {
+                MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
+            } else {
+                MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
             }
 
         }
@@ -118,21 +117,22 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $fileRel = \app\models\mgcms\db\FileRelation::find()->where(['rel_id' => $relId, 'file_id' => $fileId, 'model' => $model])->one();
         if ($fileRel) {
             $fileRel->delete();
-            MgHelpers::setFlash('success',Yii::t('db','Deleted'));
+            MgHelpers::setFlash('success', Yii::t('db', 'Deleted'));
         }
         $this->back();
     }
 
-    public function actionProducts(){
+    public function actionProducts()
+    {
         $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
-        if(!$model) {
+        if (!$model) {
             $models = [];
-        }else{
+        } else {
             $models = Product::find()->where(['company_id' => $model->id])->all();
         }
 
         return $this->render('products', [
-            '$model' => $models
+            'models' => $models
         ]);
 
 
