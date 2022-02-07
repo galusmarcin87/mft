@@ -39,6 +39,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
     public $languageAttributes = ['description', 'specification','name'];
 
     public $downloadFiles;
+    public $fileUpload;
     /**
      * @inheritdoc
      */
@@ -46,7 +47,7 @@ class Product extends \app\models\mgcms\db\AbstractRecord
     {
         return [
             [['name', 'category_id', 'company_id'], 'required'],
-            [['created_on', 'special_offer_from', 'special_offer_to'], 'safe'],
+            [['created_on', 'special_offer_from', 'special_offer_to', 'fileUpload'], 'safe'],
             [['category_id', 'number', 'min_amount_of_purchase', 'company_id','file_id'], 'integer'],
             [['description', 'specification'], 'string'],
             [['price', 'special_offer_price'], 'number'],

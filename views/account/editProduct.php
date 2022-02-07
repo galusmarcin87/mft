@@ -117,7 +117,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <?= $form->field($model, 'special_offer_price')->textInput(['placeholder' => $model->getAttributeLabel('special_offer_price')]) ?>
                         </div>
 
-                        <h2 class="with-label"></h2>
+                        <h2 class="with-label"><?= Yii::t('db', 'Image') ?></h2>
                         <label><?= Yii::t('db', 'Choose graphics') ?></label>
 
 
@@ -133,7 +133,45 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
                         <label class="file-uplad">
                             + <?= Yii::t('db', 'Add') ?>
-                            <?= $form->field($model, 'video_thumbnail')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
+                            <?= $form->field($model, 'fileUpload')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
+                        </label>
+
+
+                        <h2 class="with-label"><?= Yii::t('db', 'Gallery') ?></h2>
+                        <label><?= Yii::t('db', 'Photos with at least 1000 x 1000 pixels resolution') ?></label>
+
+
+                        <? foreach ($model->fileRelations as $relation): ?>
+                            <? if ($relation->json == '1' || !$relation->file) continue ?>
+                            <div
+                                    id="GALLERY-IMAGE-PREVIEW"
+                                    class="file-uplad"
+                            >
+                                <?= \kartik\helpers\Html::hiddenInput("fileOrder[" . $relation->file->id . "]") ?>
+                                <? echo \yii\helpers\Html::a(Icon::show('trash', ['framework' => Icon::FA]), MgHelpers::createUrl(['/account/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
+                                <?= $relation->file->getThumb(250, 130, true, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET, ['class' => 'img-responsive']) ?>
+                                <? \kartik\helpers\Html::textarea("FileRelation[$relation->file->id][$model->id][" . $model::className() . "][description]", 'aaa', ['class' => 'form-control']) ?>
+                            </div>
+                        <? endforeach ?>
+
+
+                        <label class="file-uplad">
+                            + <?= Yii::t('db', 'Add') ?>
+                            <?= $form->field($model, 'uploadedFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
+                        </label>
+
+
+                        <h2 class="with-label"><?= Yii::t('db', 'Files') ?></h2>
+                        <label><?= Yii::t('db', 'Files with extension *.pdf') ?></label>
+                        <div>
+                            <? foreach ($model->fileRelations as $relation): ?>
+                                <? if ($relation->json != '1' || !$relation->file) continue ?>
+                                <a href="<?=$relation->file->getLinkUrl()?>" class="btn btn-primary btn--medium mb-1 ml-0" target="_blank"><?=$relation->file->origin_name?> </a>
+                            <? endforeach ?>
+                        </div>
+                        <label class="file-uplad">
+                            + <?= Yii::t('db', 'Add') ?>
+                            <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true, 'accept' => 'application/pdf', 'class' => 'inputfile']); ?>
                         </label>
 
 

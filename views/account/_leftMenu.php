@@ -42,9 +42,9 @@ $request = $this->context->request;
         >
             <?= Yii::t('db', 'Products') ?>
         </a>
-        <a href="<?= Url::to('/account/edit-product') ?>"
+        <a href="<?= Url::to('/account/add-product') ?>"
            class="menu-vertical__item <? if ($request->getPathInfo() == 'account/edit-product'): ?>menu-vertical__item--active<? endif; ?>">
-            <?= Yii::t('db', 'Edit product') ?>
+            <?= Yii::t('db', 'Add product') ?>
         </a>
     </div>
 
@@ -58,9 +58,9 @@ $request = $this->context->request;
         >
             <?= Yii::t('db', 'Services') ?>
         </a>
-        <a href="<?= Url::to('/account/edit-service') ?>"
+        <a href="<?= Url::to('/account/add-service') ?>"
            class="menu-vertical__item <? if ($request->getPathInfo() == 'account/edit-service'): ?>menu-vertical__item--active<? endif; ?>">
-            <?= Yii::t('db', 'Edit service') ?>
+            <?= Yii::t('db', 'Add service') ?>
         </a>
     </div>
 
@@ -74,9 +74,9 @@ $request = $this->context->request;
         >
             <?= Yii::t('db', 'Job offers') ?>
         </a>
-        <a href="<?= Url::to('/account/edit-job') ?>"
+        <a href="<?= Url::to('/account/add-job') ?>"
            class="menu-vertical__item <? if ($request->getPathInfo() == 'account/edit-job'): ?>menu-vertical__item--active<? endif; ?>">
-            <?= Yii::t('db', 'Edit job offer') ?>
+            <?= Yii::t('db', 'Add job offer') ?>
         </a>
     </div>
 </div>

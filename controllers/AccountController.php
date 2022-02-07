@@ -149,6 +149,13 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         if ($model->load(Yii::$app->request->post())) {
 
+            $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
+            if ($fileUpload) {
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
+                $model->file_id = $file->id;
+            }
+
             if ($model->save()) {
                 $this->_assignDownloadFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
