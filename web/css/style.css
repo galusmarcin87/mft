@@ -1820,40 +1820,40 @@ section {
   margin-bottom: 20px;
 }
 
-.dashboard-wrapper .form-wrapper form {
+.dashboard-wrapper .form-wrapper .contact-form {
   background-color: #e3e0f4;
   margin: 0;
   max-width: 100%;
 }
 
-.dashboard-wrapper .form-wrapper form textarea {
+.dashboard-wrapper .form-wrapper .contact-form textarea {
   min-height: 160px;
 }
 
-.dashboard-wrapper .form-wrapper form select {
+.dashboard-wrapper .form-wrapper .contact-form select {
   margin-left: 0;
   color: #4b4044;
 }
 
-.dashboard-wrapper .form-wrapper form .select__icon {
+.dashboard-wrapper .form-wrapper .contact-form .select__icon {
   color: #4b4044;
 }
 
-.dashboard-wrapper .form-wrapper form .input {
+.dashboard-wrapper .form-wrapper .contact-form .input {
   margin-bottom: 25px;
 }
 
-.dashboard-wrapper .form-wrapper form .switch-wrapper {
+.dashboard-wrapper .form-wrapper .contact-form .switch-wrapper {
   margin-bottom: 25px;
   font-weight: 700;
 }
 
-.dashboard-wrapper .form-wrapper form .switch-wrapper .switch {
+.dashboard-wrapper .form-wrapper .contact-form .switch-wrapper .switch {
   margin: 0 15px;
   vertical-align: middle;
 }
 
-.dashboard-wrapper .form-wrapper form h2 {
+.dashboard-wrapper .form-wrapper .contact-form h2 {
   font-size: 24px;
   line-height: 30px;
   color: #464646;
@@ -1861,19 +1861,19 @@ section {
   margin-top: 10px;
 }
 
-.dashboard-wrapper .form-wrapper form h2.with-label {
+.dashboard-wrapper .form-wrapper .contact-form h2.with-label {
   margin-bottom: 10px;
   color: #422cb7;
 }
 
-.dashboard-wrapper .form-wrapper form h2.with-label + label {
+.dashboard-wrapper .form-wrapper .contact-form h2.with-label + label {
   font-size: 15px;
   color: #4b4044;
   font-weight: 400;
   display: block;
 }
 
-.dashboard-wrapper .form-wrapper form .file-uplad {
+.dashboard-wrapper .form-wrapper .contact-form .file-uplad {
   background-color: #fff;
   border-radius: 4px;
   width: 250px;
@@ -1895,7 +1895,7 @@ section {
   grid-column-gap: 10px;
 }
 
-.dashboard-wrapper .form-wrapper form .file-uplad--light {
+.dashboard-wrapper .form-wrapper .contact-form .file-uplad--light {
   font-size: 15px;
   line-height: 24px;
   color: #4b4044;
@@ -1903,7 +1903,7 @@ section {
   padding: 24px;
 }
 
-.dashboard-wrapper .form-wrapper form .file-uplad .image {
+.dashboard-wrapper .form-wrapper .contact-form .file-uplad .image {
   -o-object-fit: cover;
   object-fit: cover;
   height: 155px;
@@ -1913,15 +1913,15 @@ section {
   background-color: #fff;
 }
 
-.dashboard-wrapper .form-wrapper form .file-uplad .image + .image {
+.dashboard-wrapper .form-wrapper .contact-form .file-uplad .image + .image {
   margin-left: 10px;
 }
 
-.dashboard-wrapper .form-wrapper form .file-uplad + .file-uplad {
+.dashboard-wrapper .form-wrapper .contact-form .file-uplad + .file-uplad {
   margin-left: 10px;
 }
 
-.dashboard-wrapper .form-wrapper form .file-upload--light {
+.dashboard-wrapper .form-wrapper .contact-form .file-upload--light {
   font-size: 15px;
   line-height: 24px;
   color: #4b4044;
@@ -1929,7 +1929,7 @@ section {
   padding: 24px;
 }
 
-.dashboard-wrapper .form-wrapper form .flex > div {
+.dashboard-wrapper .form-wrapper .contact-form .flex > div {
   width: calc(100% + 30px);
 }
 

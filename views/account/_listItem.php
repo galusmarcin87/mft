@@ -21,12 +21,12 @@ use \yii\helpers\Url;
         </div>
         <div class="text-left"><?= $name ?></div>
         <div>
-            <a href="<?= Url::to('/account/' . $type.'-edit', ['id' => $id]) ?>">
+            <a href="<?= Url::to(['/account/' . $type.'-edit', 'id' => $id]) ?>">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
         </div>
         <div>
-            <a href="<?= Url::to('/account/' . $type.'-delete', ['id' => $id]) ?>">
+            <a href="<?= Url::to(['/account/' . $type.'-delete', 'id' => $id]) ?>">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </a>
         </div>

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\LoginCodeForm;
 use app\models\mgcms\db\Company;
+use app\models\mgcms\db\FileRelation;
 use app\models\mgcms\db\Product;
 use FiberPay\FiberIdClient;
 use app\models\mgcms\db\File;
@@ -97,7 +98,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->video_thumbnail = $file->getImageSrc(240, 0);
             }
 
-
+            $this->_assignDownloadFiles($model);
             if ($model->save()) {
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             } else {
@@ -136,6 +137,61 @@ class AccountController extends \app\components\mgcms\MgCmsController
         ]);
 
 
+    }
+
+    public function actionProductEdit($id, $lang = false)
+    {
+        $model = Product::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'product.id' => $id])->one();
+        if (!$model) {
+            $this->throw404();
+        }
+        $model->language = $lang;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            if ($model->save()) {
+                $this->_assignDownloadFiles($model);
+                MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
+            } else {
+                MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
+            }
+
+        }
+
+        return $this->render('editProduct', [
+            'model' => $model
+        ]);
+    }
+
+    public function _assignDownloadFiles($model)
+    {
+        $upladedFiles = UploadedFile::getInstances($model, 'downloadFiles');
+
+        if ($upladedFiles) {
+            foreach ($upladedFiles as $CUploadedFileModel) {
+                if ($CUploadedFileModel->hasError) {
+                    MgHelpers::setFlash(MgHelpers::FLASH_TYPE_ERROR, Yii::t('app', 'Error with uploading file - probably file is too big'));
+                    continue;
+                }
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($CUploadedFileModel));
+                if ($file) {
+                    if (FileRelation::find()->where(['file_id' => $file->id, 'rel_id' => $this->id, 'model' => $this::className()])->count()) {
+                        continue;
+                    }
+                    $fileRel = new FileRelation;
+                    $fileRel->file_id = $file->id;
+                    $fileRel->rel_id = $model->id;
+                    $fileRel->model = $model::className();
+                    $fileRel->json = 1;
+                    MgHelpers::saveModelAndLog($fileRel);
+                } else {
+                    MgHelpers::setFlashError('Błąd dodawania pliku powiązanego');
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
 
