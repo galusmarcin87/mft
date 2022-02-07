@@ -170,6 +170,41 @@ class AccountController extends \app\components\mgcms\MgCmsController
         ]);
     }
 
+    public function actionAddProduct($lang = false)
+    {
+
+        $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        if (!$modelCompany) {
+            MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
+            $this->back();
+        }
+        $model = new Product();
+        $model->language = $lang;
+        $model->company_id = $modelCompany->id;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
+            if ($fileUpload) {
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
+                $model->file_id = $file->id;
+            }
+
+            if ($model->save()) {
+                $this->_assignDownloadFiles($model);
+                MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
+            } else {
+                MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
+            }
+
+        }
+
+        return $this->render('editProduct', [
+            'model' => $model
+        ]);
+    }
+
     public function _assignDownloadFiles($model)
     {
         $upladedFiles = UploadedFile::getInstances($model, 'downloadFiles');
