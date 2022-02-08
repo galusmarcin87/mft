@@ -25,8 +25,8 @@ use \yii\helpers\Url;
                                 <?= Yii::t('db', 'Agents') ?>
                             </div>
                         </div>
-                        <a href="" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>
-                        <a href="" class="btn btn--primary">Podejrzyj</a>
+                        <a href="<?= Url::to('/account/add-agent') ?>" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>
+                        <a href="<?= Url::to('/account/agents') ?>" class="btn btn--primary"><?= Yii::t('db', 'See') ?></a>
                     </div>
                     <div class="contact-box">
                         <div class="person person--big">
@@ -34,12 +34,12 @@ use \yii\helpers\Url;
                                 <div class="big-number"><?= $myCompany ? count($myCompany->products) : 0 ?></div>
                             </div>
                             <div>
-                                <div class="person__role person__role--normal">Lista</div>
-                                Produktów
+                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List') ?></div>
+                                <?= Yii::t('db', 'of products') ?>
                             </div>
                         </div>
-                        <a href="" class="btn btn--primary">+ Dodaj</a>
-                        <a href="" class="btn btn--primary">Podejrzyj</a>
+                        <a href="<?= Url::to('/account/add-product') ?>" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>
+                        <a href="<?= Url::to('/account/products') ?>" class="btn btn--primary"><?= Yii::t('db', 'See') ?></a>
                     </div>
                     <div class="contact-box">
                         <div class="person person--big">
@@ -47,12 +47,12 @@ use \yii\helpers\Url;
                                 <div class="big-number"><?= $myCompany ? count($myCompany->services) : 0 ?></div>
                             </div>
                             <div>
-                                <div class="person__role person__role--normal">Lista</div>
-                                Usług
+                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List') ?></div>
+                                <?= Yii::t('db', 'of services') ?>
                             </div>
                         </div>
-                        <a href="" class="btn btn--primary">+ Dodaj</a>
-                        <a href="" class="btn btn--primary">Podejrzyj</a>
+                        <a href="<?= Url::to('/account/add-service') ?>" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>
+                        <a href="<?= Url::to('/account/services') ?>" class="btn btn--primary"><?= Yii::t('db', 'See') ?></a>
                     </div>
                     <div class="contact-box">
                         <div class="person person--big">
@@ -60,12 +60,12 @@ use \yii\helpers\Url;
                                 <div class="big-number"><?= $myCompany ? count($myCompany->jobs) : 0 ?></div>
                             </div>
                             <div>
-                                <div class="person__role person__role--normal">Lista</div>
-                                Ofert pracy
+                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List') ?></div>
+                                <?= Yii::t('db', 'of jobs') ?>
                             </div>
                         </div>
-                        <a href="" class="btn btn--primary">+ Dodaj</a>
-                        <a href="" class="btn btn--primary">Podejrzyj</a>
+                        <a href="<?= Url::to('/account/add-job') ?>" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>
+                        <a href="<?= Url::to('/account/jobs') ?>" class="btn btn--primary"><?= Yii::t('db', 'See') ?></a>
                     </div>
                     <div id="ACCORDION" class="accordion">
                         <div class="accordion__header">

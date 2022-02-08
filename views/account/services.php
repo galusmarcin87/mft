@@ -33,7 +33,7 @@ use yii\bootstrap\ActiveForm;
                         </div>
                         <div class="text-right">
                             <a class="btn btn--secondary"
-                               href="<?= Url::to('/account/service-add') ?>">+ <?= Yii::t('db', 'Add') ?></a>
+                               href="<?= Url::to('/account/add-service') ?>">+ <?= Yii::t('db', 'Add') ?></a>
                         </div>
                     </div>
                     <div class="table-responsive">
