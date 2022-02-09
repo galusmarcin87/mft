@@ -43,7 +43,7 @@ $this->registerJs($search);
         [
             'attribute' => 'status',
             'value' => function ($model) {
-                return \app\models\mgcms\db\Company::STATUSES[$model->status];
+                return in_array($model->status,\app\models\mgcms\db\Company::STATUSES) ? \app\models\mgcms\db\Company::STATUSES[$model->status]: '';
             },
             'format' => 'translate',
             'filterType' => GridView::FILTER_SELECT2,
