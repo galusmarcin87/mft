@@ -28,6 +28,7 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
     use LanguageBehaviorTrait;
 
     public $languageAttributes = ['description','position'];
+    public $fileUpload;
 
     /**
      * @inheritdoc
@@ -36,6 +37,7 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
     {
         return [
             [['full_name', 'position', 'company_id'], 'required'],
+            [['fileUpload'], 'safe'],
             [['description'], 'string'],
             [['file_id', 'company_id'], 'integer'],
             [['full_name', 'position', 'email'], 'string', 'max' => 245],

@@ -32,6 +32,22 @@ $request = $this->context->request;
         </a>
     </div>
 
+    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/agents', 'account/edit-agent'])): ?>menu-vertical__category--collapsed<? endif ?>">
+        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/agents', 'account/edit-agent'])): ?>menu-vertical__item--active<? endif ?>">
+            <?= Yii::t('db', 'Agents') ?>
+        </div>
+        <a
+                href="<?= Url::to('/account/agents') ?>"
+                class="menu-vertical__item <? if ($request->getPathInfo() == 'account/agents'): ?>menu-vertical__item--active<? endif; ?>"
+        >
+            <?= Yii::t('db', 'Agents') ?>
+        </a>
+        <a href="<?= Url::to('/account/add-agent') ?>"
+           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/edit-agent'): ?>menu-vertical__item--active<? endif; ?>">
+            <?= Yii::t('db', 'Add agent') ?>
+        </a>
+    </div>
+
     <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/products', 'account/edit-product'])): ?>menu-vertical__category--collapsed<? endif ?>">
         <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/products', 'account/edit-product'])): ?>menu-vertical__item--active<? endif ?>">
             <?= Yii::t('db', 'Products') ?>

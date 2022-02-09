@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\LoginCodeForm;
+use app\models\mgcms\db\Agent;
 use app\models\mgcms\db\Company;
 use app\models\mgcms\db\FileRelation;
 use app\models\mgcms\db\Job;
@@ -140,6 +141,21 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     }
 
+    public function actionAgents()
+    {
+        $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        if (!$model) {
+            $models = [];
+        } else {
+            $models = Agent::find()->where(['company_id' => $model->id])->all();
+        }
+
+        return $this->render('agents', [
+            'models' => $models
+        ]);
+
+    }
+
     public function actionServices()
     {
         $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
@@ -199,6 +215,37 @@ class AccountController extends \app\components\mgcms\MgCmsController
         }
 
         return $this->render('editProduct', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionAgentEdit($id, $lang = false)
+    {
+        $model = Agent::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'agent.id' => $id])->one();
+        if (!$model) {
+            $this->throw404();
+        }
+        $model->language = $lang;
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
+            if ($fileUpload) {
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
+                $model->file_id = $file->id;
+            }
+
+            if ($model->save()) {
+                $this->_assignDownloadFiles($model);
+                MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
+            } else {
+                MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
+            }
+
+        }
+
+        return $this->render('editAgent', [
             'model' => $model
         ]);
     }
@@ -319,6 +366,16 @@ class AccountController extends \app\components\mgcms\MgCmsController
         return $this->back();
     }
 
+    public function actionAgentDelete($id)
+    {
+        $model = Agent::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'agent.id' => $id])->one();
+        if (!$model) {
+            $this->throw404();
+        }
+        $model->delete();
+        return $this->back();
+    }
+
     public function actionJobDelete($id)
     {
         $model = Job::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'job.id' => $id])->one();
@@ -371,6 +428,40 @@ class AccountController extends \app\components\mgcms\MgCmsController
         }
 
         return $this->render('editProduct', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionAddAgent($lang = false)
+    {
+
+        $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        if (!$modelCompany) {
+            MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
+            $this->back();
+        }
+        $model = new Agent();
+        $model->language = $lang;
+        $model->company_id = $modelCompany->id;
+
+        if ($model->load(Yii::$app->request->post())) {
+            $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
+            if ($fileUpload) {
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
+                $model->file_id = $file->id;
+            }
+
+            if ($model->save()) {
+                $this->_assignDownloadFiles($model);
+                MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
+            } else {
+                MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
+            }
+
+        }
+
+        return $this->render('editAgent', [
             'model' => $model
         ]);
     }

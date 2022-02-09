@@ -22,7 +22,7 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field6md($model, 'full_name')->textInput(['maxlength' => true, 'placeholder2' => 'Full Name']) ?>
 
-    <?= $form->field6md($model, 'position')->textInput(['maxlength' => true, 'placeholder2' => 'Position']) ?>
+        <?= $form->field6md($model, 'position')->textInput(['maxlength' => true, 'placeholder2' => 'Position']) ?>
 
     <?= $form->field12md($model, 'description')->tinyMce(['rows' => 6]) ?>
 
