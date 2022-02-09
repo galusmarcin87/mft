@@ -34,8 +34,8 @@ use \yii\helpers\Url;
                                 <div class="big-number"><?= $myCompany ? count($myCompany->products) : 0 ?></div>
                             </div>
                             <div>
-                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List') ?></div>
-                                <?= Yii::t('db', 'of products') ?>
+                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List of') ?></div>
+                                <?= Yii::t('db', 'Products') ?>
                             </div>
                         </div>
                         <a href="<?= Url::to('/account/add-product') ?>" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>
@@ -47,8 +47,8 @@ use \yii\helpers\Url;
                                 <div class="big-number"><?= $myCompany ? count($myCompany->services) : 0 ?></div>
                             </div>
                             <div>
-                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List') ?></div>
-                                <?= Yii::t('db', 'of services') ?>
+                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List of') ?></div>
+                                <?= Yii::t('db', 'Services') ?>
                             </div>
                         </div>
                         <a href="<?= Url::to('/account/add-service') ?>" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>
@@ -60,8 +60,8 @@ use \yii\helpers\Url;
                                 <div class="big-number"><?= $myCompany ? count($myCompany->jobs) : 0 ?></div>
                             </div>
                             <div>
-                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List') ?></div>
-                                <?= Yii::t('db', 'of jobs') ?>
+                                <div class="person__role person__role--normal"><?= Yii::t('db', 'List of') ?></div>
+                                <?= Yii::t('db', 'Jobs') ?>
                             </div>
                         </div>
                         <a href="<?= Url::to('/account/add-job') ?>" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>

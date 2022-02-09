@@ -32,6 +32,9 @@ class Job extends \app\models\mgcms\db\AbstractRecord
 
     public $languageAttributes = ['requirements','info','position','address', 'city'];
 
+    public $downloadFiles;
+    public $fileUpload;
+
     /**
      * @inheritdoc
      */
@@ -41,6 +44,7 @@ class Job extends \app\models\mgcms\db\AbstractRecord
             [['name', 'company_id', 'salary', 'position', 'address', 'industry', 'info', 'requirements', 'country', 'city'], 'required'],
             [['company_id', 'file_id'], 'integer'],
             [['salary'], 'number'],
+            [['fileUpload'], 'safe'],
             [['info', 'requirements'], 'string'],
             [['name', 'position', 'address', 'industry', 'country', 'city'], 'string', 'max' => 245]
         ];

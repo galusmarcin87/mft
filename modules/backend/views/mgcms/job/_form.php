@@ -22,6 +22,14 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field6md($model, 'name')->textInput(['maxlength' => true, 'placeholder' => 'Name']) ?>
 
+    <?= $form->field4md($model, 'file_id')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->where(['created_by' => MgHelpers::getUserModel()->id])->orderBy('id')->asArray()->all(), 'id', 'origin_name'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose File'), 'prompt' => '',],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
+
 
     <?= $form->field6md($model, 'salary')->textInput(['placeholder' => 'Salary']) ?>
 
