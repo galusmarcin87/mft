@@ -33,6 +33,9 @@ $this->registerJs($search);
       ['class' => 'yii\grid\SerialColumn'],
       ['attribute' => 'id', 'visible' => false],
       [
+          'class' => app\components\mgcms\yii\ActionColumn::className(),
+      ],
+      [
           'class' => 'kartik\grid\EditableColumn',
           'attribute' => 'name',
           'editableOptions' => [
@@ -71,9 +74,7 @@ $this->registerJs($search);
       ],
       'order',
       'promoted:boolean',
-      [
-          'class' => app\components\mgcms\yii\ActionColumn::className(),
-      ],
+
   ];
 
   ?>

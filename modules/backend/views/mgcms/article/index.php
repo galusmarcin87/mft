@@ -28,6 +28,15 @@ $this->registerJs($search);
   $gridColumn = [
       ['class' => 'yii\grid\SerialColumn'],
       ['attribute' => 'id', 'visible' => false],
+      [
+          'class' => app\components\mgcms\yii\ActionColumn::className(),
+          'template' => '{view} {clone} {update} {delete}',
+          'buttons' => [
+              'clone' => function ($url, $model) {
+                  return Html::a('<span class="glyphicon glyphicon-tags"></span>', $url, [
+                      'title' => Yii::t('app', 'clone')]);
+              }]
+      ],
       'title',
       [
           'attribute' => 'link',
@@ -81,15 +90,7 @@ $this->registerJs($search);
       'promoted:boolean',
       'type',
       'tagString',
-      [
-          'class' => app\components\mgcms\yii\ActionColumn::className(),
-          'template' => '{view} {clone} {update} {delete}',
-          'buttons' => [
-              'clone' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-tags"></span>', $url, [
-                        'title' => Yii::t('app', 'clone')]);
-              }]
-      ],
+
   ];
 
   ?>

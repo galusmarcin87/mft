@@ -28,17 +28,18 @@ $this->registerJs($search);
   $gridColumn = [
       ['class' => 'yii\grid\SerialColumn'],
       ['attribute' => 'id', 'visible' => false],
-      'name',
       [
           'class' => app\components\mgcms\yii\ActionColumn::className(),
           'template' => '{view} {update} {manage} {delete}',
           'buttons' => [
-            'manage' => function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-cog"></span>', $url, [
-                            'title' => Yii::t('app', 'Manage'),
-                ]);
-            },],
+              'manage' => function ($url, $model) {
+                  return Html::a('<span class="glyphicon glyphicon-cog"></span>', $url, [
+                      'title' => Yii::t('app', 'Manage'),
+                  ]);
+              },],
       ],
+      'name',
+
   ];
 
   ?>

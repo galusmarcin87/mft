@@ -23,10 +23,13 @@ $this->registerJs($search);
         <?= Html::a(Yii::t('app', 'Create Setting'), ['create','type' => $searchModel->type], ['class' => 'btn btn-success']) ?>
         <?= Html::a(Yii::t('app', 'Clear cache'), ['clear-cache'], ['class' => 'btn btn-warning']) ?>
     </p>
-<?php 
+<?php
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
+        [
+            'class' => app\components\mgcms\yii\ActionColumn::className(),
+        ],
         'key',
         [
           'class' => 'kartik\grid\EditableColumn',
@@ -37,10 +40,8 @@ $this->registerJs($search);
           ],
         ],
         'value_text:raw',
-        [
-            'class' => app\components\mgcms\yii\ActionColumn::className(),
-        ],
-    ]; 
+
+    ];
     ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

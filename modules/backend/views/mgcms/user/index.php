@@ -29,10 +29,13 @@ $this->registerJs($search);
     <div class="search-form" style="display:none">
         <?//  $this->render('_search', ['model' => $searchModel]); ?>
     </div>
-    <?php 
+    <?php
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
+        [
+            'class' => app\components\mgcms\yii\ActionColumn::className(),
+        ],
         'username',
         'first_name',
         'last_name',
@@ -47,10 +50,8 @@ $this->registerJs($search);
         ],
         'created_on',
         'last_login',
-        [
-            'class' => app\components\mgcms\yii\ActionColumn::className(),
-        ],
-    ]; 
+
+    ];
     ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

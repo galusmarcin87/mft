@@ -22,10 +22,14 @@ $search = "$('.search-button').click(function(){
     <p>
         <?= Html::a(Yii::t('app', 'Create File'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php 
+<?php
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
+        [
+            'class' => app\components\mgcms\yii\ActionColumn::className(),
+            'template' => '{view} {delete}'
+        ],
         'thumb:raw',
         [
             'header' => Yii::t('app', 'Name'),
@@ -40,7 +44,7 @@ $search = "$('.search-button').click(function(){
             'class' => app\components\mgcms\yii\ActionColumn::className(),
             'template' => '{view} {delete}'
         ],
-    ]; 
+    ];
     ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

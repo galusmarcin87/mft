@@ -23,6 +23,10 @@ $this->registerJs($search);
   $gridColumn = [
       ['class' => 'yii\grid\SerialColumn'],
       ['attribute' => 'id', 'visible' => false],
+      [
+          'class' => app\components\mgcms\yii\ActionColumn::className(),
+          'template' => '{delete}'
+      ],
       'category',
       'message:ntext',
       array(
@@ -30,10 +34,7 @@ $this->registerJs($search);
           'value' => 'translateLinks',
           'format' => 'raw'
       ),
-      [
-          'class' => app\components\mgcms\yii\ActionColumn::className(),
-          'template' => '{delete}'
-      ],
+
   ];
 
   ?>
