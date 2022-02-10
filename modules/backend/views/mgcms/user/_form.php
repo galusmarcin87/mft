@@ -81,13 +81,23 @@ use yii\helpers\Url;
         </div>
 
         <div class="col-md-4">
+            <?= $form->field($model, 'companyForSale')->switchInput() ?>
+        </div>
+
+        <?= $form->field4md($model, 'agentCode')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('agentCode')]) ?>
+
+        <?= $form->field4md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array'), ['prompt' => '']) ?>
+
+        <?= $form->field4md($model, 'city')->textInput(['maxlength' => true, 'placeholder2' => 'City']) ?>
+
+        <?= $form->field4md($model, 'address')->textInput(['maxlength' => true, 'placeholder2' => 'City']) ?>
+
+        <?= $form->field4md($model, 'postcode')->textInput(['maxlength' => true, 'placeholder2' => 'City']) ?>
+
+        <div class="col-md-4">
             <?= $this->render('/common/_fileModalChooser', [
                 'model' => $model,
                 'form' => $form]) ?>
-        </div>
-
-        <div class="col-md-12">
-            <?= $form->field($model, 'file_text')->textarea(['rows' => 8]) ?>
         </div>
 
 
