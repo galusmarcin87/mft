@@ -41,7 +41,7 @@ class Job extends \app\models\mgcms\db\AbstractRecord
     public function rules()
     {
         return [
-            [['name', 'company_id', 'salary', 'position', 'address', 'industry', 'info', 'requirements', 'country', 'city'], 'required'],
+            [['name', 'company_id', 'salary', 'position', 'industry', 'country', 'city'], 'required'],
             [['company_id', 'file_id'], 'integer'],
             [['salary'], 'number'],
             [['fileUpload'], 'safe'],

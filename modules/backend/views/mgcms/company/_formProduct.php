@@ -48,56 +48,9 @@ echo TabularForm::widget([
             ],
             'columnOptions' => ['width' => '200px']
         ],
-        'file_id' => [
-            'label' => 'File',
-            'type' => TabularForm::INPUT_WIDGET,
-            'widgetClass' => \kartik\widgets\Select2::className(),
-            'options' => [
-                'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\File::find()->orderBy('origin_name')->asArray()->all(), 'id', 'origin_name'),
-                'options' => ['placeholder' => Yii::t('app', 'Choose File')],
-            ],
-            'columnOptions' => ['width' => '200px']
-        ],
-        //'description' => ['type' => TabularForm::INPUT_TEXTAREA],
-        //'specification' => ['type' => TabularForm::INPUT_TEXTAREA],
-        'price' => ['type' => TabularForm::INPUT_TEXT],
         'number' => ['type' => TabularForm::INPUT_TEXT],
-        'is_special_offer' => ['type' => TabularForm::INPUT_CHECKBOX,
-            'options' => [
-                'style' => 'position : relative; margin-top : -9px'
-            ]
-        ],
-        'special_offer_from' => ['type' => TabularForm::INPUT_WIDGET,
-            'widgetClass' => \kartik\datecontrol\DateControl::classname(),
-            'options' => [
-                'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
-                'saveFormat' => 'php:Y-m-d',
-                'ajaxConversion' => true,
-                'options' => [
-                    'pluginOptions' => [
-                        'placeholder' => Yii::t('app', 'Choose Special Offer From'),
-                        'autoclose' => true
-                    ]
-                ],
-            ]
-        ],
-        'special_offer_to' => ['type' => TabularForm::INPUT_WIDGET,
-            'widgetClass' => \kartik\datecontrol\DateControl::classname(),
-            'options' => [
-                'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
-                'saveFormat' => 'php:Y-m-d',
-                'ajaxConversion' => true,
-                'options' => [
-                    'pluginOptions' => [
-                        'placeholder' => Yii::t('app', 'Choose Special Offer To'),
-                        'autoclose' => true
-                    ]
-                ],
-            ]
-        ],
         'min_amount_of_purchase' => ['type' => TabularForm::INPUT_TEXT],
-        'special_offer_price' => ['type' => TabularForm::INPUT_TEXT],
-
+        'price' => ['type' => TabularForm::INPUT_TEXT]
     ],
     'gridSettings' => [
         'panel' => [

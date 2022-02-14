@@ -24,7 +24,7 @@ class Service extends \app\models\mgcms\db\AbstractRecord
 {
     use LanguageBehaviorTrait;
 
-    public $languageAttributes = ['description','specification'];
+    public $languageAttributes = ['description', 'specification'];
 
     public $downloadFiles;
 
@@ -34,7 +34,7 @@ class Service extends \app\models\mgcms\db\AbstractRecord
     public function rules()
     {
         return [
-            [['name', 'company_id'], 'required'],
+            [['name', 'company_id', 'price'], 'required'],
             [['price'], 'number'],
             [['description', 'specification'], 'string'],
             [['company_id'], 'integer'],

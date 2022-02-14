@@ -28,7 +28,7 @@ class Benefit extends \app\models\mgcms\db\AbstractRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'price', 'company_id'], 'required'],
+            [['name', 'price', 'company_id'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
             [['company_id'], 'integer'],
