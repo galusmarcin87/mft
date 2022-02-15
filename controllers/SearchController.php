@@ -30,7 +30,7 @@ class SearchController extends \app\components\mgcms\MgCmsController
 
     public function actionIndex($q = '')
     {
-        $companyQuery = Company::find()->where(['or',['like','name',$q]]);
+        $companyQuery = Company::find()->where(['or',['like','name',$q]])->andWhere(['status'=>Company::STATUS_CONFIRMED]);
         $companyDataProvider = new ActiveDataProvider([
             'query' => $companyQuery,
         ]);

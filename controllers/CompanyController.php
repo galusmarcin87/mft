@@ -27,7 +27,7 @@ class CompanyController extends \app\components\mgcms\MgCmsController
 
     public function actionIndex($is_for_sale = null, $category_id = null)
     {
-        $query = Company::find();
+        $query = Company::find()->andWhere(['status'=>Company::STATUS_CONFIRMED]);
         if($is_for_sale){
             $query->andWhere(['is_for_sale' => 1]);
         }
