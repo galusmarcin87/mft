@@ -62,15 +62,15 @@ use yii\widgets\ListView;
 
                                     // Customzing CSS class for pager link
                                     'linkOptions' => [
-                                        'class' => 'page-link',
+                                        'class' => 'pagination__item',
                                     ],
-                                    'activePageCssClass' => 'pagination__item--active',
-                                    'pageCssClass' => 'pagination__item',
+                                    'activePageCssClass' => 'active',
+                                    'pageCssClass' => 'page',
                                     // Customzing CSS class for navigating link
-                                    'prevPageCssClass' => 'pagination__item',
-                                    'nextPageCssClass' => 'pagination__item',
-                                    'firstPageCssClass' => 'pagination__item',
-                                    'lastPageCssClass' => 'pagination__item',
+                                    'prevPageCssClass' => 'prev',
+                                    'nextPageCssClass' => 'next',
+                                    'firstPageCssClass' => 'first',
+                                    'lastPageCssClass' => 'last',
                                 ],
                             ])
 
