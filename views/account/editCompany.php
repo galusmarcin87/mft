@@ -168,8 +168,9 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                     </div>
                     <div class="form-wrapper">
 
-                        <h2 class="with-label"><?= Yii::t('db', 'Thumbnail') ?></h2>
+
                         <div class="contact-form">
+                            <h2 class="with-label"><?= Yii::t('db', 'Thumbnail') ?></h2>
                             <label><?= Yii::t('db', 'Choose graphics file') ?></label>
 
 
