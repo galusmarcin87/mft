@@ -43,9 +43,8 @@ class Job extends \app\models\mgcms\db\AbstractRecord
         return [
             [['name', 'company_id', 'salary', 'position', 'industry', 'country', 'city'], 'required'],
             [['company_id', 'file_id'], 'integer'],
-            [['salary'], 'number'],
             [['fileUpload'], 'safe'],
-            [['info', 'requirements'], 'string'],
+            [['info', 'requirements', 'salary'], 'string'],
             [['name', 'position', 'address', 'industry', 'country', 'city'], 'string', 'max' => 245]
         ];
     }
