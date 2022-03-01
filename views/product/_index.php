@@ -21,7 +21,7 @@ $model->language = Yii::$app->language;
             <div class="company__name">
                 <?=$model->name?>
             </div>
-            <?=$model->specification?>
+            <?=$model->description?>
         </div>
     </div>
     <div class="company__offer">
