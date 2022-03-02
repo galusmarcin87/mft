@@ -9,6 +9,7 @@ use app\models\mgcms\db\FileRelation;
 use app\models\mgcms\db\Job;
 use app\models\mgcms\db\Product;
 use app\models\mgcms\db\Service;
+use app\models\PaySubscriptionForm;
 use FiberPay\FiberIdClient;
 use app\models\mgcms\db\File;
 use app\models\ReportRealEstateForm;
@@ -76,6 +77,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         if (!$model) {
             $model = new Company();
             $model->user_id = $this->getUserModel()->id;
+            $model->subscription_fee = MgHelpers::getSetting('kwota abonamentu', false, 10000);
         }
         $model->language = $lang;
 
@@ -495,6 +497,24 @@ class AccountController extends \app\components\mgcms\MgCmsController
             return true;
         }
         return false;
+    }
+
+    function actionPaySubscription(){
+        $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        if (!$modelCompany) {
+            MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
+            $this->back();
+        }
+
+        $model = new PaySubscriptionForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $this->redirect("https://trade.kanga.exchange/tpg/payment/Gj37cn1bep0lmfMixMnwgJkSSMlK13?currency=MFT&amount=$model->tokensAmount&transactionKey=$modelCompany->id&name=Meetfaces%20Trading%20-%20zakup%20tokena");
+        }
+
+        $model->subscrriptionFee = $modelCompany->subscription_fee * 0.6;
+        return $this->render('paySubscription',[
+            'model' => $model,
+        ]);
     }
 
 

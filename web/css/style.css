@@ -412,13 +412,14 @@ section {
 
 .companies {
   --items: 1;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (1fr)[var];
-  grid-template-columns: repeat(var(--items), 1fr);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   grid-column-gap: 20px;
   grid-row-gap: 30px;
   margin-bottom: 40px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .companies__labels {
@@ -591,31 +592,13 @@ section {
   align-self: flex-start;
 }
 
-@media (min-width: 480px) {
-  .companies {
-    --items: 2;
-  }
-}
-
-@media (min-width: 991px) {
-  .companies {
-    --items: 3;
-  }
-}
-
-@media (min-width: 1200px) {
-  .companies {
-    --items: 4;
-  }
-}
-
 .company {
   background: #fff;
   padding: 20px;
   padding-bottom: 15px;
   padding-right: 15px;
-  display: -ms-grid;
-  display: grid;
+  display: -ms-inline-grid;
+  display: inline-grid;
   grid-row-gap: 20px;
   border-bottom: 5px solid #fff;
   border-right: 5px solid #fff;
@@ -626,6 +609,26 @@ section {
   text-decoration: none !important;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  width: 100%;
+  min-height: 245px;
+}
+
+@media (min-width: 480px) {
+  .company {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (min-width: 991px) {
+  .company {
+    width: calc(33% - 11px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .company {
+    width: calc(25% - 15px);
+  }
 }
 
 .company:hover {
@@ -646,6 +649,9 @@ section {
   position: relative;
   padding-right: 50px;
   padding-bottom: 20px;
+  width: 100%;
+  display: -ms-inline-grid;
+  display: inline-grid;
 }
 
 @media (min-width: 480px) {
@@ -676,6 +682,7 @@ section {
   .company--highlighted {
     -ms-grid-columns: 40% 1fr;
     grid-template-columns: 40% 1fr;
+    width: calc(50% - 10px);
   }
 }
 

@@ -14,7 +14,15 @@ use \yii\helpers\Url;
             <?= $this->render('_leftMenu')?>
             <div>
                 <div class="dashboard-wrapper">
-                    <h1 class="text-left"><?= Yii::t('db', 'Dashboard') ?></h1>
+                    <div class="row">
+                    <h1 class="text-left col-md-6"><?= Yii::t('db', 'Dashboard') ?></h1>
+                    <?if($myCompany):?>
+                        <div class="text-left col-md-6 paySubscription">
+                            <?= Yii::t('db', 'Pay subscription') ?>
+                            <a href="<?= Url::to('/account/pay-subscription') ?>" class="btn btn--primary"><?= Yii::t('db', 'Pay by tokens') ?></a>
+                        </div>
+                    <?endif?>
+                    </div>
                     <div class="contact-box">
                         <div class="person person--big">
                             <div>
