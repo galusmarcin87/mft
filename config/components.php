@@ -22,16 +22,16 @@ $arr = [
 // for the mailer to send real emails.
         'transport' => [
             'class' => 'Swift_SmtpTransport',
-            'host' => 'piesto.io',
-            'username' => 'formularz@piesto.io',
-            'password' => ']@Id,12H4f21@I@',
+            'host' => 'vertesdesign.nazwa.pl',
+            'username' => 'mft@vertesdesign.nazwa.pl',
+            'password' => 'VAWRg5$%&Y46djshrt',
             'port' => '465',
             'encryption' => 'ssl',
         ],
         // send all mails to a file by default. You have to set
 // 'useFileTransport' to false and configure a transport
 // for the mailer to send real emails.
-        'useFileTransport' => true,
+        'useFileTransport' => false,
     ],
     'log' => [
         'traceLevel' => YII_DEBUG ? 3 : 0,
