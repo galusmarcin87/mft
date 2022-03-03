@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\InvestForm;
 use app\models\LoginCodeForm;
 use FiberPay\FiberIdClient;
 use app\models\mgcms\db\File;
@@ -581,6 +582,18 @@ class SiteController extends \app\components\mgcms\MgCmsController
 
         }
         return 'ok';
+    }
+
+    public function actionInformationForInvestors()
+    {
+        $model = new InvestForm();
+        if ($model->load(Yii::$app->request->post()) && $model->sendEmail()) {
+            \app\components\mgcms\MgHelpers::setFlashSuccess(Yii::t('db', 'Forgot Password email has been sent'));
+            return $this->refresh();
+        }
+        return $this->render('informationForInvestors', [
+            'model' => $model
+        ]);
     }
 
 
