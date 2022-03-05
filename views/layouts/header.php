@@ -29,7 +29,7 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
                     <div class="dropdown">
                         <a href="#">Więcej o MFT</a>
                         <a href="/site/information-for-investors">Dla inwestorów</a>
-                        <a href="#">Produkty w promocji</a>
+                        <a href="/product/index?specialOffer=1">Produkty w promocji</a>
                         <a href="#">Jak kupić reklamy?</a>
                     </div>
                 </div>

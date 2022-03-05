@@ -47,37 +47,7 @@ use yii\widgets\ListView;
 
                     ?>
 
-                    <div class="text-center">
-                        <div class="pagination">
-                            <?=
-                            ListView::widget([
-                                'dataProvider' => $dataProvider,
-                                'layout' => '{pager}',
-                                'pager' => [
-//                                'firstPageLabel' => '&laquo;',
-//                                'lastPageLabel' => '&raquo;',
-                                    'prevPageLabel' => '<i class="fa fa-arrow-left" aria-hidden="true"></i>',
-                                    'nextPageLabel' => '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
-
-
-                                    // Customzing CSS class for pager link
-                                    'linkOptions' => [
-                                        'class' => 'page-link',
-                                    ],
-                                    'activePageCssClass' => 'pagination__item--active',
-                                    'pageCssClass' => 'pagination__item',
-                                    // Customzing CSS class for navigating link
-                                    'prevPageCssClass' => 'pagination__item',
-                                    'nextPageCssClass' => 'pagination__item',
-                                    'firstPageCssClass' => 'pagination__item',
-                                    'lastPageCssClass' => 'pagination__item',
-                                ],
-                            ])
-
-                            ?>
-                        </div>
-
-                    </div>
+                    <?= $this->render('/common/_pagination', ['dataProvider' => $dataProvider, '']) ?>
                 </div>
             </div>
         </div>
