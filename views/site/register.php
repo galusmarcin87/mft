@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     //          echo $form->errorSummary($model);
                     ?>
                     <div class="contact-form__header"><?= Yii::t('db', 'Create new account') ?></div>
-                    <?= $form->field($model, 'firstName')->textInput(['placeholder' => $model->getAttributeLabel('first_name')]) ?>
+                    <?= $form->field($model, 'firstName')->textInput(['placeholder' => $model->getAttributeLabel('firstName')]) ?>
                     <?= $form->field($model, 'surname')->textInput(['placeholder' => $model->getAttributeLabel('surname')]) ?>
                     <?= $form->field($model, 'username')->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
