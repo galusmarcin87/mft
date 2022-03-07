@@ -54,8 +54,6 @@ class Product extends \app\models\mgcms\db\AbstractRecord
             [['price', 'special_offer_price'], 'number'],
             [['name'], 'string', 'max' => 245],
             [['is_special_offer'], 'integer', 'max' => 1],
-            [['price'], 'unique'],
-            [['number'], 'unique']
         ];
     }
 

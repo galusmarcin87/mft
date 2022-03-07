@@ -26,6 +26,9 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
         </div>
 
         <div class="service single-company">
+            <p>
+                <?= MgHelpers::getSetting('dla inwestorow tekst '.Yii::$app->language,true,'dla inwestorow tekst')?>
+            </p>
             <div class="flex">
                 <div>
                     <?php
