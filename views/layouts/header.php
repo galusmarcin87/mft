@@ -27,10 +27,13 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
             <div>
                 <div class="arr-down">
                     <div class="dropdown">
-                        <a href="#">Więcej o MFT</a>
+                        <? foreach ($menu->getItems() as $item): ?>
+                            <? if (isset($item['url'])): ?>
+                                <a href="<?= \yii\helpers\Url::to($item['url']) ?>"><?= $item['label'] ?></a>
+                            <? endif ?>
+                        <? endforeach ?>
                         <a href="/site/information-for-investors">Dla inwestorów</a>
                         <a href="/product/index?specialOffer=1">Produkty w promocji</a>
-                        <a href="#">Jak kupić reklamy?</a>
                     </div>
                 </div>
             </div>
