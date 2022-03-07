@@ -32,8 +32,6 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
                                 <a href="<?= \yii\helpers\Url::to($item['url']) ?>"><?= $item['label'] ?></a>
                             <? endif ?>
                         <? endforeach ?>
-                        <a href="/site/information-for-investors">Dla inwestorów</a>
-                        <a href="/product/index?specialOffer=1">Produkty w promocji</a>
                     </div>
                 </div>
             </div>
