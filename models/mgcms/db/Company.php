@@ -58,6 +58,7 @@ use yii\helpers\Html;
  * @property double $institution_invoice_amount
  * @property string $link
  * @property string $linkUrl
+ * @property integer $benefit
  *
  * @property \app\models\mgcms\db\Agent[] $agents
  * @property \app\models\mgcms\db\Benefit[] $benefits
@@ -100,7 +101,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number'], 'integer'],
             [['created_on', 'paid_from', 'paid_to','video','video_thumbnail','backgroundFile', 'thumbnailFile'], 'safe'],
             [['name', 'first_name', 'surname', 'email', 'www', 'sale_title', 'sale_business_range', 'sale_sale_range'], 'string', 'max' => 245],
-            [['is_promoted', 'is_for_sale', 'is_institution'], 'integer', 'max' => 1],
+            [['is_promoted', 'is_for_sale', 'is_institution', 'is_benefit'], 'integer', 'max' => 1],
             [['status', 'country', 'city', 'postcode', 'street', 'banc_account_no', 'companycol', 'payment_status', 'sale_company_profile', 'institution_agent_prefix', 'companycol1'], 'string', 'max' => 45],
             [['phone', 'nip', 'regon', 'krs', 'sale_currency'], 'string', 'max' => 15]
         ];
@@ -167,6 +168,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             'institution_agent_prefix' => Yii::t('app', 'Institution Agent Prefix'),
             'institution_invoice_amount' => Yii::t('app', 'Institution Invoice Amount'),
             'companycol1' => Yii::t('app', 'Companycol1'),
+            'is_benefit' => Yii::t('app', 'Is Benefit'),
         ];
     }
 

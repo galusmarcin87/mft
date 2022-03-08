@@ -17,9 +17,11 @@ $companies = Company::find()->limit(19)->andWhere(['status' => Company::STATUS_C
                     <?if($company->thumbnail && $company->thumbnail->isImage()):?>
                         <img class="company__logo" src="<?=$company->thumbnail->getImageSrc(0, 70)?>" alt="" />
                     <?endif;?>
-                    <div class="company__name"><?=$company->name?></div>
-                    <div class="company__industry">
-                        <div class="badge"><?=$company->category->name?></div>
+                    <div>
+                        <div class="company__name"><?=$company->name?></div>
+                        <div class="company__industry">
+                            <div class="badge"><?=$company->category->name?></div>
+                        </div>
                     </div>
                 </a>
 

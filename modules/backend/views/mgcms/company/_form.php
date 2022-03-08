@@ -72,7 +72,9 @@ use \app\models\mgcms\db\Company;
 
     <?= MgHelpers::isAdmin() ? $form->field6md($model, 'status')->dropDownList(Company::STATUSES) : '' ?>
 
-    <?= MgHelpers::isAdmin() ? $form->field6md($model, 'is_promoted')->switchInput() : '' ?>
+    <?= MgHelpers::isAdmin() ? $form->field3md($model, 'is_promoted')->switchInput() : '' ?>
+
+    <?= MgHelpers::isAdmin() ? $form->field3md($model, 'is_benefit')->switchInput() : '' ?>
 
     <?= $form->field12md($model, 'description')->tinyMce(['rows' => 6]) ?>
 

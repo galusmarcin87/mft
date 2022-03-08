@@ -14,6 +14,8 @@ $model->language = Yii::$app->language;
                                                                       alt="" /><? endif ?>
     <div class="company__content">
         <div class="company__name"><?= $model->name ?></div>
-        <?= $model->description ?>
+        <div class="company__description">
+            <?= $model->description ?>
+        </div>
     </div>
 </a>
