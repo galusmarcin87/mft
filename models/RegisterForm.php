@@ -97,7 +97,7 @@ class RegisterForm extends Model
             $mailer = Yii::$app->mailer->compose('activation', [
                 'model' => $user
             ])
-                ->setTo($user->username)
+                ->setTo([$user->username,MgHelpers::getSetting('owner email',false,'Tomasz.kopacz@meetfacestrading.com')])
                 ->setFrom([MgHelpers::getSetting('email from') => MgHelpers::getSetting('email from name')])
                 ->setSubject(MgHelpers::getSettingTranslated('register_activation_email_subject', 'Noble Platform - activation'));
             $sent = $mailer->send();
