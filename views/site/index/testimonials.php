@@ -21,20 +21,9 @@ use yii\web\View;
                             alt=""
                     />
                     <p>
-                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                        consectetur, adipisci velit, sed quia non numquam eius modi
-                        tempora incidunt ut labore et dolore magnam aliquam quaerat
-                        voluptatem.
+                        Współzależni ludzie łączą swoje własne wysiłki z wysiłkami innych, aby osiągnąć największy sukces.<br>
+						Steve Covey
                     </p>
-                    <div class="person">
-                        <div>
-                            <img class="person__avatar" src="./img/person.png" alt="" />
-                        </div>
-                        <div>
-                            <div class="person__role">IT manager</div>
-                            Jan Kowalski
-                        </div>
-                    </div>
                 </div>
                 <div class="item testimonials__item">
                     <img
@@ -43,20 +32,9 @@ use yii\web\View;
                             alt=""
                     />
                     <p>
-                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                        consectetur, adipisci velit, sed quia non numquam eius modi
-                        tempora incidunt ut labore et dolore magnam aliquam quaerat
-                        voluptatem.
+                        Współzależni ludzie łączą swoje własne wysiłki z wysiłkami innych, aby osiągnąć największy sukces.<br>
+						Steve Covey
                     </p>
-                    <div class="person">
-                        <div>
-                            <img class="person__avatar" src="./img/person.png" alt="" />
-                        </div>
-                        <div>
-                            <div class="person__role">IT manager</div>
-                            Jan Kowalski
-                        </div>
-                    </div>
                 </div>
                 <div class="item testimonials__item">
                     <img
@@ -65,20 +43,9 @@ use yii\web\View;
                             alt=""
                     />
                     <p>
-                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                        consectetur, adipisci velit, sed quia non numquam eius modi
-                        tempora incidunt ut labore et dolore magnam aliquam quaerat
-                        voluptatem.
+                        Współzależni ludzie łączą swoje własne wysiłki z wysiłkami innych, aby osiągnąć największy sukces.<br>
+						Steve Covey
                     </p>
-                    <div class="person">
-                        <div>
-                            <img class="person__avatar" src="./img/person.png" alt="" />
-                        </div>
-                        <div>
-                            <div class="person__role">IT manager</div>
-                            Jan Kowalski
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

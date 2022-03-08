@@ -23,17 +23,17 @@ $index=0;
                         i klientami <strong>na całym świecie</strong>
                     </h1>
                     <div class="block-icons">
-                        <a href="">
+                        <a href="/site/information-for-investors">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/inwestor.svg"
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Informacje dla Inwestorów
+                                Dla Inwestorów
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/product/index?specialOffer=1">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/promocje.svg"
@@ -55,9 +55,20 @@ $index=0;
                                 i Korzyści
                             </div>
                         </a>
+						<a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/konsultant.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Zostań <br />
+                                Konsultantem
+                            </div>
+                        </a>
                     </div>
-                    <a href="" class="btn btn--primary">
-                        Sprawdź najnowszą inwestycje
+					<a href="/art/wiecej-o-mft" class="btn btn--primary">
+                        O Meetfaces Trading
                     </a>
                 </div>
                 <div class="main-slider__images">
@@ -73,17 +84,17 @@ $index=0;
                         i klientami <strong>na całym świecie</strong>
                     </h1>
                     <div class="block-icons">
-                        <a href="">
+                        <a href="/site/information-for-investors">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/inwestor.svg"
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Informacje dla Inwestorów
+                                Dla Inwestorów
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/product/index?specialOffer=1">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/promocje.svg"
@@ -105,9 +116,20 @@ $index=0;
                                 i Korzyści
                             </div>
                         </a>
+						<a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/konsultant.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Zostań <br />
+                                Konsultantem
+                            </div>
+                        </a>
                     </div>
-                    <a href="" class="btn btn--primary">
-                        Sprawdź najnowszą inwestycje
+                    <a href="/art/wiecej-o-mft" class="btn btn--primary">
+                        O Meetfaces Trading
                     </a>
                 </div>
                 <div class="main-slider__images">
@@ -123,17 +145,17 @@ $index=0;
                         i klientami <strong>na całym świecie</strong>
                     </h1>
                     <div class="block-icons">
-                        <a href="">
+                        <a href="/site/information-for-investors">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/inwestor.svg"
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Informacje dla Inwestorów
+                                Dla Inwestorów
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/product/index?specialOffer=1">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/promocje.svg"
@@ -155,9 +177,20 @@ $index=0;
                                 i Korzyści
                             </div>
                         </a>
+						<a href="">
+                            <div class="block-icons__block">
+                                <img
+                                        src="./svg/konsultant.svg"
+                                        class="block-icons__icon"
+                                        alt=""
+                                />
+                                Zostań <br />
+                                Konsultantem
+                            </div>
+                        </a>
                     </div>
                     <a href="" class="btn btn--primary">
-                        Sprawdź najnowszą inwestycje
+                        O Meetfaces Trading
                     </a>
                 </div>
                 <div class="main-slider__images">

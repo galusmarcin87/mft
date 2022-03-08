@@ -19,4 +19,3 @@ use app\models\mgcms\db\Project;
 
 <?= $this->render('index/about') ?>
 
-<?= $this->render('index/benefits') ?>

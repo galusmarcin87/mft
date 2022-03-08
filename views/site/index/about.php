@@ -16,7 +16,7 @@ use yii\web\View;
                 <div>
                     <h2>
                         Metfaces Trading to innowacyjna Platforma biznesowa dedykowana
-                        firmom umozliwiająca:
+                        firmom, umożliwiająca:
                     </h2>
                     <ul class="about__list">
                         <li class="about__list__item">
@@ -24,21 +24,17 @@ use yii\web\View;
                             oferty Twojej Firmy
                         </li>
                         <li class="about__list__item">
-                            Nieograniczoną mozliwość aktualizacji oferty poprzez dodawanie
+                            Nieograniczoną możliwość aktualizacji oferty poprzez dodawanie
                             zdjec, filmów reklamowych, plików z danymi tekstowymi
                         </li>
                         <li class="about__list__item">
-                            Nawiązanie niwych relacji biznesowych poprzez uzyskanie dostpu
-                            do katalogu firm bdących Uzytkownikami Platformy w podziale na
-                            brane, towary, usługi, dostawców i odbiorców
-                        </li>
-                        <li class="about__list__item">
-                            Skorzystanie z mozliwości finansowania transakcji biznesowych
-                            przez instytucje financowe wystepujące w Platformie
+                            Nawiązanie nowych relacji biznesowych poprzez uzyskanie dostpu
+                            do katalogu firm, będących Użytkownikami Platformy w podziale na
+                            branże, towary, usługi, dostawców i odbiorców
                         </li>
                         <li class="about__list__item">
                             Korzystanie ze spotkań biznesowych oraz szkoleń organizowanych
-                            przez firmy wystepujące na Platformie oraz ekspertów
+                            przez firmy występujące na Platformie oraz ekspertów
                             zaproszonych przez Meetface S.A.
                         </li>
                     </ul>

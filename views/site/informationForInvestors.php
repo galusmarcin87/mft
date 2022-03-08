@@ -22,15 +22,15 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
     <div class="container">
         <div class="breadcrumb">
             <a href="/"> meetfaces </a>
-            <span><?= Yii::t('db', 'Information for investors') ?></span>
+			<span><?= Yii::t('db', 'Information for investors') ?></span>
         </div>
-
+		
         <div class="service single-company">
-            <p>
+			<p>
                 <?= MgHelpers::getSetting('dla inwestorow tekst '.Yii::$app->language,true,'dla inwestorow tekst')?>
             </p>
             <div class="flex">
-                <div>
+                <div><center>
                     <?php
                     $form = ActiveForm::begin([
                         'id' => 'login-form',
@@ -48,13 +48,13 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
                     </p>
                     <?= $form->field($model, 'name')->textInput(['required' => true, 'placeholder' => $model->getAttributeLabel('name')]) ?>
                     <?= $form->field($model, 'email')->textInput(['required' => true, 'type' => 'email', 'placeholder' => $model->getAttributeLabel('email')]) ?>
-                    <?= $form->field($model, 'investitionAmount')->dropDownList(MgHelpers::arrayCombineFromOneArray(['',Yii::t('db','to 10 000'), '10 000 - 25 000','25 000 - 50 000',Yii::t('db','over 50 000'),Yii::t('db','over 100 000')])
+                    <?= $form->field($model, 'investitionAmount')->dropDownList(MgHelpers::arrayCombineFromOneArray(['',Yii::t('db','to 10 000'), '10 000 - 25 000 PLN','25 000 - 50 000 PLN',Yii::t('db','over 50 000'),Yii::t('db','over 100 000')])
                         , ['required' => true, 'placeholder' => $model->getAttributeLabel('investitionAmount')]) ?>
 
                     <button class="btn btn--primary btn--block" type="submit">
                         <?= Yii::t('db', 'Send') ?>
                     </button>
-                    <?php ActiveForm::end(); ?>
+                    <?php ActiveForm::end(); ?></center>
                 </div>
             </div>
         </div>
