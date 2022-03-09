@@ -56,6 +56,6 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
 
 <script>
     $('#paysubscriptionform-exchangerate').on('change keyup',(function(){
-      $('#paysubscriptionform-tokensamount').val($(this).val() * $('#paysubscriptionform-subscrriptionfee').val());
+      $('#paysubscriptionform-tokensamount').val((1 / $(this).val()) * $('#paysubscriptionform-subscrriptionfee').val());
     })) ;
 </script>
