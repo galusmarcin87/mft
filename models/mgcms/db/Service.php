@@ -13,7 +13,7 @@ use yii\helpers\Html;
  *
  * @property integer $id
  * @property string $name
- * @property double $price
+ * @property string $price
  * @property string $description
  * @property string $specification
  * @property integer $company_id
@@ -35,10 +35,9 @@ class Service extends \app\models\mgcms\db\AbstractRecord
     {
         return [
             [['name', 'company_id', 'price'], 'required'],
-            [['price'], 'number'],
             [['description', 'specification'], 'string'],
             [['company_id'], 'integer'],
-            [['name'], 'string', 'max' => 245],
+            [['name','price'], 'string', 'max' => 245],
         ];
     }
 
