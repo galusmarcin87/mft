@@ -1,5 +1,5 @@
 <?
-/* @var $model app\models\mgcms\db\Product */
+/* @var $model app\models\mgcms\db\Service */
 
 use yii\web\View;
 $model->language = Yii::$app->language;
@@ -11,7 +11,7 @@ $model->language = Yii::$app->language;
 >
     <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
         <img
-                class="company__logo company__logo--full"
+                class="company__logo"
                 src="<?= $model->company->thumbnail->getImageSrc(250, 178, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET) ?>"
                 alt=""
         />
@@ -21,11 +21,11 @@ $model->language = Yii::$app->language;
             <div class="company__name">
                 <?= $model->name ?>
             </div>
-            <?= $model->specification ?>
+            <?= $model->description ?>
         </div>
     </div>
     <div class="company__offer">
         <span> <?= Yii::t('db', 'Price') ?>: </span>
-        <div><?= $model->price ?></div>
+        <div><?= $model->price ?> PLN</div>
     </div>
 </a>

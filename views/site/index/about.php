@@ -42,7 +42,7 @@ use yii\web\View;
                 <div class="about__image">
                     <div>
                         <img src="<?= MgHelpers::getSetting('home page - about us - photo url',false,'/img/Depositphotos_307530416_xl-2015.jpg')?>" />
-                        <a class="about__video-icon popup-video" href="<?= MgHelpers::getSetting('home page - about us - yt video url',false,'https://youtu.be/RPBMeeVkG2I')?>"><img src="/svg/play.svg" alt="" />
+                        <a class="about__video-icon popup-video" href="<?= MgHelpers::getSetting('home page - about us - yt video url',false,'https://youtu.be/dUVcyWz4Kok')?>"><img src="/svg/play.svg" alt="" />
                         </a>
                     </div>
                 </div>

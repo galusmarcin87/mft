@@ -30,7 +30,7 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Dla Inwestorów
+                                Zainwestuj
                             </div>
                         </a>
                         <a href="/product/index?specialOffer=1">
@@ -62,8 +62,8 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Zostań <br />
-                                Konsultantem
+                                Program <br />
+                                Partnerski
                             </div>
                         </a>
                     </div>
@@ -91,7 +91,7 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Dla Inwestorów
+                                Zainwestuj
                             </div>
                         </a>
                         <a href="/product/index?specialOffer=1">
@@ -123,8 +123,8 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Zostań <br />
-                                Konsultantem
+                                Program <br />
+                                Partnerski
                             </div>
                         </a>
                     </div>
@@ -152,7 +152,7 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Dla Inwestorów
+                                Zainwestuj
                             </div>
                         </a>
                         <a href="/product/index?specialOffer=1">
@@ -184,8 +184,8 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Zostań <br />
-                                Konsultantem
+                                Program <br />
+                                Partnerski
                             </div>
                         </a>
                     </div>
