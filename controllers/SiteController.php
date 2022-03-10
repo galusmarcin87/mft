@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\BecameConsultantForm;
+use app\models\BecomeConsultantForm;
 use app\models\InvestForm;
 use app\models\LoginCodeForm;
 use FiberPay\FiberIdClient;
@@ -592,6 +594,18 @@ class SiteController extends \app\components\mgcms\MgCmsController
             return $this->refresh();
         }
         return $this->render('informationForInvestors', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionBecomeConsultant()
+    {
+        $model = new BecomeConsultantForm();
+        if ($model->load(Yii::$app->request->post()) && $model->sendEmail()) {
+            \app\components\mgcms\MgHelpers::setFlashSuccess(MgHelpers::getSettingTranslated('become_consultant_mail_notification', 'Thank you for contacting us'));
+            return $this->refresh();
+        }
+        return $this->render('becomeConsultant', [
             'model' => $model
         ]);
     }
