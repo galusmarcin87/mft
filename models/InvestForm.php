@@ -55,7 +55,7 @@ class InvestForm extends Model
                 ->setFrom([$this->email => $this->name])
                 ->setSubject('Informacje dla Inwestorów')
                 ->send();
-            MgHelpers::getSettingTranslated('invest_mail_notification', 'Thank you for contacting us');
+
             return true;
         }
         MgHelpers::setFlashError(Yii::t('app', 'Error during sending contact message, please correct form'));

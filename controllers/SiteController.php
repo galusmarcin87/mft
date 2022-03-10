@@ -588,7 +588,7 @@ class SiteController extends \app\components\mgcms\MgCmsController
     {
         $model = new InvestForm();
         if ($model->load(Yii::$app->request->post()) && $model->sendEmail()) {
-            \app\components\mgcms\MgHelpers::setFlashSuccess(Yii::t('db', 'Forgot Password email has been sent'));
+            \app\components\mgcms\MgHelpers::setFlashSuccess(MgHelpers::getSettingTranslated('invest_mail_notification', 'Thank you for contacting us'));
             return $this->refresh();
         }
         return $this->render('informationForInvestors', [
