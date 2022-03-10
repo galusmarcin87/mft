@@ -104,7 +104,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             </div>
                             <div class="flex">
                                 <?= $form->field($model, 'street')->textInput(['placeholder' => $model->getAttributeLabel('street')]) ?>
-                                <?= $form->field($model, 'phone')->textInput(['placeholder' => $model->getAttributeLabel('address')]) ?>
+                                <?= $form->field($model, 'phone')->textInput(['placeholder' => $model->getAttributeLabel('phone')]) ?>
                             </div>
                             <div class="flex">
                                 <?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email'), 'type' => 'email']) ?>
