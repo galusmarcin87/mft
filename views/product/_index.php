@@ -2,6 +2,8 @@
 /* @var $model app\models\mgcms\db\Product */
 
 use yii\web\View;
+use  yii\helpers\StringHelper;
+
 $model->language = Yii::$app->language;
 ?>
 <a
@@ -21,7 +23,7 @@ $model->language = Yii::$app->language;
             <div class="company__name">
                 <?=$model->name?>
             </div>
-            <?=$model->description?>
+            <?= StringHelper::truncate(strip_tags($model->description),'180') ?>
         </div>
     </div>
     <div class="company__offer">
