@@ -311,7 +311,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
-            $this->back();
+            return $this->back();
         }
         $model = new Service();
         $model->language = $lang;
@@ -337,7 +337,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
-            $this->back();
+            return $this->back();
         }
         $model = new Job();
         $model->language = $lang;
@@ -405,7 +405,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
-            $this->back();
+            return $this->back();
         }
         $model = new Product();
         $model->language = $lang;
@@ -440,7 +440,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
-            $this->back();
+            return $this->back();
         }
         $model = new Agent();
         $model->language = $lang;
