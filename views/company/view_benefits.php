@@ -36,7 +36,7 @@ $model->language = Yii::$app->language;
 <div class="container">
     <div>
         <div class="companies__labels hidden">
-            <div class="label"><?= Yii::t('db', 'Products') ?></div>
+            <div class="label">Produkty</div>
             <div class="label text-right hidden" style="margin-top: -12px">
                 Sortuj wg
                 <div class="select-wrqpper">
@@ -51,8 +51,8 @@ $model->language = Yii::$app->language;
             </div>
         </div>
         <div class="companies companies--wide">
-            <? foreach ($model->products as $product): ?>
-                <?= $this->render('/product/_index', ['model' => $product]) ?>
+            <? foreach ($model->benefits as $benefit): ?>
+                <?= $this->render('/benefit/_index', ['model' => $benefit]) ?>
             <? endforeach ?>
         </div>
     </div>

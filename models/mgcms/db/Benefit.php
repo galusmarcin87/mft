@@ -4,6 +4,7 @@ namespace app\models\mgcms\db;
 
 use Yii;
 use app\components\mgcms\MgHelpers;
+use yii\helpers\Html;
 
 /**
  * This is the base model class for table "benefit".
@@ -73,5 +74,15 @@ class Benefit extends \app\models\mgcms\db\AbstractRecord
     public static function find()
     {
         return new \app\models\mgcms\db\BenefitQuery(get_called_class());
+    }
+
+    public function getLinkUrl()
+    {
+        return \yii\helpers\Url::to(['/benefit/view', 'id' => $this->id, 'name' => $this->name]);
+    }
+
+    public function getLink()
+    {
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/benefit/view', 'id' => $this->id, 'name' => $this->name]));
     }
 }

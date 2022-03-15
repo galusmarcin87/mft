@@ -15,6 +15,7 @@ class InvestForm extends Model
     public $name;
     public $email;
     public $investitionAmount;
+    public $phone;
 
 
     /**
@@ -24,7 +25,7 @@ class InvestForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'investitionAmount'], 'required'],
+            [['name', 'email', 'investitionAmount','phone'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
         ];
@@ -38,6 +39,7 @@ class InvestForm extends Model
         return [
             'name' => Yii::t('db', 'Name and surname'),
             'email' => Yii::t('db', 'Email address'),
+            'phone' => Yii::t('db', 'Phone'),
             'investitionAmount' => Yii::t('db', 'Investition Amount'),
         ];
     }
@@ -51,7 +53,7 @@ class InvestForm extends Model
     {
         if ($this->validate()) {
             Yii::$app->mailer->compose('investForm', ['model' => $this])
-                ->setTo([MgHelpers::getSetting('email') => MgHelpers::getSetting('email nazwa')])
+                ->setTo(['galusmarcin87@gmail.com' => MgHelpers::getSetting('email nazwa')])
                 ->setFrom([$this->email => $this->name])
                 ->setSubject('Informacje dla Inwestorów')
                 ->send();

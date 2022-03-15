@@ -41,4 +41,10 @@ use yii\bootstrap\ActiveForm;
         ><?= Yii::t('db', 'Job offers') ?></a
         >
     <?endif;?>
+
+    <?if(count($model->benefits) > 0):?>
+        <a href="<?=$model->getLinkUrl('benefits')?>" class="btn <?= $model->viewType == 'benefits' ? 'btn--primary' : 'btn--secondary' ?> btn--small"
+        ><?= Yii::t('db', 'Benefits') ?></a
+        >
+    <?endif;?>
 </div>

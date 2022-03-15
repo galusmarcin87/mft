@@ -22,39 +22,41 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
     <div class="container">
         <div class="breadcrumb">
             <a href="/"> meetfaces </a>
-			<span><?= Yii::t('db', 'Information for investors') ?></span>
+            <span><?= Yii::t('db', 'Information for investors') ?></span>
         </div>
-		
+
         <div class="service single-company">
-			<p>
-                <?= MgHelpers::getSetting('dla inwestorow tekst '.Yii::$app->language,true,'dla inwestorow tekst')?>
+            <p>
+                <?= MgHelpers::getSetting('dla inwestorow tekst ' . Yii::$app->language, true, 'dla inwestorow tekst') ?>
             </p>
             <div class="flex">
-                <div><center>
-                    <?php
-                    $form = ActiveForm::begin([
-                        'id' => 'login-form',
-                        'options' => ['class' => 'contact-form login__form'],
-                        'fieldConfig' => $fieldConfig
-                    ]);
+                <div>
+                    <center>
+                        <?php
+                        $form = ActiveForm::begin([
+                            'id' => 'login-form',
+                            'options' => ['class' => 'contact-form login__form'],
+                            'fieldConfig' => $fieldConfig
+                        ]);
 
-                    echo $form->errorSummary($model);
-                    ?>
-                    <div class="contact-form__header">
-                        <?= Yii::t('db', 'Information for investors') ?>
-                    </div>
-                    <p>
-                        <?= Yii::t('db', 'If you would like to invest, leave us information') ?>
-                    </p>
-                    <?= $form->field($model, 'name')->textInput(['required' => true, 'placeholder' => $model->getAttributeLabel('name')]) ?>
-                    <?= $form->field($model, 'email')->textInput(['required' => true, 'type' => 'email', 'placeholder' => $model->getAttributeLabel('email')]) ?>
-                    <?= $form->field($model, 'investitionAmount')->dropDownList(MgHelpers::arrayCombineFromOneArray(['',Yii::t('db','to 10 000'), '10 000 - 25 000 PLN','25 000 - 50 000 PLN',Yii::t('db','over 50 000'),Yii::t('db','over 100 000')])
-                        , ['required' => true, 'placeholder' => $model->getAttributeLabel('investitionAmount')]) ?>
+                        echo $form->errorSummary($model);
+                        ?>
+                        <div class="contact-form__header">
+                            <?= Yii::t('db', 'Information for investors') ?>
+                        </div>
+                        <p>
+                            <?= Yii::t('db', 'If you would like to invest, leave us information') ?>
+                        </p>
+                        <?= $form->field($model, 'name')->textInput(['required' => true, 'placeholder' => $model->getAttributeLabel('name')]) ?>
+                        <?= $form->field($model, 'email')->textInput(['required' => true, 'type' => 'email', 'placeholder' => $model->getAttributeLabel('email')]) ?>
+                        <?= $form->field($model, 'phone')->textInput(['required' => true, 'placeholder' => $model->getAttributeLabel('phone')]) ?>
+                        <?= $form->field($model, 'investitionAmount')->dropDownList(MgHelpers::arrayCombineFromOneArray(['', Yii::t('db', 'to 10 000'), '10 000 - 25 000 PLN', '25 000 - 50 000 PLN', Yii::t('db', 'over 50 000'), Yii::t('db', 'over 100 000')])
+                            , ['required' => true, 'placeholder' => $model->getAttributeLabel('investitionAmount')]) ?>
 
-                    <button class="btn btn--primary btn--block" type="submit">
-                        <?= Yii::t('db', 'Send') ?>
-                    </button>
-                    <?php ActiveForm::end(); ?></center>
+                        <button class="btn btn--primary btn--block" type="submit">
+                            <?= Yii::t('db', 'Send') ?>
+                        </button>
+                        <?php ActiveForm::end(); ?></center>
                 </div>
             </div>
         </div>
