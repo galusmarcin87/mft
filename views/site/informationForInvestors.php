@@ -50,6 +50,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
                         <?= $form->field($model, 'name')->textInput(['required' => true, 'placeholder' => $model->getAttributeLabel('name')]) ?>
                         <?= $form->field($model, 'email')->textInput(['required' => true, 'type' => 'email', 'placeholder' => $model->getAttributeLabel('email')]) ?>
                         <?= $form->field($model, 'phone')->textInput(['required' => true, 'placeholder' => $model->getAttributeLabel('phone')]) ?>
+                        <?= $form->field($model, 'city')->textInput(['required' => true, 'placeholder' => $model->getAttributeLabel('city')]) ?>
                         <?= $form->field($model, 'investitionAmount')->dropDownList(MgHelpers::arrayCombineFromOneArray(['', Yii::t('db', 'to 10 000'), '10 000 - 25 000 PLN', '25 000 - 50 000 PLN', Yii::t('db', 'over 50 000'), Yii::t('db', 'over 100 000')])
                             , ['required' => true, 'placeholder' => $model->getAttributeLabel('investitionAmount')]) ?>
 

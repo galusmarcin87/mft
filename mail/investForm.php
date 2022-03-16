@@ -9,3 +9,4 @@
 <p>E-mail: <?= $model->email ?></p>
 <p>Chcę zainwestować: <?= $model->investitionAmount ?></p>
 <p>Telefon: <?= $model->phone ?></p>
+<p>Miasto: <?= $model->city ?></p>
