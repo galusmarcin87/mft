@@ -23,8 +23,16 @@ use yii\bootstrap\ActiveForm;
                 src="<?= $model->background->getImageSrc() ?>"
                 alt=""
         />
+    <? else: ?>
+        <img class="single-company__image"
+             src="/images/companybg.jpeg"
+             alt=""/>
     <? endif; ?>
     <? if ($model->thumbnail && $model->thumbnail->isImage()): ?>
         <img src="<?= $model->thumbnail->getImageSrc(240, 0) ?>" class="training__logo"/>
+    <? else: ?>
+        <img class="training__logo"
+             src="/images/companylogo.jpg"
+             alt=""/>
     <? endif; ?>
 </div>

@@ -17,6 +17,10 @@ $model->language = Yii::$app->language;
                 src="<?= $model->company->thumbnail->getImageSrc(250, 178, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET) ?>"
                 alt=""
         />
+    <? else: ?>
+        <img class="company__logo"
+             src="/images/companylogo.jpg"
+             alt=""/>
     <? endif; ?>
     <div>
         <div class="company__content">

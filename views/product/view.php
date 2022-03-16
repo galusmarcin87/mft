@@ -3,6 +3,7 @@
 
 use yii\web\View;
 $model->language = Yii::$app->language;
+$imagesCount = 0;
 ?>
 <section class="service-wrapper">
     <div class="container">
@@ -18,13 +19,20 @@ $model->language = Yii::$app->language;
                         <? foreach ($model->fileRelations as $relation): ?>
 
                             <?if ($relation->json == '1' || !$relation->file || !$relation->file->isImage()) continue?>
+                            <? $imagesCount++; ?>
                             <div class="item">
                                 <img src="<?= $relation->file->getImageSrc(765)?>" alt=""/>
-                                <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
+                                <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()):?>
                                     <img src="<?= $model->company->thumbnail->getImageSrc(0, 45) ?>" class="training__logo"/>
                                 <? endif; ?>
                             </div>
                         <? endforeach ?>
+
+                        <?if ($imagesCount == 0):?>
+                            <div class="item">
+                                <img src="/images/companypic.jpg" alt=""/>
+                            </div>
+                        <?endif?>
                     </div>
                 </div>
                 <div>
