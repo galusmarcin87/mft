@@ -25,7 +25,7 @@ use app\components\mgcms\MgHelpers;
 
     <?= $form->field12md($model, 'description')->tinyMce(['rows' => 6]) ?>
 
-
+    <?= $this->render('../common/_imagesForm', ['model' => $model, 'form' => $form]) ?>
 
 
     <div class="form-group col-md-12">

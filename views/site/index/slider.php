@@ -30,7 +30,8 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Zainwestuj
+                                Zainwestuj <br />
+                                w MFT
                             </div>
                         </a>
                         <a href="/product/index?specialOffer=1">
@@ -44,7 +45,7 @@ $index=0;
                                 w promocji
                             </div>
                         </a>
-                        <a href="">
+                        <a href="/company/index?isBenefit=1">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/benefity.svg"
@@ -55,7 +56,7 @@ $index=0;
                                 i Korzyści
                             </div>
                         </a>
-						<a href="">
+						<a href="/site/become-consultant">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/konsultant.svg"
@@ -91,7 +92,8 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Zainwestuj
+                                Zainwestuj <br />
+                                w MFT
                             </div>
                         </a>
                         <a href="/product/index?specialOffer=1">
@@ -116,7 +118,7 @@ $index=0;
                                 i Korzyści
                             </div>
                         </a>
-						<a href="">
+						<a href="/site/become-consultant">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/konsultant.svg"
@@ -152,7 +154,8 @@ $index=0;
                                         class="block-icons__icon"
                                         alt=""
                                 />
-                                Zainwestuj
+                                Zainwestuj <br />
+                                w MFT
                             </div>
                         </a>
                         <a href="/product/index?specialOffer=1">
@@ -177,7 +180,7 @@ $index=0;
                                 i Korzyści
                             </div>
                         </a>
-						<a href="">
+						<a href="/site/become-consultant">
                             <div class="block-icons__block">
                                 <img
                                         src="./svg/konsultant.svg"

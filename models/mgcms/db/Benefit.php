@@ -22,6 +22,7 @@ class Benefit extends \app\models\mgcms\db\AbstractRecord
     use LanguageBehaviorTrait;
 
     public $languageAttributes = ['description','name'];
+    public $downloadFiles;
 
     /**
      * @inheritdoc

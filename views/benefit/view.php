@@ -14,10 +14,18 @@ $model->language = Yii::$app->language;
         <div class="service">
             <div class="training">
                 <div>
-                    <div class="item">
-                        <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
-                            <img src="<?= $model->company->thumbnail->getImageSrc(0, 376) ?>" class="training__logo"/>
-                        <? endif; ?>
+
+                    <div id="SERVICE_SLIDER" class="owl-carousel owl-theme">
+                        <? foreach ($model->fileRelations as $relation): ?>
+
+                            <?if ($relation->json == '1' || !$relation->file || !$relation->file->isImage()) continue?>
+                            <div class="item">
+                                <img src="<?= $relation->file->getImageSrc(765)?>" alt=""/>
+                                <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
+                                    <img src="<?= $model->company->thumbnail->getImageSrc(0, 45) ?>" class="training__logo"/>
+                                <? endif; ?>
+                            </div>
+                        <? endforeach ?>
                     </div>
                 </div>
                 <div>
