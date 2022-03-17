@@ -1,7 +1,7 @@
 <?php
 return [
     'adminEmail' => 'admin@email.com',
-    'roles' => ['admin', 'front', 'agent'],
+    'roles' => ['admin', 'front', 'agent', 'representative'],
     'languages' => ['pl', 'en', 'de', 'fr','zh','it','hi','es'],
     'languagesDisplay' => ['pl', 'en', 'de', 'fr'],
     'icon-framework' => 'bsg',
