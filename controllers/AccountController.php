@@ -63,7 +63,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
      */
     public function actionIndex()
     {
-        $myCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $myCompany = $this->_getMyCompany();
 
 
         return $this->render('index', [
@@ -71,9 +71,20 @@ class AccountController extends \app\components\mgcms\MgCmsController
         ]);
     }
 
+    private function _getMyCompany()
+    {
+        $user = $this->getUserModel();
+        $myCompany = Company::find()->where(['user_id' => $user->id])->one();
+        if(!$myCompany){
+            $myCompany = Company::find()->where(['id' => $user->company_id])->one();
+        }
+
+        return $myCompany;
+    }
+
     public function actionEditCompany($lang = false)
     {
-        $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $model = $this->_getMyCompany();
         if (!$model) {
             $model = new Company();
             $model->user_id = $this->getUserModel()->id;
@@ -130,7 +141,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionProducts()
     {
-        $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $model = $this->_getMyCompany();
         if (!$model) {
             $models = [];
         } else {
@@ -145,7 +156,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionAgents()
     {
-        $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $model = $this->_getMyCompany();
         if (!$model) {
             $models = [];
         } else {
@@ -160,7 +171,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionServices()
     {
-        $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $model = $this->_getMyCompany();
         if (!$model) {
             $models = [];
         } else {
@@ -176,7 +187,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionJobs()
     {
-        $model = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $model = $this->_getMyCompany();
         if (!$model) {
             $models = [];
         } else {
@@ -192,7 +203,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionProductEdit($id, $lang = false)
     {
-        $model = Product::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'product.id' => $id])->one();
+        $myCompany = $this->_getMyCompany();
+        $model = Product::find()->where(['company_id' => $myCompany->id, 'id' => $id])->one();
         if (!$model) {
             $this->throw404();
         }
@@ -223,7 +235,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionAgentEdit($id, $lang = false)
     {
-        $model = Agent::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'agent.id' => $id])->one();
+        $myCompany = $this->_getMyCompany();
+        $model = Agent::find()->where(['company_id' => $myCompany->id, 'id' => $id])->one();
         if (!$model) {
             $this->throw404();
         }
@@ -254,7 +267,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionJobEdit($id, $lang = false)
     {
-        $model = Job::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'job.id' => $id])->one();
+        $myCompany = $this->_getMyCompany();
+        $model = Job::find()->where(['company_id' => $myCompany->id, 'id' => $id])->one();
         if (!$model) {
             $this->throw404();
         }
@@ -285,7 +299,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionServiceEdit($id, $lang = false)
     {
-        $model = Service::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'service.id' => $id])->one();
+        $myCompany = $this->_getMyCompany();
+        $model = Service::find()->where(['company_id' => $myCompany->id, 'id' => $id])->one();
         if (!$model) {
             $this->throw404();
         }
@@ -308,7 +323,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionAddService($lang = false)
     {
-        $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $modelCompany = $this->_getMyCompany();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
             return $this->back();
@@ -334,7 +349,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionAddJob($lang = false)
     {
-        $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $modelCompany = $this->_getMyCompany();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
             return $this->back();
@@ -360,7 +375,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionProductDelete($id)
     {
-        $model = Product::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'product.id' => $id])->one();
+        $myCompany = $this->_getMyCompany();
+        $model = Product::find()->where(['company_id' => $myCompany->id, 'id' => $id])->one();
         if (!$model) {
             $this->throw404();
         }
@@ -370,7 +386,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionAgentDelete($id)
     {
-        $model = Agent::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'agent.id' => $id])->one();
+        $myCompany = $this->_getMyCompany();
+        $model = Agent::find()->where(['company_id' => $myCompany->id, 'id' => $id])->one();
         if (!$model) {
             $this->throw404();
         }
@@ -380,7 +397,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionJobDelete($id)
     {
-        $model = Job::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'job.id' => $id])->one();
+        $myCompany = $this->_getMyCompany();
+        $model = Job::find()->where(['company_id' => $myCompany->id, 'id' => $id])->one();
         if (!$model) {
             $this->throw404();
         }
@@ -390,7 +408,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionServiceDelete($id)
     {
-        $model = Service::find()->joinWith('company')->where(['company.user_id' => $this->getUserModel()->id, 'service.id' => $id])->one();
+        $myCompany = $this->_getMyCompany();
+        $model = Service::find()->where(['company_id' => $myCompany->id, 'id' => $id])->one();
         if (!$model) {
             $this->throw404();
         }
@@ -402,7 +421,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
     public function actionAddProduct($lang = false)
     {
 
-        $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $modelCompany = $this->_getMyCompany();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
             return $this->back();
@@ -437,7 +456,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
     public function actionAddAgent($lang = false)
     {
 
-        $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+        $modelCompany = $this->_getMyCompany();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
             return $this->back();
@@ -499,8 +518,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
         return false;
     }
 
-    function actionPaySubscription(){
-        $modelCompany = Company::find()->where(['user_id' => $this->getUserModel()->id])->one();
+    function actionPaySubscription()
+    {
+        $modelCompany = $this->_getMyCompany();
         if (!$modelCompany) {
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
             $this->back();
@@ -512,7 +532,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         }
 
         $model->subscrriptionFee = $modelCompany->subscription_fee * 0.6;
-        return $this->render('paySubscription',[
+        return $this->render('paySubscription', [
             'model' => $model,
         ]);
     }

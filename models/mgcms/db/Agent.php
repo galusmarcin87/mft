@@ -10,24 +10,26 @@ use yii\helpers\Html;
  * This is the base model class for table "agent".
  *
  * @property integer $id
-     * @property string $full_name
+ * @property string $full_name
  * @property string $position
  * @property string $description
  * @property string $phone
  * @property integer $file_id
+ * @property integer $user_id
  * @property string $email
  * @property string $agentcol
  * @property integer $company_id
  *
  * @property \app\models\mgcms\db\Company $company
  * @property \app\models\mgcms\db\File $file
+ * @property \app\models\mgcms\db\User $user
  */
 class Agent extends \app\models\mgcms\db\AbstractRecord
 {
 
     use LanguageBehaviorTrait;
 
-    public $languageAttributes = ['description','position'];
+    public $languageAttributes = ['description', 'position'];
     public $fileUpload;
 
     /**
@@ -36,10 +38,10 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
     public function rules()
     {
         return [
-            [['full_name', 'position', 'company_id'], 'required'],
+            [['company_id'], 'required'],
             [['fileUpload'], 'safe'],
             [['description'], 'string'],
-            [['file_id', 'company_id'], 'integer'],
+            [['file_id', 'company_id', 'user_id'], 'integer'],
             [['full_name', 'position', 'email'], 'string', 'max' => 245],
             [['phone', 'agentcol'], 'string', 'max' => 45]
         ];
@@ -85,6 +87,14 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
     public function getFile()
     {
         return $this->hasOne(\app\models\mgcms\db\File::className(), ['id' => 'file_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(\app\models\mgcms\db\User::className(), ['id' => 'user_id']);
     }
 
     /**

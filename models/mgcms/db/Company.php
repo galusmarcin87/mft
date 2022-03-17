@@ -67,6 +67,7 @@ use yii\helpers\Html;
  * @property \app\models\mgcms\db\File $background
  * @property \app\models\mgcms\db\User $createdBy
  * @property \app\models\mgcms\db\User $user
+ * @property \app\models\mgcms\db\User[] $users
  * @property \app\models\mgcms\db\Job[] $jobs
  * @property \app\models\mgcms\db\Product[] $products
  * @property \app\models\mgcms\db\Service[] $services

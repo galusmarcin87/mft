@@ -78,7 +78,7 @@ use app\components\mgcms\MgHelpers;
 class User extends BaseUser implements IdentityInterface
 {
 
-    public $modelAttributes = ['facebook', 'twitter', 'linkedin', 'instagram', 'position','companyForSale','agentCode'];
+    public $modelAttributes = ['facebook', 'twitter', 'linkedin', 'instagram', 'position','companyForSale','agentCode', 'company_id'];
 
 
     const ROLE_ADMIN = 'admin';

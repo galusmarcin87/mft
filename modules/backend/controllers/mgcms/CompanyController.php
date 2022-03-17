@@ -4,6 +4,7 @@ namespace app\modules\backend\controllers\mgcms;
 
 use app\models\mgcms\db\File;
 use app\models\mgcms\db\FileRelation;
+use app\models\mgcms\db\User;
 use Yii;
 use app\models\mgcms\db\Company;
 use app\models\mgcms\db\CompanySearch;
@@ -85,7 +86,7 @@ class CompanyController extends MgBackendController
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             $this->_assignDownloadFiles($model);
-            MgHelpers::setFlash('success',Yii::t('db','Saved'));
+            MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -106,12 +107,26 @@ class CompanyController extends MgBackendController
         $model->language = $lang;
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             $this->_assignDownloadFiles($model);
-            MgHelpers::setFlash('success',Yii::t('db','Saved'));
+            $this->_assignAgentsToCompany($model);
+            MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }
+    }
+
+    /**
+     * @param Company $model
+     */
+    private function _assignAgentsToCompany($model)
+    {
+        foreach ($model->agents as $agent) {
+            $user = User::find()->where(['id' => $agent->user_id])->one();
+            $user->company_id = (string)$model->id;
+            $user->save();
+
         }
     }
 
@@ -135,7 +150,8 @@ class CompanyController extends MgBackendController
      * @param integer $id
      * @return mixed
      */
-    public function actionPdf($id) {
+    public function actionPdf($id)
+    {
         $model = $this->findModel($id);
         $providerAgent = new \yii\data\ArrayDataProvider([
             'allModels' => $model->agents,
@@ -187,7 +203,7 @@ class CompanyController extends MgBackendController
     protected function findModel($id)
     {
         if (($model = Company::findOne($id)) !== null) {
-            if(!$this->getUserModel()->isAdmin() && $model->user_id != $this->getUserModel()->id) {
+            if (!$this->getUserModel()->isAdmin() && $model->user_id != $this->getUserModel()->id) {
                 throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
             }
             return $model;
@@ -197,18 +213,18 @@ class CompanyController extends MgBackendController
     }
 
     /**
-    * Action to load a tabular form grid
-    * for Agent
-    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
-    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
-    *
-    * @return mixed
-    */
+     * Action to load a tabular form grid
+     * for Agent
+     * @return mixed
+     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
+     *
+     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
+     */
     public function actionAddAgent()
     {
         if (Yii::$app->request->isAjax) {
             $row = Yii::$app->request->post('Agent');
-            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
+            if ((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
             return $this->renderAjax('_formAgent', ['row' => $row]);
         } else {
@@ -217,18 +233,18 @@ class CompanyController extends MgBackendController
     }
 
     /**
-    * Action to load a tabular form grid
-    * for Benefit
-    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
-    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
-    *
-    * @return mixed
-    */
+     * Action to load a tabular form grid
+     * for Benefit
+     * @return mixed
+     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
+     *
+     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
+     */
     public function actionAddBenefit()
     {
         if (Yii::$app->request->isAjax) {
             $row = Yii::$app->request->post('Benefit');
-            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
+            if ((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
             return $this->renderAjax('_formBenefit', ['row' => $row]);
         } else {
@@ -237,18 +253,18 @@ class CompanyController extends MgBackendController
     }
 
     /**
-    * Action to load a tabular form grid
-    * for Job
-    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
-    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
-    *
-    * @return mixed
-    */
+     * Action to load a tabular form grid
+     * for Job
+     * @return mixed
+     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
+     *
+     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
+     */
     public function actionAddJob()
     {
         if (Yii::$app->request->isAjax) {
             $row = Yii::$app->request->post('Job');
-            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
+            if ((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
             return $this->renderAjax('_formJob', ['row' => $row]);
         } else {
@@ -257,18 +273,18 @@ class CompanyController extends MgBackendController
     }
 
     /**
-    * Action to load a tabular form grid
-    * for Product
-    * @author Yohanes Candrajaya <moo.tensai@gmail.com>
-    * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
-    *
-    * @return mixed
-    */
+     * Action to load a tabular form grid
+     * for Product
+     * @return mixed
+     * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
+     *
+     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
+     */
     public function actionAddProduct()
     {
         if (Yii::$app->request->isAjax) {
             $row = Yii::$app->request->post('Product');
-            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
+            if ((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
             return $this->renderAjax('_formProduct', ['row' => $row]);
         } else {
@@ -279,16 +295,16 @@ class CompanyController extends MgBackendController
     /**
      * Action to load a tabular form grid
      * for Product
-     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
+     * @return mixed
      * @author Jiwantoro Ndaru <jiwanndaru@gmail.com>
      *
-     * @return mixed
+     * @author Yohanes Candrajaya <moo.tensai@gmail.com>
      */
     public function actionAddService()
     {
         if (Yii::$app->request->isAjax) {
             $row = Yii::$app->request->post('Service');
-            if((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
+            if ((Yii::$app->request->post('isNewRecord') && Yii::$app->request->post('_action') == 'load' && empty($row)) || Yii::$app->request->post('_action') == 'add')
                 $row[] = [];
             return $this->renderAjax('_formService', ['row' => $row]);
         } else {
