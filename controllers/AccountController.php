@@ -464,6 +464,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         }
         $model = new User();
         $model->company_id = $modelCompany->id;
+        $model->role = User::ROLE_REPRESENTATIVE;
 
         if ($model->load(Yii::$app->request->post())) {
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
