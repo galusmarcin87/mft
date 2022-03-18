@@ -81,9 +81,10 @@ class UserController extends MgBackendController
    * @param integer $id
    * @return mixed
    */
-  public function actionUpdate($id)
+  public function actionUpdate($id, $lang = false)
   {
     $model = $this->findModel($id);
+    $model->language = $lang;
 
     if ($model->load(Yii::$app->request->post()) && $model->save()) {
       return $this->redirect(['view', 'id' => $model->id]);

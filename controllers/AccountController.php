@@ -240,6 +240,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         if (!$model) {
             $this->throw404();
         }
+        $model = $model->user;
         $model->language = $lang;
 
         if ($model->load(Yii::$app->request->post())) {
@@ -453,7 +454,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         ]);
     }
 
-    public function actionAddAgent($lang = false)
+    public function actionAddAgent()
     {
 
         $modelCompany = $this->_getMyCompany();
@@ -461,8 +462,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
             return $this->back();
         }
-        $model = new Agent();
-        $model->language = $lang;
+        $model = new User();
         $model->company_id = $modelCompany->id;
 
         if ($model->load(Yii::$app->request->post())) {
@@ -473,9 +473,11 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->file_id = $file->id;
             }
 
+            $model->password = uniqid();
             if ($model->save()) {
                 $this->_assignDownloadFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
+                $this->redirect(['index']);
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
             }

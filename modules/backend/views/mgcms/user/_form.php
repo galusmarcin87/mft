@@ -27,6 +27,8 @@ use yii\helpers\Url;
 
     <?= $form->errorSummary($model); ?>
 
+    <?= $this->render('/common/languageBehaviorSwicher', ['model' => $model, 'form' => $form]) ?>
+
     <div class="row">
         <div class="col-md-4">
             <?= $form->field($model, 'username')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('username')]) ?>
@@ -99,6 +101,8 @@ use yii\helpers\Url;
                 'model' => $model,
                 'form' => $form]) ?>
         </div>
+
+        <?= $form->field12md($model, 'description')->tinyMce() ?>
 
 
 

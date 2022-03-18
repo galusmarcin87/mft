@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-/* @var $model \app\models\mgcms\db\Product */
+/* @var $model \app\models\mgcms\db\User */
 
 use app\extensions\mgcms\yii2TinymceWidget\TinyMce;
 use yii\helpers\Html;
@@ -15,6 +15,7 @@ Icon::map($this, Icon::FA);
 
 
 $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
+
 ?>
 <section class="companies-wrapper companies-wrapper--dashboard">
     <div class="container">
@@ -22,27 +23,31 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
             <?= $this->render('_leftMenu') ?>
             <div>
                 <div class="dashboard-wrapper">
-                    <h1 class="text-left"><?= Yii::t('db', 'Edit agent') ?></h1>
-                    <div class="contact-box">
-                        <div class="person person--big display-block">
-                            <div>
-                                <div class="person__role person__role--normal">
-                                    <?= Yii::t('db', 'Content description') ?>
+                    <h1 class="text-left"><?= Yii::t('db', $model->isNewRecord ? 'Add agent' : 'Edit agent') ?></h1>
+                    <? if (!$model->isNewRecord): ?>
+                        <div class="contact-box">
+
+                            <div class="person person--big display-block">
+                                <div>
+                                    <div class="person__role person__role--normal">
+                                        <?= Yii::t('db', 'Content description') ?>
+                                    </div>
+                                    <?= Yii::t('db', 'Choose language') ?>
                                 </div>
-                                <?= Yii::t('db', 'Choose language') ?>
                             </div>
+
+
+                            <?php $form = ActiveForm::begin(['method' => 'get', 'action' => Url::to(['account/agent-edit', 'id' => $this->context->request->getQueryParam('id')]),]); ?>
+                            <select class="select full-width" name="lang" onchange="this.form.submit()">
+                                <? foreach (MgHelpers::getConfigParam('languages') as $lang): ?>
+                                    <option value="<?php echo $lang ?>" <?= $model->language == $lang ? 'selected' : '' ?>><?= $lang ?></option>
+                                <? endforeach ?>
+                            </select>
+                            <?php ActiveForm::end(); ?>
+
+
                         </div>
-
-                        <?php $form = ActiveForm::begin(['method' => 'get', 'action' => Url::to(['account/agent-edit', 'id'=>$model->id]),]); ?>
-                        <select class="select full-width" name="lang" onchange="this.form.submit()">
-                            <? foreach (MgHelpers::getConfigParam('languages') as $lang): ?>
-                                <option value="<?php echo $lang ?>" <?= $model->language == $lang ? 'selected' : '' ?>><?= $lang ?></option>
-                            <? endforeach ?>
-                        </select>
-                        <?php ActiveForm::end(); ?>
-
-
-                    </div>
+                    <? endif; ?>
                     <div class="form-wrapper">
                         <h2><?= Yii::t('db', 'Main information') ?></h2>
                         <?php $form = ActiveForm::begin([
@@ -51,7 +56,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             'fieldConfig' => $fieldConfig
                         ]); ?>
                         <?= $form->errorSummary($model); ?>
-                        <?= $form->field($model, 'full_name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
+                        <?= $form->field($model, 'first_name')->textInput(['placeholder' => $model->getAttributeLabel('first_name')]) ?>
+                        <?= $form->field($model, 'last_name')->textInput(['placeholder' => $model->getAttributeLabel('last_name')]) ?>
 
                         <div class="mb-4 bottom25">
                             <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
@@ -63,7 +69,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         </div>
 
                         <div class="flex">
-                            <?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email')]) ?>
+                            <?= $form->field($model, 'username')->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
                         </div>
 
                         <h2 class="with-label"><?= Yii::t('db', 'Image') ?></h2>

@@ -50,8 +50,8 @@ use yii\bootstrap\ActiveForm;
 
                         <? foreach ($models as $model): ?>
                             <?= $this->render('_listItem', [
-                                'imageSrc' => $model->file && $model->file->isImage() ? $model->file->getImageSrc(70, 0) : false,
-                                'name' => $model->full_name,
+                                'imageSrc' => $model->user->file && $model->user->file->isImage() ? $model->user->file->getImageSrc(70, 0) : false,
+                                'name' => $model->user->first_name.' '.$model->user->last_name,
                                 'id' => $model->id,
                                 'type' => 'agent',
                                 'linkUrl' => $model->linkUrl

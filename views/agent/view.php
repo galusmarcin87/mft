@@ -3,6 +3,8 @@
 
 use yii\web\View;
 $model->language = Yii::$app->language;
+$user = $model->user;
+$user->language = $model->language;
 ?>
 
 <section class="service-wrapper">
@@ -11,11 +13,17 @@ $model->language = Yii::$app->language;
             <div class="training">
                 <div>
 
-                    <div id="SERVICE_SLIDER" class="owl-carousel owl-theme">
-                            <div class="item">
-                                <img src="<?= $model->file->getImageSrc(765)?>" alt=""/>
-                            </div>
-                    </div>
+                    <? if ($user->file && $user->file->isImage()): ?>
+                        <div id="SERVICE_SLIDER" class="owl-carousel owl-theme">
+                                <div class="item">
+                                    <img src="<?= $user->file->getImageSrc(765)?>" alt=""/>
+                                </div>
+                        </div>
+                    <? else: ?>
+                        <img class="single-company__image"
+                             src="/images/companybg.jpeg"
+                             alt=""/>
+                    <? endif; ?>
                 </div>
                 <div>
                     <div class="training__badge"><?= Yii::t('db', 'Agent') ?></div>
@@ -48,16 +56,16 @@ $model->language = Yii::$app->language;
                         <i class="fa fa-star rating__star" aria-hidden="true"></i>
                         <span class="rating__rate">(6,0)</span>
                     </div>
-                    <h1><?= $model->full_name ?></h1>
+                    <h1><?= $user->first_name ?> <?= $user->last_name ?></h1>
                     <div class="hr"></div>
                     <div class="label"><?= Yii::t('db', 'Position') ?>:</div>
-                    <?= $model->position ?>
+                    <?= $user->position ?>
                     <div class="hr"></div>
                     <div class="label"><?= Yii::t('db', 'Phone') ?>:</div>
-                    <?= $model->phone ?>
+                    <?= $user->phone ?>
                     <div class="hr"></div>
                     <div class="label"><?= Yii::t('db', 'Email') ?>:</div>
-                    <?= $model->email ?>
+                    <?= $user->email ?>
                     <div class="hr"></div>
 
                 </div>
@@ -65,7 +73,7 @@ $model->language = Yii::$app->language;
             <div class="service__content">
 
                 <h3><?= Yii::t('db', 'Description') ?></h3>
-                <?=$model->description?>
+                <?= $user->description?>
             </div>
         </div>
     </div>
