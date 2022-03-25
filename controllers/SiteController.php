@@ -289,7 +289,7 @@ class SiteController extends \app\components\mgcms\MgCmsController
 
         if ($loginCodeForm->load(Yii::$app->request->post())) {
             if ($loginCodeForm->verifyCode() && $loginCodeForm->login()) {
-                return $this->goHome();
+                return $this->redirect('/account/index');
             } else {
                 return $this->render('loginCode', [
                     'model' => $model,
