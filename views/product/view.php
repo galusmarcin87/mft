@@ -2,6 +2,7 @@
 /* @var $model app\models\mgcms\db\Product */
 
 use yii\web\View;
+
 $model->language = Yii::$app->language;
 $imagesCount = 0;
 ?>
@@ -18,21 +19,22 @@ $imagesCount = 0;
                     <div id="SERVICE_SLIDER" class="owl-carousel owl-theme">
                         <? foreach ($model->fileRelations as $relation): ?>
 
-                            <?if ($relation->json == '1' || !$relation->file || !$relation->file->isImage()) continue?>
+                            <? if ($relation->json == '1' || !$relation->file || !$relation->file->isImage()) continue ?>
                             <? $imagesCount++; ?>
                             <div class="item">
-                                <img src="<?= $relation->file->getImageSrc(765)?>" alt=""/>
-                                <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()):?>
-                                    <img src="<?= $model->company->thumbnail->getImageSrc(0, 45) ?>" class="training__logo"/>
+                                <img src="<?= $relation->file->getImageSrc(765) ?>" alt=""/>
+                                <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
+                                    <img src="<?= $model->company->thumbnail->getImageSrc(0, 45) ?>"
+                                         class="training__logo"/>
                                 <? endif; ?>
                             </div>
                         <? endforeach ?>
 
-                        <?if ($imagesCount == 0):?>
+                        <? if ($imagesCount == 0): ?>
                             <div class="item">
                                 <img src="/images/companypic.jpg" alt=""/>
                             </div>
-                        <?endif?>
+                        <? endif ?>
                     </div>
                 </div>
                 <div>
@@ -100,13 +102,16 @@ $imagesCount = 0;
             </div>
             <div class="service__content">
                 <? if ($model->company->agents): ?>
-                    <? foreach ($model->company->agents as $agent): ?>
+                    <? foreach ($model->company->agents as $agent):
+                        if (!$agent->user) {
+                            continue;
+                        } ?>
                         <div class="contact-box">
                             <div class="person person--big">
                                 <div>
                                     <img
                                             class="person__avatar person__avatar--small"
-                                            src="/img/person.png"
+                                            src="<?= $agent->user->file && $agent->user->file->isImage() ? $agent->user->file->getImageSrc(70, 70) : '/img/person.png' ?>"
                                             alt=""
                                     />
                                 </div>
@@ -117,30 +122,30 @@ $imagesCount = 0;
 
                                 </div>
                             </div>
-                            <a href="tel:<?= $agent->phone ?>" class="btn btn--primary"><?= $agent->phone ?></a>
-                            <a href="mailto:<?= $agent->email ?>" class="btn btn--primary"
-                            ><?= $agent->email ?></a
+                            <a href="tel:<?= $agent->user->phone ?>" class="btn btn--primary"><?= $agent->user->phone ?></a>
+                            <a href="mailto:<?= $agent->user->email ? $agent->user->email : $agent->user->username ?>" class="btn btn--primary"
+                            ><?= $agent->user->email ? $agent->user->email : $agent->user->username ?></a
                             >
                         </div>
                     <? endforeach ?>
                 <? endif ?>
 
                 <h3><?= Yii::t('db', 'Product description') ?></h3>
-                <?=$model->description?>
+                <?= $model->description ?>
                 <h3><?= Yii::t('db', 'Specification') ?></h3>
-                <?=$model->specification?>
+                <?= $model->specification ?>
                 <div class="flex">
-                    <?if(count($model->fileRelations)):?>
-                    <div>
-                        <h3><?= Yii::t('db', 'Multimedia') ?></h3>
-                        <? foreach ($model->fileRelations as $relation): ?>
-                            <?if ($relation->json != '1' || !$relation->file) continue?>
-                            <a href="<?= $relation->file->getLinkUrl() ?>" class="btn btn--primary btn--small">
-                                <?= $relation->file->origin_name?>
-                            </a>
-                        <? endforeach ?>
-                    </div>
-                    <?endif?>
+                    <? if (count($model->fileRelations)): ?>
+                        <div>
+                            <h3><?= Yii::t('db', 'Multimedia') ?></h3>
+                            <? foreach ($model->fileRelations as $relation): ?>
+                                <? if ($relation->json != '1' || !$relation->file) continue ?>
+                                <a href="<?= $relation->file->getLinkUrl() ?>" class="btn btn--primary btn--small">
+                                    <?= $relation->file->origin_name ?>
+                                </a>
+                            <? endforeach ?>
+                        </div>
+                    <? endif ?>
                     <div class="hidden">
                         <h3>Udostpnij</h3>
                         <div class="social-icons social-icons--color">
