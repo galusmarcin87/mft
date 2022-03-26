@@ -30,22 +30,22 @@ class SearchController extends \app\components\mgcms\MgCmsController
 
     public function actionIndex($q = '')
     {
-        $companyQuery = Company::find()->where(['or',['like','name',$q]])->andWhere(['status'=>Company::STATUS_CONFIRMED]);
+        $companyQuery = Company::find()->where(['or', ['like', 'name', $q], ['like', 'description', $q]])->andWhere(['status' => Company::STATUS_CONFIRMED]);
         $companyDataProvider = new ActiveDataProvider([
             'query' => $companyQuery,
         ]);
 
-        $productQuery = Product::find()->where(['or',['like','name',$q]]);
+        $productQuery = Product::find()->where(['or', ['like', 'name', $q], ['like', 'description', $q]]);
         $productDataProvider = new ActiveDataProvider([
             'query' => $productQuery,
         ]);
 
-        $serviceQuery = Service::find()->where(['or',['like','name',$q]]);
+        $serviceQuery = Service::find()->where(['or', ['like', 'name', $q], ['like', 'description', $q]]);
         $serviceDataProvider = new ActiveDataProvider([
             'query' => $serviceQuery,
         ]);
 
-        $jobQuery = Job::find()->where(['or',['like','name',$q]]);
+        $jobQuery = Job::find()->where(['or', ['like', 'name', $q], ['like', 'info', $q]]);
         $jobDataProvider = new ActiveDataProvider([
             'query' => $jobQuery,
         ]);
