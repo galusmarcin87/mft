@@ -38,6 +38,9 @@ class CompanyController extends MgBackendController
     public function actionIndex()
     {
         $searchModel = new CompanySearch();
+        if(!MgHelpers::isAdmin()){
+            $searchModel->created_by = $this->getUserModel()->id;
+        }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
