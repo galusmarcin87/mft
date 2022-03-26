@@ -27,11 +27,11 @@ class CompanyController extends \app\components\mgcms\MgCmsController
 
     public function actionIndex($is_for_sale = null, $category_id = null, $isBenefit = false)
     {
-        $query = Company::find()->andWhere(['status'=>Company::STATUS_CONFIRMED]);
-        if($is_for_sale){
+        $query = Company::find()->andWhere(['status' => Company::STATUS_CONFIRMED]);
+        if ($is_for_sale) {
             $query->andWhere(['is_for_sale' => 1]);
         }
-        if($category_id){
+        if ($category_id) {
             $query->andWhere(['category_id' => $category_id]);
         }
 
@@ -52,14 +52,16 @@ class CompanyController extends \app\components\mgcms\MgCmsController
      */
     public function actionView($name, $type = 'data')
     {
+
+        $name = str_replace('___', '/', $name);
         $model = Company::find()->where(['name' => $name])->one();
         if (!$model) {
             throw new \yii\web\HttpException(404, Yii::t('app', 'Not found'));
         }
 
-        $model->viewType =  $type;
+        $model->viewType = $type;
 
-        return $this->render('view_'.$type, ['model' => $model]);
+        return $this->render('view_' . $type, ['model' => $model]);
     }
 
     public function actionBuy($id)
@@ -79,8 +81,6 @@ class CompanyController extends \app\components\mgcms\MgCmsController
             MgHelpers::setFlash(MgHelpers::FLASH_TYPE_WARNING, Yii::t('db', 'You need to verify by Fiber ID, to do so go to <a href="' . Url::to('site/verify-fiber-id')) . '">Verify</a>');
             return $this->redirect(['site/account']);
         }
-
-
 
 
         $project = Project::find()
@@ -134,7 +134,7 @@ class CompanyController extends \app\components\mgcms\MgCmsController
 
             $item = $fiberClient->addCollectItem(
                 $project->fiber_collect_id,
-                $project->pay_description . ' od '. ($user->first_name . ' ' . $user->last_name),
+                $project->pay_description . ' od ' . ($user->first_name . ' ' . $user->last_name),
                 $payment->amount,
                 'PLN',
                 Url::to(['project/notify', 'hash' => $hash], true),
@@ -142,7 +142,6 @@ class CompanyController extends \app\components\mgcms\MgCmsController
                 Url::to(['site/account'], true)
             );
             $itemObj = Json::decode($item);
-
 
 
             $this->redirect($itemObj['data']['redirect']);

@@ -76,8 +76,8 @@ class Company extends \app\models\mgcms\db\AbstractRecord
 {
     use LanguageBehaviorTrait;
 
-    public $languageAttributes = ['description', 'sale_description', 'sale_title', 'sale_price_includes', 'sale_reason','city'];
-    public $modelAttributes = ['video','video_thumbnail'];
+    public $languageAttributes = ['description', 'sale_description', 'sale_title', 'sale_price_includes', 'sale_reason', 'city'];
+    public $modelAttributes = ['video', 'video_thumbnail'];
 
     public $downloadFiles;
     public $viewType;
@@ -97,10 +97,10 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return [
             [['name', 'description', 'first_name', 'surname', 'country', 'city', 'postcode', 'street', 'phone', 'email', 'nip', 'regon', 'category_id', 'user_id', 'background_id'], 'required'],
-            [['description', 'sale_description', 'sale_price_includes', 'sale_reason','sale_form_of_business'], 'string'],
+            [['description', 'sale_description', 'sale_price_includes', 'sale_reason', 'sale_form_of_business'], 'string'],
             [['gps_lat', 'gps_long', 'subscription_fee', 'sale_price', 'sale_last_year_income', 'institution_invoice_amount'], 'number'],
             [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number'], 'integer'],
-            [['created_on', 'paid_from', 'paid_to','video','video_thumbnail','backgroundFile', 'thumbnailFile'], 'safe'],
+            [['created_on', 'paid_from', 'paid_to', 'video', 'video_thumbnail', 'backgroundFile', 'thumbnailFile'], 'safe'],
             [['name', 'first_name', 'surname', 'email', 'www', 'sale_title', 'sale_business_range', 'sale_sale_range'], 'string', 'max' => 245],
             [['is_promoted', 'is_for_sale', 'is_institution', 'is_benefit'], 'integer', 'max' => 1],
             [['status', 'country', 'city', 'postcode', 'street', 'banc_account_no', 'companycol', 'payment_status', 'sale_company_profile', 'institution_agent_prefix', 'companycol1'], 'string', 'max' => 45],
@@ -264,18 +264,18 @@ class Company extends \app\models\mgcms\db\AbstractRecord
 
     public function getLinkUrl($type = 'info')
     {
-        return \yii\helpers\Url::to(['/company/view', 'name' => $this->name, 'type' => $type]);
+        return \yii\helpers\Url::to(['/company/view', 'name' => str_replace('/', '___', $this->name), 'id' => $this->id, 'type' => $type]);
     }
 
     public function getLink()
     {
-        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/company/view', 'name' => $this->name]));
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/company/view', 'name' => str_replace('/', '___', $this->name), 'id' => $this->id]));
     }
 
     public function beforeSave($insert)
     {
-            $currentUser = MgHelpers::getUserModel();
-        if(!$currentUser->isAdmin()){
+        $currentUser = MgHelpers::getUserModel();
+        if (!$currentUser->isAdmin()) {
             $this->user_id = $currentUser->id;
         }
 
