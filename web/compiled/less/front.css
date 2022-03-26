@@ -50,3 +50,6 @@
   -webkit-filter: drop-shadow(0.766px 0.643px 0.5px rgba(66, 44, 183, 0.3));
   filter: drop-shadow(0.766px 0.643px 0.5px rgba(66, 44, 183, 0.3));
 }
+.menu__logo {
+  max-width: 75%;
+}
