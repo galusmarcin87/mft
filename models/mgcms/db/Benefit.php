@@ -31,8 +31,7 @@ class Benefit extends \app\models\mgcms\db\AbstractRecord
     {
         return [
             [['name', 'price', 'company_id'], 'required'],
-            [['description'], 'string'],
-            [['price'], 'number'],
+            [['description','price'], 'string'],
             [['company_id'], 'integer'],
             [['name'], 'string', 'max' => 45]
         ];
