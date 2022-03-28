@@ -35,20 +35,21 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
                     <div class="hr"></div>
                     <h3 class="highlighted">
                         <img src="/svg/atuty.svg" alt=""/>
-                        Zalety posiadania konta:
+                        Przenieś swoją firmę w świat Internetu i zdobądź nowe możliwości!
                     </h3>
                     <ul class="list">
                         <li></li>
-                        <li>
-                            lorem ipsum dolor sit amet, consectetur adipisicing elit
-                        </li>
-                        <li>
-                            sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua
-                        </li>
-                        <li>ut enim ad minim veniam, quis nostrud exercitation</li>
-                        <li>lamco laboris nisi ut aliquip ex ea commodo consequat</li>
-                    </ul>
+                        <li>Szukasz nowych klientów?</li>
+                        <li>Chcesz, żeby Twoja firma była zauważona przez innych przedsiębiorców?</li>
+                        <li>Szukasz dodatkowej reklamy?</li>
+                        <li>Chcesz się wyróżnić i wyprzedzić konkurencję?</li>
+						<li>Szukasz sposobu na optymalizację kosztów prowadzenia firmy?</li>
+						<li>Chcesz nawiązać nowe relacje biznesowe?</li>
+						<li>Chcesz poszerzyć swoją wiedzę w zakresie prowadzenia firmy?</li>
+                    </ul><br>
+					<h4 class="highlighted">
+                        Jeśli tak, to prezentowana Platforma biznesowa Meetfaces Trading jest właśnie dla Ciebie i Twojej firmy!
+                    </h4>
                     <div class="hr"></div>
                     <h3>Nie masz jeszcze konta?</h3>
                     <a href="<?= \yii\helpers\Url::to('/site/register') ?>" class="btn btn--secondary"
