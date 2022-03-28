@@ -119,7 +119,7 @@ $imagesCount = 0;
                                     <div class="person__role person__role--normal">
                                         <?= Yii::t('db', 'Contact agent') ?>
                                     </div>
-
+                                    <?= $agent->user ?>
                                 </div>
                             </div>
                             <a href="tel:<?= $agent->user->phone ?>" class="btn btn--primary"><?= $agent->user->phone ?></a>

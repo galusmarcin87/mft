@@ -100,13 +100,16 @@ $imagesCount = 0;
             </div>
             <div class="service__content">
                 <? if ($model->company->agents): ?>
-                    <? foreach ($model->company->agents as $agent): ?>
+                    <? foreach ($model->company->agents as $agent):
+                        if (!$agent->user) {
+                            continue;
+                        } ?>
                         <div class="contact-box">
                             <div class="person person--big">
                                 <div>
                                     <img
                                             class="person__avatar person__avatar--small"
-                                            src="/img/person.png"
+                                            src="<?= $agent->user->file && $agent->user->file->isImage() ? $agent->user->file->getImageSrc(70, 70) : '/img/person.png' ?>"
                                             alt=""
                                     />
                                 </div>
@@ -114,12 +117,12 @@ $imagesCount = 0;
                                     <div class="person__role person__role--normal">
                                         <?= Yii::t('db', 'Contact agent') ?>
                                     </div>
-
+                                    <?= $agent->user ?>
                                 </div>
                             </div>
-                            <a href="tel:<?= $agent->phone ?>" class="btn btn--primary"><?= $agent->phone ?></a>
-                            <a href="mailto:<?= $agent->email ?>" class="btn btn--primary"
-                            ><?= $agent->email ?></a
+                            <a href="tel:<?= $agent->user->phone ?>" class="btn btn--primary"><?= $agent->user->phone ?></a>
+                            <a href="mailto:<?= $agent->user->email ? $agent->user->email : $agent->user->username ?>" class="btn btn--primary"
+                            ><?= $agent->user->email ? $agent->user->email : $agent->user->username ?></a
                             >
                         </div>
                     <? endforeach ?>
