@@ -9,15 +9,15 @@ class ComposerStaticInit6544a2bb20c292eaf871f47c7e1b1f50
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
-        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
@@ -113,8 +113,6 @@ class ComposerStaticInit6544a2bb20c292eaf871f47c7e1b1f50
             'kartik\\date\\' => 12,
             'kartik\\color\\' => 13,
             'kartik\\builder\\' => 15,
-            'kartik\\bs5dropdown\\' => 19,
-            'kartik\\bs4dropdown\\' => 19,
             'kartik\\base\\' => 12,
             'kartik\\alert\\' => 13,
             'kartik\\affix\\' => 13,
@@ -191,6 +189,7 @@ class ComposerStaticInit6544a2bb20c292eaf871f47c7e1b1f50
         'I' => 
         array (
             'Intervention\\HttpAuth\\' => 22,
+            'Imagine\\' => 8,
         ),
         'G' => 
         array (
@@ -228,7 +227,7 @@ class ComposerStaticInit6544a2bb20c292eaf871f47c7e1b1f50
         ),
         'yii\\imagine\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-imagine',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-imagine/src',
         ),
         'yii\\httpclient\\' => 
         array (
@@ -465,14 +464,6 @@ class ComposerStaticInit6544a2bb20c292eaf871f47c7e1b1f50
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-builder/src',
         ),
-        'kartik\\bs5dropdown\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/kartik-v/yii2-bootstrap5-dropdown/src',
-        ),
-        'kartik\\bs4dropdown\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/kartik-v/yii2-bootstrap4-dropdown/src',
-        ),
         'kartik\\base\\' => 
         array (
             0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base/src',
@@ -646,6 +637,10 @@ class ComposerStaticInit6544a2bb20c292eaf871f47c7e1b1f50
         array (
             0 => __DIR__ . '/..' . '/intervention/httpauth/src',
         ),
+        'Imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/imagine/imagine/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -728,13 +723,6 @@ class ComposerStaticInit6544a2bb20c292eaf871f47c7e1b1f50
             'JSMin\\' => 
             array (
                 0 => __DIR__ . '/..' . '/mrclay/jsmin-php/src',
-            ),
-        ),
-        'I' => 
-        array (
-            'Imagine' => 
-            array (
-                0 => __DIR__ . '/..' . '/imagine/imagine/lib',
             ),
         ),
         'H' => 
@@ -1323,6 +1311,7 @@ class ComposerStaticInit6544a2bb20c292eaf871f47c7e1b1f50
         'PharIo\\Version\\VersionConstraintParser' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintParser.php',
         'PharIo\\Version\\VersionConstraintValue' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintValue.php',
         'PharIo\\Version\\VersionNumber' => __DIR__ . '/..' . '/phar-io/version/src/VersionNumber.php',
+        'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'SassBoolean' => __DIR__ . '/..' . '/richthegeek/phpsass/script/literals/SassBoolean.php',
         'SassBooleanException' => __DIR__ . '/..' . '/richthegeek/phpsass/script/literals/SassLiteralExceptions.php',
         'SassColour' => __DIR__ . '/..' . '/richthegeek/phpsass/script/literals/SassColour.php',
