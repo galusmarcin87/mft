@@ -10,40 +10,40 @@ use yii\web\View;
 
 <section class="about-wrapper">
     <div class="container">
-        <h1>Czym jest Metfaces Trading?</h1>
+        <h1>Czym jest Meetfaces Trading?</h1>
         <div class="about">
             <div class="about__content">
                 <div>
                     <h2>
-                        Metfaces Trading to innowacyjna Platforma biznesowa dedykowana
-                        firmom, umożliwiająca:
+                        Meetfaces Trading to innowacyjna Platforma biznesowa dedykowana
+                        małym i średnim firmom, umożliwiająca:
                     </h2>
                     <ul class="about__list">
                         <li class="about__list__item">
-                            Dostp do dodatkowej reklamy poprzez zamieszczanie edytowalnej
-                            oferty Twojej Firmy
+                            dostęp do dodatkowej reklamy poprzez zamieszczenie edytowalnej oferty Twojej firmy
                         </li>
                         <li class="about__list__item">
-                            Nieograniczoną możliwość aktualizacji oferty poprzez dodawanie
-                            zdjec, filmów reklamowych, plików z danymi tekstowymi
+                            nieograniczoną możliwość aktualizacji oferty poprzez dodawanie zdjęć, filmów reklamowych, plików z danymi tekstowymi
                         </li>
                         <li class="about__list__item">
-                            Nawiązanie nowych relacji biznesowych poprzez uzyskanie dostpu
-                            do katalogu firm, będących Użytkownikami Platformy w podziale na
-                            branże, towary, usługi, dostawców i odbiorców
+                            pozycjonowanie i reklamowanie produktów oraz usług Twojej firmy
                         </li>
                         <li class="about__list__item">
-                            Korzystanie ze spotkań biznesowych oraz szkoleń organizowanych
-                            przez firmy występujące na Platformie oraz ekspertów
-                            zaproszonych przez Meetface S.A.
+                            nawiązanie nowych relacji biznesowych poprzez uzyskanie dostępu do katalogu firm będących Użytkownikami Platformy w podziale na: branże, towary, usługi, dostawców i odbiorców zamieszczanie ogłoszeń o pracę, dowolnej ilości w ciągu roku, edytowalne w każdym dowolnym momencie przez Ciebie
+                        </li>
+						<li class="about__list__item">
+                            benefity – możliwości skorzystania z benefitów dla firm
+                        </li>
+						<li class="about__list__item">
+                            korzystanie ze spotkań biznesowych oraz szkoleń online organizowanych przez firmy występujące na Platformie oraz ekspertów zaproszonych przez Meetface S.A.
                         </li>
                     </ul>
                 </div>
                 <div class="about__image">
                     <div>
-                        <img src="<?= MgHelpers::getSetting('home page - about us - photo url',false,'/img/Depositphotos_307530416_xl-2015.jpg')?>" />
-                        <a class="about__video-icon popup-video" href="<?= MgHelpers::getSetting('home page - about us - yt video url',false,'https://youtu.be/dUVcyWz4Kok')?>"><img src="/svg/play.svg" alt="" />
-                        </a>
+                        <iframe width="600" height="350" src="https://www.youtube.com/embed/dUVcyWz4Kok" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br><br></div>
+					<div>
+						<iframe width="600" height="350" src="https://www.youtube.com/embed/RPBMeeVkG2I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
