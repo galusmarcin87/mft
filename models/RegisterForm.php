@@ -98,6 +98,7 @@ class RegisterForm extends Model
                 'model' => $user
             ])
                 ->setTo([$user->username,MgHelpers::getSetting('owner email',false,'Tomasz.kopacz@meetfacestrading.com')])
+                ->attach(Yii::getAlias('@webroot').'/files/abonament_mft.pdf')
                 ->setFrom([MgHelpers::getSetting('email from') => MgHelpers::getSetting('email from name')])
                 ->setSubject(MgHelpers::getSettingTranslated('register_activation_email_subject', 'Noble Platform - activation'));
             $sent = $mailer->send();
