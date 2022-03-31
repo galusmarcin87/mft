@@ -36,6 +36,7 @@ class CompanyController extends \app\components\mgcms\MgCmsController
         }
 
         $query->andWhere(['is_benefit' => $isBenefit]);
+        $query->orderBy('is_promoted DESC');
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
