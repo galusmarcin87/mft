@@ -22,9 +22,9 @@ $imagesCount = 0;
                             <? if ($relation->json == '1' || !$relation->file || !$relation->file->isImage()) continue ?>
                             <? $imagesCount++; ?>
                             <div class="item">
-                                <img src="<?= $relation->file->getImageSrc(765) ?>" alt=""/>
+                                <img src="<?= $relation->file->getImageSrc(685   ) ?>" alt=""/>
                                 <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
-                                    <img src="<?= $model->company->thumbnail->getImageSrc(0, 45) ?>"
+                                    <img src="<?= $model->company->thumbnail->getImageSrc(200, 0) ?>"
                                          class="training__logo"/>
                                 <? endif; ?>
                             </div>
