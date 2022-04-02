@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\mgcms\db\Company;
+use app\models\mgcms\db\Service;
 use app\models\mgcms\db\User;
 use app\models\SubscribeForm;
 use Yii;
@@ -25,11 +27,15 @@ use yii\validators\EmailValidator;
 class JobController extends \app\components\mgcms\MgCmsController
 {
 
-    public function actionIndex($category = null)
+    public function actionIndex($industry = null)
     {
 
+        $query = Job::find()->joinWith('company')->andWhere(['company.status' => Company::STATUS_CONFIRMED]);
+        if ($industry) {
+            $query->andWhere(['industry' => $industry]);
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => Job::find(),
+            'query' => $query,
         ]);
 
         return $this->render('index', [

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\mgcms\db\Company;
 use app\models\mgcms\db\User;
 use app\models\SubscribeForm;
 use Yii;
@@ -25,11 +26,14 @@ use yii\validators\EmailValidator;
 class ServiceController extends \app\components\mgcms\MgCmsController
 {
 
-    public function actionIndex()
+    public function actionIndex($category_id = null)
     {
-
+        $query = Service::find()->joinWith('company')->andWhere(['company.status' => Company::STATUS_CONFIRMED]);
+        if ($category_id) {
+            $query->andWhere(['company.category_id' => $category_id]);
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => Service::find(),
+            'query' => $query,
         ]);
 
         return $this->render('index', [
