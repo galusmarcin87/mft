@@ -531,7 +531,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         $model = new PaySubscriptionForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $this->redirect("https://trade.kanga.exchange/tpg/payment/Gj37cn1bep0lmfMixMnwgJkSSMlK13?currency=MFT&amount=$model->tokensAmount&transactionKey=$modelCompany->id&name=Meetfaces%20Trading%20-%20zakup%20tokena");
+            $this->redirect("https://trade.kanga.exchange/tpg/payment/PAxD8ZmDtKgcDVvpqlqWvxLCNDoDwp?currency=MFT&amount=$model->tokensAmount&transactionKey=$modelCompany->id&name=Meetfaces%20Trading%20-%20zakup%20tokena");
         }
 
         $model->subscrriptionFee = $modelCompany->subscription_fee * 0.6;

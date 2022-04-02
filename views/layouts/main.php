@@ -33,6 +33,16 @@ FrontAsset::register($this);
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D6XBPWFD0Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D6XBPWFD0Q');
+</script>
+
     </head>
     <body id="page_<?= Yii::$app->controller->id . '_' . Yii::$app->controller->action->id ?>">
         <?php $this->beginBody() ?>
