@@ -65,7 +65,7 @@ $user->language = $model->language;
                     <?= $user->phone ?>
                     <div class="hr"></div>
                     <div class="label"><?= Yii::t('db', 'Email') ?>:</div>
-                    <?= $user->email ?>
+                    <?= $user->username ?>
                     <div class="hr"></div>
 
                 </div>
