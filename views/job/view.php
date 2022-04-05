@@ -20,10 +20,14 @@ $model->language = Yii::$app->language;
                             class="single-company__image"
                             src="<?= $model->file->getImageSrc(1530) ?>"
                             alt=""
-                    />
-                <? endif ?>
+                    />		
+				<? else: ?>
+             <img class="single-company__image"
+             src="/images/companybg.jpeg"
+             alt=""/>
+				<? endif ?>
                 <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
-                    <img src="<?= $model->company->thumbnail->getImageSrc(0, 45) ?>" class="training__logo"/>
+                    <img src="<?= $model->company->thumbnail->getImageSrc(300, 0) ?>" class="training__logo"/>
                 <? endif ?>
 
 
