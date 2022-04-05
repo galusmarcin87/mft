@@ -27,9 +27,9 @@ $model->language = Yii::$app->language;
                 <?= $this->render('view/_buttons',['model'=>$model])?>
 
                 <h3><?= Yii::t('db', 'General information') ?></h3>
-                <p>
+                <div class="description">
                     <?=$model->description?>
-                </p>
+                </div>
                 <h3><?= Yii::t('db', 'Contact data') ?></h3>
                 <div class="single-company__contact flex text-left">
                     <div>

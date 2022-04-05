@@ -122,8 +122,10 @@ $imagesCount = 0;
                                     <?= $agent->user ?>
                                 </div>
                             </div>
-                            <a href="tel:<?= $agent->user->phone ?>" class="btn btn--primary"><?= $agent->user->phone ?></a>
-                            <a href="mailto:<?= $agent->user->email ? $agent->user->email : $agent->user->username ?>" class="btn btn--primary"
+                            <a href="tel:<?= $agent->user->phone ?>"
+                               class="btn btn--primary"><?= $agent->user->phone ?></a>
+                            <a href="mailto:<?= $agent->user->email ? $agent->user->email : $agent->user->username ?>"
+                               class="btn btn--primary"
                             ><?= $agent->user->email ? $agent->user->email : $agent->user->username ?></a
                             >
                         </div>
@@ -131,9 +133,13 @@ $imagesCount = 0;
                 <? endif ?>
 
                 <h3><?= Yii::t('db', 'Product description') ?></h3>
-                <?= $model->description ?>
+                <div class="description">
+                    <?= $model->description ?>
+                </div>
                 <h3><?= Yii::t('db', 'Specification') ?></h3>
-                <?= $model->specification ?>
+                <div class="description">
+                    <?= $model->specification ?>
+                </div>
                 <div class="flex">
                     <? if (count($model->fileRelations)): ?>
                         <div>

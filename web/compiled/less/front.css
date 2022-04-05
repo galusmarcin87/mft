@@ -62,3 +62,6 @@
 .dashboard-wrapper .form-wrapper .contact-form .help-block {
   margin-bottom: 25px;
 }
+.service .description p {
+  margin-bottom: 0;
+}

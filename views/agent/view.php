@@ -73,7 +73,10 @@ $user->language = $model->language;
             <div class="service__content">
 
                 <h3><?= Yii::t('db', 'Description') ?></h3>
-                <?= $user->description?>
+                <div class="description">
+                    <?= $user->description ?>
+                </div>
+
             </div>
         </div>
     </div>

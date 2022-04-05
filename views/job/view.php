@@ -2,6 +2,7 @@
 /* @var $model app\models\mgcms\db\Job */
 
 use yii\web\View;
+
 $model->language = Yii::$app->language;
 ?>
 
@@ -20,12 +21,12 @@ $model->language = Yii::$app->language;
                             class="single-company__image"
                             src="<?= $model->file->getImageSrc(1530) ?>"
                             alt=""
-                    />		
-				<? else: ?>
-             <img class="single-company__image"
-             src="/images/companybg.jpeg"
-             alt=""/>
-				<? endif ?>
+                    />
+                <? else: ?>
+                    <img class="single-company__image"
+                         src="/images/companybg.jpeg"
+                         alt=""/>
+                <? endif ?>
                 <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
                     <img src="<?= $model->company->thumbnail->getImageSrc(300, 0) ?>" class="training__logo"/>
                 <? endif ?>
@@ -51,11 +52,13 @@ $model->language = Yii::$app->language;
                 </div>
                 <div class="hr"></div>
                 <h3><?= Yii::t('db', 'General information') ?></h3>
-                <?= $model->info?>
+                <?= $model->info ?>
                 <h3><?= Yii::t('db', 'Requirements') ?></h3>
-                <?= $model->requirements?>
+                <div class="description">
+                    <?= $model->requirements ?>
+                </div>
 
-                <h3 class=""hidden><?= Yii::t('db', 'Vacancy') ?></h3>
+                <h3 class="" hidden><?= Yii::t('db', 'Vacancy') ?></h3>
                 <table class="table hidden">
                     <thead>
                     <tr>

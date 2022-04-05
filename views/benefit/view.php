@@ -22,7 +22,7 @@ $imagesCount = 0;
                             <? if ($relation->json == '1' || !$relation->file || !$relation->file->isImage()) continue ?>
                             <? $imagesCount++; ?>
                             <div class="item">
-                                <img src="<?= $relation->file->getImageSrc(685   ) ?>" alt=""/>
+                                <img src="<?= $relation->file->getImageSrc(685) ?>" alt=""/>
                                 <? if ($model->company->thumbnail && $model->company->thumbnail->isImage()): ?>
                                     <img src="<?= $model->company->thumbnail->getImageSrc(200, 0) ?>"
                                          class="training__logo"/>
@@ -30,11 +30,11 @@ $imagesCount = 0;
                             </div>
                         <? endforeach ?>
 
-                        <?if ($imagesCount == 0):?>
+                        <? if ($imagesCount == 0): ?>
                             <div class="item">
                                 <img src="/images/companypic.jpg" alt=""/>
                             </div>
-                        <?endif?>
+                        <? endif ?>
                     </div>
                 </div>
                 <div>
@@ -97,7 +97,9 @@ $imagesCount = 0;
 
 
                 <h3><?= Yii::t('db', 'Description') ?></h3>
-                <?= $model->description ?>
+                <div class="description">
+                    <?= $model->description ?>
+                </div>
                 <div class="flex">
                     <div class="hidden">
                         <h3>Udostpnij</h3>
