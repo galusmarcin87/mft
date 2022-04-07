@@ -9,7 +9,6 @@ $user->language = Yii::$app->language;
 <a
         href="<?= $model->getLinkUrl() ?>"
         class="agent col-md-4
-        target="_blank"
 >
     <? if ($user->file && $user->file->isImage()): ?>
         <img

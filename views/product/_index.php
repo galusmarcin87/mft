@@ -9,7 +9,6 @@ $model->language = Yii::$app->language;
 <a
         href="<?=$model->getLinkUrl()?>"
         class="company company--service"
-        target="_blank"
 >
     <?if($model->company->thumbnail && $model->company->thumbnail->isImage()):?>
     <img
