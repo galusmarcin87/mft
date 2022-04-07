@@ -6,11 +6,21 @@
 use yii\web\View;
 use \app\models\mgcms\db\Category;
 use yii\widgets\ListView;
+use app\components\mgcms\MgHelpers;
 
 ?>
+
+
 <section class="companies-wrapper">
     <div class="container">
-        <h1 class="text-left"><?= Yii::t('db', 'Search results') ?></h1>
+        <? if ($country): ?>
+            <h1 class="text-left"><?= Yii::t('db', $country) ?></h1>
+            <div class="companyListCountryDesc mb-5">
+                <?= MgHelpers::getSetting('country description '.$country.' '.Yii::$app->language) ?>
+            </div>
+        <? else: ?>
+            <h1 class="text-left"><?= Yii::t('db', 'Search results') ?></h1>
+        <? endif ?>
         <div class="search-results">
             <?= $this->render('/common/leftMenu') ?>
             <div>
