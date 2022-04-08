@@ -1,8 +1,11 @@
 <?php
 /* @var $this \yii\web\View */
+
 /* @var $content string */
+
 use app\widgets\Alert;
 use yii\helpers\Html;
+
 //use app\assets\AppAsset;
 use app\assets\FrontAsset;
 use app\components\mgcms\MgHelpers;
@@ -14,45 +17,47 @@ FrontAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
-    <head>
-        <meta charset="<?= Yii::$app->charset ?>">
+<head>
+    <meta charset="<?= Yii::$app->charset ?>">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-                href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
-                rel="stylesheet"
-        />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
+            rel="stylesheet"
+    />
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
-        <?php $this->head() ?>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
 
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D6XBPWFD0Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-222846406-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-D6XBPWFD0Q');
-</script>
+      function gtag () {dataLayer.push(arguments);}
 
-    </head>
-    <body id="page_<?= Yii::$app->controller->id . '_' . Yii::$app->controller->action->id ?>">
-        <?php $this->beginBody() ?>
-        <?= $this->render('header') ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-        <?= $this->render('footer') ?>
-        <?php $this->endBody() ?>
+      gtag('js', new Date());
 
+      gtag('config', 'UA-222846406-1');
+    </script>
 
-    </body>
+</head>
+<body id="page_<?= Yii::$app->controller->id . '_' . Yii::$app->controller->action->id ?>">
+<?php $this->beginBody() ?>
+<?= $this->render('header') ?>
+<?= Alert::widget() ?>
+<?= $content ?>
+<?= $this->render('footer') ?>
+<?php $this->endBody() ?>
+<?= $this->render('_fbChat')?>
+
+</body>
 </html>
 <?php $this->endPage() ?>

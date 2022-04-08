@@ -7,9 +7,10 @@ use app\components\mgcms\MgHelpers;
 $continents = [
     0 => MgHelpers::getSettingsArray('kontynent - ameryka pólnocna'),
     1 => MgHelpers::getSettingsArray('kontynent - ameryka południowa'),
-    2 => MgHelpers::getSettingsArray('kontynent - euroazja'),
-    3 => MgHelpers::getSettingsArray('kontynent - afryka'),
-    4 => MgHelpers::getSettingsArray('kontynent - australia'),
+    2 => MgHelpers::getSettingsArray('kontynent - europa'),
+    3 => MgHelpers::getSettingsArray('kontynent - azja'),
+    4 => MgHelpers::getSettingsArray('kontynent - afryka'),
+    5 => MgHelpers::getSettingsArray('kontynent - australia'),
 ]
 ?>
 <section class="world-map-container">
@@ -35,21 +36,27 @@ $continents = [
                 />
                 <img
                         class="continent continent__3"
-                        src="/svg/mapa_kontynent3.svg"
+                        src="/svg/europa.svg"
                         alt=""
                         onclick="showContinent(2)"
+                />
+                <img
+                        class="continent continent__6"
+                        src="/svg/azja.svg"
+                        alt=""
+                        onclick="showContinent(3)"
                 />
                 <img
                         class="continent continent__4"
                         src="/svg/mapa_kontynent4.svg"
                         alt=""
-                        onclick="showContinent(3)"
+                        onclick="showContinent(4)"
                 />
                 <img
                         class="continent continent__5"
                         src="/svg/mapa_kontynent5.svg"
                         alt=""
-                        onclick="showContinent(4)"
+                        onclick="showContinent(5)"
                 />
             </div>
 
