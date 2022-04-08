@@ -50,6 +50,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                     ]); ?>
                     <div class="form-wrapper">
                         <h2><?= Yii::t('db', 'Main information') ?></h2>
+						<?= Yii::t('db', 'Time left') ?>
                         <div class="contact-form">
                             <?= $form->errorSummary($model); ?>
                             <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
@@ -131,6 +132,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                 <?= $form->field($model, 'banc_account_no')->textInput(['placeholder' => $model->getAttributeLabel('banc_account_no')]) ?>
                             </div>
                             <h2><?= Yii::t('db', 'Map') ?></h2>
+							<?= Yii::t('db', 'days') ?>
                             <div class="flex">
                                 <?= $form->field($model, 'gps_lat')->textInput(['placeholder' => $model->getAttributeLabel('gps_lat')]) ?>
                                 <?= $form->field($model, 'gps_long')->textInput(['placeholder' => $model->getAttributeLabel('gps_long')]) ?>
@@ -192,7 +194,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             </label>
 
                             <h2 class="with-label"><?= Yii::t('db', 'Background photo') ?></h2>
-                            <label><?= Yii::t('db', 'Choose graphics file') ?></label>
+                            <label><?= Yii::t('db', 'hours') ?></label>
 
                             <? if ($model->background && $model->background->isImage()): ?>
                                 <div
