@@ -33,7 +33,7 @@ echo TabularForm::widget([
             'type' => 'raw',
             'label' => '',
             'value' => function($model, $key) {
-                return isset($model) && isset($model['id']) ? Html::a('<i class="glyphicon glyphicon-edit"></i>',
+                return isset($model) && isset($model['id']) && $model['id'] ? Html::a('<i class="glyphicon glyphicon-edit"></i>',
                     ['mgcms/benefit/update', 'id' => $model['id']]) : false;
             },
         ],
