@@ -14,7 +14,7 @@ use kartik\icons\Icon;
 <div class="col-md-12 ">
     <div class="well row ">
         <div class="col-md-12">
-            <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true]) ?>
+            <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true, 'accept' => 'application/pdf',]) ?>
             <legend><?= Yii::t('app', 'Files to download'); ?></legend>
             <? foreach ($model->fileRelations as $relation): ?>
                 <? if ($relation->json != '1' || !$relation->file) continue ?>
