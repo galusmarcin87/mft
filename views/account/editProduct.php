@@ -130,10 +130,10 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             </div>
                         <? endif; ?>
 
-
+ccc
                         <label class="file-uplad">
                             + <?= Yii::t('db', 'Add') ?>
-                            <?= $form->field($model, 'fileUpload')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
+                            <?= $form->field($model, 'fileUpload')->fileInput(['multiple' => false, 'accept' => '.jpg,.jpeg', 'class' => 'inputfile']); ?>
                         </label>
 
 
@@ -157,7 +157,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
                         <label class="file-uplad">
                             + <?= Yii::t('db', 'Add') ?>
-                            <?= $form->field($model, 'uploadedFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
+                            <?= $form->field($model, 'uploadedFiles[]')->fileInput(['multiple' => true, 'accept' => '.jpg,.jpeg', 'class' => 'inputfile']); ?>
                         </label>
 
 

@@ -35,7 +35,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
     $options['options']['class'] = 'col-md-6';
     return $this->field($model, $attribute, $options);
   }
-  
+
   /**
    * @return ActiveField
    * @see fieldConfig
@@ -45,7 +45,7 @@ class ActiveForm extends \yii\widgets\ActiveForm
     $options['options']['class'] = 'col-md-4';
     return $this->field($model, $attribute, $options);
   }
-  
+
   /**
    * @return ActiveField
    * @see fieldConfig
@@ -63,6 +63,6 @@ class ActiveForm extends \yii\widgets\ActiveForm
 
   public function relatedFileInput($model, $multiple = false, $imageOnly = false)
   {
-    return $this->field($model, 'uploadedFiles[]')->fileInput(['multiple' => $multiple, 'accept' => $imageOnly === true ? 'image/*' : $imageOnly]);
+    return $this->field($model, 'uploadedFiles[]')->fileInput(['multiple' => $multiple, 'accept' => $imageOnly === true ? '.jpg,.jpeg' : $imageOnly]);
   }
 }
