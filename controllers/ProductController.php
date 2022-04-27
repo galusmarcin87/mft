@@ -25,11 +25,11 @@ use yii\validators\EmailValidator;
 class ProductController extends \app\components\mgcms\MgCmsController
 {
 
-    public function actionIndex( $category_id = null, $specialOffer = null)
+    public function actionIndex($category_id = null, $specialOffer = null)
     {
 
-        $query =  Product::find();
-        if($specialOffer !== null){
+        $query = Product::find();
+        if ($specialOffer !== null) {
             $query->where(['is_special_offer' => $specialOffer]);
         }
         if ($category_id) {

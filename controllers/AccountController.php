@@ -75,7 +75,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
     {
         $user = $this->getUserModel();
         $myCompany = Company::find()->where(['user_id' => $user->id])->one();
-        if(!$myCompany){
+        if (!$myCompany) {
             $myCompany = Company::find()->where(['id' => $user->company_id])->one();
         }
 
@@ -538,6 +538,55 @@ class AccountController extends \app\components\mgcms\MgCmsController
         return $this->render('paySubscription', [
             'model' => $model,
         ]);
+    }
+
+
+    function actionPaySubscriptionStripe()
+    {
+        $modelCompany = $this->_getMyCompany();
+        if (!$modelCompany) {
+            MgHelpers::setFlash('error', Yii::t('db', "Add company first"));
+            $this->back();
+        }
+
+        $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
+        $stripeAccountId = MgHelpers::getSetting('stripe account id', false, 'acct_1FOmrVInHv9lYN6G');
+        $subscriptionPriceId = MgHelpers::getSetting('stripe price id', false, 'price_1KtGkFInHv9lYN6GYypgPHXp');
+
+        \Stripe\Stripe::setApiKey($apiKey);
+        $session = \Stripe\Checkout\Session::create([
+            'line_items' => [[
+                'price' => $subscriptionPriceId,
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => Url::to(['account/payment-after', 'type' => 'success', 'hash' => MgHelpers::encrypt($modelCompany->id . '.' . date('Y-m-d'))], true),
+            'cancel_url' => Url::to(['account/payment-after', 'type' => 'cancel'], true),
+        ], ['stripe_account' => $stripeAccountId]);
+
+        $this->redirect($session->url);
+    }
+
+    function actionPaymentAfter($type, $hash)
+    {
+
+        if ($type == 'success') {
+            $decrypted = explode('.', MgHelpers::decrypt($hash));
+            if(count($decrypted) < 2){
+                return $this->throw404();
+            }
+            $companyId = $decrypted[0];
+            $date = $decrypted[1];
+            $modelCompany = Company::find($companyId)->one();
+            if (!$companyId || !$modelCompany || $date != date('Y-m-d')) {
+                return $this->throw404();
+            }
+            $modelCompany->paid_from = date('Y-m-d H:i:s');
+            $modelCompany->paid_to = date('Y-m-d H:i:s', strtotime('+1 year'));
+            $saved = $modelCompany->save();
+        }
+
+        return $this->render('paymentAfter', ['type' => $type]);
     }
 
 
