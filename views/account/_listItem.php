@@ -10,17 +10,17 @@ use \yii\helpers\Url;
 ?>
 <div class="contact-box contact-box--light">
     <div class="person person--big person-list">
-        <? if ($imageSrc): ?>
-            <div class="text-left">
 
+            <div class="text-left">
+                <? if ($imageSrc): ?>
                 <img
                         class="person__avatar person__avatar--small"
                         src="<?= $imageSrc ?>"
                         alt=""
                 />
-
+                <? endif; ?>
             </div>
-        <? endif; ?>
+
         <div class="text-left"><?= $name ?></div>
         <div>
             <a href="<?= Url::to(['/account/' . $type . '-edit', 'id' => $id]) ?>">

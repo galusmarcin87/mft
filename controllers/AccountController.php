@@ -466,6 +466,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $model->company_id = $modelCompany->id;
         $model->role = User::ROLE_REPRESENTATIVE;
 
+        $modelAgent = new Agent();
+        $modelAgent->company_id = $modelCompany->id;
+
         if ($model->load(Yii::$app->request->post())) {
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
@@ -477,6 +480,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
             $model->password = uniqid();
             if ($model->save()) {
                 $this->_assignDownloadFiles($model);
+                $modelAgent->user_id = $model->id;
+                $modelAgent->save();
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
                 $this->redirect(['index']);
             } else {
