@@ -2,6 +2,7 @@
 
 namespace app\models\mgcms\db;
 
+use app\components\mgcms\MgHelpers;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
@@ -92,4 +93,29 @@ class Service extends \app\models\mgcms\db\AbstractRecord
     {
         return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/service/view', 'id' => $this->id, 'name' => $this->name]));
     }
+
+    public function save($runValidaton = true, $attributes = null)
+    {
+
+        $saved = parent::save($runValidaton, $attributes);
+
+        if($saved){
+            $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
+            $stripe = new \Stripe\StripeClient(
+                $apiKey
+            );
+            $product = $stripe->products->create([
+                'name' => $this->name,
+                'default_price_data' => [
+                    'currency' => 'PLN',
+                    'unit_amount' => (int) ( $this->price * 100)
+                ]
+            ]);
+            $this->setModelAttribute('priceId',$product['default_price']);
+
+        }
+
+        return $saved;
+    }
+
 }

@@ -53,9 +53,8 @@ use yii\bootstrap\ActiveForm;
                                 'name' => $model->name,
                                 'id' => $model->id,
                                 'type' => 'service',
-                                'linkUrl' => $model->linkUrl
-
-
+                                'linkUrl' => $model->linkUrl,
+                                'noImageColumn' => true
                             ]) ?>
                         <? endforeach ?>
                     </div>

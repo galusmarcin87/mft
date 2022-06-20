@@ -577,7 +577,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         if ($type == 'success') {
             $decrypted = explode('.', MgHelpers::decrypt($hash));
-            if(count($decrypted) < 2){
+            if (count($decrypted) < 2) {
                 return $this->throw404();
             }
             $companyId = $decrypted[0];
@@ -592,6 +592,98 @@ class AccountController extends \app\components\mgcms\MgCmsController
         }
 
         return $this->render('paymentAfter', ['type' => $type]);
+    }
+
+    public function actionBuy($hash)
+    {
+        $thisUser = MgHelpers::getUserModel();
+        if (!$thisUser->getModelAttribute('stripeId')) {
+            $this->createStripeAccount();
+        }
+        $data = unserialize(MgHelpers::decrypt($hash));
+        $type = $data['type'];
+        $id = $data['id'];
+
+
+        switch ($type) {
+            case 'Product':
+                $model = Product::findOne($id);
+                break;
+            case 'Service':
+                $model = Service::findOne($id);
+                break;
+
+            default:
+                $model = null;
+        }
+
+        if (!$model) {
+            MgHelpers::setFlashError(Yii::t('db', 'Problem with fecthing product'));
+            return $this->back();
+        }
+
+        $priceId = $model->getModelAttribute('priceId');
+        if (!$priceId) {
+            MgHelpers::setFlashError(Yii::t('db', 'Problem with fetching product price'));
+            return $this->back();
+        }
+
+        $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
+        $stripe = new \Stripe\StripeClient($apiKey);
+        try {
+            $res = $stripe->paymentLinks->create([
+                'line_items' => [
+                    [
+                        'price' => $priceId,
+                        'quantity' => 1,
+                    ],
+                ],
+            ]);
+            if ($res['url']) {
+                $this->redirect($res['url']);
+            } else {
+                MgHelpers::setFlashError(Yii::t('db', 'Stripe: problem with generating redirect url'));
+                return $this->back();
+            }
+        } catch (Exception $e) {
+
+            MgHelpers::setFlashError(Yii::t('db', $e));
+            return $this->back();
+        }
+
+    }
+
+    public function actionConnectStripeAccount($hash){
+
+    }
+
+    public function createStripeAccount()
+    {
+        $thisUser = MgHelpers::getUserModel();
+
+        $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
+        $stripe = new \Stripe\StripeClient($apiKey);
+        $account = $stripe->accounts->create([
+            'type' => 'standard',
+            'country' => 'PL',
+            'email' => $thisUser->email ? $thisUser->email : $thisUser->username,
+        ]);
+        if(!$account['id']){
+            MgHelpers::setFlashError(Yii::t('db', 'Stripe: problem with creating account'));
+            return $this->back();
+        }
+
+        $accountLink = $stripe->accountLinks->create([
+            'account' => $account['id'],
+            'refresh_url' => Url::to(['account'],true),
+            'return_url' => Url::to(['account/connect-stripe-account','hash' => MgHelpers::encrypt($thisUser->id)],true),
+            'type' => 'account_onboarding',
+        ]);
+
+        echo '<pre>';
+        echo var_dump($accountLink);
+        echo '</pre>';
+        exit;
     }
 
 

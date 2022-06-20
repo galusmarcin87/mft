@@ -132,4 +132,28 @@ class Product extends \app\models\mgcms\db\AbstractRecord
         return $this->hasOne(\app\models\mgcms\db\File::className(), ['id' => 'file_id']);
     }
 
+    public function save($runValidaton = true, $attributes = null)
+    {
+
+        $saved = parent::save($runValidaton, $attributes);
+
+        if($saved){
+            $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
+            $stripe = new \Stripe\StripeClient(
+                $apiKey
+            );
+            $product = $stripe->products->create([
+                'name' => $this->name,
+                'default_price_data' => [
+                    'currency' => 'PLN',
+                    'unit_amount' => (int) ( $this->price * 100)
+                ]
+            ]);
+            $this->setModelAttribute('priceId',$product['default_price']);
+
+        }
+
+        return $saved;
+    }
+
 }

@@ -6,20 +6,23 @@ use yii\helpers\Html;
 use app\components\mgcms\MgHelpers;
 use \yii\helpers\Url;
 
+$noImageColumn = isset($noImageColumn) ? $noImageColumn : false;
 
 ?>
 <div class="contact-box contact-box--light">
     <div class="person person--big person-list">
 
+        <? if (!$noImageColumn): ?>
             <div class="text-left">
                 <? if ($imageSrc): ?>
-                <img
-                        class="person__avatar person__avatar--small"
-                        src="<?= $imageSrc ?>"
-                        alt=""
-                />
+                    <img
+                            class="person__avatar person__avatar--small"
+                            src="<?= $imageSrc ?>"
+                            alt=""
+                    />
                 <? endif; ?>
             </div>
+        <? endif ?>
 
         <div class="text-left"><?= $name ?></div>
         <div>
