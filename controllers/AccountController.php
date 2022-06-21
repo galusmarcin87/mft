@@ -598,7 +598,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
     {
         $thisUser = MgHelpers::getUserModel();
         if (!$thisUser->getModelAttribute('stripeId')) {
-            $this->createStripeAccount();
+            return $this->redirect($this->generateStripeAccountLink());
         }
         $data = unserialize(MgHelpers::decrypt($hash));
         $type = $data['type'];
@@ -655,9 +655,23 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionConnectStripeAccount($hash){
 
+        $data = unserialize(MgHelpers::decrypt($hash));
+        if(!isset($data['userId'])|| !isset($data['accountId'])){
+            MgHelpers::setFlashError(Yii::t('db', 'Stripe: problem with assigning stripe account'));
+            return $this->redirect('/account/index');
+        }
+
+        $user = User::findOne($data['userId']);
+        if(!$user){
+            MgHelpers::setFlashError(Yii::t('db', 'Stripe: problem with assigning stripe account - account not found'));
+            return $this->redirect('/account/index');
+        }
+        $user->setModelAttribute('stripeId',$data['accountId']);
+        MgHelpers::setFlashSuccess(Yii::t('db', 'Stripe: successfully connected to stripe account, you can purchase now'));
+        return $this->redirect('/account/index');
     }
 
-    public function createStripeAccount()
+    public function generateStripeAccountLink()
     {
         $thisUser = MgHelpers::getUserModel();
 
@@ -676,14 +690,15 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $accountLink = $stripe->accountLinks->create([
             'account' => $account['id'],
             'refresh_url' => Url::to(['account'],true),
-            'return_url' => Url::to(['account/connect-stripe-account','hash' => MgHelpers::encrypt($thisUser->id)],true),
+            'return_url' => Url::to(['account/connect-stripe-account','hash' => MgHelpers::encrypt(serialize([
+                    'userId'=>$thisUser->id,
+                    'accountId' => $account['id']
+                ]
+            ))],true),
             'type' => 'account_onboarding',
         ]);
 
-        echo '<pre>';
-        echo var_dump($accountLink);
-        echo '</pre>';
-        exit;
+        return $accountLink['url'];
     }
 
 
