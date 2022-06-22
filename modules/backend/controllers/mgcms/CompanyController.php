@@ -86,6 +86,9 @@ class CompanyController extends MgBackendController
     public function actionCreate()
     {
         $model = new Company();
+        if(!MgHelpers::isAdmin()){
+            $model->user_id = $this->getUserModel()->id;
+        }
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             $this->_assignDownloadFiles($model);
