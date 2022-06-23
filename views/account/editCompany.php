@@ -50,7 +50,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                     ]); ?>
                     <div class="form-wrapper">
                         <h2><?= Yii::t('db', 'Main information') ?></h2>
-						<?= Yii::t('db', 'Time left') ?>
+                        <?= Yii::t('db', 'Time left') ?>
                         <div class="contact-form">
                             <?= $form->errorSummary($model); ?>
                             <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
@@ -61,7 +61,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <div class="mb-4 bottom25">
                                 <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
                                     'data' => \yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type' => Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
-                                    'options' => ['placeholder2' => Yii::t('db', 'Choose Category'), 'prompt' => ''],
+                                    'options' => ['placeholder' => Yii::t('db', 'Choose Category'), 'prompt' => ''],
                                     'pluginOptions' => [
                                         'allowClear' => true
                                     ],
@@ -110,18 +110,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <div class="flex">
                                 <?= $form->field($model, 'email')->textInput(['placeholder' => $model->getAttributeLabel('email'), 'type' => 'email']) ?>
                                 <?= $form->field($model, 'www')->textInput(['placeholder' => $model->getAttributeLabel('www')]) ?>
+                            </div>
 
-                            </div>
-                            <div class="switch-wrapper">
-                                <?= Yii::t('db', 'Standard account') ?>
-                                <label class="switch">
-                                    <input type="checkbox"
-                                           name="Company[is_for_sale]" <?= $model->is_for_sale ? 'checked' : '' ?>
-                                           value="1"/>
-                                    <span class="slider round"></span>
-                                </label>
-                                <?= Yii::t('db', 'Company for sale') ?>
-                            </div>
                             <div class="flex">
                                 <?= $form->field($model, 'nip')->textInput(['placeholder' => $model->getAttributeLabel('nip')]) ?>
                                 <?= $form->field($model, 'regon')->textInput(['placeholder' => $model->getAttributeLabel('regon')]) ?>
@@ -131,8 +121,61 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                 <?= $form->field($model, 'krs')->textInput(['placeholder' => $model->getAttributeLabel('krs')]) ?>
                                 <?= $form->field($model, 'banc_account_no')->textInput(['placeholder' => $model->getAttributeLabel('banc_account_no')]) ?>
                             </div>
+
+
+                            <div class="switch-wrapper">
+                                <?= Yii::t('db', 'Standard account') ?>
+                                <label class="switch">
+                                    <input type="checkbox" id="company_is_for_sale"
+                                           name="Company[is_for_sale]" <?= $model->is_for_sale ? 'checked' : '' ?>
+                                           value="1"/>
+                                    <span class="slider round"></span>
+                                </label>
+                                <?= Yii::t('db', 'Company for sale') ?>
+                            </div>
+
+
+                            <div id="saleWrapper" class="<?= $model->is_for_sale ? '' : 'hidden' ?>">
+                                <div class="col-md-12">
+                                    <legend><?= Yii::t('db', 'Data for sale') ?></legend>
+                                </div>
+
+
+                                <div class="flex">
+                                    <?= $form->field($model, 'sale_title')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('sale_title')]) ?>
+
+                                    <?= $form->field($model, 'sale_description')->textarea(['rows' => 6, 'placeholder' => $model->getAttributeLabel('sale_description')]) ?>
+                                </div>
+                                <div class="flex">
+                                    <?= $form->field($model, 'sale_price')->textInput(['placeholder' => $model->getAttributeLabel('sale_price')]) ?>
+
+                                    <?= $form->field($model, 'sale_currency')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('currency array'), ['prompt' => $model->getAttributeLabel('sale_currency')]) ?>
+                                </div>
+                                <div class="flex">
+                                    <?= $form->field($model, 'sale_price_includes')->textarea(['rows' => 6, 'placeholder' => $model->getAttributeLabel('sale_price_includes')]) ?>
+
+                                    <?= $form->field($model, 'sale_reason')->textarea(['rows' => 6, 'placeholder' => $model->getAttributeLabel('sale_reason')]) ?>
+                                </div>
+                                <div class="flex">
+                                    <?= $form->field($model, 'sale_business_range')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('business range array'), ['prompt' => $model->getAttributeLabel('sale_business_range')]) ?>
+
+                                    <?= $form->field($model, 'sale_workers_number')->textInput(['placeholder' => $model->getAttributeLabel('sale_workers_number')]) ?>
+                                </div>
+                                <div class="flex">
+                                    <?= $form->field($model, 'sale_sale_range')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('sales range array'), ['prompt' => $model->getAttributeLabel('sale_sale_range')]) ?>
+
+                                    <?= $form->field($model, 'sale_last_year_income')->textInput(['placeholder' => $model->getAttributeLabel('sale_last_year_income')]) ?>
+                                </div>
+                                <div class="flex">
+                                    <?= $form->field($model, 'sale_company_profile')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('company profile array'), ['prompt' => $model->getAttributeLabel('sale_company_profile')]) ?>
+
+                                    <?= $form->field($model, 'sale_form_of_business')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('form of business array'), ['prompt' => $model->getAttributeLabel('sale_form_of_business')]) ?>
+                                </div>
+                            </div>
+
+
                             <h2><?= Yii::t('db', 'Map') ?></h2>
-							<?= Yii::t('db', 'days') ?>
+                            <?= Yii::t('db', 'days') ?>
                             <div class="flex">
                                 <?= $form->field($model, 'gps_lat')->textInput(['placeholder' => $model->getAttributeLabel('gps_lat')]) ?>
                                 <?= $form->field($model, 'gps_long')->textInput(['placeholder' => $model->getAttributeLabel('gps_long')]) ?>
@@ -242,7 +285,9 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <div>
                                 <? foreach ($model->fileRelations as $relation): ?>
                                     <? if ($relation->json != '1' || !$relation->file) continue ?>
-                                    <a href="<?=$relation->file->getLinkUrl()?>" class="btn btn-primary btn--medium mb-1 ml-0" target="_blank"><?=$relation->file->origin_name?> </a>
+                                    <a href="<?= $relation->file->getLinkUrl() ?>"
+                                       class="btn btn-primary btn--medium mb-1 ml-0"
+                                       target="_blank"><?= $relation->file->origin_name ?> </a>
                                 <? endforeach ?>
                             </div>
                             <label class="file-uplad">
@@ -264,3 +309,10 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
         </div>
     </div>
 </section>
+
+<script>
+    var saleSwitch = $('#company_is_for_sale');
+    saleSwitch.change(function () {
+        $('#saleWrapper').toggleClass('hidden');
+    });
+</script>
