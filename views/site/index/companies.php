@@ -5,7 +5,7 @@ use app\components\mgcms\MgHelpers;
 use yii\web\View;
 use app\models\mgcms\db\Company;
 
-$companies = Company::find()->limit(19)->andWhere(['status' => Company::STATUS_CONFIRMED])->orderBy(['is_promoted' => SORT_DESC])->all();
+$companies = Company::find()->limit(19)->andWhere(['status' => Company::STATUS_CONFIRMED])->orderBy(['is_promoted' => SORT_DESC,'created_on' => SORT_DESC])->all();
 
 ?>
 <section class="companies-wrapper">
