@@ -124,7 +124,7 @@ $model->language = Yii::$app->language;
                         </div>
                     </div>
                     <?endif?>
-                    <div class="hidden">
+                    <div class="">
                         <h3>Udostpnij</h3>
                         <div class="social-icons social-icons--color">
                             <a class="social-icons__icon social-icons__icon--fb">

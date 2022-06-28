@@ -34,7 +34,8 @@
     "fiberpay/fiberpay-php":  "0.1.4",
     "firebase/php-jwt": "2.0.0",
     "guzzlehttp/guzzle": "6.5.5",
-    "stripe/stripe-php": "v7.125.0"
+    "stripe/stripe-php": "v7.125.0",
+    "yiimaker/yii2-social-share": "~2.3"
 
   },
   "require-dev": {
