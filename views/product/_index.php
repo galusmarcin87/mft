@@ -1,5 +1,6 @@
 <?
 /* @var $model app\models\mgcms\db\Product */
+/* @var $this yii\web\View */
 
 use yii\web\View;
 use  yii\helpers\StringHelper;

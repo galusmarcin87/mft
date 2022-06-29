@@ -124,7 +124,30 @@ $arr = [
                 'clientSecret' => 'facebook_client_secret',
             ],
         ],
-    ]
+    ],
+    'socialShare' => [
+        'class' => \ymaker\social\share\configurators\Configurator::class,
+        'socialNetworks' => [
+            'facebook' => [
+                'class' => \ymaker\social\share\drivers\Facebook::class,
+                'options' => ['class' => 'social-icons__icon social-icons__icon--fb'],
+                'label' => '<img src="/svg/facebook.svg" alt="" />'
+            ],
+            'twitter' => [
+                'class' => \ymaker\social\share\drivers\Twitter::class,
+                'label' => '<img src="/svg/twitter.svg" alt="" />',
+                'options' => ['class' => 'social-icons__icon social-icons__icon--tw'],
+            ],
+            'linkedin' => [
+                'class' => \ymaker\social\share\drivers\LinkedIn::class,
+                'label' => '<img src="/svg/linkedin.svg" alt="" />',
+                'options' => ['class' => 'social-icons__icon social-icons__icon--ln'],
+            ],
+        ],
+        'options' => [
+            'class' => 'social-icons social-icons--color',
+        ],
+    ],
 ];
 
 return $arr;

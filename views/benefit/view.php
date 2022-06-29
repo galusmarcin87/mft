@@ -1,10 +1,12 @@
 <?
 /* @var $model app\models\mgcms\db\Benefit */
+/* @var $this yii\web\View */
 
 use yii\web\View;
 
 $model->language = Yii::$app->language;
 $imagesCount = 0;
+
 ?>
 <section class="service-wrapper">
     <div class="container">
@@ -101,26 +103,11 @@ $imagesCount = 0;
                     <?= $model->description ?>
                 </div>
                 <div class="flex">
-                    <div class="hidden">
-                        <h3>Udostpnij</h3>
-                        <div class="social-icons social-icons--color">
-                            <a class="social-icons__icon social-icons__icon--fb">
-                                <img src="./svg/facebook.svg" alt=""/>
-                            </a>
-                            <a class="social-icons__icon social-icons__icon--tw">
-                                <img src="./svg/twitter.svg" alt=""/>
-                            </a>
-                            <a class="social-icons__icon social-icons__icon--in">
-                                <img src="./svg/instagram.svg" alt=""/>
-                            </a>
-                            <a class="social-icons__icon social-icons__icon--tik-tok">
-                                <img src="./svg/tik-tok.svg" alt=""/>
-                            </a>
-                            <a class="social-icons__icon social-icons__icon--ln">
-                                <img src="./svg/linkedin.svg" alt=""/>
-                            </a>
-                        </div>
-                    </div>
+                    <?= $this->render('/common/_socialShare', [
+                        'title' => $model->name,
+                        'description' => $model->description,
+                        'image' => $model->company->thumbnail && $model->company->thumbnail->isImage() ? $model->company->thumbnail->getImageSrc(240, 0) : false,
+                    ]) ?>
                 </div>
             </div>
         </div>
