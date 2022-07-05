@@ -61,11 +61,14 @@ $continents = [
             </div>
 
             <? foreach ($continents as $continentIndex => $countries): ?>
-                <div class="world-map__countries" id="country_<?= $continentIndex ?>" style="display: none">
+                <div class="world-map__countries" id="continent_<?= $continentIndex ?>" style="display: none">
                     <? foreach ($countries as $country): ?>
                         <a class="world-map__country"
                            href="<?= \yii\helpers\Url::to(['/company/index', 'country' => $country]) ?>">
-                            <img src="<?= MgHelpers::getSetting('flaga - ' . $country) ?>" alt=""/>
+                            <img src="<?= MgHelpers::getSetting('flaga - ' . $country) ?>"
+                                 alt="<?= MgHelpers::getSetting('kraj kod - ' . $country) ?>"
+                                 data-continent="<?= $continentIndex?>"
+                            />
                             <div><?= Yii::t('db', $country) ?></div>
                         </a>
                     <? endforeach ?>
@@ -79,6 +82,18 @@ $continents = [
 <script>
   function showContinent (index) {
     $('.world-map__countries').hide();
-    $('#country_' + index).show();
+    $('#continent_' + index).show();
   }
+
+  $( document ).ready(function() {
+      $.get("https://ipinfo.io", function(response) {
+          let countryImg = $('.world-map__countries img[alt='+response.country+']');
+          if(countryImg){
+              let continentId = countryImg.data('continent');
+              if(continentId){
+                  showContinent(continentId);
+              }
+          }
+      }, "jsonp");
+  });
 </script>
