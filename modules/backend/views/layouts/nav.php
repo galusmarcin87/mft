@@ -27,6 +27,7 @@ echo Nav::widget([
 //        ['label' => T::t('Galleries'), 'url' => '/backend/mgcms/gallery', 'visible' => MgHelpers::checkAccess('gallery', 'index')],
         ['label' => T::t('Users'), 'url' => '/backend/mgcms/user', 'visible' => MgHelpers::checkAccess('user', 'index')],
         ['label' => T::t('Menu'), 'url' => '/backend/mgcms/menu', 'visible' => MgHelpers::checkAccess('menu', 'index')],
+        ['label' => T::t('Statistics'), 'url' => '/backend/mgcms/stats', 'visible' => MgHelpers::checkAccess('stats', 'index')],
 //        ['label' => T::t('Tags'), 'url' => '/backend/mgcms/tag', 'visible' => MgHelpers::checkAccess('tag', 'index')],
         ['label' => T::t('Settings'), 'visible' => MgHelpers::checkAccess('menu', 'Settings'), 'items' => [
                 ['label' => T::t('Settings system'), 'url' => '/backend/mgcms/setting', 'visible' => MgHelpers::checkAccess('setting', 'index')],
