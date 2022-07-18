@@ -71,6 +71,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
         ]);
     }
 
+    /**
+     * @return Company
+     */
     private function _getMyCompany()
     {
         $user = $this->getUserModel();
@@ -596,10 +599,18 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionBuy($hash)
     {
-        $thisUser = MgHelpers::getUserModel();
-        if (!$thisUser->getModelAttribute('stripeId')) {
-            return $this->redirect($this->generateStripeAccountLink());
+        $modelCompany = $this->_getMyCompany();
+        if (!$modelCompany) {
+            MgHelpers::setFlashError(Yii::t('db', 'You need to create company first in order to buy'));
+            return $this->back();
         }
+
+        if ($modelCompany->status != Company::STATUS_CONFIRMED) {
+            MgHelpers::setFlashError(Yii::t('db', 'Your company has to be confirmed in order to buy'));
+            return $this->back();
+        }
+
+
         $data = unserialize(MgHelpers::decrypt($hash));
         $type = $data['type'];
         $id = $data['id'];
@@ -622,29 +633,40 @@ class AccountController extends \app\components\mgcms\MgCmsController
             return $this->back();
         }
 
-        $priceId = $model->getModelAttribute('priceId');
-        if (!$priceId) {
-            MgHelpers::setFlashError(Yii::t('db', 'Problem with fetching product price'));
+        $price = (double)str_replace(',', '.', $model->price);
+
+        if (!$price) {
+            MgHelpers::setFlashError(Yii::t('db', 'Price is incorrect'));
             return $this->back();
         }
+
+        if (!$model->company->getModelAttribute('stripeId')) {
+            MgHelpers::setFlashError(Yii::t('db', 'Company you would like to buy from are not connected with Stripe'));
+            return $this->back();
+        }
+
+
 
         $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
         $stripe = new \Stripe\StripeClient($apiKey);
         try {
-            $res = $stripe->paymentLinks->create([
-                'line_items' => [
-                    [
-                        'price' => $priceId,
-                        'quantity' => 1,
-                    ],
-                ],
+
+
+            $application_fee = (double)MgHelpers::getSetting('stripe prowizja procent', false, 5);
+            $payment_intent = $stripe->paymentIntents->create([
+                'amount' => (int)$model->price * 100,
+                'currency' => 'PLN',
+                'automatic_payment_methods' => ['enabled' => true],
+                'application_fee_amount' => (int)$application_fee * $price,
+            ], ['stripe_account' => $model->company->getModelAttribute('stripeId')]);
+
+
+            return $this->render('buy', [
+                'clientSecret' => $payment_intent['client_secret'],
+                'stripeAccount' => $model->company->getModelAttribute('stripeId'),
+                'returnUrl' => Url::to(['account/payment-after', 'type' => 'success', 'hash' => MgHelpers::encrypt($modelCompany->id . '.' . date('Y-m-d'))], true),
             ]);
-            if ($res['url']) {
-                $this->redirect($res['url']);
-            } else {
-                MgHelpers::setFlashError(Yii::t('db', 'Stripe: problem with generating redirect url'));
-                return $this->back();
-            }
+
         } catch (Exception $e) {
 
             MgHelpers::setFlashError(Yii::t('db', $e));
@@ -653,48 +675,54 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     }
 
-    public function actionConnectStripeAccount($hash){
+    public function actionConnectStripeAccount($hash)
+    {
 
         $data = unserialize(MgHelpers::decrypt($hash));
-        if(!isset($data['userId'])|| !isset($data['accountId'])){
+        if (!isset($data['companyId']) || !isset($data['accountId'])) {
             MgHelpers::setFlashError(Yii::t('db', 'Stripe: problem with assigning stripe account'));
             return $this->redirect('/account/index');
         }
 
-        $user = User::findOne($data['userId']);
-        if(!$user){
+        $company = Company::findOne($data['companyId']);
+        if (!$company) {
             MgHelpers::setFlashError(Yii::t('db', 'Stripe: problem with assigning stripe account - account not found'));
             return $this->redirect('/account/index');
         }
-        $user->setModelAttribute('stripeId',$data['accountId']);
+        $company->setModelAttribute('stripeId', $data['accountId']);
         MgHelpers::setFlashSuccess(Yii::t('db', 'Stripe: successfully connected to stripe account, you can purchase now'));
         return $this->redirect('/account/index');
     }
 
     public function generateStripeAccountLink()
     {
-        $thisUser = MgHelpers::getUserModel();
+        $modelCompany = $this->_getMyCompany();
+
+        if (!$modelCompany) {
+            MgHelpers::setFlashError(Yii::t('db', 'You need to create company first in order to create a Stripe account'));
+            return $this->back();
+        }
 
         $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
         $stripe = new \Stripe\StripeClient($apiKey);
         $account = $stripe->accounts->create([
             'type' => 'standard',
             'country' => 'PL',
-            'email' => $thisUser->email ? $thisUser->email : $thisUser->username,
+            'email' => $modelCompany->email,
         ]);
-        if(!$account['id']){
+        if (!$account['id']) {
             MgHelpers::setFlashError(Yii::t('db', 'Stripe: problem with creating account'));
             return $this->back();
         }
 
         $accountLink = $stripe->accountLinks->create([
             'account' => $account['id'],
-            'refresh_url' => Url::to(['account'],true),
-            'return_url' => Url::to(['account/connect-stripe-account','hash' => MgHelpers::encrypt(serialize([
-                    'userId'=>$thisUser->id,
+            'refresh_url' => Url::to(['account'], true),
+            'return_url' => Url::to(['account/connect-stripe-account', 'hash' => MgHelpers::encrypt(serialize([
+                    'comapnyId' => $modelCompany->id,
                     'accountId' => $account['id']
                 ]
-            ))],true),
+            ))], true),
             'type' => 'account_onboarding',
         ]);
 

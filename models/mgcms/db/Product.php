@@ -137,21 +137,21 @@ class Product extends \app\models\mgcms\db\AbstractRecord
 
         $saved = parent::save($runValidaton, $attributes);
 
-        if($saved){
-            $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
-            $stripe = new \Stripe\StripeClient(
-                $apiKey
-            );
-            $product = $stripe->products->create([
-                'name' => $this->name,
-                'default_price_data' => [
-                    'currency' => 'PLN',
-                    'unit_amount' => (int) ( $this->price * 100)
-                ]
-            ]);
-            $this->setModelAttribute('priceId',$product['default_price']);
-
-        }
+//        if($saved){
+//            $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
+//            $stripe = new \Stripe\StripeClient(
+//                $apiKey
+//            );
+//            $product = $stripe->products->create([
+//                'name' => $this->name,
+//                'default_price_data' => [
+//                    'currency' => 'PLN',
+//                    'unit_amount' => (int) ( $this->price * 100)
+//                ]
+//            ]);
+//            $this->setModelAttribute('priceId',$product['default_price']);
+//
+//        }
 
         return $saved;
     }

@@ -56,7 +56,7 @@ FrontAsset::register($this);
 <?= $content ?>
 <?= $this->render('footer') ?>
 <?php $this->endBody() ?>
-<?= $this->render('_fbChat')?>
+<?// $this->render('_fbChat')?>
 
 </body>
 </html>
