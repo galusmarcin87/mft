@@ -675,6 +675,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     }
 
+    public function actionConnectWithStripe()
+    {
+        return $this->redirect($this->generateStripeAccountLink());
+    }
     public function actionConnectStripeAccount($hash)
     {
 

@@ -15,11 +15,12 @@ use \yii\helpers\Url;
             <div>
                 <div class="dashboard-wrapper">
                     <div class="row">
-                    <h1 class="text-left col-md-6"><?= Yii::t('db', 'Dashboard') ?></h1>
+                    <h1 class="text-left col-md-4"><?= Yii::t('db', 'Dashboard') ?></h1>
                     <?if($myCompany):?>
-                        <div class="text-left col-md-6 paySubscription">
+                        <div class="text-left col-md-8 paySubscription">
 							<a href="<?= Url::to('/account/pay-subscription-stripe') ?>" class="btn btn--primary"><?= Yii::t('db', 'Pay subscription') ?></a>
                             <a href="<?= Url::to('/account/pay-subscription') ?>" class="btn btn--primary"><?= Yii::t('db', 'Pay by tokens') ?></a>
+                            <a href="<?= Url::to('/account/connect-with-stripe') ?>" class="btn btn--primary"><?= Yii::t('db', 'Connect with Stripe') ?></a>
                         </div>
                     <?endif?>
                     </div>
