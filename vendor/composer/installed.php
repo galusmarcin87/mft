@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'cdb5396e319308f3c83e9687d340abef89f4cd28',
+    'reference' => 'b2360a756455a77f692e3f95aa18efa19d332a34',
     'name' => 'mg/cms',
   ),
   'versions' => 
@@ -193,12 +193,12 @@
     ),
     'fakerphp/faker' => 
     array (
-      'pretty_version' => 'v1.19.0',
-      'version' => '1.19.0.0',
+      'pretty_version' => 'v1.20.0',
+      'version' => '1.20.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd7f08a622b3346766325488aa32ddc93ccdecc75',
+      'reference' => '37f751c67a5372d4e26353bd9384bc03744ec77b',
     ),
     'fiberpay/fiberpay-php' => 
     array (
@@ -288,7 +288,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '48f71983adb65052909d024bdf1695af6bf31d2f',
+      'reference' => 'c233160befa815aab3f00c3a88f1d9984567b886',
     ),
     'kartik-v/bootstrap-popover-x' => 
     array (
@@ -575,10 +575,11 @@
     ),
     'kartik-v/yii2-widget-rating' => 
     array (
-      'pretty_version' => 'v1.0.5',
-      'version' => '1.0.5.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
+        0 => '1.0.x-dev',
       ),
       'reference' => 'd3d7249490044f80e65f8f3938191f39a76586b2',
     ),
@@ -715,7 +716,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'cdb5396e319308f3c83e9687d340abef89f4cd28',
+      'reference' => 'b2360a756455a77f692e3f95aa18efa19d332a34',
     ),
     'monolog/monolog' => 
     array (
@@ -935,12 +936,12 @@
     ),
     'phpoffice/phpspreadsheet' => 
     array (
-      'pretty_version' => '1.23.0',
-      'version' => '1.23.0.0',
+      'pretty_version' => '1.24.1',
+      'version' => '1.24.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '21e4cf62699eebf007db28775f7d1554e612ed9e',
+      'reference' => '69991111e05fca3ff7398e1e7fca9ebed33efec6',
     ),
     'phpspec/php-diff' => 
     array (
@@ -1086,8 +1087,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0|2.0',
-        1 => '1.0.0 || 2.0.0 || 3.0.0',
+        0 => '1.0.0 || 2.0.0 || 3.0.0',
+        1 => '1.0|2.0',
       ),
     ),
     'psr/simple-cache' => 

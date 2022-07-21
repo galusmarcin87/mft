@@ -180,7 +180,7 @@ ccc
                                 <?= Yii::t('db', 'Save') ?>
                             </button>
                         </div>
-                        <?php ActiveForm::end(); ?>
+                            <?php ActiveForm::end(); ?>
                     </div>
 
 

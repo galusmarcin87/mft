@@ -611,19 +611,20 @@ class AccountController extends \app\components\mgcms\MgCmsController
         return $this->render('buyAfter', ['type' => $type, 'payment' => $payment]);
     }
 
-    function actionRate($hash){
+    function actionRate($hash)
+    {
         $paymentId = MgHelpers::decrypt($hash);
-        if(!$paymentId){
+        if (!$paymentId) {
             return $this->throw404();
         }
 
         $payment = Payment::findOne($paymentId);
-        if(!$payment){
+        if (!$payment) {
             return $this->throw404();
         }
 
         $model = false;
-        switch($payment->type){
+        switch ($payment->type) {
             case 'Product':
                 $model = Product::findOne($payment->rel_id);
                 break;
@@ -632,11 +633,15 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 break;
         }
 
-        if(!$model){
+        if (!$model) {
             return $this->throw404();
         }
 
-        return $this->render('rate', ['model' => $model]);
+        if ($payment->load(Yii::$app->request->post())) {
+            $payment->save();
+        }
+
+        return $this->render('rate', ['model' => $model, 'payment' => $payment]);
 
     }
 
@@ -689,7 +694,6 @@ class AccountController extends \app\components\mgcms\MgCmsController
         }
 
 
-
         $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
         $stripe = new \Stripe\StripeClient($apiKey);
         try {
@@ -728,6 +732,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
     {
         return $this->redirect($this->generateStripeAccountLink());
     }
+
     public function actionConnectStripeAccount($hash)
     {
 
@@ -785,7 +790,6 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         return $accountLink['url'];
     }
-
 
 
 }
