@@ -10,19 +10,13 @@ use app\components\mgcms\MgHelpers;
  *
  * @property integer $id
  * @property string $created_on
- * @property integer $project_id
  * @property integer $user_id
  * @property double $amount
  * @property string $status
- * @property double $percentage
- * @property integer $is_preico
- * @property string $user_token
- * @property string $statusStr
- * @property double $bonusPercentage
- * @property string $ethereum_buy_date
- * @property string $market
+ * @property integer $rel_id
+ * @property string $type
+ * @property integer $rate
  *
- * @property \app\models\mgcms\db\Project $project
  * @property \app\models\mgcms\db\User $user
  */
 class Payment extends \app\models\mgcms\db\AbstractRecord
@@ -43,10 +37,6 @@ class Payment extends \app\models\mgcms\db\AbstractRecord
         self::STATUS_UNKNOWN => 'Nieznany',
     ];
 
-    public $amountInDollars;
-    public $terms;
-    public $type;
-    public $modelAttributes = ['comments'];
 
     /**
      * @inheritdoc
@@ -54,11 +44,9 @@ class Payment extends \app\models\mgcms\db\AbstractRecord
     public function rules()
     {
         return [
-            [['created_on', 'amountInDollars', 'ethereum_buy_date', 'market', 'comments'], 'safe'],
-            [['project_id', 'user_id', 'user_token'], 'required'],
-            [['project_id', 'user_id', 'status'], 'integer'],
-            [['is_preico'], 'integer', 'max' => 1],
-            [['user_token'], 'string', 'max' => 245],
+            [['created_on', 'type'], 'safe'],
+            [['user_id'], 'required'],
+            [['user_id', 'status', 'rate', 'rel_id'], 'integer'],
             [['amount'], 'number'],
         ];
     }
@@ -101,14 +89,6 @@ class Payment extends \app\models\mgcms\db\AbstractRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProject()
-    {
-        return $this->hasOne(\app\models\mgcms\db\Project::className(), ['id' => 'project_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getUser()
     {
         return $this->hasOne(\app\models\mgcms\db\User::className(), ['id' => 'user_id']);
@@ -128,81 +108,6 @@ class Payment extends \app\models\mgcms\db\AbstractRecord
         return array_key_exists($this->status, self::STATUSES) ? self::STATUSES[$this->status] : '';
     }
 
-    public function getBonusPercentage()
-    {
-        if ($this->amount <= 10 && $this->amount >= 5) {
-            return $this->project->bonus_5_10;
-        }
-
-        if ($this->amount <= 100 && $this->amount >= 11) {
-            return $this->project->bonus_11_100;
-        }
-
-        if ($this->amount <= 1000 && $this->amount >= 101) {
-            return $this->project->bonus_101_1000;
-        }
-
-        if ($this->amount > 1000) {
-            return $this->project->bonus_1001;
-        }
-
-        return false;
-    }
-
-    public function save($runValidaton = true, $attributes = null)
-    {
-        $currentLanguage = Yii::$app->language;
-        if ($this->user->language) {
-            Yii::$app->language = $this->user->language;
-        }
-        if ($this->getOldAttribute('status') == self::STATUS_AFTER_PAYMENT && $this->getAttribute('status') == self::STATUS_PAYMENT_CONFIRMED) {
-            $project = Project::findOne($this->project_id);
-            $project->money_gathered = $project->money_gathered + ($this->amount * $project->token_value);
-            $saved = $project->save();
-
-            Yii::$app->mailer->compose('paymentChangedConfirmed', ['model' => $this])
-                ->setTo($this->user->username)
-                ->setFrom([MgHelpers::getSetting('register_email') => MgHelpers::getSetting('register_email_name')])
-                ->setSubject(MgHelpers::getSettingTranslated('payment_status_changed_confirmed_subject', 'Your payment has been confirmed') . ' ' . $this->project->title)
-                ->send();
-        }
-
-        if ($this->getOldAttribute('status') == self::STATUS_PAYMENT_CONFIRMED && $this->getAttribute('status') == self::STATUS_PAYMENT_REALISATION) {
-            Yii::$app->mailer->compose('paymentChangedRealisation', ['model' => $this])
-                ->setTo($this->user->username)
-                ->setFrom([MgHelpers::getSetting('register_email') => MgHelpers::getSetting('register_email_name')])
-                ->setSubject(MgHelpers::getSettingTranslated('payment_status_changed_realisation_subject', 'Your payment has been set to realisation') . ' ' . $this->project->title)
-                ->send();
-        }
-
-        Yii::$app->language = $currentLanguage;
-
-        return parent::save($runValidaton, $attributes);
-    }
 
 
-    public function getBenefit()
-    {
-        return ($this->project->percentage / 100) * $this->amount * (int)$this->project->investition_time;
-    }
-
-    public function getBenefitWithAmount()
-    {
-        return ($this->project->percentage / 100) * $this->amount * (int)$this->project->investition_time + $this->amount;
-    }
-
-    public function getStatusToDisplay()
-    {
-
-        $class = 'red';
-        $label = Yii::t('db', 'Pay');
-        switch ($this->status) {
-            case Payment::STATUS_PAYMENT_CONFIRMED:
-                $class = 'green';
-                $label = Yii::t('db', 'Confirmed');
-                break;
-        }
-
-        return '<span class="'.$class.'">'.$label.'</span>';
-    }
 }

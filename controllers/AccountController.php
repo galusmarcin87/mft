@@ -597,6 +597,49 @@ class AccountController extends \app\components\mgcms\MgCmsController
         return $this->render('paymentAfter', ['type' => $type]);
     }
 
+    function actionBuyAfter($type, $hash)
+    {
+        $data = unserialize(MgHelpers::decrypt($hash));
+
+        if ($type == 'success') {
+            $payment = new Payment();
+            $payment->load(['Payment' => $data]);
+            $payment->amount = str_replace(',', '.', $payment->amount);
+            $payment->save();
+        }
+
+        return $this->render('buyAfter', ['type' => $type, 'payment' => $payment]);
+    }
+
+    function actionRate($hash){
+        $paymentId = MgHelpers::decrypt($hash);
+        if(!$paymentId){
+            return $this->throw404();
+        }
+
+        $payment = Payment::findOne($paymentId);
+        if(!$payment){
+            return $this->throw404();
+        }
+
+        $model = false;
+        switch($payment->type){
+            case 'Product':
+                $model = Product::findOne($payment->rel_id);
+                break;
+            case 'Service':
+                $model = Service::findOne($payment->rel_id);
+                break;
+        }
+
+        if(!$model){
+            return $this->throw404();
+        }
+
+        return $this->render('rate', ['model' => $model]);
+
+    }
+
     public function actionBuy($hash)
     {
         $modelCompany = $this->_getMyCompany();
@@ -664,7 +707,13 @@ class AccountController extends \app\components\mgcms\MgCmsController
             return $this->render('buy', [
                 'clientSecret' => $payment_intent['client_secret'],
                 'stripeAccount' => $model->company->getModelAttribute('stripeId'),
-                'returnUrl' => Url::to(['account/payment-after', 'type' => 'success', 'hash' => MgHelpers::encrypt($modelCompany->id . '.' . date('Y-m-d'))], true),
+                'returnUrl' => Url::to(['account/buy-after', 'type' => 'success', 'hash' => MgHelpers::encrypt(serialize([
+                    'comapnyId' => $modelCompany->id,
+                    'amount' => $model->price,
+                    'rel_id' => $model->id,
+                    'type' => $type,
+                    'user_id' => $this->getUserModel()->id,
+                ]))], true),
             ]);
 
         } catch (Exception $e) {
@@ -721,7 +770,11 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         $accountLink = $stripe->accountLinks->create([
             'account' => $account['id'],
-            'refresh_url' => Url::to(['account'], true),
+            'refresh_url' => Url::to(['account/connect-stripe-account', 'hash' => MgHelpers::encrypt(serialize([
+                    'comapnyId' => $modelCompany->id,
+                    'accountId' => $account['id']
+                ]
+            ))], true),
             'return_url' => Url::to(['account/connect-stripe-account', 'hash' => MgHelpers::encrypt(serialize([
                     'comapnyId' => $modelCompany->id,
                     'accountId' => $account['id']
@@ -732,6 +785,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         return $accountLink['url'];
     }
+
 
 
 }
