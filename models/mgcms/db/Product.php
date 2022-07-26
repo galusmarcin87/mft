@@ -26,6 +26,7 @@ use yii\helpers\Html;
  * @property string $link
  * @property string $linkUrl
  * @property integer $file_id
+ * @property double $rating
  *
  * @property \app\models\mgcms\db\Category $category
  * @property \app\models\mgcms\db\Company $company
@@ -51,8 +52,8 @@ class Product extends \app\models\mgcms\db\AbstractRecord
             [['created_on', 'special_offer_from', 'special_offer_to', 'fileUpload'], 'safe'],
             [['category_id', 'number', 'min_amount_of_purchase', 'company_id', 'file_id'], 'integer'],
             [['description', 'specification'], 'string'],
-            [[ 'special_offer_price'], 'number'],
-            [['name','price',], 'string', 'max' => 245],
+            [['special_offer_price'], 'number'],
+            [['name', 'price',], 'string', 'max' => 245],
             [['is_special_offer'], 'integer', 'max' => 1],
         ];
     }
@@ -154,6 +155,40 @@ class Product extends \app\models\mgcms\db\AbstractRecord
 //        }
 
         return $saved;
+    }
+
+    /**
+     * @return false|Payment
+     */
+    public function getRatePayment()
+    {
+        $user = MgHelpers::getUserModel();
+        if (!$user) {
+            return false;
+        }
+        $payment = Payment::find()->where(['user_id' => $user->id, 'rel_id' => $this->id, 'type' => 'Product'])->one();
+        return $payment;
+
+    }
+
+    public function getRating()
+    {
+        $payments = Payment::find()->where(['rel_id' => $this->id, 'type' => 'Product'])->all();
+        $sum = 0;
+        $max = 0;
+        foreach ($payments as $payment) {
+            if ($payment->rate) {
+                $sum += $payment->rate;
+                $max += 8;
+            }
+        }
+
+        if ($max) {
+            return number_format(($sum / $max) * 8, 2);
+        } else {
+            return 0;
+        }
+
     }
 
 }

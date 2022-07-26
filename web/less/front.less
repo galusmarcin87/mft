@@ -92,3 +92,25 @@
 .service .description p{
   margin-bottom: 0;
 }
+.rating-container{
+  display: inline-block;
+  &.rating-disabled{
+    .rating__star{
+      cursor: initial;
+    }
+  }
+}
+.rating-input{
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  font-size: 1px;
+  border: none;
+  background: none;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+}
+

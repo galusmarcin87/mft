@@ -23,7 +23,7 @@ if ($this->beginCache('hpNumbers'    . Yii::$app->language)) {
                     <?= Company::find()->andWhere(['status' => Company::STATUS_CONFIRMED,'is_for_sale' => 1])->count()?>
                     <small><?= Yii::t('db', 'Companies for sale number') ?></small>
                 </a>
-                <a href="<?= Url::to('project/index')?>" class="numbers__item">
+                <a href="<?= Url::to('product/index')?>" class="numbers__item">
                     <?= Product::find()->count()?>
                     <small><?= Yii::t('db', 'Products number') ?></small>
                 </a>
