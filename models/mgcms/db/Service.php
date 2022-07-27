@@ -118,4 +118,38 @@ class Service extends \app\models\mgcms\db\AbstractRecord
         return $saved;
     }
 
+    /**
+     * @return false|Payment
+     */
+    public function getRatePayment()
+    {
+        $user = MgHelpers::getUserModel();
+        if (!$user) {
+            return false;
+        }
+        $payment = Payment::find()->where(['user_id' => $user->id, 'rel_id' => $this->id, 'type' => 'Service'])->one();
+        return $payment;
+
+    }
+
+    public function getRating()
+    {
+        $payments = Payment::find()->where(['rel_id' => $this->id, 'type' => 'Service'])->all();
+        $sum = 0;
+        $max = 0;
+        foreach ($payments as $payment) {
+            if ($payment->rate) {
+                $sum += $payment->rate;
+                $max += 8;
+            }
+        }
+
+        if ($max) {
+            return number_format(($sum / $max) * 8, 2);
+        } else {
+            return 0;
+        }
+
+    }
+
 }

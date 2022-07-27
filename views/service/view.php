@@ -39,35 +39,7 @@ $imagesCount = 0;
                 </div>
                 <div>
                     <div class="training__badge"><?= Yii::t('db', 'SERVICE') ?></div>
-                    <div class="rating hidden">
-                        Oceń:
-                        <i
-                                class="fa fa-star rating__star rating__star--active"
-                                aria-hidden="true"
-                        ></i>
-                        <i
-                                class="fa fa-star rating__star rating__star--active"
-                                aria-hidden="true"
-                        ></i>
-                        <i
-                                class="fa fa-star rating__star rating__star--active"
-                                aria-hidden="true"
-                        ></i>
-                        <i
-                                class="fa fa-star rating__star rating__star--active"
-                                aria-hidden="true"
-                        ></i>
-                        <i
-                                class="fa fa-star rating__star rating__star--active"
-                                aria-hidden="true"
-                        ></i>
-                        <i
-                                class="fa fa-star rating__star rating__star--active"
-                                aria-hidden="true"
-                        ></i>
-                        <i class="fa fa-star rating__star" aria-hidden="true"></i>
-                        <span class="rating__rate">(6,0)</span>
-                    </div>
+                    <?= $this->render('/common/rate', ['model' => $model]); ?>
                     <h1><?= $model->name ?></h1>
                     <div class="hr"></div>
                     <div class="label"><?= Yii::t('db', 'Category') ?>:</div>

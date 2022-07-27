@@ -34,7 +34,6 @@ if (!$toRate) {
     ]); ?>
 
     <? if ($toRate): ?>
-        <?= Yii::t('db', 'Rate') ?>
         <?= $form->field($payment, 'rate')->widget(StarRating::classname(), [
             'pluginOptions' => $options,
             'value' => $model->rating,

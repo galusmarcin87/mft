@@ -49,6 +49,14 @@ class ServiceController extends \app\components\mgcms\MgCmsController
     public function actionView($id)
     {
         $model = Service::find()->where(['id' => $id])->one();
+
+        $payment = $model->getRatePayment();
+        if($payment){
+            if ($payment->load(Yii::$app->request->post())) {
+                $payment->save();
+            }
+        }
+
         if (!$model) {
             throw new \yii\web\HttpException(404, Yii::t('app', 'Not found'));
         }
