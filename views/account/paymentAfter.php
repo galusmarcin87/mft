@@ -13,8 +13,11 @@ use yii\bootstrap\ActiveForm;
 ?>
 <section class="companies-wrapper companies-wrapper--dashboard">
     <div class="container">
-        <h1><?= Yii::t('db', 'Payment') ?></h1>
-        <div><?= MgHelpers::getSetting('payment after ' . $type . ' ' . Yii::$app->language, true, 'payment after ' . $type) ?></div>
-
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <h1><?= Yii::t('db', 'Payment') ?></h1>
+                <div><?= MgHelpers::getSetting('payment after ' . $type . ' ' . Yii::$app->language, true, 'payment after ' . $type) ?></div>
+            </div>
+        </div>
     </div>
 </section>
