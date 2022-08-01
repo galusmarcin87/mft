@@ -773,7 +773,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             return $this->back();
         }
 
-        $accountLink = $stripe->accountLinks->create([
+        $createParams = [
             'account' => $account['id'],
             'refresh_url' => Url::to(['account/connect-stripe-account', 'hash' => MgHelpers::encrypt(serialize([
                     'comapnyId' => $modelCompany->id,
@@ -786,7 +786,12 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 ]
             ))], true),
             'type' => 'account_onboarding',
-        ]);
+        ];
+        echo '<pre>';
+        echo var_dump($createParams);
+        echo '</pre>';
+        exit;
+        $accountLink = $stripe->accountLinks->create($createParams);
 
         return $accountLink['url'];
     }
