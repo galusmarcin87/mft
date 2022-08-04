@@ -86,12 +86,12 @@ class Service extends \app\models\mgcms\db\AbstractRecord
 
     public function getLinkUrl()
     {
-        return \yii\helpers\Url::to(['/service/view', 'id' => $this->id, 'name' => $this->name]);
+        return \yii\helpers\Url::to(['/service/view', 'id' => $this->id, 'name' => urlencode($this->name)]);
     }
 
     public function getLink()
     {
-        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/service/view', 'id' => $this->id, 'name' => $this->name]));
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/service/view', 'id' => $this->id, 'name' => urlencode($this->name)]));
     }
 
     public function save($runValidaton = true, $attributes = null)

@@ -108,11 +108,11 @@ class Agent extends \app\models\mgcms\db\AbstractRecord
 
     public function getLinkUrl($type = 'info')
     {
-        return \yii\helpers\Url::to(['/agent/view', 'name' => $this->full_name, 'id' => $this->id]);
+        return \yii\helpers\Url::to(['/agent/view', 'name' =>  urlencode($this->full_name), 'id' => $this->id]);
     }
 
     public function getLink()
     {
-        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/agent/view', 'name' => $this->full_name, 'id' => $this->id]));
+        return Html::a(Yii::t('db', 'See'), \yii\helpers\Url::to(['/agent/view', 'name' =>  urlencode($this->full_name), 'id' => $this->id]));
     }
 }
