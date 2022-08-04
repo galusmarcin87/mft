@@ -766,6 +766,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $account = $stripe->accounts->create([
             'type' => 'standard',
             'country' => 'PL',
+            'business_type' => 'company',
             'email' => $modelCompany->email,
         ]);
         if (!$account['id']) {
