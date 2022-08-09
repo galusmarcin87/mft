@@ -31,6 +31,7 @@ use yii\helpers\Html;
  * @property \app\models\mgcms\db\Category $category
  * @property \app\models\mgcms\db\Company $company
  * @property \app\models\mgcms\db\File $file
+ * @property \app\models\mgcms\db\File $firstImage
  */
 class Product extends \app\models\mgcms\db\AbstractRecord
 {
@@ -189,6 +190,19 @@ class Product extends \app\models\mgcms\db\AbstractRecord
             return 0;
         }
 
+    }
+
+    /**
+     * @return File|void
+     */
+    public function getFirstImage(){
+        foreach ($this->fileRelations as $relation){
+            if ($relation->json !== '1' && $relation->file && $relation->file->isImage()){
+                return $relation->file;
+            }
+        }
+
+        return null;
     }
 
 }

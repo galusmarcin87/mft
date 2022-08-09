@@ -11,10 +11,10 @@ $model->language = Yii::$app->language;
         href="<?=$model->getLinkUrl()?>"
         class="company company--service"
 >
-    <?if($model->company->thumbnail && $model->company->thumbnail->isImage()):?>
+    <?if($model->firstImage):?>
     <img
             class="company__logo"
-            src="<?= $model->company->thumbnail->getImageSrc(250,178, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET)?>"
+            src="<?= $model->firstImage->getImageSrc(250,178, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET)?>"
             alt=""
     />
     <? else: ?>
