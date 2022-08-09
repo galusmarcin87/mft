@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\BuyForm;
 use app\models\LoginCodeForm;
 use app\models\mgcms\db\Agent;
 use app\models\mgcms\db\Company;
@@ -696,35 +697,40 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
         $stripe = new \Stripe\StripeClient($apiKey);
-        try {
 
+        $buyForm = new BuyForm();
 
-            $application_fee = (double)MgHelpers::getSetting('stripe prowizja procent', false, 5);
-            $payment_intent = $stripe->paymentIntents->create([
-                'amount' => (int)$model->price * 100,
-                'currency' => 'PLN',
-                'automatic_payment_methods' => ['enabled' => true],
-                'application_fee_amount' => (int)$application_fee * $price,
-            ], ['stripe_account' => $model->company->getModelAttribute('stripeId')]);
+        if ($buyForm->load(Yii::$app->request->post()) && $buyForm->validate()) {
+            try {
+                $amount = (double)((double)$buyForm->amount * (double)$model->price);
+                $application_fee = (double)MgHelpers::getSetting('stripe prowizja procent', false, 5);
+                $payment_intent = $stripe->paymentIntents->create([
+                    'amount' => (int)($amount * 100),
+                    'currency' => 'PLN',
+                    'automatic_payment_methods' => ['enabled' => true],
+                    'application_fee_amount' => (int)$application_fee * $price,
+                ], ['stripe_account' => $model->company->getModelAttribute('stripeId')]);
 
+                return $this->render('buy', [
+                    'clientSecret' => $payment_intent['client_secret'],
+                    'stripeAccount' => $model->company->getModelAttribute('stripeId'),
+                    'returnUrl' => Url::to(['account/buy-after', 'type' => 'success', 'hash' => MgHelpers::encrypt(serialize([
+                        'comapnyId' => $modelCompany->id,
+                        'amount' => $amount,
+                        'rel_id' => $model->id,
+                        'type' => $type,
+                        'user_id' => $this->getUserModel()->id,
+                    ]))], true),
+                ]);
+            } catch (Exception $e) {
 
-            return $this->render('buy', [
-                'clientSecret' => $payment_intent['client_secret'],
-                'stripeAccount' => $model->company->getModelAttribute('stripeId'),
-                'returnUrl' => Url::to(['account/buy-after', 'type' => 'success', 'hash' => MgHelpers::encrypt(serialize([
-                    'comapnyId' => $modelCompany->id,
-                    'amount' => $model->price,
-                    'rel_id' => $model->id,
-                    'type' => $type,
-                    'user_id' => $this->getUserModel()->id,
-                ]))], true),
-            ]);
-
-        } catch (Exception $e) {
-
-            MgHelpers::setFlashError(Yii::t('db', $e));
-            return $this->back();
+                MgHelpers::setFlashError(Yii::t('db', $e));
+                return $this->back();
+            }
         }
+
+        return $this->render('buyForm', ['model' => $model, 'buyForm' => $buyForm]);
+
 
     }
 

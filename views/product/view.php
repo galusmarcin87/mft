@@ -62,7 +62,10 @@ $imagesCount = 0;
                             <div class="label"><?= Yii::t('db', 'Price') ?> PLN:</div>
                             <?= $model->price ?> PLN / szt
                             <div>
-                                <a href="<?= \yii\helpers\Url::to(['account/buy', 'hash' => \app\components\mgcms\MgHelpers::encrypt(serialize(['type' => 'Product', 'id' => $model->id]))]) ?>"><?= Yii::t('db', 'Pay') ?></a>
+                                <a
+                                        href="<?= \yii\helpers\Url::to(['account/buy', 'hash' => \app\components\mgcms\MgHelpers::encrypt(serialize(['type' => 'Product', 'id' => $model->id]))]) ?>"
+                                        class="btn btn--primary"
+                                ><?= Yii::t('db', 'Pay') ?></a>
                             </div>
                             <div class="hr"></div>
                         </div>
