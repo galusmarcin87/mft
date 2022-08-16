@@ -118,7 +118,8 @@ class User extends \app\models\mgcms\db\AbstractRecord
         'company_country' => Yii::t('db', 'Country'),
         'company_postcode' => Yii::t('db', 'Postcode'),
         'company_city' => Yii::t('db', 'City'),
-        'file_text' => 'Pliki oddzielane enterem, nazwa;link'
+        'file_text' => 'Pliki oddzielane enterem, nazwa;link',
+        'imAgentCheckbox' => Yii::t('db', 'I am agent'),
     ];
   }
 

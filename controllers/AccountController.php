@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\mgcms\yii\ActiveForm;
 use app\models\BuyForm;
 use app\models\LoginCodeForm;
 use app\models\mgcms\db\Agent;
@@ -470,10 +471,29 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $model->company_id = $modelCompany->id;
         $model->role = User::ROLE_REPRESENTATIVE;
 
+
         $modelAgent = new Agent();
         $modelAgent->company_id = $modelCompany->id;
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            if($model->imAgentCheckbox){
+                $model->scenario = 'onAgent';
+            }
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+
         if ($model->load(Yii::$app->request->post())) {
+            if($model->imAgentCheckbox){
+                $model = $this->getUserModel();
+                $model->scenario = 'onAgent';
+                $model->load(Yii::$app->request->post());
+                $model->username = $model->getOldAttribute('username');
+            }
+
+
+
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
                 $fileModel = new File;

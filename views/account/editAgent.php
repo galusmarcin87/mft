@@ -53,11 +53,26 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         <?php $form = ActiveForm::begin([
                             'id' => 'category-edit-form',
                             'options' => ['class' => 'contact-form'],
-                            'fieldConfig' => $fieldConfig
+                            'fieldConfig' => $fieldConfig,
+                            'enableAjaxValidation' => true,
+                            'enableClientValidation' => false,
                         ]); ?>
                         <?= $form->errorSummary($model); ?>
-                        <?= $form->field($model, 'first_name')->textInput(['placeholder' => $model->getAttributeLabel('first_name')]) ?>
-                        <?= $form->field($model, 'last_name')->textInput(['placeholder' => $model->getAttributeLabel('last_name')]) ?>
+
+                        <div class="switch-wrapper">
+                            <?= Yii::t('db', 'I am the agent') ?>
+                            <label class="switch">
+                                <input type="checkbox" id="imAgentCheckbox"
+                                       name="User[imAgentCheckbox]" <?= $model->imAgentCheckbox ? 'checked' : '' ?>
+                                       value="1"/>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div class="imAgentWrapper <?= $model->imAgentCheckbox ? 'hidden' : '' ?>">
+                            <?= $form->field($model, 'first_name')->textInput(['placeholder' => $model->getAttributeLabel('first_name')]) ?>
+                            <?= $form->field($model, 'last_name')->textInput(['placeholder' => $model->getAttributeLabel('last_name')]) ?>
+                        </div>
 
                         <div class="mb-4 bottom25">
                             <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
@@ -68,7 +83,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <?= $form->field($model, 'phone')->textInput(['placeholder' => $model->getAttributeLabel('phone')]) ?>
                         </div>
 
-                        <div class="flex">
+                        <div class="flex imAgentWrapper">
                             <?= $form->field($model, 'username')->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
                         </div>
 
@@ -106,3 +121,14 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
         </div>
     </div>
 </section>
+
+<script>
+    $('#imAgentCheckbox').on('change', function () {
+        const isChecked = $(this).is(':checked');
+        if (isChecked) {
+            $('.imAgentWrapper').addClass('hidden');
+        }else{
+            $('.imAgentWrapper').removeClass('hidden');
+        }
+    });
+</script>

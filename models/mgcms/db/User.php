@@ -112,6 +112,7 @@ class User extends BaseUser implements IdentityInterface
     public $oldPassword;
 
     public $acceptTerms;
+    public $imAgentCheckbox = false;
 
     /**
      * @inheritdoc
@@ -127,7 +128,7 @@ class User extends BaseUser implements IdentityInterface
     public function rules()
     {
         return [
-            [['username'], 'required'],
+            [['username'], 'required', 'except' => 'onAgent'],
             [['status', 'created_by', 'file_id', 'acceptTerms5', 'acceptTerms6'], 'integer'],
             [['created_on', 'last_login', 'birthdate', 'country', 'voivodeship', 'street', 'flat_no', 'citizenship', 'id_document_no', 'id_document_type', 'pesel', 'oldPassword'], 'safe'],
             [['username', 'password', 'first_name', 'last_name', 'email', 'address', 'postcode', 'city', 'cor_first_name', 'cor_last_name', 'cor_country', 'cor_voivodeship', 'cor_street', 'cor_flat_no', 'cor_house_no', 'cor_city', 'cor_postcode'], 'string', 'max' => 245],
@@ -145,6 +146,7 @@ class User extends BaseUser implements IdentityInterface
             [['first_name', 'last_name', 'linkedin', 'instagram', 'phone', 'position'], 'required', 'on' => 'person'],
             [['company_name','company_nip','company_regon', 'company_country', 'company_voivodeship', 'company_street', 'company_flat_no', 'company_house_no', 'company_city', 'company_postcode', 'bank_no'], 'safe'],
             [['file_text'], 'string'],
+            [['imAgentCheckbox'], 'safe']
         ];
     }
 
