@@ -14,35 +14,7 @@ use yii\bootstrap\ActiveForm;
 
 ?>
 
-<div class="rating hidden">
-    Oceń:
-    <i
-            class="fa fa-star rating__star rating__star--active"
-            aria-hidden="true"
-    ></i>
-    <i
-            class="fa fa-star rating__star rating__star--active"
-            aria-hidden="true"
-    ></i>
-    <i
-            class="fa fa-star rating__star rating__star--active"
-            aria-hidden="true"
-    ></i>
-    <i
-            class="fa fa-star rating__star rating__star--active"
-            aria-hidden="true"
-    ></i>
-    <i
-            class="fa fa-star rating__star rating__star--active"
-            aria-hidden="true"
-    ></i>
-    <i
-            class="fa fa-star rating__star rating__star--active"
-            aria-hidden="true"
-    ></i>
-    <i class="fa fa-star rating__star" aria-hidden="true"></i>
-    <span class="rating__rate">(6,0)</span>
-</div>
+<?= $this->render('/common/rate', ['model' => $model]); ?>
 <h1 class="text-left"><?=$model->name?></h1>
 <div class="hr"></div>
 <div class="label"><?= Yii::t('db', 'Address') ?>:</div>

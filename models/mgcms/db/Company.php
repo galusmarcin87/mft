@@ -282,4 +282,36 @@ class Company extends \app\models\mgcms\db\AbstractRecord
 
         return parent::beforeSave($insert);
     }
+
+    /**
+     * @return false|Payment
+     */
+    public function getRatePayment()
+    {
+        return false;
+
+    }
+
+    public function getRating()
+    {
+        $payments = Payment::find()->where(['company_id' => $this->id])->all();
+        $sum = 0;
+        $max = 0;
+        foreach ($payments as $payment) {
+            if ($payment->rate) {
+                $sum += $payment->rate;
+                $max += 8;
+            }
+        }
+
+        if ($max) {
+            return number_format(($sum / $max) * 8, 2);
+        } else {
+            return 0;
+        }
+
+    }
+
+
+
 }

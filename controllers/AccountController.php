@@ -735,7 +735,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
                     'clientSecret' => $payment_intent['client_secret'],
                     'stripeAccount' => $model->company->getModelAttribute('stripeId'),
                     'returnUrl' => Url::to(['account/buy-after', 'type' => 'success', 'hash' => MgHelpers::encrypt(serialize([
-                        'comapnyId' => $modelCompany->id,
+                        'company_id' => $modelCompany->id,
                         'amount' => $amount,
                         'rel_id' => $model->id,
                         'type' => $type,
