@@ -16,9 +16,10 @@ NavBar::begin([
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
     'items' => [
-//        ['label' => T::t('Sliders'), 'url' => '/backend/mgcms/slider', 'visible' => MgHelpers::checkAccess('slider', 'index')],
+
 //        ['label' => T::t('Team Members'), 'url' => '/backend/mgcms/team-member', 'visible' => MgHelpers::checkAccess('team-member', 'index')],
         ['label' => T::t('Companies'), 'url' => '/backend/mgcms/company', 'visible' => MgHelpers::checkAccess('company', 'index')],
+        ['label' => T::t('Sliders'), 'url' => '/backend/mgcms/slider', 'visible' => MgHelpers::checkAccess('slider', 'index')],
 //        ['label' => T::t('Projects'), 'url' => '/backend/mgcms/project', 'visible' => MgHelpers::checkAccess('project', 'index')],
 //        ['label' => T::t('Payments'), 'url' => '/backend/mgcms/payment', 'visible' => MgHelpers::checkAccess('payment', 'index')],
         ['label' => T::t('Articles'), 'url' => '/backend/mgcms/article', 'visible' => MgHelpers::checkAccess('article', 'index')],
