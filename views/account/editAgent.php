@@ -54,7 +54,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             'id' => 'category-edit-form',
                             'options' => ['class' => 'contact-form'],
                             'fieldConfig' => $fieldConfig,
-                            'enableAjaxValidation' => true,
+                            'enableAjaxValidation' => false,
                             'enableClientValidation' => false,
                         ]); ?>
                         <?= $form->errorSummary($model); ?>
