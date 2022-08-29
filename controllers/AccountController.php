@@ -79,6 +79,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
     private function _getMyCompany()
     {
         $user = $this->getUserModel();
+        if(!$user){
+            return false;
+        }
         $myCompany = Company::find()->where(['user_id' => $user->id])->one();
         if (!$myCompany) {
             $myCompany = Company::find()->where(['id' => $user->company_id])->one();
@@ -668,6 +671,11 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
     public function actionBuy($hash)
     {
+        $user = $this->getUserModel();
+        if(!$user){
+            MgHelpers::setFlashError(Yii::t('db', 'Log in first'));
+            return $this->redirect(['site/login']);
+        }
         $modelCompany = $this->_getMyCompany();
         if (!$modelCompany) {
             MgHelpers::setFlashError(Yii::t('db', 'You need to create company first in order to buy'));
