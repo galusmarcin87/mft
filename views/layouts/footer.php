@@ -11,6 +11,7 @@ $menu2 = new NobleMenu(['name' => 'footer2_' . Yii::$app->language, 'loginLink' 
 ?>
     <footer class="footer-wrapper">
       <div class="container">
+
         <img src="/img/logo_meetfaces_white.png" class="footer__Logo" alt="" />
         <div class="footer">
           <div>

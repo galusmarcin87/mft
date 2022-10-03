@@ -32,8 +32,8 @@ $request = $this->context->request;
         </a>
     </div>
 
-    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/agents', 'account/edit-agent'])): ?>menu-vertical__category--collapsed<? endif ?>">
-        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/agents', 'account/edit-agent'])): ?>menu-vertical__item--active<? endif ?>">
+    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/agents', 'account/agent-edit', 'account/add-agent'])): ?>menu-vertical__category--collapsed<? endif ?>">
+        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/agents', 'account/agent-edit', 'account/add-agent'])): ?>menu-vertical__item--active<? endif ?>">
             <?= Yii::t('db', 'Agents') ?>
         </div>
         <a
@@ -43,13 +43,13 @@ $request = $this->context->request;
             <?= Yii::t('db', 'Agents') ?>
         </a>
         <a href="<?= Url::to('/account/add-agent') ?>"
-           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/edit-agent'): ?>menu-vertical__item--active<? endif; ?>">
+           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/add-agent'): ?>menu-vertical__item--active<? endif; ?>">
             <?= Yii::t('db', 'Add agent') ?>
         </a>
     </div>
 
-    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/products', 'account/edit-product'])): ?>menu-vertical__category--collapsed<? endif ?>">
-        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/products', 'account/edit-product'])): ?>menu-vertical__item--active<? endif ?>">
+    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/products', 'account/product-edit', 'account/add-product'])): ?>menu-vertical__category--collapsed<? endif ?>">
+        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/products', 'account/product-edit', 'account/add-product'])): ?>menu-vertical__item--active<? endif ?>">
             <?= Yii::t('db', 'Products') ?>
         </div>
         <a
@@ -59,13 +59,13 @@ $request = $this->context->request;
             <?= Yii::t('db', 'Products') ?>
         </a>
         <a href="<?= Url::to('/account/add-product') ?>"
-           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/edit-product'): ?>menu-vertical__item--active<? endif; ?>">
+           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/add-product'): ?>menu-vertical__item--active<? endif; ?>">
             <?= Yii::t('db', 'Add product') ?>
         </a>
     </div>
 
-    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/services', 'account/edit-service'])): ?>menu-vertical__category--collapsed<? endif ?>">
-        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/services', 'account/edit-service'])): ?>menu-vertical__item--active<? endif ?>">
+    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/services', 'account/service-edit', 'account/add-service'])): ?>menu-vertical__category--collapsed<? endif ?>">
+        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/services', 'account/service-edit', 'account/add-service'])): ?>menu-vertical__item--active<? endif ?>">
             <?= Yii::t('db', 'Services') ?>
         </div>
         <a
@@ -75,13 +75,13 @@ $request = $this->context->request;
             <?= Yii::t('db', 'Services') ?>
         </a>
         <a href="<?= Url::to('/account/add-service') ?>"
-           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/edit-service'): ?>menu-vertical__item--active<? endif; ?>">
+           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/add-service'): ?>menu-vertical__item--active<? endif; ?>">
             <?= Yii::t('db', 'Add service') ?>
         </a>
     </div>
 
-    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/jobs', 'account/edit-job'])): ?>menu-vertical__category--collapsed<? endif ?>">
-        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/jobs', 'account/edit-job'])): ?>menu-vertical__item--active<? endif ?>">
+    <div class="menu-vertical__category <? if (!in_array($request->getPathInfo(), ['account/jobs', 'account/job-edit','account/add-job'])): ?>menu-vertical__category--collapsed<? endif ?>">
+        <div class="menu-vertical__item <? if (in_array($request->getPathInfo(), ['account/jobs', 'account/job-edit','account/add-job'])): ?>menu-vertical__item--active<? endif ?>">
             <?= Yii::t('db', 'Job offers') ?>
         </div>
         <a
@@ -91,7 +91,7 @@ $request = $this->context->request;
             <?= Yii::t('db', 'Job offers') ?>
         </a>
         <a href="<?= Url::to('/account/add-job') ?>"
-           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/edit-job'): ?>menu-vertical__item--active<? endif; ?>">
+           class="menu-vertical__item <? if ($request->getPathInfo() == 'account/add-job'): ?>menu-vertical__item--active<? endif; ?>">
             <?= Yii::t('db', 'Add job offer') ?>
         </a>
     </div>
