@@ -51,16 +51,20 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             'fieldConfig' => $fieldConfig
                         ]); ?>
                         <?= $form->errorSummary($model); ?>
+						<?= Yii::t('db', 'Profit realization') ?>
                         <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
 
                         <div class="mb-4 bottom25">
+							<?= Yii::t('db', 'TOKEN') ?>
                             <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                         </div>
                         <div class="mb-4 bottom25">
+							<?= Yii::t('db', 'Value') ?>
                             <?= $form->field($model, 'specification')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('specification')])) ?>
                         </div>
 
-                        <div class="flex">
+                        <?= Yii::t('db', 'Blockchain') ?>
+						<div class="flex">
                             <?= $form->field($model, 'price')->textInput(['placeholder' => $model->getAttributeLabel('price')]) ?>
                         </div>
 
@@ -84,7 +88,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
                         <label class="file-uplad">
                             + <?= Yii::t('db', 'Add') ?>
-                            <?= $form->field($model, 'uploadedFiles[]')->fileInput(['multiple' => true, 'accept' => '.jpg,.jpeg', 'class' => 'inputfile']); ?>
+                            <?= $form->field($model, 'uploadedFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
                         </label>
 
 

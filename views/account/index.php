@@ -14,8 +14,9 @@ use \yii\helpers\Url;
             <?= $this->render('_leftMenu')?>
             <div>
                 <div class="dashboard-wrapper">
-                    <div class="row">
-                    <h1 class="text-left col-md-4"><?= Yii::t('db', 'Dashboard') ?></h1>
+                                        <h1 class="text-left col-md-4"><?= Yii::t('db', 'Dashboard') ?></h1><br>
+					<div class="row">
+
                     <?if($myCompany):?>
                         <div class="text-left col-md-8 paySubscription">
 							<a href="<?= Url::to('/account/pay-subscription-stripe') ?>" class="btn btn--primary"><?= Yii::t('db', 'Pay subscription') ?></a>
@@ -76,43 +77,7 @@ use \yii\helpers\Url;
                         <a href="<?= Url::to('/account/add-job') ?>" class="btn btn--primary">+ <?= Yii::t('db', 'Add') ?></a>
                         <a href="<?= Url::to('/account/jobs') ?>" class="btn btn--primary"><?= Yii::t('db', 'See') ?></a>
                     </div>
-                    <div id="ACCORDION" class="accordion">
-                        <div class="accordion__header">
-                            Jak uzupełnić dane dotyczące firmy?
-                        </div>
-                        <div class="accordion__content">
-                            Aby uzupełnić dane Twojej firmy przejdź do zakładki „Firmy”
-                            znajdującej się w menu panelu administracyjnego a następnie
-                            wybierz opcję „Edytuj firmę”. Po wprowadzeniu wszystkich
-                            wymaganych danych zatwierdź zmiany poprzez przycisk „Zapisz”.
-                            Pamiętaj, że wprowadzone przez Ciebie dane będą wyświetlane w
-                            obrębie platformy Meetfaces Trading, dlatego zadbaj o ich
-                            najlepszą jakość.
-                        </div>
-                        <div class="accordion__header">
-                            Jak dodać przedstawiciela firmy?
-                        </div>
-                        <div class="accordion__content">
-                            Aby uzupełnić dane Twojej firmy przejdź do zakładki „Firmy”
-                            znajdującej się w menu panelu administracyjnego a następnie
-                            wybierz opcję „Edytuj firmę”. Po wprowadzeniu wszystkich
-                            wymaganych danych zatwierdź zmiany poprzez przycisk „Zapisz”.
-                            Pamiętaj, że wprowadzone przez Ciebie dane będą wyświetlane w
-                            obrębie platformy Meetfaces Trading, dlatego zadbaj o ich
-                            najlepszą jakość.
-                        </div>
-                        <div class="accordion__header">
-                            Jak dodać produkty oraz usługi?
-                        </div>
-                        <div class="accordion__content">
-                            Aby uzupełnić dane Twojej firmy przejdź do zakładki „Firmy”
-                            znajdującej się w menu panelu administracyjnego a następnie
-                            wybierz opcję „Edytuj firmę”. Po wprowadzeniu wszystkich
-                            wymaganych danych zatwierdź zmiany poprzez przycisk „Zapisz”.
-                            Pamiętaj, że wprowadzone przez Ciebie dane będą wyświetlane w
-                            obrębie platformy Meetfaces Trading, dlatego zadbaj o ich
-                            najlepszą jakość.
-                        </div>
+                 
                     </div>
                 </div>
             </div>

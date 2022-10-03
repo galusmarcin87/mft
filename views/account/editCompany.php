@@ -53,12 +53,16 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         <?= Yii::t('db', 'Time left') ?>
                         <div class="contact-form">
                             <?= $form->errorSummary($model); ?>
+							<?= Yii::t('db', 'Current projects') ?>
                             <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
 
                             <div class="mb-4 bottom25">
+								<?= Yii::t('db', 'Current') ?>
                                 <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                             </div>
                             <div class="mb-4 bottom25">
+								
+								<?= Yii::t('db', 'Ended') ?>
                                 <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
                                     'data' => \yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type' => Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
                                     'options' => ['placeholder' => Yii::t('db', 'Choose Category'), 'prompt' => ''],
@@ -66,8 +70,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                         'allowClear' => true
                                     ],
                                 ]); ?>
-                            </div>
-
+                            </div><br>
+							<?= Yii::t('db', 'Planned') ?>
                             <div class="text-right">
                                 <button class="btn btn--primary btn--medium" type="submit">
                                     <?= Yii::t('db', 'Save') ?>

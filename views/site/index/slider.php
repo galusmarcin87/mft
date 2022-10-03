@@ -74,10 +74,10 @@ if (!$slider) {
                         </a>
                     </div>
                     <div class="main-slider__images">
-                        <a href="<?= $slide->link?>" target="_blank"><img src="<?= MgHelpers::getSetting('slider right first image',false, '/img/slider-rabat.jpg')?>" alt="" /></a>
+                        <a href="<?= $slide->link?>" target="_blank"><img src="<?= MgHelpers::getSetting('slider right first image',false, '/img/slider-nowy2.jpg')?>" alt="" /></a>
                         <? if ($slide->file && $slide->file->isImage()): ?><img src="<?= $slide->file->getImageSrc() ?>"/><? endif ?>
-                    </div>
-                </div>
+					</div>
+               </div>
             <? endforeach ?>
 
         </div>

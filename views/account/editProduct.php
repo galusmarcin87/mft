@@ -51,15 +51,19 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             'fieldConfig' => $fieldConfig
                         ]); ?>
                         <?= $form->errorSummary($model); ?>
+						<?= Yii::t('db', 'Annual profit') ?>
                         <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
 
                         <div class="mb-4 bottom25">
+							<?= Yii::t('db', 'Pre-sale start') ?>
                             <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                         </div>
                         <div class="mb-4 bottom25">
+							<?= Yii::t('db', 'Pre-sale end') ?>
                             <?= $form->field($model, 'specification')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('specification')])) ?>
                         </div>
                         <div class="mb-4 bottom25">
+							<?= Yii::t('db', 'Crowdsale start') ?>
                             <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
                                 'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->andWhere(['type' => \app\models\mgcms\db\Category::TYPE_PRODUCT_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
                                 'options' => ['placeholder' => Yii::t('app', 'Choose Category'), 'prompt' => '',],
@@ -68,12 +72,14 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                 ],
                             ]); ?>
                         </div>
-
+						
+						<?= Yii::t('db', 'Crowdsale end') ?>
                         <div class="flex">
                             <?= $form->field($model, 'price')->textInput(['placeholder' => $model->getAttributeLabel('price')]) ?>
                             <?= $form->field($model, 'number')->textInput(['placeholder' => $model->getAttributeLabel('number')]) ?>
                         </div>
-
+						
+						<?= Yii::t('db', 'Crowdsale profit') ?>
                         <div class="switch-wrapper">
                             <?= Yii::t('db', 'Standard offer') ?>
                             <label class="switch">
@@ -83,7 +89,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             </label>
                             <?= Yii::t('db', 'Special offer') ?>
                         </div>
-
+						
+						<?= Yii::t('db', 'Pre-sale bonus') ?>
                         <div class="flex mb-4">
                             <?= $form->field($model, 'special_offer_from')->widget(\kartik\datecontrol\DateControl::classname(), [
                                 'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
@@ -98,6 +105,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                     ]
                                 ],
                             ]); ?>
+				
                             <?= $form->field($model, 'special_offer_to')->widget(\kartik\datecontrol\DateControl::classname(), [
                                 'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
                                 'saveFormat' => 'php:Y-m-d',

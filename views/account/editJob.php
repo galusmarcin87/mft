@@ -51,23 +51,27 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             'fieldConfig' => $fieldConfig
                         ]); ?>
                         <?= $form->errorSummary($model); ?>
+						<?= Yii::t('db', 'Intended for sale') ?>
                         <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
 
                         <div class="mb-4 bottom25">
+							<?= Yii::t('db', 'Left') ?>
                             <?= $form->field($model, 'info')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                         </div>
                         <div class="mb-4 bottom25">
+							<?= Yii::t('db', 'tokens') ?>
                             <?= $form->field($model, 'requirements')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('specification')])) ?>
                         </div>
 
-                        <div class="flex">
+                        <?= Yii::t('db', 'BONUS FOR SALE') ?>
+						<div class="flex">
                             <?= $form->field($model, 'salary')->textInput(['placeholder' => $model->getAttributeLabel('salary')]) ?>
                             <?= $form->field($model, 'position')->textInput(['placeholder' => $model->getAttributeLabel('position')]) ?>
                         </div>
 
 
                         <div class="flex">
-                            <?= $form->field($model, 'address')->textInput(['placeholder' => $model->getAttributeLabel('min_amount_of_purchase')]) ?>
+                            <?= $form->field($model, 'address')->textInput(['placeholder' => $model->getAttributeLabel('')]) ?>
                             <div>
                                 <div class="select-wrqpper full-width">
                                     <?= $form->field($model, 'industry')->
@@ -95,7 +99,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                     ></i>
                                 </div>
                             </div>
-                            <?= $form->field($model, 'city')->textInput(['placeholder' => $model->getAttributeLabel('min_amount_of_purchase')]) ?>
+                            <?= $form->field($model, 'city')->textInput(['placeholder' => $model->getAttributeLabel('job_city')]) ?>
                         </div>
 
                         <h2 class="with-label"><?= Yii::t('db', 'Image') ?></h2>
@@ -114,7 +118,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
                         <label class="file-uplad">
                             + <?= Yii::t('db', 'Add') ?>
-                            <?= $form->field($model, 'fileUpload')->fileInput(['multiple' => false, 'accept' => '.jpg,.jpeg', 'class' => 'inputfile']); ?>
+                            <?= $form->field($model, 'fileUpload')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
                         </label>
 
 

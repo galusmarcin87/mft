@@ -70,11 +70,13 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         </div>
 
                         <div class="imAgentWrapper <?= $model->imAgentCheckbox ? 'hidden' : '' ?>">
-                            <?= $form->field($model, 'first_name')->textInput(['placeholder' => $model->getAttributeLabel('first_name')]) ?>
+                            <?= Yii::t('db', 'Parent') ?>
+							<?= $form->field($model, 'first_name')->textInput(['placeholder' => $model->getAttributeLabel('first_name')]) ?>
                             <?= $form->field($model, 'last_name')->textInput(['placeholder' => $model->getAttributeLabel('last_name')]) ?>
                         </div>
 
                         <div class="mb-4 bottom25">
+							<?= Yii::t('db', 'News') ?>
                             <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                         </div>
 
@@ -88,7 +90,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         </div>
 
                         <h2 class="with-label"><?= Yii::t('db', 'Image') ?></h2>
-                        <label><?= Yii::t('db', 'Choose graphics') ?></label>
+                        <?= Yii::t('db', 'They write about us') ?>
 
 
                         <? if ($model->file && $model->file->isImage()): ?>
