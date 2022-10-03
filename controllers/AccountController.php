@@ -487,7 +487,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         }
 
 
-        if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post()) ) {
             if($model->imAgentCheckbox){
                 $model = $this->getUserModel();
                 $model->scenario = 'onAgent';
@@ -504,6 +504,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->file_id = $file->id;
             }
 
+            $model->validate();
             $model->password = uniqid();
             if ($model->save()) {
                 $this->_assignDownloadFiles($model);
