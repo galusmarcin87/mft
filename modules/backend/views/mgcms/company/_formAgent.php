@@ -36,7 +36,7 @@
                 'type' => TabularForm::INPUT_WIDGET,
                 'widgetClass' => \kartik\widgets\Select2::className(),
                 'options' => [
-                    'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->andWhere(['role' => \app\models\mgcms\db\User::ROLE_REPRESENTATIVE])->orderBy('last_name')->all(), 'id', 'toString'),
+                    'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->andWhere(['role' => [\app\models\mgcms\db\User::ROLE_REPRESENTATIVE, \app\models\mgcms\db\User::ROLE_CLIENT]])->orderBy('last_name')->all(), 'id', 'toString'),
                     'options' => ['placeholder' => Yii::t('app', 'Choose User')],
                 ],
                 'columnOptions' => ['width' => '200px']
