@@ -47,7 +47,7 @@ use yii\helpers\Url;
 
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'role')->dropDownList(MgHelpers::arrayCombineFromOneArray(Yii::$app->params['roles']), ['maxlength' => true]) ?>
+            <?= $form->field($model, 'role')->dropDownList(MgHelpers::arrayKeyValueFromArray(\app\models\mgcms\db\User::ROLES, true), ['maxlength' => true]) ?>
 
         </div>
         <div class="col-md-4">
