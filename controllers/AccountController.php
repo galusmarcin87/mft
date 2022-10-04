@@ -474,7 +474,6 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $model->company_id = $modelCompany->id;
         $model->role = User::ROLE_REPRESENTATIVE;
 
-
         $modelAgent = new Agent();
         $modelAgent->company_id = $modelCompany->id;
 
@@ -493,9 +492,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->scenario = 'onAgent';
                 $model->load(Yii::$app->request->post());
                 $model->username = $model->getOldAttribute('username');
+                $model->first_name = $model->getOldAttribute('first_name');
+                $model->last_name = $model->getOldAttribute('last_name');
             }
-
-
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
@@ -505,7 +504,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
             }
 
             $model->validate();
-            $model->password = uniqid();
+            if(!$model->imAgentCheckbox){
+                $model->password = uniqid();
+            }
             if ($model->save()) {
                 $this->_assignDownloadFiles($model);
                 $modelAgent->user_id = $model->id;
