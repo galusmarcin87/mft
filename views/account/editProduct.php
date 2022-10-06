@@ -72,13 +72,13 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                 ],
                             ]); ?>
                         </div>
-						
+
 						<?= Yii::t('db', 'Crowdsale end') ?>
                         <div class="flex">
                             <?= $form->field($model, 'price')->textInput(['placeholder' => $model->getAttributeLabel('price')]) ?>
                             <?= $form->field($model, 'number')->textInput(['placeholder' => $model->getAttributeLabel('number')]) ?>
                         </div>
-						
+
 						<?= Yii::t('db', 'Crowdsale profit') ?>
                         <div class="switch-wrapper">
                             <?= Yii::t('db', 'Standard offer') ?>
@@ -89,7 +89,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             </label>
                             <?= Yii::t('db', 'Special offer') ?>
                         </div>
-						
+
 						<?= Yii::t('db', 'Pre-sale bonus') ?>
                         <div class="flex mb-4">
                             <?= $form->field($model, 'special_offer_from')->widget(\kartik\datecontrol\DateControl::classname(), [
@@ -105,7 +105,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                     ]
                                 ],
                             ]); ?>
-				
+
                             <?= $form->field($model, 'special_offer_to')->widget(\kartik\datecontrol\DateControl::classname(), [
                                 'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
                                 'saveFormat' => 'php:Y-m-d',
@@ -141,7 +141,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
                         <label class="file-uplad">
                             + <?= Yii::t('db', 'Add') ?>
-                            <?= $form->field($model, 'fileUpload')->fileInput(['multiple' => false, 'accept' => '.jpg,.jpeg', 'class' => 'inputfile']); ?>
+                            <?= $form->field($model, 'fileUpload')->fileInput(['multiple' => false, 'accept' => '.jpg,.jpeg,.png', 'class' => 'inputfile']); ?>
                         </label>
 
 
@@ -165,7 +165,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
                         <label class="file-uplad">
                             + <?= Yii::t('db', 'Add') ?>
-                            <?= $form->field($model, 'uploadedFiles[]')->fileInput(['multiple' => true, 'accept' => '.jpg,.jpeg', 'class' => 'inputfile']); ?>
+                            <?= $form->field($model, 'uploadedFiles[]')->fileInput(['multiple' => true, 'accept' => '.jpg,.jpeg,.png', 'class' => 'inputfile']); ?>
                         </label>
 
 

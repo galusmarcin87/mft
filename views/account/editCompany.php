@@ -61,7 +61,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                 <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                             </div>
                             <div class="mb-4 bottom25">
-								
+
 								<?= Yii::t('db', 'Ended') ?>
                                 <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
                                     'data' => \yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type' => Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
@@ -236,7 +236,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <label class="file-uplad">
                                 + <?= Yii::t('db', 'Add') ?>
 
-                                <?= $form->field($model, 'thumbnailFile')->fileInput(['multiple' => false, 'accept' => '.jpg,.jpeg', 'class' => 'inputfile']); ?>
+                                <?= $form->field($model, 'thumbnailFile')->fileInput(['multiple' => false, 'accept' => '.jpg,.jpeg,.png', 'class' => 'inputfile']); ?>
 
                             </label>
 
@@ -257,7 +257,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
                             <label class="file-uplad">
                                 + <?= Yii::t('db', 'Add') ?>
-                                <?= $form->field($model, 'backgroundFile')->fileInput(['multiple' => false, 'accept' => '.jpg,.jpeg', 'class' => 'inputfile']); ?>
+                                <?= $form->field($model, 'backgroundFile')->fileInput(['multiple' => false, 'accept' => '.jpg,.jpeg,.png', 'class' => 'inputfile']); ?>
                             </label>
 
                             <h2 class="with-label"><?= Yii::t('db', 'Gallery') ?></h2>
