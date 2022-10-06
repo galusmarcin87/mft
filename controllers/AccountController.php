@@ -164,6 +164,19 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->file_id = null;
                 $model->save();
                 break;
+            case 'app\models\mgcms\db\Company':
+                if($relId != $company->id){
+                    MgHelpers::setFlashError(Yii::t('db','Problem with perform this operation'));
+                    $this->back();
+                }
+                $model = Company::find()->where(['id' => $relId])->one();
+                if(!$model){
+                    MgHelpers::setFlashError(Yii::t('db','Problem with finding company'));
+                    $this->back();
+                }
+                $model->thumbnail_id = null;
+                $model->save();
+                break;
             default:
                 break;
         }

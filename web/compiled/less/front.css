@@ -84,3 +84,11 @@
   padding: 0;
   margin: 0;
 }
+.file-uplad {
+  position: relative;
+}
+.deleteLink {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
