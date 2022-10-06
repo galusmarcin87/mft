@@ -147,6 +147,29 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $this->back();
     }
 
+    public function actionDeleteMainImage($relId, $model)
+    {
+        $company = $this->_getMyCompany();
+        if(!$company){
+            MgHelpers::setFlashError(Yii::t('db','You need to have company to perform this action'));
+            $this->back();
+        }
+        switch ($model) {
+            case 'app\models\mgcms\db\Product':
+                $model = Product::find()->where(['company_id'=>$company->id,'id' => $relId])->one();
+                if(!$model){
+                    MgHelpers::setFlashError(Yii::t('db','Problem with finding product'));
+                    $this->back();
+                }
+                $model->file_id = null;
+                $model->save();
+                break;
+            default:
+                break;
+        }
+        $this->back();
+    }
+
     public function actionProducts()
     {
         $model = $this->_getMyCompany();
@@ -219,7 +242,6 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $model->language = $lang;
 
         if ($model->load(Yii::$app->request->post())) {
-
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
                 $fileModel = new File;

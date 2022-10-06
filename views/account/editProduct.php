@@ -134,7 +134,9 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                     id="MINIATURE-PREVIEW"
                                     class="file-uplad"
                             >
+                                <? echo \yii\helpers\Html::a(Icon::show('trash', ['framework' => Icon::FA]), MgHelpers::createUrl(['/account/delete-main-image', 'relId' => $model->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
                                 <img src="<?= $model->file->getImageSrc(140) ?>" class=""/>
+
                             </div>
                         <? endif; ?>
 
