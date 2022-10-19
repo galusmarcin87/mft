@@ -147,7 +147,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $this->back();
     }
 
-    public function actionDeleteMainImage($relId, $model)
+    public function actionDeleteMainImage($relId, $model, $type = 'main')
     {
         $company = $this->_getMyCompany();
         if(!$company){
@@ -161,6 +161,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
                     MgHelpers::setFlashError(Yii::t('db','Problem with finding product'));
                     $this->back();
                 }
+
                 $model->file_id = null;
                 $model->save();
                 break;
@@ -174,7 +175,15 @@ class AccountController extends \app\components\mgcms\MgCmsController
                     MgHelpers::setFlashError(Yii::t('db','Problem with finding company'));
                     $this->back();
                 }
-                $model->thumbnail_id = null;
+                switch($type){
+                    case 'main':
+                        $model->thumbnail_id = null;
+                        break;
+                    case 'background':
+                        $model->background_id = null;
+                        break;
+                }
+
                 $model->save();
                 break;
             default:

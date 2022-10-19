@@ -53,16 +53,16 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         <?= Yii::t('db', 'Time left') ?>
                         <div class="contact-form">
                             <?= $form->errorSummary($model); ?>
-							<?= Yii::t('db', 'Current projects') ?>
+                            <?= Yii::t('db', 'Current projects') ?>
                             <?= $form->field($model, 'name')->textInput(['placeholder' => $model->getAttributeLabel('name')]) ?>
 
                             <div class="mb-4 bottom25">
-								<?= Yii::t('db', 'Current') ?>
+                                <?= Yii::t('db', 'Current') ?>
                                 <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                             </div>
                             <div class="mb-4 bottom25">
 
-								<?= Yii::t('db', 'Ended') ?>
+                                <?= Yii::t('db', 'Ended') ?>
                                 <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
                                     'data' => \yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type' => Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
                                     'options' => ['placeholder' => Yii::t('db', 'Choose Category'), 'prompt' => ''],
@@ -70,8 +70,9 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                         'allowClear' => true
                                     ],
                                 ]); ?>
-                            </div><br>
-							<?= Yii::t('db', 'Planned') ?>
+                            </div>
+                            <br>
+                            <?= Yii::t('db', 'Planned') ?>
                             <div class="text-right">
                                 <button class="btn btn--primary btn--medium" type="submit">
                                     <?= Yii::t('db', 'Save') ?>
@@ -249,6 +250,12 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                         id="BG-IMAGE-PREVIEW"
                                         class="file-uplad"
                                 >
+                                    <? echo \yii\helpers\Html::a(Icon::show('trash', ['framework' => Icon::FA]), MgHelpers::createUrl([
+                                        '/account/delete-main-image',
+                                        'relId' => $model->id,
+                                        'model' => $model::className(),
+                                        'type' => 'background'
+                                    ]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
                                     <img
                                             src="<?= $model->background->getImageSrc(240, 0) ?>"
                                             alt=""
@@ -290,9 +297,13 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <div>
                                 <? foreach ($model->fileRelations as $relation): ?>
                                     <? if ($relation->json != '1' || !$relation->file) continue ?>
+                                <span class="inline-block position-relative">
+                                    <? echo \yii\helpers\Html::a(Icon::show('trash', ['framework' => Icon::FA]), MgHelpers::createUrl(['/account/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
                                     <a href="<?= $relation->file->getLinkUrl() ?>"
                                        class="btn btn-primary btn--medium mb-1 ml-0"
                                        target="_blank"><?= $relation->file->origin_name ?> </a>
+                                </span>
+
                                 <? endforeach ?>
                             </div>
                             <label class="file-uplad">
