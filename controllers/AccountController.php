@@ -102,7 +102,12 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         if ($model->load(Yii::$app->request->post())) {
             $thumbnail = UploadedFile::getInstance($model, 'thumbnailFile');
+
             if ($thumbnail) {
+                if($thumbnail->size > 1024 * 1024 * 2){
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($thumbnail));
                 $model->thumbnail_id = $file->id;
@@ -110,6 +115,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $background = UploadedFile::getInstance($model, 'backgroundFile');
             if ($background) {
+                if($background->size > 1024 * 1024 * 2){
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
                 $fileModel2 = new File;
                 $file2 = $fileModel2->push(new \rmrevin\yii\module\File\resources\UploadedResource($background));
                 $model->background_id = $file2->id;
@@ -117,13 +126,17 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $videoThumbnail = UploadedFile::getInstance($model, 'video_thumbnail');
             if ($videoThumbnail) {
+                if($videoThumbnail->size > 1024 * 1024 * 2){
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($videoThumbnail));
                 $model->video_thumbnail = $file->getImageSrc(240, 0);
             }
 
             $this->_assignDownloadFiles($model);
-            if ($model->save()) {
+            if ($model->validate() && $model->save()) {
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
@@ -266,6 +279,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
         if ($model->load(Yii::$app->request->post())) {
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
+                if($fileUpload->size > 1024 * 1024 * 2){
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
                 $model->file_id = $file->id;
@@ -299,6 +316,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
+                if($fileUpload->size > 1024 * 1024 * 2){
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
                 $model->file_id = $file->id;
@@ -331,6 +352,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
+                if($fileUpload->size > 1024 * 1024 * 2){
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
                 $model->file_id = $file->id;
@@ -487,6 +512,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
+                if($fileUpload->size > 1024 * 1024 * 2){
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
                 $model->file_id = $file->id;
@@ -542,6 +571,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
+                if($fileUpload->size > 1024 * 1024 * 2){
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
                 $fileModel = new File;
                 $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($fileUpload));
                 $model->file_id = $file->id;
