@@ -19,9 +19,9 @@ use app\components\mgcms\MgHelpers;
     public function rules()
     {
         return [
-            [['id', 'project_id', 'user_id'], 'integer'],
-            [['created_on', 'status', 'is_preico', 'user_token', 'user_id'], 'safe'],
-            [['amount', 'percentage'], 'number'],
+            [['id', 'user_id'], 'integer'],
+            [['created_on', 'status', 'user_id', 'type'], 'safe'],
+            [['amount'], 'number'],
         ];
     }
 
@@ -61,15 +61,12 @@ use app\components\mgcms\MgHelpers;
         $query->andFilterWhere([
             'id' => $this->id,
             'created_on' => $this->created_on,
-            'project_id' => $this->project_id,
             'user_id' => $this->user_id,
             'amount' => $this->amount,
-            'percentage' => $this->percentage,
+            'type' => $this->type,
         ]);
 
-        $query->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'is_preico', $this->is_preico])
-            ->andFilterWhere(['like', 'user_token', $this->user_token]);
+        $query->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

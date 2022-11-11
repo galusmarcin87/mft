@@ -19,15 +19,7 @@ $this->registerJs($search);
 <div class="payment-index">
 
   <h1><?= Html::encode($this->title) ?></h1>
-  <p>
-    <?
-    $controller = Yii::$app->controller->id;
-    if (\app\components\mgcms\MgHelpers::getUserModel()->checkAccess($controller, 'create')):
 
-      ?>
-      <?= Html::a(Yii::t('app', 'Create Payment'), ['create'], ['class' => 'btn btn-success']) ?>
-  <? endif ?>
-  </p>
   <?php
   $gridColumn = [
       ['class' => 'yii\grid\SerialColumn'],
@@ -46,19 +38,6 @@ $this->registerJs($search);
       ['attribute' => 'id', 'visible' => false],
       'created_on',
       [
-          'attribute' => 'project_id',
-          'label' => Yii::t('app', 'Project'),
-          'value' => function($model) {
-            return $model->project->name;
-          },
-          'filterType' => GridView::FILTER_SELECT2,
-          'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Project::find()->asArray()->all(), 'id', 'name'),
-          'filterWidgetOptions' => [
-              'pluginOptions' => ['allowClear' => true],
-          ],
-          'filterInputOptions' => ['placeholder' => Yii::t('app', 'Project'), 'id' => 'grid-payment-search-project_id']
-      ],
-      [
           'attribute' => 'user_id',
           'label' => Yii::t('app', 'User'),
           'value' => function($model) {
@@ -71,27 +50,23 @@ $this->registerJs($search);
           ],
           'filterInputOptions' => ['placeholder' => Yii::t('app', 'User'), 'id' => 'grid-payment-search-user_id']
       ],
-      'user.first_name',
-      'user.last_name',
-      'amount',
       [
-          'attribute' => 'status',
+          'attribute' => 'type',
           'filterType' => GridView::FILTER_SELECT2,
           'value' => function($model) {
-            return $model->statusStr;
+              return $model->typeStr;
           },
-          'filter' => \app\models\mgcms\db\Payment::STATUSES,
+          'filter' => \app\models\mgcms\db\Payment::TYPES,
           'filterWidgetOptions' => [
               'pluginOptions' => ['allowClear' => true],
           ],
           'filterInputOptions' => ['placeholder' => Yii::t('app', 'Status')]
       ],
-//      'percentage',
-//      'is_preico',
-//      'user_token',
+      'amount',
+      'relLink:raw',
       [
           'class' => app\components\mgcms\yii\ActionColumn::className(),
-          'template' => '{save-as-new} {view} {update} {delete}',
+          'template' => '{view} {delete}',
           'buttons' => [
               'save-as-new' => function ($url) {
                 return Html::a('<span class="glyphicon glyphicon-copy"></span>', $url, ['title' => 'Save As New']);

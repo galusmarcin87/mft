@@ -4,6 +4,7 @@ namespace app\models\mgcms\db;
 
 use Yii;
 use app\components\mgcms\MgHelpers;
+use yii\helpers\Html;
 
 /**
  * This is the base model class for table "payment".
@@ -35,6 +36,13 @@ class Payment extends \app\models\mgcms\db\AbstractRecord
         self::STATUS_PAYMENT_CONFIRMED => 'Potwierdzone',
         self::STATUS_PAYMENT_REALISATION => 'Realizacja zysku',
         self::STATUS_UNKNOWN => 'Nieznany',
+    ];
+
+    const TYPE_PRODUCT = 'Product';
+    const TYPE_SERVICE = 'Service';
+    const TYPES = [
+        self::TYPE_PRODUCT => 'Produkt',
+        self::TYPE_SERVICE => 'Serwis',
     ];
 
 
@@ -83,6 +91,8 @@ class Payment extends \app\models\mgcms\db\AbstractRecord
             'comments' => 'Komentarz',
             'statusToDisplay' => Yii::t('db', 'Payment status'),
             'benefitWithAmount' => Yii::t('db', 'Expected return with profit'),
+            'type'=> Yii::t('app', 'Type'),
+            'amount' => Yii::t('db', 'Amount'),
         ];
     }
 
@@ -106,6 +116,27 @@ class Payment extends \app\models\mgcms\db\AbstractRecord
     public function getStatusStr()
     {
         return array_key_exists($this->status, self::STATUSES) ? self::STATUSES[$this->status] : '';
+    }
+
+    public function getTypeStr()
+    {
+        return array_key_exists($this->type, self::TYPES) ? self::TYPES[$this->type] : '';
+    }
+
+    public function getRelLink(){
+        $model = false;
+        switch($this->type){
+            case self::TYPE_PRODUCT:
+                $model = Product::findOne($this->rel_id);
+                break;
+            case self::TYPE_SERVICE:
+                $model = Service::findOne($this->rel_id);
+
+        }
+        if($model && isset($model->linkUrl)){
+
+            return Html::a(Yii::t('db', $model->name), \yii\helpers\Url::to(['/backend/mgcms/'. strtolower($this->type) .'/view', 'id' => $model->id]));
+        }
     }
 
 

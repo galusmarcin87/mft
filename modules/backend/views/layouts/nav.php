@@ -21,7 +21,7 @@ echo Nav::widget([
         ['label' => T::t('Companies'), 'url' => '/backend/mgcms/company', 'visible' => MgHelpers::checkAccess('company', 'index')],
         ['label' => T::t('Sliders'), 'url' => '/backend/mgcms/slider', 'visible' => MgHelpers::checkAccess('slider', 'index')],
 //        ['label' => T::t('Projects'), 'url' => '/backend/mgcms/project', 'visible' => MgHelpers::checkAccess('project', 'index')],
-//        ['label' => T::t('Payments'), 'url' => '/backend/mgcms/payment', 'visible' => MgHelpers::checkAccess('payment', 'index')],
+        ['label' => T::t('Payments'), 'url' => '/backend/mgcms/payment', 'visible' => MgHelpers::checkAccess('payment', 'index')],
         ['label' => T::t('Articles'), 'url' => '/backend/mgcms/article', 'visible' => MgHelpers::checkAccess('article', 'index')],
         ['label' => T::t('Categories'), 'url' => '/backend/mgcms/category', 'visible' => MgHelpers::checkAccess('category', 'index')],
         ['label' => T::t('Files'), 'url' => '/backend/mgcms/file', 'visible' => MgHelpers::checkAccess('file', 'index')],
