@@ -74,7 +74,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <br>
                             <?= Yii::t('db', 'Planned') ?>
                             <div class="text-right">
-                                <button class="btn btn--primary btn--medium" type="submit">
+                                <button class="btn btn--primary btn--medium" type="submit"
+                                        onclick="return formSubmit()">
                                     <?= Yii::t('db', 'Save') ?>
                                 </button>
                             </div>
@@ -210,7 +211,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                 <?= $form->field($model, 'video_thumbnail')->fileInput(['multiple' => false, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
                             </label>
                             <div class="text-right">
-                                <button class="btn btn--primary btn--medium" type="submit">
+                                <button class="btn btn--primary btn--medium" type="submit"
+                                        onclick="return formSubmit()">
                                     <?= Yii::t('db', 'Save') ?>
                                 </button>
                             </div>
@@ -297,7 +299,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <div>
                                 <? foreach ($model->fileRelations as $relation): ?>
                                     <? if ($relation->json != '1' || !$relation->file) continue ?>
-                                <span class="inline-block position-relative">
+                                    <span class="inline-block position-relative">
                                     <? echo \yii\helpers\Html::a(Icon::show('trash', ['framework' => Icon::FA]), MgHelpers::createUrl(['/account/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
                                     <a href="<?= $relation->file->getLinkUrl() ?>"
                                        class="btn btn-primary btn--medium mb-1 ml-0"
@@ -312,7 +314,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             </label>
 
                             <div class="text-right">
-                                <button class="btn btn--primary btn--medium" type="submit">
+                                <button class="btn btn--primary btn--medium" type="submit"
+                                        onclick="return formSubmit()">
                                     <?= Yii::t('db', 'Save') ?>
                                 </button>
                             </div>
@@ -331,4 +334,12 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
     saleSwitch.change(function () {
         $('#saleWrapper').toggleClass('hidden');
     });
+
+    function formSubmit () {
+        <?if($model->isNewRecord):?>
+            return confirm('<?= Yii::t('db','In order to your company be visible for other users Meetfaces Trading, you have to add product or service. Would you like to add product now?')?>');
+        <?else:?>
+            return true;
+        <?endif?>
+    }
 </script>

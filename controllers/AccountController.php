@@ -138,6 +138,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
             $this->_assignDownloadFiles($model);
             if ($model->validate() && $model->save()) {
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
+                if($model->isNewRecord){
+                    return $this->redirect(['add-product']);
+                }
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
             }
