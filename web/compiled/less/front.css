@@ -99,3 +99,14 @@
 .position-relative {
   position: relative;
 }
+.rating-container .filled-stars {
+  -webkit-text-stroke: initial;
+  text-shadow: none;
+}
+.rating__star {
+  color: #e8d5a0;
+}
+.rating__star--active,
+.rating__star:hover {
+  color: #D4AF37;
+}
