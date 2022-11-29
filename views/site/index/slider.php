@@ -31,7 +31,7 @@ if (!$slider) {
                                             class="block-icons__icon"
                                             alt=""
                                     />
-                                    <?= MgHelpers::getSetting('slider 1 text',false, 'Invest <br />in MFT')?>
+                                    <?= MgHelpers::getSetting('slider 1 text ' . Yii::$app->language,false, 'Invest <br />in MFT')?>
                                 </div>
                             </a>
                             <a href="<?= MgHelpers::getSetting('slider 2 link',false, '/product/index?specialOffer=1')?>">
@@ -41,7 +41,7 @@ if (!$slider) {
                                             class="block-icons__icon"
                                             alt=""
                                     />
-                                    <?= MgHelpers::getSetting('slider 2 text',false, 'Products <br /> on sale')?>
+                                    <?= MgHelpers::getSetting('slider 2 text '. Yii::$app->language,false, 'Products <br /> on sale')?>
 
                                 </div>
                             </a>
@@ -52,7 +52,7 @@ if (!$slider) {
                                             class="block-icons__icon"
                                             alt=""
                                     />
-                                    <?= MgHelpers::getSetting('slider 3 text',false, 'Benefis')?>
+                                    <?= MgHelpers::getSetting('slider 3 text '. Yii::$app->language,false, 'Benefis')?>
 
                                 </div>
                             </a>
@@ -63,14 +63,14 @@ if (!$slider) {
                                             class="block-icons__icon"
                                             alt=""
                                     />
-                                    <?= MgHelpers::getSetting('slider 4 text',false, 'Partner <br /> Program')?>
+                                    <?= MgHelpers::getSetting('slider 4 text '. Yii::$app->language,false, 'Partner <br /> Program')?>
 
                                 </div>
                             </a>
 
                         </div>
                         <a href="<?= MgHelpers::getSetting('slider bottom link',false, '/art/wiecej-o-mft')?>" class="btn btn--primary">
-                            <?= MgHelpers::getSetting('slider bottom link text',false, 'About Meetfaces Trading')?>
+                            <?= MgHelpers::getSetting('slider bottom link text ' . Yii::$app->language,false, 'About Meetfaces Trading')?>
                         </a>
                     </div>
                     <div class="main-slider__images">
