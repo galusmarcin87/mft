@@ -15,11 +15,13 @@ $continents = [
 ?>
 <section class="world-map-container">
     <div class="container">
-        <h1>Wybierz Twój Rynek lub Kraj</h1>
-        <p>
+        <h1><?= Yii::t('db','Choose your market or country')?></h1>
+        <?= MgHelpers::getSetting('map description ' . Yii::$app->language, true, '<p>
             Meetfaces Trading będzie działać na ponad 90 rynkach. Sprawdź lokalne
             firmy i dowiedz się, jakie produkty dostępne są w Twoim regionie.
-        </p>
+        </p>')?>
+
+
         <div class="world-map">
             <div class="map-container">
                 <img

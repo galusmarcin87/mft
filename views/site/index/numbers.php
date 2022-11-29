@@ -36,7 +36,7 @@ if ($this->beginCache('hpNumbers'    . Yii::$app->language)) {
                     <small><?= Yii::t('db', 'Job offers number') ?></small>
                 </a>
             </div>
-            <div class="text-center">
+            <div class="text-center hidden">
                 <a href="" class="btn btn--primary"> Sprawdź najnowszą inwestycje </a>
             </div>
         </div>

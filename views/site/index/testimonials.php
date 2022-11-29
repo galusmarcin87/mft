@@ -4,6 +4,10 @@
 use app\components\mgcms\MgHelpers;
 use yii\web\View;
 
+$testimonials = MgHelpers::getSettingOptionArray('testimonials '. Yii::$app->language);
+if(count($testimonials) == 0){
+    return false;
+}
 
 ?>
 
@@ -14,39 +18,19 @@ use yii\web\View;
                 style="background-image: url('./img/testimonials-bg.png')"
         >
             <div id="TESTIMONIALS" class="owl-carousel owl-theme">
-                <div class="item testimonials__item">
-                    <img
-                            class="testimonials__quote"
-                            src="./svg/cudzyslow.svg"
-                            alt=""
-                    />
-                    <p>
-                        Współzależni ludzie łączą swoje własne wysiłki z wysiłkami innych, aby osiągnąć największy sukces.<br>
-						Steve Covey
-                    </p>
-                </div>
-                <div class="item testimonials__item">
-                    <img
-                            class="testimonials__quote"
-                            src="./svg/cudzyslow.svg"
-                            alt=""
-                    />
-                    <p>
-                        Współzależni ludzie łączą swoje własne wysiłki z wysiłkami innych, aby osiągnąć największy sukces.<br>
-						Steve Covey
-                    </p>
-                </div>
-                <div class="item testimonials__item">
-                    <img
-                            class="testimonials__quote"
-                            src="./svg/cudzyslow.svg"
-                            alt=""
-                    />
-                    <p>
-                        Współzależni ludzie łączą swoje własne wysiłki z wysiłkami innych, aby osiągnąć największy sukces.<br>
-						Steve Covey
-                    </p>
-                </div>
+                <?foreach($testimonials as $testimonial):?>
+                    <div class="item testimonials__item">
+                        <img
+                                class="testimonials__quote"
+                                src="./svg/cudzyslow.svg"
+                                alt=""
+                        />
+                        <p>
+                            <?=$testimonial?>
+                        </p>
+                    </div>
+                <?endforeach;?>
+
             </div>
         </div>
     </div>
