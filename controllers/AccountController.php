@@ -79,7 +79,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
     private function _getMyCompany()
     {
         $user = $this->getUserModel();
-        if(!$user){
+        if (!$user) {
             return false;
         }
         $myCompany = Company::find()->where(['user_id' => $user->id])->one();
@@ -104,7 +104,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             $thumbnail = UploadedFile::getInstance($model, 'thumbnailFile');
 
             if ($thumbnail) {
-                if($thumbnail->size > 1024 * 1024 * 2){
+                if ($thumbnail->size > 1024 * 1024 * 2) {
                     MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
                     return $this->refresh();
                 }
@@ -115,7 +115,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $background = UploadedFile::getInstance($model, 'backgroundFile');
             if ($background) {
-                if($background->size > 1024 * 1024 * 2){
+                if ($background->size > 1024 * 1024 * 2) {
                     MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
                     return $this->refresh();
                 }
@@ -126,7 +126,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $videoThumbnail = UploadedFile::getInstance($model, 'video_thumbnail');
             if ($videoThumbnail) {
-                if($videoThumbnail->size > 1024 * 1024 * 2){
+                if ($videoThumbnail->size > 1024 * 1024 * 2) {
                     MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
                     return $this->refresh();
                 }
@@ -138,7 +138,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             $this->_assignDownloadFiles($model);
             if ($model->validate() && $model->save()) {
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
-                if($model->isNewRecord){
+                if ($model->isNewRecord) {
                     return $this->redirect(['add-product']);
                 }
             } else {
@@ -166,15 +166,15 @@ class AccountController extends \app\components\mgcms\MgCmsController
     public function actionDeleteMainImage($relId, $model, $type = 'main')
     {
         $company = $this->_getMyCompany();
-        if(!$company){
-            MgHelpers::setFlashError(Yii::t('db','You need to have company to perform this action'));
+        if (!$company) {
+            MgHelpers::setFlashError(Yii::t('db', 'You need to have company to perform this action'));
             $this->back();
         }
         switch ($model) {
             case 'app\models\mgcms\db\Product':
-                $model = Product::find()->where(['company_id'=>$company->id,'id' => $relId])->one();
-                if(!$model){
-                    MgHelpers::setFlashError(Yii::t('db','Problem with finding product'));
+                $model = Product::find()->where(['company_id' => $company->id, 'id' => $relId])->one();
+                if (!$model) {
+                    MgHelpers::setFlashError(Yii::t('db', 'Problem with finding product'));
                     $this->back();
                 }
 
@@ -182,16 +182,16 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->save();
                 break;
             case 'app\models\mgcms\db\Company':
-                if($relId != $company->id){
-                    MgHelpers::setFlashError(Yii::t('db','Problem with perform this operation'));
+                if ($relId != $company->id) {
+                    MgHelpers::setFlashError(Yii::t('db', 'Problem with perform this operation'));
                     $this->back();
                 }
                 $model = Company::find()->where(['id' => $relId])->one();
-                if(!$model){
-                    MgHelpers::setFlashError(Yii::t('db','Problem with finding company'));
+                if (!$model) {
+                    MgHelpers::setFlashError(Yii::t('db', 'Problem with finding company'));
                     $this->back();
                 }
-                switch($type){
+                switch ($type) {
                     case 'main':
                         $model->thumbnail_id = null;
                         break;
@@ -282,7 +282,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         if ($model->load(Yii::$app->request->post())) {
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
-                if($fileUpload->size > 1024 * 1024 * 2){
+                if ($fileUpload->size > 1024 * 1024 * 2) {
                     MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
                     return $this->refresh();
                 }
@@ -319,7 +319,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
-                if($fileUpload->size > 1024 * 1024 * 2){
+                if ($fileUpload->size > 1024 * 1024 * 2) {
                     MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
                     return $this->refresh();
                 }
@@ -355,7 +355,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
-                if($fileUpload->size > 1024 * 1024 * 2){
+                if ($fileUpload->size > 1024 * 1024 * 2) {
                     MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
                     return $this->refresh();
                 }
@@ -515,7 +515,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
-                if($fileUpload->size > 1024 * 1024 * 2){
+                if ($fileUpload->size > 1024 * 1024 * 2) {
                     MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
                     return $this->refresh();
                 }
@@ -554,7 +554,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $modelAgent->company_id = $modelCompany->id;
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            if($model->imAgentCheckbox){
+            if ($model->imAgentCheckbox) {
                 $model->scenario = 'onAgent';
             }
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -562,8 +562,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
         }
 
 
-        if ($model->load(Yii::$app->request->post()) ) {
-            if($model->imAgentCheckbox){
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->imAgentCheckbox) {
                 $model = $this->getUserModel();
                 $model->scenario = 'onAgent';
                 $model->load(Yii::$app->request->post());
@@ -574,7 +574,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
-                if($fileUpload->size > 1024 * 1024 * 2){
+                if ($fileUpload->size > 1024 * 1024 * 2) {
                     MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
                     return $this->refresh();
                 }
@@ -584,7 +584,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             }
 
             $model->validate();
-            if(!$model->imAgentCheckbox){
+            if (!$model->imAgentCheckbox) {
                 $model->password = uniqid();
             }
             if ($model->save()) {
@@ -754,7 +754,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
     public function actionBuy($hash)
     {
         $user = $this->getUserModel();
-        if(!$user){
+        if (!$user) {
             MgHelpers::setFlashError(Yii::t('db', 'Log in first'));
             return $this->redirect(['site/login']);
         }
@@ -907,6 +907,33 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $accountLink = $stripe->accountLinks->create($createParams);
 
         return $accountLink['url'];
+    }
+
+    public function actionFvProforma()
+    {
+        $company = $this->_getMyCompany();
+        if (!$company) {
+            return $this->throw404();
+        }
+
+        $this->view->registerCssFile(Yii::getAlias('@web') . '/css/fv.css');
+        $content = $this->renderAjax('fvProforma', [
+            'company' => $company
+        ]);
+
+
+        $pdf = new \kartik\mpdf\Pdf([
+            'mode' => \kartik\mpdf\Pdf::MODE_UTF8,
+            'format' => \kartik\mpdf\Pdf::FORMAT_A4,
+            'orientation' => \kartik\mpdf\Pdf::ORIENT_PORTRAIT,
+            'destination' => \kartik\mpdf\Pdf::DEST_BROWSER,
+            'cssFile' => Yii::getAlias('@app') . '/web/css/fv.css',
+            'content' => $content,
+        ]);
+
+
+//        return $content;
+        return $pdf->render();
     }
 
 
