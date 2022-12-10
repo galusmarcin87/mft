@@ -239,4 +239,15 @@ class AbstractRecord extends \yii\db\ActiveRecord
             }
         }
     }
+
+    public function delete()
+    {
+        try {
+            return parent::delete();
+        }catch (yii\db\IntegrityException  $e){
+            MgHelpers::setFlashError(Yii::t('app', 'Problem with deletion. You need to remove all relational object first'));
+            return false;
+        }
+
+    }
 }
