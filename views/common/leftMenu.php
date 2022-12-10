@@ -17,7 +17,7 @@ $request = $this->context->request;
 
 ?>
 
-<div class="menu-vertical">
+<div class="menu-vertical menu-vertical--closed">
     <div class="label"><?= Yii::t('db', 'Filter') ?></div>
     <div class="menu-vertical__toggle">
         <i class="fa fa-times" aria-hidden="true"></i>

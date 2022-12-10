@@ -151,9 +151,27 @@
   color: #D4AF37;
 }
 
-.carousel-wrap.buttons{
-    .btn{
-      margin-left: 0;
-      margin-bottom: 5px;
-    }
+.btn{
+  margin-bottom: 15px;
 }
+.btn + .btn{
+  margin-left: 0;
+
+}
+
+.company-wrapper .single-company__image{
+  height: auto;
+}
+
+@media (max-width: 991px){
+  .about-wrapper::before{
+    display: none;
+  }
+}
+
+@media (min-width: 992px){
+  .menu-vertical--closed{
+    margin-left: 0;
+  }
+}
+

@@ -10,7 +10,7 @@ use \yii\helpers\Url;
 $request = $this->context->request;
 ?>
 
-<div class="menu-vertical">
+<div class="menu-vertical menu-vertical--closed">
     <div class="menu-vertical__toggle">
         <i class="fa fa-times" aria-hidden="true"></i>
         <i class="fa fa-bars" aria-hidden="true"></i>
