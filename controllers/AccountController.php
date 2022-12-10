@@ -280,6 +280,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         $model->language = $lang;
 
         if ($model->load(Yii::$app->request->post())) {
+
             $fileUpload = UploadedFile::getInstance($model, 'fileUpload');
             if ($fileUpload) {
                 if ($fileUpload->size > 1024 * 1024 * 2) {
@@ -527,6 +528,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             if ($model->save()) {
                 $this->_assignDownloadFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
+                $this->redirect('account/index');
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
             }
