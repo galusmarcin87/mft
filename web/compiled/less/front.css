@@ -110,3 +110,7 @@
 .rating__star:hover {
   color: #D4AF37;
 }
+.carousel-wrap.buttons .btn {
+  margin-left: 0;
+  margin-bottom: 5px;
+}

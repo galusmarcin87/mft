@@ -73,7 +73,7 @@ $model->language = Yii::$app->language;
                     <? if (count($model->fileRelations)): ?>
                         <div>
                             <h3><?= Yii::t('db', 'Multimedia') ?></h3>
-                            <div class="carousel-wrap">
+                            <div class="carousel-wrap buttons">
                                 <? foreach ($model->fileRelations as $relation): ?>
                                     <? if ($relation->json != '1' || !$relation->file) continue ?>
                                     <a href="<?= $relation->file->getLinkUrl() ?>" class="btn btn--primary btn--small">
