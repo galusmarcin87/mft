@@ -93,8 +93,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
     public function actionEditCompany($lang = false)
     {
         $model = $this->_getMyCompany();
+        $newRecord = false;
         if (!$model) {
             $model = new Company();
+            $newRecord = true;
             $model->user_id = $this->getUserModel()->id;
             $model->subscription_fee = MgHelpers::getSetting('kwota abonamentu', false, 10000);
         }
@@ -136,9 +138,10 @@ class AccountController extends \app\components\mgcms\MgCmsController
             }
 
             $this->_assignDownloadFiles($model);
+
             if ($model->validate() && $model->save()) {
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
-                if ($model->isNewRecord) {
+                if ($newRecord) {
                     return $this->redirect(['add-product']);
                 }
             } else {
