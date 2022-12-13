@@ -144,6 +144,14 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 if ($newRecord) {
                     return $this->redirect(['add-product']);
                 }
+
+                Yii::$app->mailer->compose('companyAdded', ['model' => $model])
+                    ->setTo($model->email)
+                    ->attach($this->_fvProforma())
+                    ->setFrom([MgHelpers::getSetting('email') => MgHelpers::getSetting('email nazwa')])
+                    ->setSubject(Yii::t('db', 'New company added'))
+                    ->send();
+
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
             }
@@ -914,7 +922,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         return $accountLink['url'];
     }
 
-    public function actionFvProforma()
+    public function _fvProforma()
     {
         $company = $this->_getMyCompany();
         if (!$company) {
@@ -931,12 +939,13 @@ class AccountController extends \app\components\mgcms\MgCmsController
             'mode' => \kartik\mpdf\Pdf::MODE_UTF8,
             'format' => \kartik\mpdf\Pdf::FORMAT_A4,
             'orientation' => \kartik\mpdf\Pdf::ORIENT_PORTRAIT,
-            'destination' => \kartik\mpdf\Pdf::DEST_BROWSER,
+            'destination' => \kartik\mpdf\Pdf::DEST_FILE,
             'cssFile' => Yii::getAlias('@app') . '/web/css/fv.css',
             'content' => $content,
+            'filename' => "fv/fv-$company->id.pdf"
         ]);
 
-
+        return "fv/fv-$company->id.pdf";
 //        return $content;
         return $pdf->render();
     }
