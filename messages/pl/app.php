@@ -340,6 +340,13 @@ or <b>=</b>) na początku każdej wyszukiwanej wartości.',
     'Bank Account No' => 'Numer konta bankowego',
     'Company' => 'Firma',
     'Problem with deletion. You need to remove all relational object first' => 'Problem podczas usuwania. Musisz najpierw usunąć wszystkie relacyjne obiekty',
+    'Ad' => 'Reklama',
+    'Ads' => 'Reklamy',
+    'Date To' => 'Data do',
+    'Country' => 'Kraj',
+    'Update Ad' => 'Aktualizauj reklamę',
+
+
 ];
 
 return $arr;
