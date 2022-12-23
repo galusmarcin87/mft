@@ -148,6 +148,11 @@ $arr = [
             'class' => 'social-icons social-icons--color',
         ],
     ],
+    'ip2location' => [
+        'class' => 'app\components\IP2Location\Geolocation',
+        'database' => __DIR__ .DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'IP2Location'.DIRECTORY_SEPARATOR.'IP2LOCATION-LITE-DB1.BIN',
+        'mode' => 'FILE_IO',
+    ],
 ];
 
 return $arr;

@@ -14,6 +14,14 @@ $(document).ready(function () {
     items: 1,
     dots: true,
   });
+  $('#AD-SLIDER').owlCarousel({
+    loop: true,
+    nav: false,
+    items: 1,
+    dots: true,
+    center: true,
+  });
+
 
   $('.popup-video').magnificPopup({
     disableOn: 700,

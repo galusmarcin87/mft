@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use app\widgets\Alert;
+use app\widgets\AdWidget;
 use yii\helpers\Html;
 
 //use app\assets\AppAsset;
@@ -53,6 +54,7 @@ FrontAsset::register($this);
 <?php $this->beginBody() ?>
 <?= $this->render('header') ?>
 <?= Alert::widget() ?>
+<?= AdWidget::widget() ?>
 <?= $content ?>
 <?= $this->render('footer') ?>
 <?php $this->endBody() ?>
