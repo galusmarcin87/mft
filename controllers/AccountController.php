@@ -658,6 +658,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         $model = new PaySubscriptionForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $modelCompany->paid_from = date('Y-m-d H:i:s');
+            $modelCompany->paid_to = date('Y-m-d H:i:s', strtotime('+1 year'));
+            $saved = $modelCompany->save();
             $this->redirect("https://trade.kanga.exchange/tpg/payment/PAxD8ZmDtKgcDVvpqlqWvxLCNDoDwp?currency=MFT&amount=$model->tokensAmount&transactionKey=$modelCompany->id&name=Meetfaces%20Trading%20-%20zakup%20tokena");
         }
 

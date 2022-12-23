@@ -5,7 +5,10 @@ namespace app\controllers;
 use app\models\BecameConsultantForm;
 use app\models\BecomeConsultantForm;
 use app\models\InvestForm;
+use app\models\ByAdForm;
 use app\models\LoginCodeForm;
+use app\models\mgcms\db\Ad;
+use app\models\mgcms\db\Company;
 use FiberPay\FiberIdClient;
 use app\models\mgcms\db\File;
 use app\models\ReportRealEstateForm;
@@ -608,6 +611,109 @@ class SiteController extends \app\components\mgcms\MgCmsController
         return $this->render('becomeConsultant', [
             'model' => $model
         ]);
+    }
+
+    public function actionBuyAd()
+    {
+        $model = new ByAdForm();
+        if ($model->load(Yii::$app->request->post())) {
+
+            $image = UploadedFile::getInstance($model, 'image');
+
+            if ($image) {
+                if ($image->size > 1024 * 1024 * 2) {
+                    MgHelpers::setFlash('error', Yii::t('db', 'File too big (max 2MB)'));
+                    return $this->refresh();
+                }
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($image));
+
+                $adModel = new Ad();
+                $adModel->file_id = $file->id;
+                $adModel->date_to = date('d-m-Y', strtotime("now+$model->displayTime months"));
+                $adModel->country = $model->country;
+                $adModel->status = Ad::STATUS_NEW;
+                $adModel->save();
+
+                if (Yii::$app->request->post('pay-stripe') === '') {
+                    return $this->_buyAdByStripe($adModel, $model->displayTime);
+                }
+                if (Yii::$app->request->post('pay-kanga') === '') {
+                    return $this->_buyAdByKanga($adModel, $model->displayTime);
+                }
+
+
+            } else {
+                MgHelpers::setFlash('error', Yii::t('db', 'Image is required'));
+                return $this->refresh();
+            }
+
+            return $this->refresh();
+        }
+        return $this->render('buyAd', [
+            'model' => $model
+        ]);
+    }
+
+    /**
+     * @param $model Ad
+     * @param $months integer
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    private function _buyAdByStripe($model, $months)
+    {
+        $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
+        $stripeAccountId = MgHelpers::getSetting('stripe account id', false, 'acct_1FOmrVInHv9lYN6G');
+        $adPriceId = MgHelpers::getSetting('stripe ad price id for months: ' . $months, false, 'price_1KtH7tInHv9lYN6GmgumYmlZ');
+
+        \Stripe\Stripe::setApiKey($apiKey);
+        $session = \Stripe\Checkout\Session::create([
+            'line_items' => [[
+                'price' => $adPriceId,
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => Url::to(['site/ad-payment-after-stripe', 'type' => 'success', 'hash' => MgHelpers::encrypt($model->id . '.' . date('Y-m-d'))], true),
+            'cancel_url' => Url::to(['site/ad-payment-after-stripe', 'type' => 'cancel'], true),
+        ], ['stripe_account' => $stripeAccountId]);
+
+        return $this->redirect($session->url);
+
+    }
+
+    /**
+     * @param $model Ad
+     * @param $months integer
+     * @throws \Stripe\Exception\ApiErrorException
+     */
+    private function _buyAdByKanga($model, $months)
+    {
+        $tokens = MgHelpers::getSetting('kanga ad tokens for months: ' . $months, false, 20);
+        $model->status = Ad::STATUS_PAID;
+        $saved = $model->save();
+        return $this->redirect("https://trade.kanga.exchange/tpg/payment/PAxD8ZmDtKgcDVvpqlqWvxLCNDoDwp?currency=MFT&amount=$tokens&transactionKey=$model->id&name=Meetfaces%20Trading%20-%20zakup%20tokena");
+    }
+
+
+    function actionAdPaymentAfterStripe($type, $hash)
+    {
+
+        if ($type == 'success') {
+            $decrypted = explode('.', MgHelpers::decrypt($hash));
+            if (count($decrypted) < 2) {
+                return $this->throw404();
+            }
+            $adId = $decrypted[0];
+            $date = $decrypted[1];
+            $model = Ad::findOne($adId);
+            if (!$adId || !$model || $date != date('Y-m-d')) {
+                return $this->throw404();
+            }
+            $model->status = Ad::STATUS_PAID;
+            $saved = $model->save();
+        }
+
+        return $this->render('adPaymentAfterStripe', ['type' => $type]);
     }
 
 
