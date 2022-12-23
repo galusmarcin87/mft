@@ -14,12 +14,10 @@ use app\components\mgcms\MgHelpers;
  * @property string $date_to
  * @property string $country
  * @property integer $file_id
+ * @property integer $link
  *
  * @property \app\models\mgcms\db\File $file
  */
-
-
-
 class Ad extends \app\models\mgcms\db\AbstractRecord
 {
     const STATUS_NEW = 'new';
@@ -32,6 +30,7 @@ class Ad extends \app\models\mgcms\db\AbstractRecord
         self::STATUS_PAID => 'opłacony',
         self::STATUS_APPROVED => 'zatwierdzony',
     ];
+
     /**
      * @inheritdoc
      */
@@ -40,7 +39,7 @@ class Ad extends \app\models\mgcms\db\AbstractRecord
         return [
             [['date_to'], 'safe'],
             [['file_id'], 'integer'],
-            [['name', 'country'], 'string', 'max' => 255],
+            [['name', 'country', 'link'], 'string', 'max' => 255],
             [['status'], 'string', 'max' => 25]
         ];
     }

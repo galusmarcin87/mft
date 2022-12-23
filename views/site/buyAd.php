@@ -48,6 +48,7 @@ array_walk($countries, function (&$v, $k) {
                             3 => Yii::t('db', 'Three months'),
                             6 => Yii::t('db', 'Six months'),
                         ]) ?>
+                        <?= $form->field($model, 'link')->textInput(['placeholder' => Yii::t('db','Link')]) ?>
 
                         <label class="file-uplad">
                             + <?= Yii::t('db', 'Choose image') ?>

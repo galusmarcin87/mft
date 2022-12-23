@@ -16,6 +16,7 @@ class ByAdForm extends Model
     public $displayTime;
     public $fileId;
     public $image;
+    public $link;
 
 
     /**
@@ -25,7 +26,7 @@ class ByAdForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['country', 'displayTime'], 'required'],
+            [['country', 'displayTime', 'link'], 'required'],
             ['image', 'safe'],
             ['email', 'email'],
         ];

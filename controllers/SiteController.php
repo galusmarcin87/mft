@@ -633,6 +633,7 @@ class SiteController extends \app\components\mgcms\MgCmsController
                 $adModel->date_to = date('Y-m-d H:i:s', strtotime("now+$model->displayTime months"));
                 $adModel->country = $model->country;
                 $adModel->status = Ad::STATUS_NEW;
+                $adModel->link = $model->link;
                 $adModel->save();
 
                 if (Yii::$app->request->post('pay-stripe') === '') {
