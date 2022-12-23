@@ -630,7 +630,7 @@ class SiteController extends \app\components\mgcms\MgCmsController
 
                 $adModel = new Ad();
                 $adModel->file_id = $file->id;
-                $adModel->date_to = date('d-m-Y H:i:s', strtotime("now+$model->displayTime months"));
+                $adModel->date_to = date('Y-m-d H:i:s', strtotime("now+$model->displayTime months"));
                 $adModel->country = $model->country;
                 $adModel->status = Ad::STATUS_NEW;
                 $adModel->save();
