@@ -15,7 +15,7 @@ class AdWidget extends \yii\bootstrap\Widget
     {
         $ip = Yii::$app->request->userIP;
         $country = Yii::$app->ip2location->getCountryCode($ip);
-        $ads = Ad::find()->where(['country' => $country, 'status' => Ad::STATUS_PAID])->andWhere(['>', 'date_to', date('Y-m-d')])->all();
+        $ads = Ad::find()->where(['country' => $country, 'status' => Ad::STATUS_APPROVED])->andWhere(['>', 'date_to', date('Y-m-d')])->all();
         return $this->render('adWidget', ['ads' => $ads]);
     }
 }
