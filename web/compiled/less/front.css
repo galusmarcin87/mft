@@ -204,3 +204,25 @@
   box-shadow: 0px 0px 15px #000;
   position: absolute;
 }
+#page_article_view h1 {
+  margin-bottom: 20px;
+}
+#page_article_view .content p {
+  margin-bottom: 5px;
+  line-height: initial;
+}
+#page_article_view .content ol,
+#page_article_view .content ul {
+  padding-left: 40px;
+}
+#page_article_view .content ol li,
+#page_article_view .content ul li {
+  padding: initial;
+  margin: initial;
+}
+#page_article_view .content ul {
+  list-style-type: disc;
+}
+#page_article_view .content ol {
+  list-style-type: decimal;
+}

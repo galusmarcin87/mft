@@ -9,7 +9,7 @@ $this->params['breadcrumbs'][] = $model->title;
 
 ?>
 
-<section class="service-wrapper company-wrapper login">
+<section class="service-wrapper company-wrapper">
     <div class="container">
         <div class="breadcrumb">
             <a href="/"> meetfaces </a>
