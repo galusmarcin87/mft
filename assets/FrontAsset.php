@@ -29,6 +29,7 @@ class FrontAsset extends AssetBundle
         'css/magnific-popup.min.css',
         'less/front.less',
         'fonts/stylesheet.css',
+        'css/translate.css',
     ];
     public $js = [
         'js/popper.min.js',

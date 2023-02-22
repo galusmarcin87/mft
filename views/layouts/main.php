@@ -40,13 +40,13 @@ FrontAsset::register($this);
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-222846406-1"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
+        window.dataLayer = window.dataLayer || [];
 
-      function gtag () {dataLayer.push(arguments);}
+        function gtag () {dataLayer.push(arguments);}
 
-      gtag('js', new Date());
+        gtag('js', new Date());
 
-      gtag('config', 'UA-222846406-1');
+        gtag('config', 'UA-222846406-1');
     </script>
 
 </head>
@@ -58,7 +58,12 @@ FrontAsset::register($this);
 <?= $content ?>
 <?= $this->render('footer') ?>
 <?php $this->endBody() ?>
-<?= $this->render('_translate')?>
+
+<? $actionsForTranslate = ['company_view', 'service_view', 'product_view', 'job_view', 'agent_view'] ?>
+
+<?= in_array(Yii::$app->controller->id . '_' . Yii::$app->controller->action->id, $actionsForTranslate) ?
+    $this->render('_translate') :
+    false ?>
 
 </body>
 </html>
