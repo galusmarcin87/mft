@@ -51,12 +51,14 @@
         var event;
         var classic = jQuery('.goog-te-combo');
         var simple = jQuery('.goog-te-menu-frame:first');
+        if(typeof lang_text == 'undefined'){
+            var lang_text = lang_dest;
+        }
         var simpleValue = simple.contents().find('.goog-te-menu2-item span.text:contains(' + lang_text + ')');
         if (classic.length == 0) {for (var i = 0; i < simple.length; i++) {event = simple[i];}}
         else {for (var i = 0; i < classic.length; i++) {event = classic[i];}}
         if (document.getElementById('google_translate_element') != null) {
             if (classic.length != 0) {
-                console.log('tu');
                 if (lang_prefix != default_lang) {
                     event.value = lang_dest;
                     GLTFireEvent(event, 'change');
@@ -77,7 +79,6 @@
         $(document.body).on('click', 'a.flag', function () {
             lang_text = $(this).attr('data-lang');
             default_lang = window.glt_default_lang || $('#google_translate_element').attr('class').split('-').pop();
-            console.log('aaa', $(this));
             lang_prefix = $(this).attr('class').split(' ')[2];
             lang_prefix == default_lang ? l() : n();
 
@@ -94,5 +95,13 @@
         $('#glt-translate-trigger').
           on('click',
             function (event) { $('.tool-container').show();});
+
+        <?if(Yii::$app->language != 'pl'):?>
+        setTimeout(function (){
+            $('.tool-items .<?=Yii::$app->language?>').click();
+        },1000)
+
+
+        <?endif;?>
     });
 </script>

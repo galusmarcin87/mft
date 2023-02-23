@@ -68,23 +68,24 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
                 </div>
 
             <? endif; ?>
-            <div class="language-select hidden">
+            <div class="language-select">
                 <img
                         class="language-select__selected-lang"
-                        src="/img/flaga_pl.png"
+                        src="/img/flaga_<?= Yii::$app->language ?>.png"
                         alt=""
                 />
                 <div class="dropdown">
-                    <img
-                            class="language-select__selected-lang"
-                            src="/img/flaga_panama.png"
-                            alt=""
-                    />
-                    <img
-                            class="language-select__selected-lang"
-                            src="/img/flaga_kanada.png"
-                            alt=""
-                    />
+                    <? foreach (Yii::$app->params['languagesDisplay'] as $language) : ?>
+                        <a href="<?= yii\helpers\Url::to(['/', 'language' => $language]) ?>">
+                            <img
+                                    class="language-select__selected-lang"
+                                    src="/img/flaga_<?= $language ?>.png"
+                                    alt=""
+                            />
+                        </a>
+                    <? endforeach ?>
+
+
                 </div>
             </div>
         </div>
@@ -94,7 +95,7 @@ $menu = new NobleMenu(['name' => 'header_' . Yii::$app->language, 'loginLink' =>
 <?= Html::beginForm(['/site/logout'], 'post', ['id' => 'logoutForm']) ?>
 <?= Html::endForm() ?>
 <script type="text/javascript">
-  function submitLogoutForm () {
-    $('#logoutForm').submit();
-  }
+    function submitLogoutForm () {
+        $('#logoutForm').submit();
+    }
 </script>

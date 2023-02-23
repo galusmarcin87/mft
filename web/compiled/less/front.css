@@ -116,6 +116,9 @@
 .btn + .btn {
   margin-left: 0;
 }
+.menu .btn {
+  margin-bottom: 0;
+}
 .company-wrapper .single-company__image {
   height: auto;
 }
