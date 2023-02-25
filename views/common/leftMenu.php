@@ -34,7 +34,7 @@ $request = $this->context->request;
                         href="<?= \yii\helpers\Url::to(['company/index', 'category_id' => $category->id]) ?>"
                         class="menu-vertical__item <? if ($request->getQueryParam('category_id') == $category->id): ?>menu-vertical__item--active<? endif; ?>"
                 >
-                    <?= $category->name ?>
+                    <?= Yii::t('db', $category->name) ?>
                 </a>
             <? endforeach; ?>
         </div>
@@ -45,19 +45,19 @@ $request = $this->context->request;
     <? endif ?>
 
     <? if ($request->getPathInfo() == 'product/index'): ?>
-    <div class="menu-vertical__category">
-        <div class="menu-vertical__item <?= $request->getPathInfo() == 'product/index' ? 'menu-vertical__item--active' : '' ?>">
-            <?= Yii::t('db', 'Products') ?>
+        <div class="menu-vertical__category">
+            <div class="menu-vertical__item <?= $request->getPathInfo() == 'product/index' ? 'menu-vertical__item--active' : '' ?>">
+                <?= Yii::t('db', 'Products') ?>
+            </div>
+            <? foreach ($productCategories as $category): ?>
+                <a
+                        href="<?= \yii\helpers\Url::to(['product/index', 'category_id' => $category->id]) ?>"
+                        class="menu-vertical__item <? if ($request->getQueryParam('category_id') == $category->id): ?>menu-vertical__item--active<? endif; ?>"
+                >
+                    <?= Yii::t('db', $category->name) ?>
+                </a>
+            <? endforeach; ?>
         </div>
-        <? foreach ($productCategories as $category): ?>
-            <a
-                    href="<?= \yii\helpers\Url::to(['product/index', 'category_id' => $category->id]) ?>"
-                    class="menu-vertical__item <? if ($request->getQueryParam('category_id') == $category->id): ?>menu-vertical__item--active<? endif; ?>"
-            >
-                <?= $category->name ?>
-            </a>
-        <? endforeach; ?>
-    </div>
     <? else: ?>
         <a href="<?= Url::to(['product/index']) ?>" class="menu-vertical__category">
             <div class="menu-vertical__item <?= $request->getPathInfo() == 'product/index' ? 'menu-vertical__item--active' : '' ?>"><?= Yii::t('db', 'Products') ?></div>
@@ -65,15 +65,14 @@ $request = $this->context->request;
     <? endif ?>
 
 
-
     <a href="<?= Url::to(['company/index', 'is_for_sale' => 1]) ?>" class="menu-vertical__category">
         <div class="menu-vertical__item <?= $request->getPathInfo() == 'company/index' && $request->getQueryParam('is_for_sale') ? 'menu-vertical__item--active' : '' ?>"><?= Yii::t('db', 'Companies for sale') ?></div>
     </a>
 
 
-    <? if ($request->getPathInfo() == 'service/index' ): ?>
+    <? if ($request->getPathInfo() == 'service/index'): ?>
         <div class="menu-vertical__category">
-            <div class="menu-vertical__item <?= $request->getPathInfo() == 'service/index'? 'menu-vertical__item--active' : '' ?>">
+            <div class="menu-vertical__item <?= $request->getPathInfo() == 'service/index' ? 'menu-vertical__item--active' : '' ?>">
                 <?= Yii::t('db', 'Services') ?>
             </div>
             <? foreach ($companyCategories as $category): ?>
@@ -81,7 +80,7 @@ $request = $this->context->request;
                         href="<?= \yii\helpers\Url::to(['service/index', 'category_id' => $category->id]) ?>"
                         class="menu-vertical__item <? if ($request->getQueryParam('category_id') == $category->id): ?>menu-vertical__item--active<? endif; ?>"
                 >
-                    <?= $category->name ?>
+                    <?= Yii::t('db', $category->name) ?>
                 </a>
             <? endforeach; ?>
         </div>
@@ -91,9 +90,9 @@ $request = $this->context->request;
         </a>
     <? endif ?>
 
-    <? if ($request->getPathInfo() == 'job/index' ): ?>
+    <? if ($request->getPathInfo() == 'job/index'): ?>
         <div class="menu-vertical__category">
-            <div class="menu-vertical__item <?= $request->getPathInfo() == 'job/index'? 'menu-vertical__item--active' : '' ?>">
+            <div class="menu-vertical__item <?= $request->getPathInfo() == 'job/index' ? 'menu-vertical__item--active' : '' ?>">
                 <?= Yii::t('db', 'Jobs offers') ?>
             </div>
             <? foreach ($industries as $industry => $industryTranslated): ?>
