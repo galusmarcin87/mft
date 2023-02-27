@@ -31,9 +31,9 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
         <div class="service single-company">
             <div class="flex">
                 <div>
-                    <h1 class="text-left">Logowanie</h1>
+                    <h1 class="text-left"><?= Yii::t('db', 'Login') ?></h1>
                     <div class="hr"></div>
-                    <h3 class="highlighted">
+                    <?= MgHelpers::getSettingTypeText('login text '.Yii::$app->language,true,' <h3 class="highlighted">
                         <img src="/svg/atuty.svg" alt=""/>
                         Przenieś swoją firmę w świat Internetu i zdobądź nowe możliwości!
                     </h3>
@@ -49,7 +49,8 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfig(true)
                     </ul><br>
 					<h4 class="highlighted">
                         Jeśli tak, to prezentowana Platforma biznesowa Meetfaces Trading jest właśnie dla Ciebie i Twojej firmy!
-                    </h4>
+                    </h4>')?>
+
                     <div class="hr"></div>
                     <h3>Nie masz jeszcze konta?</h3>
                     <a href="<?= \yii\helpers\Url::to('/site/register') ?>" class="btn btn--secondary"
