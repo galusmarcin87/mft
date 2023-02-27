@@ -55,7 +55,7 @@ $model->language = Yii::$app->language;
                         </div>
                     </div>
                 <? endif ?>
-                <h3>Film o firmie</h3>
+                <h3><?= Yii::t('db', 'Movie about company') ?></h3>
                 <div class="single-company__video">
                     <a
                             class="popup-video"
