@@ -20,7 +20,7 @@ $companies = Company::find()->limit(19)->andWhere(['status' => Company::STATUS_C
                     <div>
                         <div class="company__name"><?=$company->name?></div>
                         <div class="company__industry">
-                            <div class="badge"><?=$company->category->name?></div>
+                            <div class="badge"><?=Yii::t('db',$company->category->name) ?></div>
                         </div>
                     </div>
                 </a>
