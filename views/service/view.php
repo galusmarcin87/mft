@@ -3,7 +3,7 @@
 
 use yii\web\View;
 
-$model->language = Yii::$app->language;
+//$model->language = Yii::$app->language;
 $imagesCount = 0;
 ?>
 <section class="service-wrapper">

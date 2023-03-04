@@ -25,7 +25,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                 <div class="dashboard-wrapper">
                     <h1 class="text-left"><?= Yii::t('db', $model->isNewRecord ? 'Add agent' : 'Edit agent') ?></h1>
                     <? if (!$model->isNewRecord): ?>
-                        <div class="contact-box">
+                        <div class="contact-box hidden">
 
                             <div class="person person--big display-block">
                                 <div>

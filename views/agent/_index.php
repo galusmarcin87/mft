@@ -2,9 +2,9 @@
 /* @var $model app\models\mgcms\db\Agent */
 
 use yii\web\View;
-$model->language = Yii::$app->language;
+//$model->language = Yii::$app->language;
 $user = $model->user;
-$user->language = Yii::$app->language;
+//$user->language = Yii::$app->language;
 ?>
 <a
         href="<?= $model->getLinkUrl() ?>"

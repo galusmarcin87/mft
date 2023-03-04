@@ -5,7 +5,7 @@ use yii\web\View;
 use  yii\helpers\StringHelper;
 
 /* @var $this yii\web\View */
-$model->language = Yii::$app->language;
+//$model->language = Yii::$app->language;
 
 ?>
 

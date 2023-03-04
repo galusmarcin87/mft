@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
 
 
 $this->title = $model->name;
-$model->language = Yii::$app->language;
+//$model->language = Yii::$app->language;
 
 ?>
 

@@ -23,7 +23,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
             <div>
                 <div class="dashboard-wrapper">
                     <h1 class="text-left"><?= Yii::t('db', 'Edit job') ?></h1>
-                    <div class="contact-box">
+                    <div class="contact-box hidden">
                         <div class="person person--big display-block">
                             <div>
                                 <div class="person__role person__role--normal">

@@ -4,7 +4,7 @@
 use yii\web\View;
 use  yii\helpers\StringHelper;
 
-$model->language = Yii::$app->language;
+//$model->language = Yii::$app->language;
 ?>
 <a
         href="<?= $model->getLinkUrl() ?>"

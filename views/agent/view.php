@@ -2,9 +2,9 @@
 /* @var $model app\models\mgcms\db\Agent */
 
 use yii\web\View;
-$model->language = Yii::$app->language;
+//$model->language = Yii::$app->language;
 $user = $model->user;
-$user->language = $model->language;
+//$user->language = $model->language;
 ?>
 
 <section class="service-wrapper">

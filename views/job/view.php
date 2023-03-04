@@ -3,7 +3,7 @@
 
 use yii\web\View;
 
-$model->language = Yii::$app->language;
+//$model->language = Yii::$app->language;
 ?>
 
 <section class="service-wrapper company-wrapper">
