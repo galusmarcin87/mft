@@ -59,7 +59,8 @@ FrontAsset::register($this);
 <?= $this->render('footer') ?>
 <?php $this->endBody() ?>
 
-<? $actionsForTranslate = ['company_view', 'service_view', 'product_view', 'job_view', 'agent_view'] ?>
+<? $actionsForTranslate = ['company_view', 'service_view', 'product_view', 'job_view', 'agent_view',
+    'company_index', 'service_index', 'product_index', 'job_index', 'agent_index'] ?>
 
 <?= in_array(Yii::$app->controller->id . '_' . Yii::$app->controller->action->id, $actionsForTranslate) ?
     $this->render('_translate') :
