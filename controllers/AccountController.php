@@ -539,7 +539,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             if ($model->save()) {
                 $this->_assignDownloadFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
-                $this->redirect('account/index');
+                $this->redirect('/account/index');
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
             }
