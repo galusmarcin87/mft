@@ -60,6 +60,7 @@ use yii\helpers\Html;
  * @property string $linkUrl
  * @property string $agent_code
  * @property integer $benefit
+ * @property string $stripe_price_id
  *
  * @property \app\models\mgcms\db\Agent[] $agents
  * @property \app\models\mgcms\db\Benefit[] $benefits
@@ -102,7 +103,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             [['gps_lat', 'gps_long', 'subscription_fee', 'sale_price', 'sale_last_year_income', 'institution_invoice_amount'], 'number'],
             [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number'], 'integer'],
             [['created_on', 'paid_from', 'paid_to', 'video', 'video_thumbnail', 'backgroundFile', 'thumbnailFile'], 'safe'],
-            [['name', 'first_name', 'surname', 'email', 'www', 'sale_title', 'sale_business_range', 'sale_sale_range'], 'string', 'max' => 245],
+            [['name', 'first_name', 'surname', 'email', 'www', 'sale_title', 'sale_business_range', 'sale_sale_range', 'stripe_price_id'], 'string', 'max' => 245],
             [['is_promoted', 'is_for_sale', 'is_institution', 'is_benefit'], 'integer', 'max' => 1],
             [['status', 'country', 'city', 'postcode', 'street', 'banc_account_no', 'companycol', 'payment_status', 'sale_company_profile', 'institution_agent_prefix', 'companycol1'], 'string', 'max' => 45],
             [['phone', 'nip', 'regon', 'krs', 'sale_currency'], 'string', 'max' => 15]
@@ -171,6 +172,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             'institution_invoice_amount' => Yii::t('app', 'Institution Invoice Amount'),
             'companycol1' => Yii::t('app', 'Companycol1'),
             'is_benefit' => Yii::t('app', 'Is Benefit'),
+            'stripe_price_id' => Yii::t('app', 'Stripe Price ID'),
         ];
     }
 

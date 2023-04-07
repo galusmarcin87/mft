@@ -681,7 +681,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         $apiKey = MgHelpers::getSetting('stripe api key', false, 'sk_test_51FOmrVInHv9lYN6G23xLhzLTDNytsH8bOStCMPJ472ZAoutfeNag8DSuQswJkDmkpGPd1yRqqKtFfrrSb2ReZhtM00J3jbGTp0');
         $stripeAccountId = MgHelpers::getSetting('stripe account id', false, 'acct_1FOmrVInHv9lYN6G');
-        $subscriptionPriceId = MgHelpers::getSetting('stripe price id', false, 'price_1KtH7tInHv9lYN6GmgumYmlZ');
+        $subscriptionPriceId = $modelCompany->stripe_price_id ?: MgHelpers::getSetting('stripe price id', false, 'price_1KtH7tInHv9lYN6GmgumYmlZ');
 
         \Stripe\Stripe::setApiKey($apiKey);
         $session = \Stripe\Checkout\Session::create([

@@ -181,6 +181,8 @@ use \app\models\mgcms\db\Company;
         ],
     ]); ?>
 
+    <?= $form->field6md($model, 'stripe_price_id')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('stripe_price_id')]) ?>
+
     <?= $this->render('../common/_imagesForm', ['model' => $model, 'form' => $form]) ?>
 
     <?= $this->render('../common/_downloadFilesForm', ['model' => $model, 'form' => $form]) ?>
@@ -189,7 +191,6 @@ use \app\models\mgcms\db\Company;
     <?= $form->field6md($model, 'video')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('video')]) ?>
 
     <?= $form->field6md($model, 'video_thumbnail')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('video_thumbnail')]) ?>
-
 
 
 
