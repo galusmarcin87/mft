@@ -11,8 +11,11 @@ use app\components\mgcms\MgHelpers;
 /**
  * app\models\mgcms\db\CompanySearch represents the model behind the search form about `app\models\mgcms\db\Company`.
  */
- class CompanySearch extends Company
+class CompanySearch extends Company
 {
+
+    public $agentCode;
+
     /**
      * @inheritdoc
      */
@@ -62,7 +65,7 @@ use app\components\mgcms\MgHelpers;
             'gps_lat' => $this->gps_lat,
             'gps_long' => $this->gps_long,
             'subscription_fee' => $this->subscription_fee,
-            'created_by' => $this->created_by,
+            'company.created_by' => $this->created_by,
             'created_on' => $this->created_on,
             'category_id' => $this->category_id,
             'user_id' => $this->user_id,
@@ -105,8 +108,11 @@ use app\components\mgcms\MgHelpers;
             ->andFilterWhere(['like', 'sale_sale_range', $this->sale_sale_range])
             ->andFilterWhere(['like', 'sale_company_profile', $this->sale_company_profile])
             ->andFilterWhere(['like', 'is_institution', $this->is_institution])
-            ->andFilterWhere(['like', 'institution_agent_prefix', $this->institution_agent_prefix])
-            ->andFilterWhere(['like', 'companycol1', $this->companycol1]);
+            ->andFilterWhere(['like', 'institution_agent_prefix', $this->institution_agent_prefix]);
+
+        if ($this->agentCode) {
+            $query->orFilterWhere(['agent_code' => $this->agentCode]);
+        }
 
         return $dataProvider;
     }

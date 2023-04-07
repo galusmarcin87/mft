@@ -85,8 +85,8 @@ class RegisterForm extends Model
             $user->phone = $this->phone;
             $user->acceptTerms5 = (int)$this->acceptTerms5;
             $user->acceptTerms6 = (int)$this->acceptTerms6;
+            $user->agent_code = $this->agentCode;
             $user->setModelAttribute('companyForSale', $this->isForSale);
-            $user->setModelAttribute('agentCode', $this->agentCode);
             $saved = $user->save();
             if (!$saved) {
                 MgHelpers::setFlashError(Yii::t('db', 'Error during registration:') . MgHelpers::getErrorsString($user->getErrors()));

@@ -86,7 +86,7 @@ use yii\helpers\Url;
             <?= $form->field($model, 'companyForSale')->switchInput() ?>
         </div>
 
-        <?= $form->field4md($model, 'agentCode')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('agentCode')]) ?>
+        <?= $form->field4md($model, 'agent_code')->textInput(['maxlength' => true, 'placeholder' => $model->getAttributeLabel('agent_code')]) ?>
 
         <?= $form->field4md($model, 'country')->dropDownList(MgHelpers::getSettingOptionArrayTranslated('countries array'), ['prompt' => '']) ?>
 

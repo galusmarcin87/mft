@@ -39,6 +39,7 @@ class CompanyController extends MgBackendController
     {
         $searchModel = new CompanySearch();
         if(!MgHelpers::isAdmin()){
+            $searchModel->agentCode = $this->getUserModel()->agent_code;
             $searchModel->created_by = $this->getUserModel()->id;
         }
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

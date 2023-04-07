@@ -58,6 +58,7 @@ use yii\helpers\Html;
  * @property double $institution_invoice_amount
  * @property string $link
  * @property string $linkUrl
+ * @property string $agent_code
  * @property integer $benefit
  *
  * @property \app\models\mgcms\db\Agent[] $agents
@@ -277,6 +278,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
         $currentUser = MgHelpers::getUserModel();
         if (!$currentUser->isAdmin()) {
             $this->user_id = $currentUser->id;
+            $this->agent_code = $currentUser->agent_code;
         }
 
 
