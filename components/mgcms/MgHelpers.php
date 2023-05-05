@@ -319,8 +319,9 @@ class MgHelpers extends \yii\base\Component
             return array();
         }
         foreach ($array as $item) {
-            if (isset($item))
-                $retArray[$item] = Yii::t('app', $item);
+            if (isset($item)){
+                $retArray[$item] = Yii::t('db', $item);
+            }
         }
         return $retArray;
     }

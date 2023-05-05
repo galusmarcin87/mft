@@ -65,7 +65,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                         <div class="mb-4 bottom25">
 							<?= Yii::t('db', 'Crowdsale start') ?>
                             <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
-                                'data' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->andWhere(['type' => \app\models\mgcms\db\Category::TYPE_PRODUCT_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name'),
+                                'data' =>  MgHelpers::translatedSBValueFromArray(\yii\helpers\ArrayHelper::map(\app\models\mgcms\db\Category::find()->andWhere(['type' => \app\models\mgcms\db\Category::TYPE_PRODUCT_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name')),
                                 'options' => ['placeholder' => Yii::t('app', 'Choose Category'), 'prompt' => '',],
                                 'pluginOptions' => [
                                     'allowClear' => true
