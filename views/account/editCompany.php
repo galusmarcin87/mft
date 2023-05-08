@@ -64,7 +64,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
                                 <?= Yii::t('db', 'Ended') ?>
                                 <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
-                                    'data' => MgHelpers::translatedSBValueFromArray(\yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type' => Category::TYPE_COMPANY_TYPE])->orderBy('id')->asArray()->all(), 'id', 'name')),
+                                    'data' =>\yii\helpers\ArrayHelper::map(Category::find()->andWhere(['type' => Category::TYPE_COMPANY_TYPE])->orderBy('id')->all(), 'id', 'nameTranslated'),
                                     'options' => ['placeholder' => Yii::t('db', 'Choose Category'), 'prompt' => ''],
                                     'pluginOptions' => [
                                         'allowClear' => true

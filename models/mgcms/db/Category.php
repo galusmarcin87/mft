@@ -21,6 +21,7 @@ use yii\behaviors\SluggableBehavior;
  * @property string $url
  * @property string $link
  * @property string $linkUrl
+ * @property string $nameTranslated
  *
  * @property \app\models\mgcms\db\Category $parent
  * @property \app\models\mgcms\db\Category[] $categories
@@ -117,16 +118,22 @@ class Category extends BaseCategory
     }
 
 
-    public function getCategoryTree(){
+    public function getCategoryTree()
+    {
         $parent = $this->parent;
         $categories = [$this];
 
-        while($parent){
+        while ($parent) {
             $categories[] = $parent;
             $parent = $parent->parent;
         }
 
         return $categories;
 
+    }
+
+    public function getNameTranslated()
+    {
+        return \Yii::t('db', $this->name);
     }
 }
