@@ -707,7 +707,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             }
             $companyId = $decrypted[0];
             $date = $decrypted[1];
-            $modelCompany = Company::find($companyId)->one();
+            $modelCompany = Company::find()->where(['id' => $companyId])->one();
             if (!$companyId || !$modelCompany || $date != date('Y-m-d')) {
                 return $this->throw404();
             }
