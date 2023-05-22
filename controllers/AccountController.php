@@ -288,7 +288,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         if (!$model) {
             $this->throw404();
         }
-        $model->language = $lang;
+        //$model->language = $lang;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -325,7 +325,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             $this->throw404();
         }
         $model = $model->user;
-        $model->language = $lang;
+        //$model->language = $lang;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -361,7 +361,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         if (!$model) {
             $this->throw404();
         }
-        $model->language = $lang;
+        //$model->language = $lang;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -397,7 +397,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
         if (!$model) {
             $this->throw404();
         }
-        $model->language = $lang;
+        //$model->language = $lang;
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
