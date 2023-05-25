@@ -54,3 +54,5 @@ use app\models\mgcms\db\Project;
 <?= $this->render('index/testimonials') ?>
 
 <?= $this->render('index/about') ?>
+
+<?= $this->render('index/section4') ?>
