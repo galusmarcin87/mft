@@ -50,6 +50,7 @@ $this->registerJs($search);
         ],
         'created_on',
         'last_login',
+        'agent_code'
 
     ];
     ?>

@@ -10,7 +10,7 @@ use app\models\mgcms\db\User;
 /**
  * app\models\mgcms\db\UserSearch represents the model behind the search form about `app\models\mgcms\db\User`.
  */
- class UserSearch extends User
+class UserSearch extends User
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ use app\models\mgcms\db\User;
     {
         return [
             [['id', 'status', 'created_by'], 'integer'],
-            [['username', 'password', 'first_name', 'last_name', 'role', 'email', 'created_on', 'last_login', 'address', 'postcode', 'birthdate', 'city', 'auth_key'], 'safe'],
+            [['username', 'password', 'first_name', 'last_name', 'role', 'email', 'created_on', 'last_login', 'address', 'postcode', 'birthdate', 'city', 'auth_key', 'agent_code'], 'safe'],
         ];
     }
 
@@ -72,6 +72,7 @@ use app\models\mgcms\db\User;
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'postcode', $this->postcode])
+            ->andFilterWhere(['like', 'agent_code', $this->agent_code])
             ->andFilterWhere(['like', 'city', $this->city]);
 
         return $dataProvider;
