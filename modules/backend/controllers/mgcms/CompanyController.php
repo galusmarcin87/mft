@@ -209,8 +209,23 @@ class CompanyController extends MgBackendController
      */
     protected function findModel($id)
     {
+        $currentUser = $this->getUserModel();
         if (($model = Company::findOne($id)) !== null) {
-            if (!$this->getUserModel()->isAdmin() && $model->user_id != $this->getUserModel()->id) {
+            if (!$currentUser->isAdmin() && $model->user_id != $currentUser->id) {
+                if($currentUser->role === User::ROLE_SALES_DIRECTOR || $currentUser->role === User::ROLE_MANAGER) {
+                    //my or my agents companies
+                    if($model->created_by == $currentUser->id || $model->createdBy->created_by == $currentUser->id) {
+                        return $model;
+                    }
+                    // my managers companies
+                    if($model->createdBy->createdBy && ($model->createdBy->createdBy->created_by == $currentUser->id)){
+                        return $model;
+                    }
+                    // my sales director companies
+                    if($model->createdBy->created_by && $model->createdBy->createdBy->created_by && ($model->createdBy->createdBy->createdBy->created_by == $currentUser->id)){
+                        return $model;
+                    }
+                }
                 throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
             }
             return $model;

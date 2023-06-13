@@ -111,8 +111,24 @@ class CompanySearch extends Company
             ->andFilterWhere(['like', 'institution_agent_prefix', $this->institution_agent_prefix]);
 
         if ($this->agentCode) {
-            $query->orFilterWhere(['agent_code' => $this->agentCode]);
+            $query->orFilterWhere(['company.agent_code' => $this->agentCode]);
         }
+
+        $currentUser = MgHelpers::getUserModel();
+        if($currentUser && $currentUser->role == User::ROLE_MANAGER) {
+            $query->joinWith('createdBy.createdBy as managerUser');
+            $query->orFilterWhere(['managerUser.id' => $currentUser->id]);
+        }
+
+        if($currentUser && $currentUser->role === User::ROLE_SALES_DIRECTOR ){
+            $query->joinWith('createdBy as createdByAgent');
+            $query->join('LEFT JOIN','user createdByManager','`createdByAgent`.`created_by` = `createdByManager`.`id`');
+            $query->join('LEFT JOIN','user createdBySalesDirector','`createdByManager`.`created_by` = `createdBySalesDirector`.`id`');
+            $query->orFilterWhere(['createdBySalesDirector.id' => $currentUser->id]);
+            $query->orFilterWhere(['createdByManager.id' => $currentUser->id]);
+        }
+
+
 
         return $dataProvider;
     }

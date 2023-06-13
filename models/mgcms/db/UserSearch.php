@@ -2,6 +2,7 @@
 
 namespace app\models\mgcms\db;
 
+use app\components\mgcms\MgHelpers;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -74,6 +75,18 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'postcode', $this->postcode])
             ->andFilterWhere(['like', 'agent_code', $this->agent_code])
             ->andFilterWhere(['like', 'city', $this->city]);
+
+        $currentUser = MgHelpers::getUserModel();
+        if($currentUser && $currentUser->role === User::ROLE_MANAGER ){
+            $query->andFilterWhere(['created_by' => $currentUser->id]);
+        }
+
+        if($currentUser && $currentUser->role === User::ROLE_SALES_DIRECTOR ){
+            $query->joinWith('createdBy as createdByManager');
+            $query->join('LEFT JOIN','user createdBySalesDirector','`createdByManager`.`created_by` = `createdBySalesDirector`.`id`');
+            $query->andFilterWhere(['createdBySalesDirector.id' => $currentUser->id]);
+            $query->orFilterWhere(['createdByManager.id' => $currentUser->id]);
+        }
 
         return $dataProvider;
     }

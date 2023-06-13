@@ -67,7 +67,7 @@ use app\components\mgcms\MgHelpers;
  * @property integer $file_text
  * @property integer $acceptTerms5
  * @property integer $acceptTerms6
- *@property string $agent_code
+ * @property string $agent_code
  *
  *
  * @property User $createdBy
@@ -89,11 +89,15 @@ class User extends BaseUser implements IdentityInterface
     const ROLE_PROJECT_OWNER = 'project owner';
     const ROLE_AGENT = 'agent';
     const ROLE_REPRESENTATIVE = 'representative';
+    const ROLE_MANAGER = 'manager';
+    const ROLE_SALES_DIRECTOR = 'sales director';
     const   ROLES = [
         self::ROLE_ADMIN,
         self::ROLE_CLIENT,
         self::ROLE_AGENT,
         self::ROLE_REPRESENTATIVE,
+        self::ROLE_MANAGER,
+        self::ROLE_SALES_DIRECTOR,
     ];
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
@@ -374,6 +378,9 @@ class User extends BaseUser implements IdentityInterface
 //                ->send();
 //        }
 
+        if(!$this->agent_code){
+            $this->agent_code = bin2hex(random_bytes(10));
+        }
 
         return parent::save($runValidaton, $attributes);
     }
@@ -407,5 +414,17 @@ class User extends BaseUser implements IdentityInterface
     {
 
         return $this->role == self::ROLE_ADMIN;
+    }
+
+    public function getRolesManagableForUser()
+    {
+        switch ($this->role) {
+            case self::ROLE_MANAGER:
+                return [self::ROLE_AGENT];
+            case self::ROLE_SALES_DIRECTOR:
+                return [self::ROLE_AGENT];
+            case self::ROLE_ADMIN:
+                return self::ROLES;
+        }
     }
 }
