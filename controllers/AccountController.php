@@ -832,7 +832,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $application_fee = (double)MgHelpers::getSetting('stripe prowizja procent', false, 5);
                 $payment_intent = $stripe->paymentIntents->create([
                     'amount' => (int)($amount * 100),
-                    'currency' => 'PLN',
+                    'currency' => 'USD',
                     'automatic_payment_methods' => ['enabled' => true],
                     'application_fee_amount' => (int)$application_fee * $price,
                 ], ['stripe_account' => $model->company->getModelAttribute('stripeId')]);

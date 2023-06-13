@@ -55,8 +55,8 @@ $imagesCount = 0;
                     <div class="hr"></div>
                     <div class="training__prices">
                         <div>
-                            <div class="label"><?= Yii::t('db', 'Price') ?> PLN:</div>
-                            <?= $model->price ?> PLN / szt
+                            <div class="label"><?= Yii::t('db', 'Price') ?> USD:</div>
+                            <?= $model->price ?> USD / szt
                             <div>
                                 <a class="btn btn--primary" href="<?= \yii\helpers\Url::to(['account/buy', 'hash' => \app\components\mgcms\MgHelpers::encrypt(serialize(['type' => 'Service', 'id' => $model->id]))]) ?>"><?= Yii::t('db', 'Pay') ?></a>
                             </div>

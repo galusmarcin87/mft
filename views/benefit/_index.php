@@ -31,6 +31,6 @@ use  yii\helpers\StringHelper;
     </div>
     <div class="company__offer">
         <span> <?= Yii::t('db', 'Price') ?>: </span>
-        <div><?= $model->price ?> PLN</div>
+        <div>$<?= $model->price ?></div>
     </div>
 </a>

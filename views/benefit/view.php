@@ -78,8 +78,8 @@ $imagesCount = 0;
                     <div class="hr"></div>
                     <div class="training__prices">
                         <div>
-                            <div class="label"><?= Yii::t('db', 'Price') ?> PLN:</div>
-                            <?= $model->price ?> PLN / szt
+                            <div class="label"><?= Yii::t('db', 'Price') ?> USD:</div>
+                            <?= $model->price ?> $ / szt
                             <div class="hr"></div>
                         </div>
                         <div class="hidden">

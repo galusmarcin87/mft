@@ -142,7 +142,7 @@ class CompanyController extends \app\components\mgcms\MgCmsController
                 $project->fiber_collect_id,
                 $project->pay_description . ' od ' . ($user->first_name . ' ' . $user->last_name),
                 $payment->amount,
-                'PLN',
+                'USD',
                 Url::to(['project/notify', 'hash' => $hash], true),
                 $hash, null,
                 Url::to(['site/account'], true)
