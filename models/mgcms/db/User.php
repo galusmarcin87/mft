@@ -378,6 +378,15 @@ class User extends BaseUser implements IdentityInterface
 //                ->send();
 //        }
 
+        if($this->getOldAttribute('agent_code') && $this->getOldAttribute('agent_code') != $this->agent_code){
+            $companies = Company::find()->where(['agent_code' => $this->getOldAttribute('agent_code')])->all();
+
+            foreach($companies as $company){
+                $company->agent_code = $this->agent_code;
+                $company->save();
+            }
+        }
+
         if(!$this->agent_code){
             $this->agent_code = bin2hex(random_bytes(10));
         }
