@@ -119,13 +119,16 @@ class SiteController extends \app\components\mgcms\MgCmsController
      *
      * @return Response|string
      */
-    public function actionRegister()
+    public function actionRegister($agentCode = false)
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new RegisterForm();
+        if($agentCode){
+            $model->agentCode = $agentCode;
+        }
         if ($model->load(Yii::$app->request->post()) && $model->register()) {
             MgHelpers::setFlashSuccess(MgHelpers::getSettingTranslated('register_after_message',
                 'Thank you for registration, email with activation of account has been sent.'));
