@@ -429,7 +429,7 @@ class User extends BaseUser implements IdentityInterface
     {
         switch ($this->role) {
             case self::ROLE_MANAGER:
-                return [self::ROLE_AGENT];
+                return [self::ROLE_AGENT, self::ROLE_CLIENT];
             case self::ROLE_SALES_DIRECTOR:
                 return [self::ROLE_AGENT];
             case self::ROLE_ADMIN:
