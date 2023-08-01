@@ -49,3 +49,6 @@
 .top10 {
   margin-top: 10px;
 }
+.dd-handle.active {
+  background: #7dccf3;
+}

@@ -14,10 +14,11 @@ use app\components\mgcms\MgHelpers;
 $this->title = Yii::t('app', 'Company');
 $this->params['breadcrumbs'][] = $this->title;
 $search = "$('.search-button').click(function(){
-	$('.search-form').toggle(1000);
+	$('.search-form').toggle(500);
 	return false;
 });";
 $this->registerJs($search);
+$currentUserId = Yii::$app->getRequest()->getQueryParam('CompanySearch')['created_by'];
 ?>
 <div class="company-index">
 
@@ -27,8 +28,9 @@ $this->registerJs($search);
         if (\app\components\mgcms\MgHelpers::getUserModel()->checkAccess($controller, 'create')):?>
             <?= Html::a(Yii::t('app', 'Create Company'), ['create'], ['class' => 'btn btn-success']) ?>
         <? endif ?>
+        <?= Html::a(Yii::t('app', 'Advance Search'), '#', ['class' => 'btn btn-info search-button']) ?>
     </p>
-    <div class="search-form" style="display:none">
+    <div class="search-form" style="<?= $currentUserId ? '': 'display:none'?>">
         <?= $this->render('_search', ['model' => $searchModel]); ?>
     </div>
     <?php
@@ -70,6 +72,7 @@ $this->registerJs($search);
         'phone',
         'email:email',
         'created_on',
+        'createdBy',
         [
             'attribute' => 'category_id',
             'label' => Yii::t('app', 'Category'),

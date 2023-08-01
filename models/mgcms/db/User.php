@@ -117,6 +117,7 @@ class User extends BaseUser implements IdentityInterface
 
     public $acceptTerms;
     public $imAgentCheckbox = false;
+    public $children = [];
 
     /**
      * @inheritdoc
