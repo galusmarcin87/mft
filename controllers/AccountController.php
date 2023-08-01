@@ -142,15 +142,15 @@ class AccountController extends \app\components\mgcms\MgCmsController
             if ($model->validate() && $model->save()) {
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
                 if ($newRecord) {
+                    Yii::$app->mailer->compose('companyAdded', ['model' => $model])
+                        ->setTo($model->email)
+                        ->attach($this->_fvProforma())
+                        ->setFrom([MgHelpers::getSetting('email') => MgHelpers::getSetting('email nazwa')])
+                        ->setSubject(Yii::t('db', 'New company added'))
+                        ->send();
+
                     return $this->redirect(['add-product']);
                 }
-
-                Yii::$app->mailer->compose('companyAdded', ['model' => $model])
-                    ->setTo($model->email)
-                    ->attach($this->_fvProforma())
-                    ->setFrom([MgHelpers::getSetting('email') => MgHelpers::getSetting('email nazwa')])
-                    ->setSubject(Yii::t('db', 'New company added'))
-                    ->send();
 
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
