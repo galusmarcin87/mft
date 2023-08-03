@@ -18,7 +18,7 @@ $search = "$('.search-button').click(function(){
 	return false;
 });";
 $this->registerJs($search);
-$currentUserId = Yii::$app->getRequest()->getQueryParam('CompanySearch')['created_by'];
+$currentUserId = Yii::$app->getRequest()->getQueryParam('CompanySearch')? Yii::$app->getRequest()->getQueryParam('CompanySearch')['created_by'] : false;
 ?>
 <div class="company-index">
 
