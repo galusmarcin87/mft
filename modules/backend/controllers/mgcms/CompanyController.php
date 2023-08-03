@@ -212,8 +212,9 @@ class CompanyController extends MgBackendController
         $currentUser = $this->getUserModel();
         if (($model = Company::findOne($id)) !== null) {
             if (!$currentUser->isAdmin() && $model->user_id != $currentUser->id) {
-                if($currentUser->role === User::ROLE_SALES_DIRECTOR || $currentUser->role === User::ROLE_MANAGER) {
+                if($currentUser->role === User::ROLE_SALES_DIRECTOR || $currentUser->role === User::ROLE_MANAGER || $currentUser->role === User::ROLE_INTERNATIONAL_DIRECTOR) {
                     //my or my agents companies
+
                     if($model->created_by == $currentUser->id || $model->createdBy->created_by == $currentUser->id) {
                         return $model;
                     }
@@ -223,6 +224,11 @@ class CompanyController extends MgBackendController
                     }
                     // my sales director companies
                     if($model->createdBy->created_by && $model->createdBy->createdBy->created_by && ($model->createdBy->createdBy->createdBy->created_by == $currentUser->id)){
+                        return $model;
+                    }
+
+                    // my international director companies
+                    if($model->createdBy->created_by && $model->createdBy->createdBy->created_by && $model->createdBy->createdBy->createdBy->created_by && ($model->createdBy->createdBy->createdBy->createdBy->created_by == $currentUser->id)){
                         return $model;
                     }
                 }

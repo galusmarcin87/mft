@@ -88,6 +88,15 @@ class UserSearch extends User
             $query->orFilterWhere(['createdByManager.id' => $currentUser->id]);
         }
 
+        if($currentUser && $currentUser->role === User::ROLE_INTERNATIONAL_DIRECTOR ){
+            $query->joinWith('createdBy as createdByManager');
+            $query->join('LEFT JOIN','user createdBySalesDirector','`createdByManager`.`created_by` = `createdBySalesDirector`.`id`');
+            $query->join('LEFT JOIN','user createdByInternationalDirector','`createdBySalesDirector`.`created_by` = `createdByInternationalDirector`.`id`');
+            $query->andFilterWhere(['createdByInternationalDirector.id' => $currentUser->id]);
+            $query->orFilterWhere(['createdBySalesDirector.id' => $currentUser->id]);
+            $query->orFilterWhere(['createdByManager.id' => $currentUser->id]);
+        }
+
         return $dataProvider;
     }
 }

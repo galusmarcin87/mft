@@ -91,6 +91,7 @@ class User extends BaseUser implements IdentityInterface
     const ROLE_REPRESENTATIVE = 'representative';
     const ROLE_MANAGER = 'manager';
     const ROLE_SALES_DIRECTOR = 'sales director';
+    const ROLE_INTERNATIONAL_DIRECTOR = 'international director';
     const   ROLES = [
         self::ROLE_ADMIN,
         self::ROLE_CLIENT,
@@ -98,6 +99,7 @@ class User extends BaseUser implements IdentityInterface
         self::ROLE_REPRESENTATIVE,
         self::ROLE_MANAGER,
         self::ROLE_SALES_DIRECTOR,
+        self::ROLE_INTERNATIONAL_DIRECTOR
     ];
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
