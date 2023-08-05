@@ -77,7 +77,7 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'city', $this->city]);
 
         $currentUser = MgHelpers::getUserModel();
-        if($currentUser && $currentUser->role === User::ROLE_MANAGER ){
+        if($currentUser && ($currentUser->role === User::ROLE_MANAGER || $currentUser->role === User::ROLE_AGENT) ){
             $query->andFilterWhere(['created_by' => $currentUser->id]);
         }
 

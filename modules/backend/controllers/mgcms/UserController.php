@@ -121,7 +121,7 @@ class UserController extends MgBackendController
         $currentUser = $this->getUserModel();
         if (($model = User::findOne($id)) !== null) {
             if (!$currentUser->isAdmin() && $model->created_by != $currentUser->id) {
-                if($currentUser->role === User::ROLE_SALES_DIRECTOR || $currentUser->role === User::ROLE_MANAGER || $currentUser->role === User::ROLE_INTERNATIONAL_DIRECTOR) {
+                if($currentUser->role === User::ROLE_SALES_DIRECTOR || $currentUser->role === User::ROLE_MANAGER || $currentUser->role === User::ROLE_INTERNATIONAL_DIRECTOR || $currentUser->role === User::ROLE_AGENT) {
                     if($model->created_by == $currentUser->id || $model->createdBy->created_by == $currentUser->id || $model->createdBy->createdBy->created_by == $currentUser->id){
                         return $model;
                     }

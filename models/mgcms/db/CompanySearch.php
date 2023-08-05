@@ -115,6 +115,18 @@ class CompanySearch extends Company
         }
 
         $currentUser = MgHelpers::getUserModel();
+
+        if($currentUser && $currentUser->role == User::ROLE_MANAGER) {
+            $query->joinWith('createdBy.createdBy as managerUser');
+            $query->orFilterWhere(['managerUser.id' => $currentUser->id]);
+        }
+
+        if($currentUser && $currentUser->role == User::ROLE_AGENT) {
+            $query->joinWith('createdBy.createdBy as agentUser');
+            $query->orFilterWhere(['agentUser.id' => $currentUser->id]);
+        }
+
+
         if($currentUser && $currentUser->role == User::ROLE_MANAGER) {
             $query->joinWith('createdBy.createdBy as managerUser');
             $query->orFilterWhere(['managerUser.id' => $currentUser->id]);
