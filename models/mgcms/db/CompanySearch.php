@@ -125,13 +125,7 @@ class CompanySearch extends Company
             $query->joinWith('createdBy.createdBy as agentUser');
             $query->orFilterWhere(['agentUser.id' => $currentUser->id]);
         }
-
-
-        if($currentUser && $currentUser->role == User::ROLE_MANAGER) {
-            $query->joinWith('createdBy.createdBy as managerUser');
-            $query->orFilterWhere(['managerUser.id' => $currentUser->id]);
-        }
-
+        
         if($currentUser && $currentUser->role === User::ROLE_SALES_DIRECTOR ){
             $query->joinWith('createdBy as createdByAgent');
             $query->join('LEFT JOIN','user createdByManager','`createdByAgent`.`created_by` = `createdByManager`.`id`');
