@@ -437,6 +437,8 @@ class User extends BaseUser implements IdentityInterface
                 return [self::ROLE_AGENT, self::ROLE_CLIENT];
             case self::ROLE_SALES_DIRECTOR:
                 return [self::ROLE_AGENT, self::ROLE_MANAGER, self::ROLE_CLIENT];
+            case self::ROLE_INTERNATIONAL_DIRECTOR:
+                return [self::ROLE_SALES_DIRECTOR, self::ROLE_AGENT, self::ROLE_MANAGER, self::ROLE_CLIENT];
             case self::ROLE_ADMIN:
                 return self::ROLES;
         }
