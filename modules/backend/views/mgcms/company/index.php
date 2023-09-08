@@ -72,7 +72,19 @@ $currentUserId = Yii::$app->getRequest()->getQueryParam('CompanySearch')? Yii::$
         'phone',
         'email:email',
         'created_on',
-        'createdBy',
+        [
+            'attribute' => 'created_by',
+            'label' => Yii::t('app', 'Created By'),
+            'value' => function ($model) {
+                return $model->createdBy;
+            },
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => \yii\helpers\ArrayHelper::map(\app\models\mgcms\db\User::find()->all(), 'id', 'toString'),
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true],
+            ],
+            'filterInputOptions' => ['placeholder' => Yii::t('db','User'), 'id' => 'grid-company-search-category_id']
+        ],
         [
             'attribute' => 'category_id',
             'label' => Yii::t('app', 'Category'),
