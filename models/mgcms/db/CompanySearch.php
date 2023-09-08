@@ -50,6 +50,7 @@ class CompanySearch extends Company
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['id' => SORT_DESC]],
         ]);
 
         $this->load($params);
@@ -125,7 +126,7 @@ class CompanySearch extends Company
             $query->joinWith('createdBy.createdBy as agentUser');
             $query->orFilterWhere(['agentUser.id' => $currentUser->id]);
         }
-        
+
         if($currentUser && $currentUser->role === User::ROLE_SALES_DIRECTOR ){
             $query->joinWith('createdBy as createdByAgent');
             $query->join('LEFT JOIN','user createdByManager','`createdByAgent`.`created_by` = `createdByManager`.`id`');
