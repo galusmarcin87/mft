@@ -80,6 +80,7 @@ class UserSearch extends User
         $currentUser = MgHelpers::getUserModel();
         if($currentUser && ($currentUser->role === User::ROLE_MANAGER || $currentUser->role === User::ROLE_AGENT) ){
             $query->andFilterWhere(['created_by' => $currentUser->id]);
+            $query->orFilterWhere(['agent_code' => $currentUser->agent_code]);
         }
 
         if($currentUser && $currentUser->role === User::ROLE_SALES_DIRECTOR ){
@@ -87,6 +88,7 @@ class UserSearch extends User
             $query->join('LEFT JOIN','user createdBySalesDirector','`createdByManager`.`created_by` = `createdBySalesDirector`.`id`');
             $query->andFilterWhere(['createdBySalesDirector.id' => $currentUser->id]);
             $query->orFilterWhere(['createdByManager.id' => $currentUser->id]);
+            $query->orFilterWhere(['createdByManager.agent_code' => $currentUser->agent_code]);
         }
 
         if($currentUser && $currentUser->role === User::ROLE_INTERNATIONAL_DIRECTOR ){
@@ -96,6 +98,7 @@ class UserSearch extends User
             $query->andFilterWhere(['createdByInternationalDirector.id' => $currentUser->id]);
             $query->orFilterWhere(['createdBySalesDirector.id' => $currentUser->id]);
             $query->orFilterWhere(['createdByManager.id' => $currentUser->id]);
+            $query->orFilterWhere(['createdByManager.agent_code' => $currentUser->agent_code]);
         }
 
         return $dataProvider;
