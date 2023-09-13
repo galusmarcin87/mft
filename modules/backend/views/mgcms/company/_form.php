@@ -70,7 +70,7 @@ use \app\models\mgcms\db\Company;
 
     <?= $form->field12md($model, 'name')->textInput(['maxlength' => true, 'placeholder2' => 'Name']) ?>
 
-    <?= MgHelpers::isAdmin() ? $form->field6md($model, 'status')->dropDownList(Company::STATUSES) : '' ?>
+    <?= $form->field6md($model, 'status')->dropDownList(Company::STATUSES) ?>
 
     <?= MgHelpers::isAdmin() ? $form->field3md($model, 'is_promoted')->switchInput() : '' ?>
 
