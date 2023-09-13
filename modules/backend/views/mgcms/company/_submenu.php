@@ -1,6 +1,7 @@
 <?
 /* @var $items \app\models\mgcms\db\User[] */
-$currentUserId = Yii::$app->getRequest()->getQueryParam('CompanySearch') ? Yii::$app->getRequest()->getQueryParam('CompanySearch')['created_by'] : false;
+$companySearchQueryParams = Yii::$app->getRequest()->getQueryParam('CompanySearch');
+$currentUserId = $companySearchQueryParams && isset($companySearchQueryParams['created_by']) ? $companySearchQueryParams['created_by'] : false;
 ?>
 
 <ol class="dd-list">
