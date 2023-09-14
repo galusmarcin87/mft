@@ -25,11 +25,14 @@ use yii\validators\EmailValidator;
 class CompanyController extends \app\components\mgcms\MgCmsController
 {
 
-    public function actionIndex($is_for_sale = null, $category_id = null, $isBenefit = false, $country = null)
+    public function actionIndex($is_for_sale = null, $category_id = null, $isBenefit = false, $country = null, $isInstitution = null)
     {
         $query = Company::find()->andWhere(['status' => Company::STATUS_CONFIRMED]);
         if ($is_for_sale) {
             $query->andWhere(['is_for_sale' => 1]);
+        }
+        if ($isInstitution) {
+            $query->andWhere(['is_institution' => 1]);
         }
         if ($category_id) {
             $query->andWhere(['category_id' => $category_id]);
