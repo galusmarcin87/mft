@@ -215,7 +215,8 @@ class CompanyController extends MgBackendController
                 if($currentUser->role === User::ROLE_SALES_DIRECTOR || $currentUser->role === User::ROLE_MANAGER || $currentUser->role === User::ROLE_INTERNATIONAL_DIRECTOR || $currentUser->role === User::ROLE_AGENT) {
                     //my or my agents companies
 
-                    if($model->created_by == $currentUser->id || $model->createdBy->created_by == $currentUser->id) {
+
+                    if($model->created_by == $currentUser->id || $model->createdBy->created_by == $currentUser->id || $model->createdBy->agent_code == $currentUser->agent_code) {
                         return $model;
                     }
                     // my managers companies
