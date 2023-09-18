@@ -216,20 +216,20 @@ class CompanyController extends MgBackendController
                     //my or my agents companies
 
 
-                    if($model->created_by == $currentUser->id || $model->createdBy->created_by == $currentUser->id || $model->createdBy->agent_code == $currentUser->agent_code) {
+                    if($model->created_by == $currentUser->id || $model->agent_code == $currentUser->agent_code || $model->createdBy->created_by == $currentUser->id || $model->createdBy->agent_code == $currentUser->agent_code) {
                         return $model;
                     }
                     // my managers companies
-                    if($model->createdBy->createdBy && ($model->createdBy->createdBy->created_by == $currentUser->id)){
+                    if($model->createdBy->createdBy && ($model->createdBy->createdBy->created_by == $currentUser->id || $model->createdBy->createdBy->agent_code == $currentUser->agent_code)){
                         return $model;
                     }
                     // my sales director companies
-                    if($model->createdBy->created_by && $model->createdBy->createdBy->created_by && ($model->createdBy->createdBy->createdBy->created_by == $currentUser->id)){
+                    if($model->createdBy->created_by && $model->createdBy->createdBy->created_by && ($model->createdBy->createdBy->createdBy->created_by == $currentUser->id || $model->createdBy->createdBy->createdBy->agent_code == $currentUser->agent_code)){
                         return $model;
                     }
 
                     // my international director companies
-                    if($model->createdBy->created_by && $model->createdBy->createdBy->created_by && $model->createdBy->createdBy->createdBy->created_by && ($model->createdBy->createdBy->createdBy->createdBy->created_by == $currentUser->id)){
+                    if($model->createdBy->created_by && $model->createdBy->createdBy->created_by && $model->createdBy->createdBy->createdBy->created_by && ($model->createdBy->createdBy->createdBy->createdBy->created_by == $currentUser->id || $model->createdBy->createdBy->createdBy->createdBy->agent_code == $currentUser->agent_code)){
                         return $model;
                     }
                 }
