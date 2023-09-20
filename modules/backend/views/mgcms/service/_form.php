@@ -7,7 +7,7 @@ use app\components\mgcms\MgHelpers;
 /* @var $this yii\web\View */
 /* @var $model app\models\mgcms\db\Service */
 /* @var $form app\components\mgcms\yii\ActiveForm */
-
+yii\jui\JuiAsset::register($this);
 ?>
 
 <div class="service-form">
