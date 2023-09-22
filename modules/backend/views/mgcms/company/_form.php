@@ -183,6 +183,14 @@ use \app\models\mgcms\db\Company;
 
     <?= $form->field6md($model, 'stripe_price_id')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('stripe_price_id')]) ?>
 
+    <?= $form->field6md($model, 'company_id')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(Company::find()->andWhere(['is_institution'=> 1])->orderBy('id')->asArray()->all(), 'id', 'name'),
+        'options' => ['placeholder2' => Yii::t('app', 'Institution'), 'prompt' => '',],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
+
     <?= $this->render('../common/_imagesForm', ['model' => $model, 'form' => $form]) ?>
 
     <?= $this->render('../common/_downloadFilesForm', ['model' => $model, 'form' => $form]) ?>

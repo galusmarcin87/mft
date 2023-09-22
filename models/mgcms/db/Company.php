@@ -69,6 +69,8 @@ use yii\helpers\Html;
  * @property \app\models\mgcms\db\File $background
  * @property \app\models\mgcms\db\User $createdBy
  * @property \app\models\mgcms\db\User $user
+ * @property \app\models\mgcms\db\Company $institution
+ * @property \app\models\mgcms\db\Company[] $institutionCompanies
  * @property \app\models\mgcms\db\User[] $users
  * @property \app\models\mgcms\db\Job[] $jobs
  * @property \app\models\mgcms\db\Product[] $products
@@ -101,7 +103,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             [['name', 'description', 'first_name', 'surname', 'country', 'city', 'postcode', 'street', 'phone', 'email', 'nip', 'regon', 'category_id', 'user_id'], 'required'],
             [['description', 'sale_description', 'sale_price_includes', 'sale_reason', 'sale_form_of_business'], 'string'],
             [['gps_lat', 'gps_long', 'subscription_fee', 'sale_price', 'sale_last_year_income', 'institution_invoice_amount'], 'number'],
-            [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number'], 'integer'],
+            [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number', 'company_id'], 'integer'],
             [['created_on', 'paid_from', 'paid_to', 'video', 'video_thumbnail', 'backgroundFile', 'thumbnailFile'], 'safe'],
             [['name', 'first_name', 'surname', 'email', 'www', 'sale_title', 'sale_business_range', 'sale_sale_range', 'stripe_price_id'], 'string', 'max' => 245],
             [['is_promoted', 'is_for_sale', 'is_institution', 'is_benefit'], 'integer', 'max' => 1],
@@ -173,6 +175,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             'companycol1' => Yii::t('app', 'Companycol1'),
             'is_benefit' => Yii::t('app', 'Is Benefit'),
             'stripe_price_id' => Yii::t('app', 'Stripe Price ID'),
+            'company_id' => Yii::t('app', 'Institution'),
         ];
     }
 
@@ -198,6 +201,14 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     public function getCategory()
     {
         return $this->hasOne(\app\models\mgcms\db\Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInstitution()
+    {
+        return $this->hasOne(\app\models\mgcms\db\Company::className(), ['id' => 'company_id']);
     }
 
     /**
@@ -238,6 +249,14 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     public function getJobs()
     {
         return $this->hasMany(\app\models\mgcms\db\Job::className(), ['company_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInstitutionCompanies()
+    {
+        return $this->hasMany(\app\models\mgcms\db\Company::className(), ['company_id' => 'id']);
     }
 
     /**
@@ -315,7 +334,6 @@ class Company extends \app\models\mgcms\db\AbstractRecord
         }
 
     }
-
 
 
 }

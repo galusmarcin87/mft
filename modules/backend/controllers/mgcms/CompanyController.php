@@ -112,7 +112,7 @@ class CompanyController extends MgBackendController
     {
         $model = $this->findModel($id);
         $model->language = $lang;
-        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
+        if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll(['institutionCompanies'])) {
             $this->_assignDownloadFiles($model);
             $this->_assignAgentsToCompany($model);
             MgHelpers::setFlash('success', Yii::t('db', 'Saved'));

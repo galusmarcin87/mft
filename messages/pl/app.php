@@ -20,7 +20,7 @@ $arr = [
     'gallery'=>'galeria',
     'Files to download' => 'Pliki do pobrania',
     'Position' => 'Stanowisko',
-
+    'Institution' => 'Instytucja',
 
 
 

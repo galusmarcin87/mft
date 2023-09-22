@@ -6,6 +6,7 @@
 
 /* @var $subscribeForm \app\models\SubscribeForm */
 
+
 use app\components\mgcms\MgHelpers;
 use yii\web\View;
 use yii\helpers\Url;
@@ -45,6 +46,12 @@ use yii\bootstrap\ActiveForm;
     <?if(count($model->benefits) > 0):?>
         <a href="<?=$model->getLinkUrl('benefits')?>" class="btn <?= $model->viewType == 'benefits' ? 'btn--primary' : 'btn--secondary' ?> btn--small"
         ><?= Yii::t('db', 'Benefits') ?></a
+        >
+    <?endif;?>
+
+    <?if(count($model->institutionCompanies) > 0):?>
+        <a href="<?=$model->getLinkUrl('institutionCompanies')?>" class="btn <?= $model->viewType == 'institutionCompanies' ? 'btn--primary' : 'btn--secondary' ?> btn--small"
+        ><?= Yii::t('db', 'Institution Companies') ?></a
         >
     <?endif;?>
 </div>
