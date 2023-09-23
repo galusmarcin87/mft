@@ -167,11 +167,19 @@ class User extends BaseUser implements IdentityInterface
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
+ * @return \yii\db\ActiveQuery
+ */
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['created_by' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCompanies()
+    {
+        return $this->hasMany(Company::className(), ['user_id' => 'id']);
     }
 
     /**

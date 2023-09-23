@@ -29,8 +29,11 @@ echo Nav::widget([
 //        ['label' => T::t('Galleries'), 'url' => '/backend/mgcms/gallery', 'visible' => MgHelpers::checkAccess('gallery', 'index')],
         ['label' => T::t('Users'), 'url' => '/backend/mgcms/user', 'visible' => MgHelpers::checkAccess('user', 'index')],
         ['label' => T::t('Menu'), 'url' => '/backend/mgcms/menu', 'visible' => MgHelpers::checkAccess('menu', 'index')],
-        ['label' => T::t('Statistics'), 'url' => '/backend/mgcms/stats', 'visible' => MgHelpers::checkAccess('stats', 'index')],
 //        ['label' => T::t('Tags'), 'url' => '/backend/mgcms/tag', 'visible' => MgHelpers::checkAccess('tag', 'index')],
+        ['label' => T::t('Statistics'), 'visible' => MgHelpers::checkAccess('menu', 'Statistics'), 'items' => [
+            ['label' => T::t('General'), 'url' => '/backend/mgcms/stats', 'visible' => MgHelpers::checkAccess('stats', 'index')],
+            ['label' => T::t('Provisions'), 'url' => '/backend/mgcms/stats/provisions', 'visible' => MgHelpers::checkAccess('setting', 'provisions')],
+          ]],
         ['label' => T::t('Settings'), 'visible' => MgHelpers::checkAccess('menu', 'Settings'), 'items' => [
                 ['label' => T::t('Settings system'), 'url' => '/backend/mgcms/setting', 'visible' => MgHelpers::checkAccess('setting', 'index')],
                 ['label' => T::t('Settings text'), 'url' => '/backend/mgcms/setting/index-text', 'visible' => MgHelpers::checkAccess('setting', 'index')],
