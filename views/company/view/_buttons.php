@@ -6,7 +6,13 @@
 
 /* @var $subscribeForm \app\models\SubscribeForm */
 
+$logos = [];
 
+foreach ($model->fileRelations as $relation){
+    if ($relation->json == 'logo'){
+        $logos[] = $relation;
+    }
+}
 use app\components\mgcms\MgHelpers;
 use yii\web\View;
 use yii\helpers\Url;
@@ -52,6 +58,18 @@ use yii\bootstrap\ActiveForm;
     <?if(count($model->institutionCompanies) > 0):?>
         <a href="<?=$model->getLinkUrl('institutionCompanies')?>" class="btn <?= $model->viewType == 'institutionCompanies' ? 'btn--primary' : 'btn--secondary' ?> btn--small"
         ><?= Yii::t('db', 'Institution Companies') ?></a
+        >
+    <?endif;?>
+
+    <?if($model->looking_for):?>
+        <a href="<?=$model->getLinkUrl('lookingFor')?>" class="btn <?= $model->viewType == 'lookingFor' ? 'btn--primary' : 'btn--secondary' ?> btn--small"
+        ><?= Yii::t('db', 'Looking for') ?></a
+        >
+    <?endif;?>
+
+    <?if(count($logos) > 0):?>
+        <a href="<?=$model->getLinkUrl('logos')?>" class="btn <?= $model->viewType == 'logos' ? 'btn--primary' : 'btn--secondary' ?> btn--small"
+        ><?= Yii::t('db', 'Logos') ?></a
         >
     <?endif;?>
 </div>

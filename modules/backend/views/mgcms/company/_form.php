@@ -191,16 +191,17 @@ use \app\models\mgcms\db\Company;
         ],
     ]); ?>
 
+    <?= $form->field12md($model, 'looking_for')->tinyMce(['rows' => 6]) ?>
+
     <?= $this->render('../common/_imagesForm', ['model' => $model, 'form' => $form]) ?>
 
     <?= $this->render('../common/_downloadFilesForm', ['model' => $model, 'form' => $form]) ?>
 
+    <?= $this->render('../common/_logosFilesForm', ['model' => $model, 'form' => $form]) ?>
 
     <?= $form->field6md($model, 'video')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('video')]) ?>
 
     <?= $form->field6md($model, 'video_thumbnail')->textInput(['maxlength' => true, 'placeholder2' => $model->getAttributeLabel('video_thumbnail')]) ?>
-
-
 
 
     <?= $form->field12md($model, 'is_for_sale')->checkbox() ?>

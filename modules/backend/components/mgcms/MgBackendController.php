@@ -129,4 +129,35 @@ class MgBackendController extends MgCmsController
         return false;
     }
 
+    public function _assignLogosFiles($model)
+    {
+        $upladedFiles = UploadedFile::getInstances($model, 'logosFiles');
+
+        if ($upladedFiles) {
+            foreach ($upladedFiles as $CUploadedFileModel) {
+                if ($CUploadedFileModel->hasError) {
+                    MgHelpers::setFlash(MgHelpers::FLASH_TYPE_ERROR, Yii::t('app', 'Error with uploading file - probably file is too big'));
+                    continue;
+                }
+                $fileModel = new File;
+                $file = $fileModel->push(new \rmrevin\yii\module\File\resources\UploadedResource($CUploadedFileModel));
+                if ($file) {
+                    if (FileRelation::find()->where(['file_id' => $file->id, 'rel_id' => $this->id, 'model' => $this::className()])->count()) {
+                        continue;
+                    }
+                    $fileRel = new FileRelation;
+                    $fileRel->file_id = $file->id;
+                    $fileRel->rel_id = $model->id;
+                    $fileRel->model = $model::className();
+                    $fileRel->json = 'logo';
+                    MgHelpers::saveModelAndLog($fileRel);
+                } else {
+                    MgHelpers::setFlashError('Błąd dodawania pliku powiązanego');
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

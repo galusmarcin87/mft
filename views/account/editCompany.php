@@ -61,6 +61,10 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                                 <?= $form->field($model, 'description')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
                             </div>
                             <div class="mb-4 bottom25">
+                                <?= Yii::t('db', 'Looking for') ?>
+                                <?= $form->field($model, 'looking_for')->widget(TinyMce::className(), MgHelpers::getTinyMceOptions(['placeholder' => $model->getAttributeLabel('description')])) ?>
+                            </div>
+                            <div class="mb-4 bottom25">
 
                                 <?= Yii::t('db', 'Ended') ?>
                                 <?= $form->field($model, 'category_id')->widget(\kartik\widgets\Select2::classname(), [
@@ -275,7 +279,7 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
 
 
                             <? foreach ($model->fileRelations as $relation): ?>
-                                <? if ($relation->json == '1' || !$relation->file) continue ?>
+                                <? if ($relation->json != '' || !$relation->file) continue ?>
                                 <div
                                         id="GALLERY-IMAGE-PREVIEW"
                                         class="file-uplad"
@@ -311,6 +315,27 @@ $fieldConfig = \app\components\ProjectHelper::getFormFieldConfigMyAccount();
                             <label class="file-uplad">
                                 + <?= Yii::t('db', 'Add') ?>
                                 <?= $form->field($model, 'downloadFiles[]')->fileInput(['multiple' => true, 'accept' => 'application/pdf', 'class' => 'inputfile']); ?>
+                            </label>
+
+                            <h2 class="with-label"><?= Yii::t('db', 'Logos') ?></h2>
+
+                            <? foreach ($model->fileRelations as $relation): ?>
+                                <? if ($relation->json != 'logo' || !$relation->file) continue ?>
+                                <div
+                                        id="GALLERY-IMAGE-PREVIEW"
+                                        class="file-uplad"
+                                >
+                                    <?= \kartik\helpers\Html::hiddenInput("fileOrder[" . $relation->file->id . "]") ?>
+                                    <? echo \yii\helpers\Html::a(Icon::show('trash', ['framework' => Icon::FA]), MgHelpers::createUrl(['/account/delete-relation', 'relId' => $model->id, 'fileId' => $relation->file->id, 'model' => $model::className()]), ['onclick' => 'return confirm("' . Yii::t('app', 'Are you sure?') . '")', 'class' => 'deleteLink']) ?>
+                                    <?= $relation->file->getThumb(250, 130, true, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET, ['class' => 'img-responsive']) ?>
+                                    <? \kartik\helpers\Html::textarea("FileRelation[$relation->file->id][$model->id][" . $model::className() . "][description]", 'aaa', ['class' => 'form-control']) ?>
+                                </div>
+                            <? endforeach ?>
+
+
+                            <label class="file-uplad">
+                                + <?= Yii::t('db', 'Add') ?>
+                                <?= $form->field($model, 'logosFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*', 'class' => 'inputfile']); ?>
                             </label>
 
                             <div class="text-right">

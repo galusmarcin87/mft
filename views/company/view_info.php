@@ -50,7 +50,7 @@ $this->title = $model->name;
             <div class="carousel-wrap">
                 <div class="owl-carousel owl-theme" id="GALLERY">
                     <?php foreach ($model->fileRelations as $relation): ?>
-                        <?php if ($relation->json == '1' || !$relation->file) continue; ?>
+                        <?php if ($relation->json != '' || !$relation->file) continue; ?>
                         <img class="item" src="<?= $relation->file->getImageSrc() ?>"/>
                     <?php endforeach; ?>
                 </div>
@@ -67,7 +67,7 @@ $this->title = $model->name;
             </div>
         <?php endif; ?>
 
-        <div class="flex">	
+        <div class="flex">
             <?php if ($hasGallery): ?>
                 <div class="carousel-wrap buttons">
                     <h3><?= Yii::t('db', 'Multimedia') ?></h3>
@@ -89,7 +89,7 @@ $this->title = $model->name;
     </div>
 </div>
 
-		
+
     </div>
 </section>
 

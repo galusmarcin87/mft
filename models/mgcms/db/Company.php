@@ -61,6 +61,7 @@ use yii\helpers\Html;
  * @property string $agent_code
  * @property integer $benefit
  * @property string $stripe_price_id
+ * @property string $looking_for
  *
  * @property \app\models\mgcms\db\Agent[] $agents
  * @property \app\models\mgcms\db\Benefit[] $benefits
@@ -84,6 +85,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     public $modelAttributes = ['video', 'video_thumbnail'];
 
     public $downloadFiles;
+    public $logosFiles;
     public $viewType;
     public $backgroundFile;
     public $thumbnailFile;
@@ -101,7 +103,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
     {
         return [
             [['name', 'description', 'first_name', 'surname', 'country', 'city', 'postcode', 'street', 'phone', 'email', 'nip', 'regon', 'category_id', 'user_id'], 'required'],
-            [['description', 'sale_description', 'sale_price_includes', 'sale_reason', 'sale_form_of_business'], 'string'],
+            [['description', 'sale_description', 'sale_price_includes', 'sale_reason', 'sale_form_of_business', 'looking_for'], 'string'],
             [['gps_lat', 'gps_long', 'subscription_fee', 'sale_price', 'sale_last_year_income', 'institution_invoice_amount'], 'number'],
             [['created_by', 'category_id', 'user_id', 'thumbnail_id', 'background_id', 'sale_workers_number', 'company_id'], 'integer'],
             [['created_on', 'paid_from', 'paid_to', 'video', 'video_thumbnail', 'backgroundFile', 'thumbnailFile'], 'safe'],
@@ -176,6 +178,7 @@ class Company extends \app\models\mgcms\db\AbstractRecord
             'is_benefit' => Yii::t('app', 'Is Benefit'),
             'stripe_price_id' => Yii::t('app', 'Stripe Price ID'),
             'company_id' => Yii::t('app', 'Institution'),
+            'looking_for' => Yii::t('app', 'Looking for'),
         ];
     }
 

@@ -21,7 +21,7 @@ $arr = [
     'Files to download' => 'Pliki do pobrania',
     'Position' => 'Stanowisko',
     'Institution' => 'Instytucja',
-
+    'Looking for' => 'Kogo szukam?',
 
 
 

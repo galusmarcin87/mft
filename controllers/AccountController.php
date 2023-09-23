@@ -137,7 +137,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->video_thumbnail = $file->getImageSrc(240, 0);
             }
 
-            $this->_assignDownloadFiles($model);
+            $this->_assignFiles($model);
+            $this->_assignFiles($model,'logosFiles','logo');
 
             if ($model->validate() && $model->save()) {
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
@@ -304,7 +305,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             }
 
             if ($model->save()) {
-                $this->_assignDownloadFiles($model);
+                $this->_assignFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
@@ -341,7 +342,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             }
 
             if ($model->save()) {
-                $this->_assignDownloadFiles($model);
+                $this->_assignFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
@@ -377,7 +378,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             }
 
             if ($model->save()) {
-                $this->_assignDownloadFiles($model);
+                $this->_assignFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
@@ -401,7 +402,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                $this->_assignDownloadFiles($model);
+                $this->_assignFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
@@ -427,7 +428,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                $this->_assignDownloadFiles($model);
+                $this->_assignFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
@@ -453,7 +454,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                $this->_assignDownloadFiles($model);
+                $this->_assignFiles($model);
+
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             } else {
                 MgHelpers::setFlash('error', Yii::t('db', 'Saving failed'));
@@ -537,7 +539,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
             }
 
             if ($model->save()) {
-                $this->_assignDownloadFiles($model);
+                $this->_assignFiles($model);
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
                 $this->redirect('/account/index');
             } else {
@@ -601,7 +603,8 @@ class AccountController extends \app\components\mgcms\MgCmsController
                 $model->password = uniqid();
             }
             if ($model->save()) {
-                $this->_assignDownloadFiles($model);
+                $this->_assignFiles($model);
+                $this->_assignFiles($model,'logosFiles','logo');
                 $modelAgent->user_id = $model->id;
                 $modelAgent->save();
                 MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
@@ -617,9 +620,9 @@ class AccountController extends \app\components\mgcms\MgCmsController
         ]);
     }
 
-    public function _assignDownloadFiles($model)
+    public function _assignFiles($model, $type = 'downloadFiles', $json = '1')
     {
-        $upladedFiles = UploadedFile::getInstances($model, 'downloadFiles');
+        $upladedFiles = UploadedFile::getInstances($model, $type);
 
         if ($upladedFiles) {
             foreach ($upladedFiles as $CUploadedFileModel) {
@@ -637,7 +640,7 @@ class AccountController extends \app\components\mgcms\MgCmsController
                     $fileRel->file_id = $file->id;
                     $fileRel->rel_id = $model->id;
                     $fileRel->model = $model::className();
-                    $fileRel->json = 1;
+                    $fileRel->json = $json;
                     MgHelpers::saveModelAndLog($fileRel);
                 } else {
                     MgHelpers::setFlashError('Błąd dodawania pliku powiązanego');

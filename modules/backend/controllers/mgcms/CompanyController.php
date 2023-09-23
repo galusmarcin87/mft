@@ -93,6 +93,7 @@ class CompanyController extends MgBackendController
 
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll()) {
             $this->_assignDownloadFiles($model);
+            $this->_assignLogosFiles($model);
             MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
@@ -114,6 +115,7 @@ class CompanyController extends MgBackendController
         $model->language = $lang;
         if ($model->loadAll(Yii::$app->request->post()) && $model->saveAll(['institutionCompanies'])) {
             $this->_assignDownloadFiles($model);
+            $this->_assignLogosFiles($model);
             $this->_assignAgentsToCompany($model);
             MgHelpers::setFlash('success', Yii::t('db', 'Saved'));
             return $this->redirect(['update', 'id' => $model->id]);
