@@ -17,11 +17,15 @@ if ($this->beginCache('hpNumbers'    . Yii::$app->language)) {
             <div class="numbers">
                 <a href="<?= Url::to('company/index')?>" class="numbers__item">
                     <?= Company::find()->andWhere(['status' => Company::STATUS_CONFIRMED])->count()?>
-                    <small><?= Yii::t('db', 'Companies number') ?></small>
+                    <small><?= Yii::t('db', 'Companies number')?></small>
                 </a>
                 <a href="<?= Url::to(['company/index', 'is_for_sale' => 1])?>" class="numbers__item">
                     <?= Company::find()->andWhere(['status' => Company::STATUS_CONFIRMED,'is_for_sale' => 1])->count()?>
                     <small><?= Yii::t('db', 'Companies for sale number') ?></small>
+                </a>
+				<a href="<?= Url::to('/company/index?isInstitution=1')?>" class="numbers__item">
+                    <?= Product::find()->count()?>
+                    <small><?= Yii::t('db', 'Institution') ?></small>
                 </a>
                 <a href="<?= Url::to('product/index')?>" class="numbers__item">
                     <?= Product::find()->count()?>

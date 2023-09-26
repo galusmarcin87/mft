@@ -44,18 +44,29 @@ $this->title = $model->name;
 
         <?php $hasGallery = false; ?>
 
-        <?php if (count($model->fileRelations) > 0): ?>
-            <?php $hasGallery = true; ?>
-            <h3><?= Yii::t('db', 'Gallery') ?></h3>
-            <div class="carousel-wrap">
-                <div class="owl-carousel owl-theme" id="GALLERY">
-                    <?php foreach ($model->fileRelations as $relation): ?>
-                        <?php if ($relation->json != '' || !$relation->file) continue; ?>
-                        <img class="item" src="<?= $relation->file->getImageSrc() ?>"/>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        <?php endif; ?>
+        <?php
+$hasGallery = false;
+
+foreach ($model->fileRelations as $relation) {
+    if ($relation->json == '' && $relation->file) {
+        $hasGallery = true;
+        break;
+    }
+}
+?>
+
+<?php if ($hasGallery): ?>
+    <h3><?= Yii::t('db', 'Gallery') ?></h3>
+    <div class="carousel-wrap">
+        <div class="owl-carousel owl-theme" id="GALLERY">
+            <?php foreach ($model->fileRelations as $relation): ?>
+                <?php if ($relation->json != '' || !$relation->file) continue; ?>
+                <img class="item" src="<?= $relation->file->getImageSrc() ?>"/>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
 
         <?php if ($model->video): ?>
             <h3><?= Yii::t('db', 'Movie about company') ?></h3>
