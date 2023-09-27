@@ -17,5 +17,5 @@ use yii\bootstrap\ActiveForm;
 <?= $this->render('/common/rate', ['model' => $model]); ?>
 <h1 class="text-left"><?=$model->name?></h1>
 <div class="hr"></div>
-<div class="label"><?= Yii::t('db', 'Address') ?>:</div>
-<?= $model->city?>,<?= $model->street?>, <?= $model->country?>
+<div class="label"><?= Yii::t('db', 'Address') ?>: <?= $model->city?>, <?= $model->street?>, <?= $model->country?> </div>
+

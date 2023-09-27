@@ -55,15 +55,15 @@ $imagesCount = 0;
                     <div class="hr"></div>
                     <div class="training__prices">
                         <div>
-                            <div class="label"><?= Yii::t('db', 'Price') ?> USD:</div>
-                            <?= $model->price ?> USD / szt
+                            <div class="label"><?= Yii::t('db', 'Price') ?>:</div>
+                            <?= $model->price ?> / szt
                             <div>
                                 <a class="btn btn--primary" href="<?= \yii\helpers\Url::to(['account/buy', 'hash' => \app\components\mgcms\MgHelpers::encrypt(serialize(['type' => 'Service', 'id' => $model->id]))]) ?>"><?= Yii::t('db', 'Pay') ?></a>
                             </div>
                             <div class="hr"></div>
                         </div>
                         <div class="hidden">
-                            <div class="label">Cena USD:</div>
+                            <div class="label">Cena:</div>
                             - $
                             <div class="hr"></div>
                         </div>
@@ -110,22 +110,35 @@ $imagesCount = 0;
                 <h3><?= Yii::t('db', 'Service description') ?></h3>
                 <div class="description">
                     <?= $model->description ?>
-                </div>
-                <h3><?= Yii::t('db', 'Specification') ?></h3>
-                <div class="description">
-                    <?= $model->specification ?>
-                </div>
+                </div><br><br>
+                <?php if (!empty($model->specification)): ?>
+    <h3><?= Yii::t('db', 'Specification') ?></h3>
+    <div class="description">
+        <?= $model->specification ?>
+    </div><br><br>
+<?php endif; ?>
+
                 <div class="flex">
                     <? if (count($model->fileRelations)): ?>
-                        <div>
-                            <h3><?= Yii::t('db', 'Multimedia') ?></h3>
-                            <? foreach ($model->fileRelations as $relation): ?>
-                                <? if ($relation->json != '1' || !$relation->file) continue ?>
-                                <a href="<?= $relation->file->getLinkUrl() ?>" class="btn btn--primary btn--small">
-                                    <?= $relation->file->origin_name ?>
-                                </a>
-                            <? endforeach ?>
-                        </div>
+                        <?php $mediaExist = false; ?>
+
+<?php if (!empty($model->fileRelations)): ?>
+    <?php foreach ($model->fileRelations as $relation): ?>
+        <?php if ($relation->json != '1' || !$relation->file || empty($relation->file->origin_name)) continue; ?>
+        <?php $mediaExist = true; ?>
+        <a href="<?= $relation->file->getLinkUrl() ?>" class="btn btn--primary btn--small">
+            <?= $relation->file->origin_name ?>
+        </a>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if ($mediaExist): ?>
+    <div>
+        <h3><?= Yii::t('db', 'Multimedia') ?></h3>
+    </div>
+    <br><br>
+<?php endif; ?>
+
                     <? endif ?>
                     <?= $this->render('/common/_socialShare', [
                         'title' => $model->name,
