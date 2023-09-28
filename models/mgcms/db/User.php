@@ -398,6 +398,13 @@ class User extends BaseUser implements IdentityInterface
             }
         }
 
+        if($this->agent_code){
+            $reflinkUser = User::find()->where(['agent_code' => $this->agent_code])->one();
+            if($reflinkUser){
+                $this->created_by = $reflinkUser->id;
+            }
+        }
+
         if(!$this->agent_code){
             $this->agent_code = bin2hex(random_bytes(10));
         }
